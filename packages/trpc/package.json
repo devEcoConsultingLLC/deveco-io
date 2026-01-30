@@ -1,0 +1,26 @@
+{
+  "name": "@deveco/trpc",
+  "version": "0.1.0",
+  "private": true,
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "exports": {
+    ".": "./src/root.ts",
+    "./context": "./src/context.ts",
+    "./trpc": "./src/trpc.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@trpc/server": "^11.9.0",
+    "@deveco/db": "workspace:*",
+    "@deveco/auth": "workspace:*",
+    "superjson": "^2.2.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@deveco/config": "workspace:*",
+    "typescript": "^5.7.3"
+  }
+}

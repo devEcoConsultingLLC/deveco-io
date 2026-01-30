@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System | devEco.io</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-green: #004e53;
+      --light-green: #00e7ad;
+      --white: #ffffff;
+      --black: #000000;
+      --deveco-pink: #e85a85;
+      --deveco-yellow: #f4c84b;
+      --deveco-teal: #4db3a8;
+      --deveco-teal-light: #6ab4a8;
+      --deveco-blue: #5bc5e8;
+      --purple: #5f2bef;
+      --dark-blue: #1b357d;
+      --aqua: #42fffe;
+      --portal-purple: #5865F2;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --font-sans: 'Poppins', sans-serif;
+      --font-display: 'Nunito', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); font-size: 15px; background: var(--gray-100); color: var(--gray-900); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    
+    /* Page Selector */
+    .page-selector { position: fixed; top: 0; left: 0; right: 0; background: var(--gray-900); padding: 12px 24px; display: flex; align-items: center; gap: 8px; z-index: 1000; }
+    .page-selector__logo { display: flex; align-items: center; gap: 10px; margin-right: 24px; padding-right: 24px; border-right: 1px solid var(--gray-700); }
+    .page-selector__logo svg { width: 28px; height: 32px; }
+    .page-selector__logo-text { font-family: var(--font-display); font-size: 1rem; font-weight: 800; color: var(--white); }
+    .page-selector__logo-text span { color: var(--light-green); }
+    .page-selector__btn { padding: 8px 16px; font-size: 0.8125rem; font-weight: 600; color: var(--gray-400); background: transparent; border: none; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+    .page-selector__btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
+    .page-selector__btn--active { color: var(--light-green); background: rgba(0,231,173,0.15); }
+    
+    /* Page Container */
+    .page { display: none; margin-top: 56px; min-height: calc(100vh - 56px); padding: 32px 0; }
+    .page--active { display: block; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    
+    /* Section Header */
+    .section-header { margin-bottom: 32px; }
+    .section-header__title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+    .section-header__desc { font-size: 1rem; color: var(--gray-500); }
+    
+    .subsection { margin-top: 40px; }
+    .subsection__title { font-size: 1rem; font-weight: 700; color: var(--gray-700); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--gray-200); }
+
+    /* ========================================
+       MOCKUPS PAGE
+       ======================================== */
+    .mockups-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .mockup-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.2s; }
+    .mockup-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+    .mockup-card__preview { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .mockup-card__preview svg { width: 48px; height: 48px; color: var(--white); opacity: 0.7; }
+    .mockup-card__badge { position: absolute; top: 12px; right: 12px; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: var(--white); color: var(--dark-green); padding: 4px 12px; border-radius: 4px; }
+    .mockup-card__body { padding: 20px; }
+    .mockup-card__title { font-size: 1.125rem; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+    .mockup-card__desc { font-size: 0.8125rem; color: var(--gray-500); line-height: 1.5; margin-bottom: 12px; }
+    .mockup-card__link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8125rem; font-weight: 600; color: var(--dark-green); }
+    .mockup-card__link svg { width: 14px; height: 14px; }
+
+    /* ========================================
+       COLORS PAGE
+       ======================================== */
+    .colors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+    .color-swatch { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow-sm); }
+    .color-swatch__preview { height: 80px; }
+    .color-swatch__info { padding: 12px; }
+    .color-swatch__name { font-size: 0.8125rem; font-weight: 600; color: var(--gray-900); }
+    .color-swatch__value { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gray-500); }
+
+    /* ========================================
+       TYPOGRAPHY PAGE
+       ======================================== */
+    .type-samples { display: flex; flex-direction: column; gap: 16px; }
+    .type-sample { background: var(--white); border-radius: 8px; padding: 24px; box-shadow: var(--shadow-sm); }
+    .type-sample__label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-400); margin-bottom: 8px; }
+    .type-sample__preview { margin-bottom: 8px; }
+    .type-sample__meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gray-500); }
+
+    /* ========================================
+       SHADOWS PAGE
+       ======================================== */
+    .shadows-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+    .shadow-sample { background: var(--white); border-radius: 8px; padding: 32px 16px; text-align: center; }
+    .shadow-sample__label { font-size: 0.8125rem; font-weight: 700; color: var(--gray-700); margin-bottom: 8px; }
+    .shadow-sample__value { font-family: var(--font-mono); font-size: 0.625rem; color: var(--gray-400); word-break: break-all; line-height: 1.4; }
+
+    /* ========================================
+       SPACING PAGE
+       ======================================== */
+    .radius-grid { display: flex; gap: 32px; background: var(--white); padding: 32px; border-radius: 8px; box-shadow: var(--shadow-sm); }
+    .radius-sample { text-align: center; }
+    .radius-sample__box { width: 64px; height: 64px; background: var(--dark-green); margin: 0 auto 12px; }
+    .radius-sample__label { font-size: 0.8125rem; font-weight: 600; color: var(--gray-700); }
+    .radius-sample__value { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--gray-400); }
+    
+    .spacing-grid { display: flex; flex-wrap: wrap; gap: 16px; background: var(--white); padding: 32px; border-radius: 8px; box-shadow: var(--shadow-sm); margin-top: 24px; }
+    .spacing-sample { display: flex; align-items: center; gap: 12px; }
+    .spacing-sample__bar { height: 24px; background: var(--light-green); border-radius: 3px; }
+    .spacing-sample__label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--gray-600); min-width: 100px; }
+
+    /* ========================================
+       COMPONENTS PAGE
+       ======================================== */
+    .buttons-row { display: flex; flex-wrap: wrap; gap: 12px; background: var(--white); padding: 32px; border-radius: 8px; box-shadow: var(--shadow-sm); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; font-size: 0.875rem; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; transition: all 0.15s; }
+    .btn--primary { background: var(--dark-green); color: var(--white); }
+    .btn--accent { background: var(--light-green); color: var(--dark-green); }
+    .btn--outline { background: transparent; border: 2px solid var(--gray-200); color: var(--gray-700); }
+    .btn--pink { background: var(--deveco-pink); color: var(--white); }
+    .btn--yellow { background: var(--deveco-yellow); color: var(--gray-900); }
+    .btn--blue { background: var(--deveco-blue); color: var(--white); }
+
+    .code-block { background: var(--gray-900); border-radius: 8px; padding: 24px; overflow-x: auto; margin-top: 24px; }
+    .code-block pre { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--gray-300); line-height: 1.8; margin: 0; }
+    .code-block .c { color: var(--gray-500); }
+    .code-block .p { color: var(--deveco-pink); }
+    .code-block .v { color: var(--light-green); }
+
+    /* ========================================
+       LOGO PAGE
+       ======================================== */
+    .logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .logo-card { border-radius: 8px; padding: 48px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
+    .logo-card--light { background: var(--white); box-shadow: var(--shadow-md); }
+    .logo-card--dark { background: var(--gray-900); }
+    .logo-card--gradient { background: linear-gradient(135deg, var(--dark-green), var(--dark-blue)); }
+    .logo-card__label { font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+    .logo-card--light .logo-card__label { color: var(--gray-400); }
+    .logo-card--dark .logo-card__label, .logo-card--gradient .logo-card__label { color: rgba(255,255,255,0.5); }
+    
+    .logo-full { display: flex; align-items: center; gap: 12px; }
+    .logo-full__icon { width: 48px; height: 56px; }
+    .logo-full__text { font-family: var(--font-display); font-size: 1.75rem; font-weight: 800; }
+    .logo-full--dark .logo-full__text { color: var(--dark-green); }
+    .logo-full--dark .logo-full__text span { color: var(--light-green); }
+    .logo-full--light .logo-full__text { color: var(--white); }
+    .logo-full--light .logo-full__text span { color: var(--light-green); }
+    
+    .logo-mark { width: 64px; height: 74px; }
+    
+    /* Animated Logo */
+    .animated-logo { width: 80px; height: 93px; }
+    
+    /* Breathe Animation - smooth scale */
+    .anim-breathe { animation: breathe 3s ease-in-out infinite; }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    
+    /* Pulse Animation - sequential opacity */
+    .anim-pulse polygon { animation: pulseFade 2.4s ease-in-out infinite; }
+    .anim-pulse polygon:nth-child(2) { animation-delay: 0s; }
+    .anim-pulse polygon:nth-child(3) { animation-delay: 0.3s; }
+    .anim-pulse polygon:nth-child(4) { animation-delay: 0.6s; }
+    .anim-pulse polygon:nth-child(5) { animation-delay: 0.9s; }
+    .anim-pulse polygon:nth-child(6) { animation-delay: 1.2s; }
+    .anim-pulse polygon:nth-child(7) { animation-delay: 0.3s; }
+    .anim-pulse polygon:nth-child(8) { animation-delay: 0.6s; }
+    @keyframes pulseFade {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    
+    /* Assemble Animation - tiles fly in */
+    .anim-assemble polygon { animation: assembleIn 2s ease-out infinite; }
+    .anim-assemble polygon:nth-child(2) { animation-delay: 0s; }
+    .anim-assemble polygon:nth-child(3) { animation-delay: 0.1s; }
+    .anim-assemble polygon:nth-child(4) { animation-delay: 0.2s; }
+    .anim-assemble polygon:nth-child(5) { animation-delay: 0.3s; }
+    .anim-assemble polygon:nth-child(6) { animation-delay: 0.4s; }
+    .anim-assemble polygon:nth-child(7) { animation-delay: 0.5s; }
+    .anim-assemble polygon:nth-child(8) { animation-delay: 0.6s; }
+    @keyframes assembleIn {
+      0% { opacity: 0; transform: scale(0.5) translateY(-20px); }
+      30% { opacity: 1; transform: scale(1) translateY(0); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    
+    /* Glow Animation - soft glow pulse */
+    .anim-glow { animation: glowPulse 2s ease-in-out infinite; filter: drop-shadow(0 0 0 transparent); }
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 4px rgba(0,231,173,0.2)); }
+      50% { filter: drop-shadow(0 0 20px rgba(0,231,173,0.6)) drop-shadow(0 0 40px rgba(0,231,173,0.3)); }
+    }
+    
+    /* Float Animation - gentle hover */
+    .anim-float { animation: floatUp 3s ease-in-out infinite; }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    
+    .animation-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .animation-card { background: var(--gray-900); border-radius: 8px; padding: 48px 24px; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+    .animation-card__label { font-size: 0.75rem; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px; }
+  </style>
+</head>
+<body>
+  <!-- Page Selector -->
+  <div class="page-selector">
+    <div class="page-selector__logo">
+      <svg viewBox="0 0 100 115">
+        <g transform="translate(4, 8) scale(0.18)">
+          <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+          <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+          <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+          <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+          <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+          <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+          <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+          <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+        </g>
+      </svg>
+      <span class="page-selector__logo-text">dev<span>Eco</span></span>
+    </div>
+    <button class="page-selector__btn page-selector__btn--active" onclick="showPage('mockups')">Mockups</button>
+    <button class="page-selector__btn" onclick="showPage('logo')">Logo</button>
+    <button class="page-selector__btn" onclick="showPage('colors')">Colors</button>
+    <button class="page-selector__btn" onclick="showPage('typography')">Typography</button>
+    <button class="page-selector__btn" onclick="showPage('shadows')">Shadows</button>
+    <button class="page-selector__btn" onclick="showPage('spacing')">Spacing</button>
+    <button class="page-selector__btn" onclick="showPage('components')">Components</button>
+  </div>
+
+  <!-- MOCKUPS PAGE -->
+  <div id="mockups" class="page page--active">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Page Mockups</h1>
+        <p class="section-header__desc">Click any card to view the full page mockup</p>
+      </div>
+      
+      <div class="mockups-grid">
+        <a href="index.html" class="mockup-card">
+          <div class="mockup-card__preview" style="background: linear-gradient(135deg, var(--dark-green), var(--dark-blue));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="mockup-card__badge">Home</span>
+          </div>
+          <div class="mockup-card__body">
+            <div class="mockup-card__title">Homepage</div>
+            <div class="mockup-card__desc">Main landing with hero, featured projects, events section, and sidebar widgets.</div>
+            <span class="mockup-card__link">View Page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+        
+        <a href="project.html" class="mockup-card">
+          <div class="mockup-card__preview" style="background: linear-gradient(135deg, var(--deveco-teal), var(--deveco-blue));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span class="mockup-card__badge">Project</span>
+          </div>
+          <div class="mockup-card__body">
+            <div class="mockup-card__title">Project Detail</div>
+            <div class="mockup-card__desc">Individual project view with tabs, code blocks, components, and related projects.</div>
+            <span class="mockup-card__link">View Page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+        
+        <a href="editor.html" class="mockup-card">
+          <div class="mockup-card__preview" style="background: linear-gradient(135deg, var(--deveco-pink), var(--purple));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span class="mockup-card__badge">Editor</span>
+          </div>
+          <div class="mockup-card__body">
+            <div class="mockup-card__title">Project Editor</div>
+            <div class="mockup-card__desc">Three-column layout with navigation sidebar, rich text editor, and settings panel.</div>
+            <span class="mockup-card__link">View Page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+        
+        <a href="pages.html" class="mockup-card">
+          <div class="mockup-card__preview" style="background: linear-gradient(135deg, var(--deveco-yellow), var(--deveco-pink));">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            <span class="mockup-card__badge">Pages</span>
+          </div>
+          <div class="mockup-card__body">
+            <div class="mockup-card__title">Additional Pages</div>
+            <div class="mockup-card__desc">Contests, hardware catalog, user profile, communities, and community hub mockups.</div>
+            <span class="mockup-card__link">View Page <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGO PAGE -->
+  <div id="logo" class="page">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Logo</h1>
+        <p class="section-header__desc">Logo variations for different contexts and backgrounds</p>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Full Logo</h3>
+        <div class="logo-grid">
+          <div class="logo-card logo-card--light">
+            <div class="logo-full logo-full--dark">
+              <svg class="logo-full__icon" viewBox="0 0 100 115">
+                <g transform="translate(4, 8) scale(0.18)">
+                  <path fill="#004e53" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                  <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                  <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                  <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                  <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#004e53"/>
+                  <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                  <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                  <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#004e53"/>
+                </g>
+              </svg>
+              <span class="logo-full__text">dev<span>Eco</span></span>
+            </div>
+            <span class="logo-card__label">Light Background</span>
+          </div>
+          
+          <div class="logo-card logo-card--dark">
+            <div class="logo-full logo-full--light">
+              <svg class="logo-full__icon" viewBox="0 0 100 115">
+                <g transform="translate(4, 8) scale(0.18)">
+                  <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                  <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                  <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                  <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                  <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                  <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                  <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                  <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+                </g>
+              </svg>
+              <span class="logo-full__text">dev<span>Eco</span></span>
+            </div>
+            <span class="logo-card__label">Dark Background</span>
+          </div>
+          
+          <div class="logo-card logo-card--gradient">
+            <div class="logo-full logo-full--light">
+              <svg class="logo-full__icon" viewBox="0 0 100 115">
+                <g transform="translate(4, 8) scale(0.18)">
+                  <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                  <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                  <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                  <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                  <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                  <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                  <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                  <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+                </g>
+              </svg>
+              <span class="logo-full__text">dev<span>Eco</span></span>
+            </div>
+            <span class="logo-card__label">Brand Gradient</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Logo Mark Only</h3>
+        <div class="logo-grid">
+          <div class="logo-card logo-card--light">
+            <svg class="logo-mark" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#004e53" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#004e53"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#004e53"/>
+              </g>
+            </svg>
+            <span class="logo-card__label">Light Background</span>
+          </div>
+          
+          <div class="logo-card logo-card--dark">
+            <svg class="logo-mark" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+              </g>
+            </svg>
+            <span class="logo-card__label">Dark Background</span>
+          </div>
+          
+          <div class="logo-card logo-card--gradient">
+            <svg class="logo-mark" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+              </g>
+            </svg>
+            <span class="logo-card__label">Brand Gradient</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Animated Logos</h3>
+        <div class="animation-grid">
+          <div class="animation-card">
+            <svg class="animated-logo anim-breathe" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+              </g>
+            </svg>
+            <span class="animation-card__label">Breathe</span>
+          </div>
+          
+          <div class="animation-card">
+            <svg class="animated-logo anim-pulse" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+              </g>
+            </svg>
+            <span class="animation-card__label">Pulse</span>
+          </div>
+          
+          <div class="animation-card">
+            <svg class="animated-logo anim-glow" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+              </g>
+            </svg>
+            <span class="animation-card__label">Glow</span>
+          </div>
+          
+          <div class="animation-card">
+            <svg class="animated-logo anim-float" viewBox="0 0 100 115">
+              <g transform="translate(4, 8) scale(0.18)">
+                <path fill="#ffffff" fill-rule="evenodd" d="M262,22 L492.8,155.25 L492.8,421.75 L262,555 L31.2,421.75 L31.2,155.25 Z M262,84 L439.1,186.25 L439.1,390.75 L262,493 L84.9,390.75 L84.9,186.25 Z"/>
+                <polygon points="211.11,146.74 255.28,172.24 255.28,223.24 211.11,248.74 166.94,223.24 166.94,172.24" fill="#e85a85"/>
+                <polygon points="315.85,146.72 360.01,172.22 360.01,223.22 315.85,248.72 271.68,223.22 271.68,172.22" fill="#f4c84b"/>
+                <polygon points="159.06,237.57 203.23,263.07 203.23,314.07 159.06,339.57 114.9,314.07 114.9,263.07" fill="#6ab4a8"/>
+                <polygon points="263.14,237.57 307.31,263.07 307.31,314.07 263.14,339.57 218.98,314.07 218.98,263.07" fill="#ffffff"/>
+                <polygon points="367.56,237.57 411.73,263.07 411.73,314.07 367.56,339.57 323.39,314.07 323.39,263.07" fill="#5bc5e8"/>
+                <polygon points="211.13,327.96 255.3,353.46 255.3,404.46 211.13,429.96 166.96,404.46 166.96,353.46" fill="#4db3a8"/>
+                <polygon points="315.84,327.95 360.01,353.45 360.01,404.45 315.84,429.95 271.67,404.45 271.67,353.45" fill="#ffffff"/>
+              </g>
+            </svg>
+            <span class="animation-card__label">Float</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLORS PAGE -->
+  <div id="colors" class="page">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Colors</h1>
+        <p class="section-header__desc">Brand palette and gray scale</p>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Brand Colors</h3>
+        <div class="colors-grid">
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--dark-green);"></div><div class="color-swatch__info"><div class="color-swatch__name">Dark Green</div><div class="color-swatch__value">#004e53</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--light-green);"></div><div class="color-swatch__info"><div class="color-swatch__name">Light Green</div><div class="color-swatch__value">#00e7ad</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--deveco-pink);"></div><div class="color-swatch__info"><div class="color-swatch__name">Pink</div><div class="color-swatch__value">#e85a85</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--deveco-yellow);"></div><div class="color-swatch__info"><div class="color-swatch__name">Yellow</div><div class="color-swatch__value">#f4c84b</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--deveco-teal);"></div><div class="color-swatch__info"><div class="color-swatch__name">Teal</div><div class="color-swatch__value">#4db3a8</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--deveco-blue);"></div><div class="color-swatch__info"><div class="color-swatch__name">Blue</div><div class="color-swatch__value">#5bc5e8</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--purple);"></div><div class="color-swatch__info"><div class="color-swatch__name">Purple</div><div class="color-swatch__value">#5f2bef</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--dark-blue);"></div><div class="color-swatch__info"><div class="color-swatch__name">Dark Blue</div><div class="color-swatch__value">#1b357d</div></div></div>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Gray Scale</h3>
+        <div class="colors-grid">
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-50);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 50</div><div class="color-swatch__value">#f9fafb</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-100);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 100</div><div class="color-swatch__value">#f3f4f6</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-200);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 200</div><div class="color-swatch__value">#e5e7eb</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-300);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 300</div><div class="color-swatch__value">#d1d5db</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-400);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 400</div><div class="color-swatch__value">#9ca3af</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-500);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 500</div><div class="color-swatch__value">#6b7280</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-600);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 600</div><div class="color-swatch__value">#4b5563</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-700);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 700</div><div class="color-swatch__value">#374151</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-800);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 800</div><div class="color-swatch__value">#1f2937</div></div></div>
+          <div class="color-swatch"><div class="color-swatch__preview" style="background: var(--gray-900);"></div><div class="color-swatch__info"><div class="color-swatch__name">Gray 900</div><div class="color-swatch__value">#111827</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY PAGE -->
+  <div id="typography" class="page">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Typography</h1>
+        <p class="section-header__desc">Font families and scale</p>
+      </div>
+      
+      <div class="type-samples">
+        <div class="type-sample">
+          <div class="type-sample__label">Display / H1</div>
+          <div class="type-sample__preview" style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; color: var(--gray-900);">Edge AI Projects & Hardware</div>
+          <div class="type-sample__meta">Nunito 800 · 2.5rem / 40px</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">Heading 2</div>
+          <div class="type-sample__preview" style="font-size: 1.5rem; font-weight: 700; color: var(--gray-900);">Featured Projects</div>
+          <div class="type-sample__meta">Poppins 700 · 1.5rem / 24px</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">Heading 3</div>
+          <div class="type-sample__preview" style="font-size: 1.25rem; font-weight: 700; color: var(--gray-900);">Real-time Object Detection on ESP32</div>
+          <div class="type-sample__meta">Poppins 700 · 1.25rem / 20px</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">Body</div>
+          <div class="type-sample__preview" style="font-size: 1rem; color: var(--gray-700); line-height: 1.7;">Deploy a custom trained TensorFlow Lite model for real-time object detection on the ESP32-S3 with camera module. Includes step-by-step guide for training, quantization, and deployment.</div>
+          <div class="type-sample__meta">Poppins 400 · 1rem / 16px · line-height 1.7</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">Small / Caption</div>
+          <div class="type-sample__preview" style="font-size: 0.875rem; color: var(--gray-500);">Backed by EDGE AI FOUNDATION · Part of the Internet of Communities™</div>
+          <div class="type-sample__meta">Poppins 400 · 0.875rem / 14px</div>
+        </div>
+        <div class="type-sample">
+          <div class="type-sample__label">Monospace / Code</div>
+          <div class="type-sample__preview" style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--gray-700);">esp_err_t init_camera() { return esp_camera_init(&config); }</div>
+          <div class="type-sample__meta">JetBrains Mono 400 · 0.875rem / 14px</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHADOWS PAGE -->
+  <div id="shadows" class="page">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Shadows</h1>
+        <p class="section-header__desc">Tailwind-style elevation system</p>
+      </div>
+      
+      <div class="shadows-grid">
+        <div class="shadow-sample" style="box-shadow: var(--shadow-sm);"><div class="shadow-sample__label">SM</div><div class="shadow-sample__value">0 1px 2px 0 rgb(0 0 0 / 0.05)</div></div>
+        <div class="shadow-sample" style="box-shadow: var(--shadow);"><div class="shadow-sample__label">Default</div><div class="shadow-sample__value">0 1px 3px 0 rgb(0 0 0 / 0.1)</div></div>
+        <div class="shadow-sample" style="box-shadow: var(--shadow-md);"><div class="shadow-sample__label">MD</div><div class="shadow-sample__value">0 4px 6px -1px rgb(0 0 0 / 0.1)</div></div>
+        <div class="shadow-sample" style="box-shadow: var(--shadow-lg);"><div class="shadow-sample__label">LG</div><div class="shadow-sample__value">0 10px 15px -3px rgb(0 0 0 / 0.1)</div></div>
+        <div class="shadow-sample" style="box-shadow: var(--shadow-xl);"><div class="shadow-sample__label">XL</div><div class="shadow-sample__value">0 20px 25px -5px rgb(0 0 0 / 0.1)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACING PAGE -->
+  <div id="spacing" class="page">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Spacing & Radius</h1>
+        <p class="section-header__desc">Consistent spacing scale and border radius</p>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Border Radius</h3>
+        <div class="radius-grid">
+          <div class="radius-sample"><div class="radius-sample__box" style="border-radius: 4px;"></div><div class="radius-sample__label">SM</div><div class="radius-sample__value">4px</div></div>
+          <div class="radius-sample"><div class="radius-sample__box" style="border-radius: 6px;"></div><div class="radius-sample__label">MD</div><div class="radius-sample__value">6px</div></div>
+          <div class="radius-sample"><div class="radius-sample__box" style="border-radius: 8px;"></div><div class="radius-sample__label">LG</div><div class="radius-sample__value">8px</div></div>
+          <div class="radius-sample"><div class="radius-sample__box" style="border-radius: 12px;"></div><div class="radius-sample__label">XL</div><div class="radius-sample__value">12px</div></div>
+          <div class="radius-sample"><div class="radius-sample__box" style="border-radius: 9999px;"></div><div class="radius-sample__label">Full</div><div class="radius-sample__value">9999px</div></div>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Spacing Scale</h3>
+        <div class="spacing-grid">
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 4px;"></div><div class="spacing-sample__label">--space-1: 4px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 8px;"></div><div class="spacing-sample__label">--space-2: 8px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 12px;"></div><div class="spacing-sample__label">--space-3: 12px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 16px;"></div><div class="spacing-sample__label">--space-4: 16px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 20px;"></div><div class="spacing-sample__label">--space-5: 20px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 24px;"></div><div class="spacing-sample__label">--space-6: 24px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 32px;"></div><div class="spacing-sample__label">--space-8: 32px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 40px;"></div><div class="spacing-sample__label">--space-10: 40px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 48px;"></div><div class="spacing-sample__label">--space-12: 48px</div></div>
+          <div class="spacing-sample"><div class="spacing-sample__bar" style="width: 64px;"></div><div class="spacing-sample__label">--space-16: 64px</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTS PAGE -->
+  <div id="components" class="page">
+    <div class="container">
+      <div class="section-header">
+        <h1 class="section-header__title">Components</h1>
+        <p class="section-header__desc">Buttons and code reference</p>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">Buttons</h3>
+        <div class="buttons-row">
+          <button class="btn btn--primary">Primary</button>
+          <button class="btn btn--accent">Accent</button>
+          <button class="btn btn--outline">Outline</button>
+          <button class="btn btn--pink">Pink</button>
+          <button class="btn btn--yellow">Yellow</button>
+          <button class="btn btn--blue">Blue</button>
+        </div>
+      </div>
+      
+      <div class="subsection">
+        <h3 class="subsection__title">CSS Variables</h3>
+        <div class="code-block">
+          <pre><span class="c">/* Brand Colors */</span>
+<span class="p">--dark-green</span>: <span class="v">#004e53</span>;
+<span class="p">--light-green</span>: <span class="v">#00e7ad</span>;
+<span class="p">--deveco-pink</span>: <span class="v">#e85a85</span>;
+<span class="p">--deveco-yellow</span>: <span class="v">#f4c84b</span>;
+<span class="p">--deveco-teal</span>: <span class="v">#4db3a8</span>;
+<span class="p">--deveco-blue</span>: <span class="v">#5bc5e8</span>;
+
+<span class="c">/* Typography */</span>
+<span class="p">--font-sans</span>: <span class="v">'Poppins', system-ui, sans-serif</span>;
+<span class="p">--font-display</span>: <span class="v">'Nunito', sans-serif</span>;
+<span class="p">--font-mono</span>: <span class="v">'JetBrains Mono', monospace</span>;
+
+<span class="c">/* Shadows */</span>
+<span class="p">--shadow-sm</span>: <span class="v">0 1px 2px 0 rgb(0 0 0 / 0.05)</span>;
+<span class="p">--shadow-md</span>: <span class="v">0 4px 6px -1px rgb(0 0 0 / 0.1)</span>;
+<span class="p">--shadow-lg</span>: <span class="v">0 10px 15px -3px rgb(0 0 0 / 0.1)</span>;
+
+<span class="c">/* Radius */</span>
+<span class="p">--radius-sm</span>: <span class="v">4px</span>;
+<span class="p">--radius-md</span>: <span class="v">6px</span>;
+<span class="p">--radius-lg</span>: <span class="v">8px</span>;</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('page--active'));
+      document.getElementById(pageId).classList.add('page--active');
+      document.querySelectorAll('.page-selector__btn').forEach(btn => btn.classList.remove('page-selector__btn--active'));
+      event.target.classList.add('page-selector__btn--active');
+    }
+  </script>
+</body>
+</html>

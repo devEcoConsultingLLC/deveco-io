@@ -1,0 +1,34 @@
+{
+  "name": "deveco-io",
+  "version": "0.1.0",
+  "private": true,
+  "description": "devEco.io — Edge AI project sharing and community platform",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edge-ai-foundation/deveco-io"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "db:generate": "pnpm --filter @deveco/db generate",
+    "db:migrate": "pnpm --filter @deveco/db migrate",
+    "db:seed": "pnpm --filter @deveco/db seed",
+    "db:studio": "pnpm --filter @deveco/db studio",
+    "clean": "turbo clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,vue,md,json,css}\""
+  },
+  "devDependencies": {
+    "@deveco/config": "workspace:*",
+    "prettier": "^3.4.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3"
+  }
+}

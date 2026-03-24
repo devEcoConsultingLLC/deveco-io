@@ -2,8 +2,8 @@
 definePageMeta({ middleware: 'auth' });
 
 useSeoMeta({
-  title: 'Create Hub -- devEco.io',
-  description: 'Create a new maker hub.',
+  title: 'Create Community -- devEco.io',
+  description: 'Create a new community on devEco.io.',
 });
 
 const toast = useToast();
@@ -12,6 +12,8 @@ const name = ref('');
 const description = ref('');
 const hubType = ref<'community' | 'product' | 'company'>('community');
 const joinPolicy = ref<'open' | 'approval' | 'invite'>('open');
+const iconUrl = ref('');
+const bannerUrl = ref('');
 const saving = ref(false);
 
 async function handleCreate(): Promise<void> {
@@ -24,6 +26,8 @@ async function handleCreate(): Promise<void> {
         description: description.value || undefined,
         hubType: hubType.value,
         joinPolicy: joinPolicy.value,
+        iconUrl: iconUrl.value || undefined,
+        bannerUrl: bannerUrl.value || undefined,
       },
     });
     await navigateTo(`/hubs/${(result as { slug: string }).slug}`);
@@ -36,153 +40,187 @@ async function handleCreate(): Promise<void> {
 </script>
 
 <template>
-  <div class="cpub-create-hub">
-    <div class="cpub-create-header">
-      <NuxtLink to="/explore" class="cpub-back-link">
-        <i class="fa-solid fa-arrow-left"></i> Back
+  <div class="de-create-hub">
+    <div class="de-create-header">
+      <NuxtLink to="/hubs" class="de-back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Communities
       </NuxtLink>
-      <h1 class="cpub-create-title">Create Hub</h1>
-      <p class="cpub-create-subtitle">Start a new maker community, product page, or company hub.</p>
+      <h1 class="de-create-title">Create Community</h1>
+      <p class="de-create-subtitle">Start a new community, product page, or organization hub.</p>
     </div>
 
-    <form class="cpub-create-form" @submit.prevent="handleCreate" aria-label="Create hub form">
-      <div class="cpub-field">
-        <label for="hub-name" class="cpub-field-label">Name</label>
-        <input id="hub-name" v-model="name" type="text" class="cpub-field-input" required placeholder="Hub name" />
+    <form class="de-create-form" @submit.prevent="handleCreate" aria-label="Create hub form">
+      <div class="de-field">
+        <label for="hub-name" class="de-field-label">Name</label>
+        <input id="hub-name" v-model="name" type="text" class="de-field-input" required placeholder="Community name" />
       </div>
 
-      <div class="cpub-field">
-        <label for="hub-desc" class="cpub-field-label">Description</label>
-        <textarea id="hub-desc" v-model="description" class="cpub-field-input cpub-field-textarea" rows="3" placeholder="What is this hub about?" />
+      <div class="de-field">
+        <label for="hub-desc" class="de-field-label">Description</label>
+        <textarea id="hub-desc" v-model="description" class="de-field-input de-field-textarea" rows="3" placeholder="What is this community about?" />
       </div>
 
-      <div class="cpub-field-row">
-        <div class="cpub-field">
-          <label for="hub-type" class="cpub-field-label">Hub Type</label>
-          <select id="hub-type" v-model="hubType" class="cpub-field-input">
-            <option value="community">Community — maker group / topic space</option>
-            <option value="product">Product — product or platform page</option>
-            <option value="company">Company — organization page</option>
+      <div class="de-field-row">
+        <div class="de-field">
+          <label for="hub-type" class="de-field-label">Type</label>
+          <select id="hub-type" v-model="hubType" class="de-field-input">
+            <option value="community">Community</option>
+            <option value="product">Product</option>
+            <option value="company">Company</option>
           </select>
         </div>
 
-        <div class="cpub-field">
-          <label for="hub-join" class="cpub-field-label">Join Policy</label>
-          <select id="hub-join" v-model="joinPolicy" class="cpub-field-input">
-            <option value="open">Open — anyone can join</option>
-            <option value="approval">Approval — requests must be approved</option>
+        <div class="de-field">
+          <label for="hub-join" class="de-field-label">Join Policy</label>
+          <select id="hub-join" v-model="joinPolicy" class="de-field-input">
+            <option value="open">Open</option>
+            <option value="approval">Approval Required</option>
             <option value="invite">Invite Only</option>
           </select>
         </div>
       </div>
 
-      <div class="cpub-form-actions">
-        <button type="submit" class="cpub-btn cpub-btn-primary" :disabled="saving || !name">
-          {{ saving ? 'Creating...' : 'Create Hub' }}
+      <ImageUpload v-model="iconUrl" purpose="avatar" label="Icon / Avatar" hint="Square image, at least 256×256px" />
+
+      <ImageUpload v-model="bannerUrl" purpose="banner" label="Banner Image" hint="Wide image, at least 1200×300px" />
+
+      <div class="de-form-actions">
+        <button type="submit" class="de-btn-submit" :disabled="saving || !name">
+          {{ saving ? 'Creating...' : 'Create Community' }}
         </button>
-        <NuxtLink to="/explore" class="cpub-btn">Cancel</NuxtLink>
+        <NuxtLink to="/hubs" class="de-btn-cancel">Cancel</NuxtLink>
       </div>
     </form>
   </div>
 </template>
 
 <style scoped>
-.cpub-create-hub {
+.de-create-hub {
   max-width: 640px;
   margin: 0 auto;
-  padding: 32px;
+  padding: 40px 24px 64px;
 }
 
-.cpub-create-header {
-  margin-bottom: 32px;
-}
+.de-create-header { margin-bottom: 32px; }
 
-.cpub-back-link {
-  font-size: 11px;
-  font-family: var(--font-mono);
+.de-back-link {
+  font-size: 0.8125rem;
   color: var(--text-dim);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  margin-bottom: 12px;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.de-back-link:hover { color: var(--text); }
+
+.de-create-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 6px;
 }
 
-.cpub-back-link:hover { color: var(--text); }
-
-.cpub-create-title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.cpub-create-subtitle {
-  font-size: 13px;
+.de-create-subtitle {
+  font-size: 0.9375rem;
   color: var(--text-dim);
 }
 
-.cpub-create-form {
+.de-create-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.cpub-field {
+.de-field {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.cpub-field-label {
-  font-size: 11px;
+.de-field-label {
+  font-size: 0.75rem;
   font-weight: 600;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--text-dim);
 }
 
-.cpub-field-input {
-  padding: 8px 12px;
-  border: 2px solid var(--border);
+.de-field-input {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   background: var(--surface);
   color: var(--text);
-  font-size: 13px;
+  font-size: 0.875rem;
   font-family: var(--font-sans);
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.cpub-field-input:focus {
+.de-field-input:focus {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 231, 173, 0.12);
 }
 
-.cpub-field-input::placeholder {
-  color: var(--text-faint);
-}
+.de-field-input::placeholder { color: var(--text-faint); }
 
-.cpub-field-textarea {
+.de-field-textarea {
   resize: vertical;
   min-height: 60px;
   line-height: 1.5;
 }
 
-.cpub-field-row {
+.de-field-hint {
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+}
+
+.de-field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
 
-.cpub-form-actions {
+.de-form-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   padding-top: 8px;
 }
 
-select.cpub-field-input { cursor: pointer; }
+.de-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.de-btn-submit:hover { background: var(--color-primary-hover); }
+.de-btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.de-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.de-btn-cancel:hover { background: var(--surface2); }
+
+select.de-field-input { cursor: pointer; }
 
 @media (max-width: 640px) {
-  .cpub-create-hub { padding: 16px; }
-  .cpub-field-row { grid-template-columns: 1fr; }
+  .de-create-hub { padding: 24px 16px; }
+  .de-field-row { grid-template-columns: 1fr; }
 }
 </style>

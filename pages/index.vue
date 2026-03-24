@@ -2,8 +2,8 @@
 import type { Serialized, ContentListItem, PaginatedResponse } from '@commonpub/server';
 
 useSeoMeta({
-  title: 'devEco.io -- Edge AI Project Sharing & Community',
-  description: 'Build, share, and collaborate on edge AI projects. Join communities, enter contests, and publish your work.',
+  title: 'devEco.io | Edge AI Projects & Hardware Community',
+  description: 'The open platform for Edge AI projects, hardware, and communities. Share your builds, discover optimized models, and connect with developers pushing intelligence to the edge.',
 });
 
 const { user: authUser } = useAuth();
@@ -131,24 +131,39 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
             </div>
           </template>
           <template v-else>
-            <div class="de-hero-eyebrow">
-              <span class="de-badge de-badge-live"><span class="de-live-dot" /> Open Source</span>
-            </div>
+            <div class="de-hero-eyebrow"><span class="de-eyebrow-line" /> Open Platform for Edge AI</div>
             <h1 class="de-hero-title">
-              Build at the edge.<br>
-              <span>Share with the world.</span>
+              Build <span>Edge AI</span> Projects That Matter
             </h1>
             <p class="de-hero-excerpt">
-              devEco is an open platform for edge AI builders. Document your projects, join communities, compete in contests, and collaborate with fellow makers.
+              The open platform for Edge AI projects, hardware, and communities. Share your builds, discover optimized models, and connect with developers pushing intelligence to the edge.
             </p>
             <div class="de-hero-actions">
-              <NuxtLink to="/create" class="de-btn de-btn-accent"><i class="fa-solid fa-plus"></i> Start Building</NuxtLink>
-              <NuxtLink to="/explore" class="de-btn de-btn-outline"><i class="fa-solid fa-compass"></i> Explore</NuxtLink>
+              <NuxtLink to="/explore" class="de-btn de-btn-accent">
+                <i class="fa-solid fa-magnifying-glass"></i> Explore Projects
+              </NuxtLink>
+              <NuxtLink to="/create" class="de-btn de-btn-outline">
+                <i class="fa-solid fa-plus"></i> Start Building
+              </NuxtLink>
+            </div>
+            <div class="de-hero-stats">
+              <div class="de-hero-stat-block">
+                <span class="de-hero-stat-value">{{ stats?.content?.byType?.project ?? 0 }}</span>
+                <span class="de-hero-stat-label">Projects</span>
+              </div>
+              <div class="de-hero-stat-block">
+                <span class="de-hero-stat-value">{{ stats?.users?.total ?? 0 }}</span>
+                <span class="de-hero-stat-label">Members</span>
+              </div>
+              <div class="de-hero-stat-block">
+                <span class="de-hero-stat-value">{{ stats?.hubs?.total ?? 0 }}</span>
+                <span class="de-hero-stat-label">Communities</span>
+              </div>
             </div>
           </template>
         </div>
-        <div v-if="activeContest?.endDate" class="de-hero-aside">
-          <CountdownTimer :target-date="activeContest.endDate" />
+        <div class="de-hero-visual">
+          <DevEcoLogo variant="dark-bg" size="lg" :show-text="false" />
         </div>
       </div>
     </section>
@@ -234,28 +249,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
       <!-- Sidebar -->
       <aside class="de-sidebar">
         <!-- Platform Stats -->
-        <div class="de-sb-card">
-          <div class="de-sb-head">Platform Stats</div>
-          <div class="de-stats-grid">
-            <div class="de-stat-block">
-              <span class="de-stat-num">{{ stats?.content?.byType?.project ?? 0 }}</span>
-              <span class="de-stat-lbl">Projects</span>
-            </div>
-            <div class="de-stat-block">
-              <span class="de-stat-num">{{ stats?.content?.byType?.blog ?? 0 }}</span>
-              <span class="de-stat-lbl">Posts</span>
-            </div>
-            <div class="de-stat-block">
-              <span class="de-stat-num">{{ stats?.users?.total ?? 0 }}</span>
-              <span class="de-stat-lbl">Members</span>
-            </div>
-            <div v-if="hubsEnabled" class="de-stat-block">
-              <span class="de-stat-num">{{ stats?.hubs?.total ?? 0 }}</span>
-              <span class="de-stat-lbl">Communities</span>
-            </div>
-          </div>
-        </div>
-
         <!-- Active Contests -->
         <div v-if="contestsEnabled && contests?.items?.length" class="de-sb-card">
           <div class="de-sb-head">Active Contests <NuxtLink to="/contests">View all</NuxtLink></div>
@@ -298,7 +291,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
         <!-- Powered badge -->
         <div class="de-powered-badge">
           <DevEcoLogo variant="light-bg" size="sm" :show-text="false" />
-          <span class="de-powered-text">Powered by <a href="https://commonpub.dev" target="_blank" rel="noopener">CommonPub</a></span>
+          <span class="de-powered-text">Powered by <a href="https://github.com/commonpub/commonpub" target="_blank" rel="noopener">CommonPub</a></span>
         </div>
       </aside>
     </div>
@@ -332,15 +325,14 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 }
 .de-hero-dismiss:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
 
-.de-hero-inner {
-  position: relative; z-index: 1;
-  max-width: 1280px; margin: 0 auto; padding: 48px 32px;
-  width: 100%; display: flex; align-items: center; gap: 48px;
+.de-hero-content { flex: 1; min-width: 0; }
+
+.de-hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px;
+  font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent);
 }
-
-.de-hero-content { flex: 1; }
-
-.de-hero-eyebrow { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.de-eyebrow-line { width: 20px; height: 2px; background: var(--accent); }
 
 .de-badge {
   font-size: 0.6875rem; font-weight: 600;
@@ -373,17 +365,51 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 }
 
 .de-hero-title {
-  font-family: var(--font-display); font-size: 2rem; font-weight: 800;
-  line-height: 1.2; margin-bottom: 12px; color: #fff;
+  font-family: var(--font-display); font-size: 2.75rem; font-weight: 800;
+  line-height: 1.1; margin-bottom: 16px; color: #fff;
 }
-.de-hero-title span { color: var(--accent); }
+.de-hero-title span {
+  background: linear-gradient(90deg, var(--accent), #42fffe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .de-hero-excerpt {
   font-size: 1rem; color: rgba(255, 255, 255, 0.7);
   line-height: 1.6; margin-bottom: 24px; max-width: 560px;
 }
 
-.de-hero-actions { display: flex; gap: 10px; }
+.de-hero-actions { display: flex; gap: 12px; margin-bottom: 32px; }
+
+.de-hero-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; padding-top: 24px;
+  border-top: 1px solid rgba(0, 231, 173, 0.1);
+}
+.de-hero-stat-value {
+  font-family: var(--font-display); font-size: 1.5rem;
+  font-weight: 800; color: #fff; display: block;
+}
+.de-hero-stat-label {
+  font-size: 0.6875rem; font-weight: 600;
+  color: rgba(255, 255, 255, 0.4); text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.de-hero-visual {
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.de-hero-visual :deep(svg) {
+  height: 280px !important; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3));
+}
+
+.de-hero-inner {
+  position: relative; z-index: 1;
+  max-width: 1280px; margin: 0 auto; padding: 56px 32px;
+  width: 100%; display: grid; grid-template-columns: 1fr 320px;
+  gap: 48px; align-items: center;
+}
 
 .de-btn {
   display: inline-flex; align-items: center; gap: 8px;
@@ -417,7 +443,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 
 /* ---- TABS ---- */
 .de-tabs-bar {
-  position: sticky; top: 64px;
+  position: sticky; top: 60px;
   background: var(--surface); border-bottom: 1px solid var(--border);
   z-index: 90; padding: 0 32px;
 }
@@ -536,15 +562,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 }
 .de-sb-head a:hover { text-decoration: underline; }
 
-/* Stats grid */
-.de-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.de-stat-block {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 8px; padding: 14px 16px;
-}
-.de-stat-num { font-size: 1.25rem; font-weight: 700; color: var(--text); line-height: 1; display: block; margin-bottom: 4px; }
-.de-stat-lbl { font-size: 0.6875rem; color: var(--text-faint); }
-
 /* Contest items */
 .de-contest-item { padding: 12px 0; border-bottom: 1px solid var(--border); }
 .de-contest-item:last-child { border-bottom: none; padding-bottom: 0; }
@@ -613,7 +630,8 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 /* ---- RESPONSIVE ---- */
 @media (max-width: 1024px) {
   .de-main-layout { grid-template-columns: 1fr; }
-  .de-hero-inner { flex-direction: column; gap: 24px; }
+  .de-hero-inner { grid-template-columns: 1fr; }
+  .de-hero-visual { display: none; }
 }
 
 @media (max-width: 640px) {

@@ -69,7 +69,7 @@ const sizeMap: Record<string, string> = {
       class="deveco-logo-text"
       :class="variant === 'light-bg' ? 'deveco-logo-text--dark' : 'deveco-logo-text--light'"
     >
-      dev<span class="deveco-logo-accent">Eco</span>
+      dev<span class="deveco-logo-accent">Eco</span><span class="deveco-logo-dot">.io</span>
     </span>
   </div>
 </template>
@@ -101,6 +101,12 @@ const sizeMap: Record<string, string> = {
 }
 
 .deveco-logo-accent {
-  color: #00e7ad;
+  color: #4db3a8;
+}
+
+.deveco-logo-dot {
+  color: inherit;
+  font-weight: 600;
+  opacity: 0.5;
 }
 </style>

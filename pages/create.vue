@@ -10,37 +10,37 @@ const allTypes = [
   {
     type: 'project',
     icon: 'fa-solid fa-microchip',
-    color: 'var(--accent)',
-    bg: 'var(--accent-bg)',
-    border: 'var(--accent-border)',
+    color: '#004e53',
+    bg: 'rgba(0, 78, 83, 0.06)',
+    border: 'rgba(0, 78, 83, 0.15)',
     name: 'Project',
     desc: 'Document a hardware or software build with step-by-step instructions, parts list, and build photos.',
-    badge: 'Popular',
+    badge: '',
   },
   {
     type: 'article',
     icon: 'fa-solid fa-file-lines',
-    color: 'var(--teal)',
-    bg: 'rgba(20,184,166,0.08)',
-    border: 'rgba(20,184,166,0.25)',
+    color: '#5bc5e8',
+    bg: 'rgba(91, 197, 232, 0.06)',
+    border: 'rgba(91, 197, 232, 0.2)',
     name: 'Article',
     desc: 'Write a long-form technical article with code examples, diagrams, and rich formatting.',
   },
   {
     type: 'explainer',
     icon: 'fa-solid fa-lightbulb',
-    color: 'var(--yellow)',
-    bg: 'var(--yellow-bg)',
-    border: 'var(--yellow-border)',
+    color: '#f4c84b',
+    bg: 'rgba(244, 200, 75, 0.06)',
+    border: 'rgba(244, 200, 75, 0.2)',
     name: 'Explainer',
     desc: 'Create an interactive explorable explanation with sliders, quizzes, and section-by-section progression.',
   },
   {
     type: 'blog',
     icon: 'fa-solid fa-pen-nib',
-    color: 'var(--pink)',
-    bg: 'rgba(236,72,153,0.08)',
-    border: 'rgba(236,72,153,0.25)',
+    color: '#e85a85',
+    bg: 'rgba(232, 90, 133, 0.06)',
+    border: 'rgba(232, 90, 133, 0.15)',
     name: 'Blog Post',
     desc: 'Share thoughts, tutorials, or updates with a clean writing experience and inline media.',
   },
@@ -50,29 +50,29 @@ const types = computed(() => allTypes.filter(t => isTypeEnabled(t.type as Conten
 </script>
 
 <template>
-  <div class="cpub-create-page">
-    <div class="cpub-create-header">
-      <div class="cpub-create-eyebrow"><i class="fa-solid fa-plus"></i> New Content</div>
-      <h1 class="cpub-create-title">What would you like to create?</h1>
-      <p class="cpub-create-subtitle">Choose a content type to get started. You can change the format later.</p>
+  <div class="de-create-page">
+    <div class="de-create-header">
+      <div class="de-create-eyebrow"><i class="fa-solid fa-plus"></i> New Content</div>
+      <h1 class="de-create-title">What would you like to create?</h1>
+      <p class="de-create-subtitle">Choose a content type to get started. You can change the format later.</p>
     </div>
 
-    <div class="cpub-create-grid">
+    <div class="de-create-grid">
       <NuxtLink
         v-for="t in types"
         :key="t.type"
         :to="`/${t.type}/new/edit`"
-        class="cpub-create-card"
+        class="de-create-card"
       >
-        <div class="cpub-create-card-icon" :style="{ color: t.color, background: t.bg, borderColor: t.border }">
+        <div class="de-create-card-icon" :style="{ color: t.color, background: t.bg, borderColor: t.border }">
           <i :class="t.icon"></i>
-          <span v-if="t.badge" class="cpub-create-badge">{{ t.badge }}</span>
+          <span v-if="t.badge" class="de-create-badge">{{ t.badge }}</span>
         </div>
-        <div class="cpub-create-card-body">
-          <h3 class="cpub-create-card-name">{{ t.name }}</h3>
-          <p class="cpub-create-card-desc">{{ t.desc }}</p>
+        <div class="de-create-card-body">
+          <h3 class="de-create-card-name">{{ t.name }}</h3>
+          <p class="de-create-card-desc">{{ t.desc }}</p>
         </div>
-        <div class="cpub-create-card-arrow">
+        <div class="de-create-card-arrow">
           <i class="fa-solid fa-arrow-right"></i>
         </div>
       </NuxtLink>
@@ -81,66 +81,67 @@ const types = computed(() => allTypes.filter(t => isTypeEnabled(t.type as Conten
 </template>
 
 <style scoped>
-.cpub-create-page {
-  max-width: 800px;
-  padding: var(--space-8) var(--space-6);
+.de-create-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
 }
 
-.cpub-create-header {
-  margin-bottom: var(--space-8);
+.de-create-header {
+  margin-bottom: 36px;
 }
 
-.cpub-create-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
+.de-create-eyebrow {
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: var(--space-3);
+  color: var(--deveco-dark-green);
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
-.cpub-create-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: var(--space-2);
-  letter-spacing: -0.02em;
+.de-create-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text);
 }
 
-.cpub-create-subtitle {
-  font-size: 14px;
+.de-create-subtitle {
+  font-size: 0.9375rem;
   color: var(--text-dim);
   line-height: 1.6;
 }
 
-.cpub-create-grid {
+.de-create-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
-.cpub-create-card {
+.de-create-card {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 20px 24px;
+  padding: 24px;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 14px;
   text-decoration: none;
   color: inherit;
-  box-shadow: 4px 4px 0 var(--border);
-  transition: box-shadow 0.15s, transform 0.15s;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 
-.cpub-create-card:hover {
-  box-shadow: 6px 6px 0 var(--border);
-  transform: translate(-1px, -1px);
+.de-create-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--deveco-dark-green);
 }
 
-.cpub-create-card-icon {
+.de-create-card-icon {
   width: 56px;
   height: 56px;
   display: flex;
@@ -148,69 +149,72 @@ const types = computed(() => allTypes.filter(t => isTypeEnabled(t.type as Conten
   justify-content: center;
   font-size: 22px;
   flex-shrink: 0;
-  border: 2px solid;
+  border: 1px solid;
+  border-radius: 14px;
   position: relative;
 }
 
-.cpub-create-badge {
+.de-create-badge {
   position: absolute;
   top: -8px;
   right: -8px;
-  font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 0.5625rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 2px 6px;
-  background: var(--accent);
-  color: var(--color-text-inverse);
-  border: 2px solid var(--border);
+  padding: 2px 8px;
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border-radius: 10px;
 }
 
-.cpub-create-card-body {
+.de-create-card-body {
   flex: 1;
   min-width: 0;
 }
 
-.cpub-create-card-name {
-  font-size: 16px;
+.de-create-card-name {
+  font-size: 1.0625rem;
   font-weight: 700;
   margin-bottom: 4px;
+  color: var(--text);
 }
 
-.cpub-create-card-desc {
-  font-size: 13px;
+.de-create-card-desc {
+  font-size: 0.8125rem;
   color: var(--text-dim);
   line-height: 1.55;
 }
 
-.cpub-create-card-arrow {
-  width: 32px;
-  height: 32px;
+.de-create-card-arrow {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--surface2);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   color: var(--text-faint);
-  font-size: 12px;
+  font-size: 14px;
   flex-shrink: 0;
-  transition: color 0.15s, background 0.15s;
+  transition: all 0.15s;
 }
 
-.cpub-create-card:hover .cpub-create-card-arrow {
-  background: var(--accent);
-  color: var(--color-text-inverse);
-  border-color: var(--border);
+.de-create-card:hover .de-create-card-arrow {
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border-color: var(--deveco-dark-green);
 }
 
 @media (max-width: 640px) {
-  .cpub-create-card {
+  .de-create-page { padding: 24px 16px 48px; }
+  .de-create-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
   }
-  .cpub-create-card-arrow {
+  .de-create-card-arrow {
     align-self: flex-end;
   }
 }

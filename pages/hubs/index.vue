@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Hubs -- devEco.io',
-  description: 'Browse and join maker communities.',
+  title: 'Communities -- devEco.io',
+  description: 'Browse and join edge AI communities.',
 });
 
 const { data } = await useFetch('/api/hubs');
@@ -11,43 +11,48 @@ const hubs = computed(() => data.value?.items ?? []);
 </script>
 
 <template>
-  <div class="cpub-hubs-page">
-    <div class="cpub-hubs-header">
+  <div class="de-hubs-page">
+    <div class="de-hubs-header">
       <div>
-        <h1 class="cpub-hubs-title">Hubs</h1>
-        <p class="cpub-hubs-desc">Communities, products, and companies on devEco.io</p>
+        <h1 class="de-hubs-title">Communities</h1>
+        <p class="de-hubs-desc">Groups, products, and organizations on devEco.io</p>
       </div>
-      <NuxtLink v-if="isAuthenticated" to="/hubs/create" class="cpub-btn cpub-btn-primary">
+      <NuxtLink v-if="isAuthenticated" to="/hubs/create" class="de-btn-create">
         <i class="fa-solid fa-plus"></i> Create Hub
       </NuxtLink>
     </div>
 
-    <div v-if="hubs.length" class="cpub-hubs-grid">
+    <div v-if="hubs.length" class="de-hubs-grid">
       <NuxtLink
         v-for="hub in hubs"
         :key="hub.id"
         :to="`/hubs/${hub.slug}`"
-        class="cpub-hub-card"
+        class="de-hub-card"
       >
-        <div class="cpub-hub-card-icon">
-          <i :class="hub.hubType === 'company' ? 'fa-solid fa-building' : hub.hubType === 'product' ? 'fa-solid fa-microchip' : 'fa-solid fa-users'"></i>
+        <div class="de-hub-card-banner" :style="hub.bannerUrl ? { backgroundImage: `url(${hub.bannerUrl})` } : {}">
+          <div class="de-hub-card-icon">
+            <img v-if="hub.iconUrl" :src="hub.iconUrl" :alt="hub.name" class="de-hub-card-avatar" />
+            <i v-else :class="hub.hubType === 'company' ? 'fa-solid fa-building' : hub.hubType === 'product' ? 'fa-solid fa-microchip' : 'fa-solid fa-users'"></i>
+          </div>
         </div>
-        <div class="cpub-hub-card-body">
-          <h2 class="cpub-hub-card-name">{{ hub.name }}</h2>
-          <p v-if="hub.description" class="cpub-hub-card-desc">{{ hub.description }}</p>
-          <div class="cpub-hub-card-meta">
-            <span class="cpub-hub-card-stat"><i class="fa-solid fa-users"></i> {{ hub.memberCount ?? 0 }}</span>
-            <span class="cpub-hub-card-stat"><i class="fa-solid fa-message"></i> {{ hub.postCount ?? 0 }}</span>
-            <span class="cpub-hub-card-type">{{ hub.hubType ?? 'community' }}</span>
+        <div class="de-hub-card-body">
+          <div class="de-hub-card-top">
+            <h2 class="de-hub-card-name">{{ hub.name }}</h2>
+            <span class="de-hub-card-type">{{ hub.hubType ?? 'community' }}</span>
+          </div>
+          <p v-if="hub.description" class="de-hub-card-desc">{{ hub.description }}</p>
+          <div class="de-hub-card-meta">
+            <span class="de-hub-card-stat"><i class="fa-solid fa-users"></i> {{ hub.memberCount ?? 0 }} members</span>
+            <span class="de-hub-card-stat"><i class="fa-solid fa-message"></i> {{ hub.postCount ?? 0 }} posts</span>
           </div>
         </div>
       </NuxtLink>
     </div>
-    <div v-else class="cpub-empty-state">
-      <div class="cpub-empty-state-icon"><i class="fa-solid fa-users"></i></div>
-      <p class="cpub-empty-state-title">No hubs yet</p>
-      <p class="cpub-empty-state-desc">Be the first to create a community!</p>
-      <NuxtLink v-if="isAuthenticated" to="/hubs/create" class="cpub-btn cpub-btn-primary" style="margin-top: 16px">
+    <div v-else class="de-empty-state">
+      <div class="de-empty-icon"><i class="fa-solid fa-users"></i></div>
+      <p class="de-empty-title">No communities yet</p>
+      <p class="de-empty-desc">Be the first to create one.</p>
+      <NuxtLink v-if="isAuthenticated" to="/hubs/create" class="de-btn-create" style="margin-top: 16px">
         <i class="fa-solid fa-plus"></i> Create Hub
       </NuxtLink>
     </div>
@@ -55,76 +60,135 @@ const hubs = computed(() => data.value?.items ?? []);
 </template>
 
 <style scoped>
-.cpub-hubs-page { max-width: 960px; }
+.de-hubs-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
 
-.cpub-hubs-header {
+.de-hubs-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   gap: 16px;
 }
 
-.cpub-hubs-title {
-  font-size: 22px;
-  font-weight: 700;
+.de-hubs-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text);
 }
 
-.cpub-hubs-desc {
-  font-size: 13px;
+.de-hubs-desc {
+  font-size: 0.9375rem;
   color: var(--text-dim);
   margin-top: 4px;
 }
 
-.cpub-hubs-grid {
+.de-btn-create {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.de-btn-create:hover { background: var(--color-primary-hover); }
+
+.de-hubs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
 }
 
-.cpub-hub-card {
-  display: flex;
-  gap: 14px;
-  padding: 18px;
+.de-hub-card {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: box-shadow 0.15s;
-  box-shadow: 4px 4px 0 var(--border);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.de-hub-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--deveco-dark-green);
 }
 
-.cpub-hub-card:hover {
-  box-shadow: 6px 6px 0 var(--border);
-  transform: translate(-1px, -1px);
+.de-hub-card-banner {
+  height: 80px;
+  background: linear-gradient(135deg, var(--deveco-dark-green), #1b357d);
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
 
-.cpub-hub-card-icon {
-  width: 44px;
-  height: 44px;
+.de-hub-card-icon {
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-bg);
-  border: 2px solid var(--accent-border);
-  color: var(--accent);
-  font-size: 18px;
-  flex-shrink: 0;
+  background: var(--surface);
+  border: 2px solid var(--surface);
+  border-radius: 12px;
+  font-size: 20px;
+  color: var(--deveco-dark-green);
+  box-shadow: var(--shadow-sm);
 }
 
-.cpub-hub-card-body { flex: 1; min-width: 0; }
+.de-hub-card-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
 
-.cpub-hub-card-name {
-  font-size: 14px;
+.de-hub-card-body {
+  padding: 28px 20px 20px;
+}
+
+.de-hub-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.de-hub-card-name {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.de-hub-card-type {
+  font-size: 0.625rem;
   font-weight: 600;
-  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--deveco-dark-green);
+  background: rgba(0, 78, 83, 0.06);
+  border: 1px solid rgba(0, 78, 83, 0.12);
+  padding: 2px 8px;
+  border-radius: 4px;
 }
 
-.cpub-hub-card-desc {
-  font-size: 12px;
+.de-hub-card-desc {
+  font-size: 0.8125rem;
   color: var(--text-dim);
   line-height: 1.5;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -132,35 +196,36 @@ const hubs = computed(() => data.value?.items ?? []);
   -webkit-box-orient: vertical;
 }
 
-.cpub-hub-card-meta {
+.de-hub-card-meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
-.cpub-hub-card-stat {
-  font-size: 11px;
-  font-family: var(--font-mono);
+.de-hub-card-stat {
+  font-size: 0.75rem;
   color: var(--text-faint);
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
+.de-hub-card-stat i { font-size: 11px; }
 
-.cpub-hub-card-stat i { font-size: 10px; }
-
-.cpub-hub-card-type {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
-  padding: 2px 6px;
+/* Empty state */
+.de-empty-state {
+  text-align: center;
+  padding: 56px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
 }
+.de-empty-icon { font-size: 36px; color: var(--text-faint); margin-bottom: 16px; }
+.de-empty-title { font-size: 1.0625rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.de-empty-desc { font-size: 0.875rem; color: var(--text-dim); }
 
 @media (max-width: 640px) {
-  .cpub-hubs-grid { grid-template-columns: 1fr; }
+  .de-hubs-page { padding: 24px 16px 48px; }
+  .de-hubs-grid { grid-template-columns: 1fr; }
+  .de-hubs-header { flex-direction: column; }
 }
 </style>

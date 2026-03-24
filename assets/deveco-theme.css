@@ -186,6 +186,11 @@
 }
 
 /* === BASE OVERRIDES === */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -197,6 +202,22 @@ body {
   border-radius: var(--radius);
 }
 
+/* Full-width sections: no rounding */
+.de-top-banner,
+.de-hero,
+.de-footer,
+.de-footer-bottom,
+.de-tabs-bar,
+.cpub-editor-topbar,
+footer {
+  border-radius: 0;
+}
+
+/* Topbar: always has rounded bottom corners */
+header {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -206,3 +227,318 @@ body {
 [data-content-type="project"] { --badge-color: var(--deveco-dark-green); --badge-bg: rgba(0, 78, 83, 0.08); }
 [data-content-type="blog"] { --badge-color: var(--pink); --badge-bg: var(--pink-bg); }
 [data-content-type="article"] { --badge-color: var(--deveco-blue); --badge-bg: rgba(91, 197, 232, 0.08); }
+
+/* === PAGE WRAPPER — centers and pads all cpub page containers === */
+#main-content > div {
+  background: var(--bg);
+}
+
+[class*="cpub-"][class*="-page"],
+.cpub-listing,
+.cpub-contests-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+/* === GLOBAL CARD OVERRIDES — softer than commonpub default === */
+.cpub-card,
+.cpub-hub-card,
+[class*="cpub-"][class*="-card"] {
+  border: 1px solid var(--border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: box-shadow 0.2s, transform 0.2s !important;
+}
+
+.cpub-card:hover,
+.cpub-hub-card:hover,
+[class*="cpub-"][class*="-card"]:hover {
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Hub card icon: rounded */
+.cpub-hub-card-icon {
+  border-radius: 10px !important;
+  border: 1px solid var(--accent-border) !important;
+}
+
+/* Hub card type badge */
+.cpub-hub-card-type {
+  border-radius: 4px;
+}
+
+/* Listing page header */
+.cpub-listing-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* Listing sort select */
+.cpub-listing-sort {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+/* Listing create button */
+.cpub-listing-create {
+  background: var(--deveco-dark-green) !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 8px 16px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+}
+
+.cpub-listing-create:hover {
+  background: var(--color-primary-hover) !important;
+}
+
+/* Section headers */
+.cpub-section-header,
+[class*="cpub-"][class*="-header"] h1 {
+  font-family: var(--font-display);
+}
+
+/* Empty states */
+.cpub-empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.cpub-empty-state-icon {
+  font-size: 32px;
+  color: var(--text-faint);
+  margin-bottom: 16px;
+}
+
+.cpub-empty-state-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.cpub-empty-state-desc {
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+}
+
+/* Buttons: deveco style */
+.cpub-btn {
+  border-radius: 8px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 8px 16px !important;
+  transition: all 0.15s !important;
+}
+
+.cpub-btn-primary {
+  background: var(--deveco-dark-green) !important;
+  color: #fff !important;
+}
+
+.cpub-btn-primary:hover {
+  background: var(--color-primary-hover) !important;
+  box-shadow: var(--shadow-md) !important;
+  transform: none !important;
+}
+
+/* Badges */
+.cpub-badge,
+[class*="cpub-badge"] {
+  border-radius: 4px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cpub-badge-green { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+.cpub-badge-yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+.cpub-badge-red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+
+/* Grid layouts */
+.cpub-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Content card from commonpub */
+.cpub-card-body {
+  padding: 20px;
+}
+
+/* Search/explore page tabs */
+.cpub-filter-pills,
+.cpub-type-pills {
+  gap: 6px;
+}
+
+.cpub-filter-pill,
+.cpub-type-pill {
+  border-radius: 20px !important;
+  font-size: 0.8125rem !important;
+  padding: 6px 16px !important;
+}
+
+/* === EDITOR OVERRIDES === */
+
+/* Block picker: softer styling, larger icons, color-coded by type */
+.cpub-picker {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  min-width: 300px;
+  max-width: 380px;
+}
+
+.cpub-picker-header {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+}
+
+.cpub-picker-search {
+  font-size: 0.8125rem;
+}
+
+.cpub-picker-search-icon {
+  font-size: 12px;
+}
+
+.cpub-picker-item {
+  padding: 10px 12px;
+  gap: 12px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+}
+
+.cpub-picker-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.cpub-picker-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.cpub-picker-desc {
+  font-size: 0.6875rem;
+  font-family: var(--font-sans);
+}
+
+/* Color-code block type icons in picker */
+.cpub-picker-item[data-block="text"] .cpub-picker-icon,
+.cpub-picker-item[data-block="paragraph"] .cpub-picker-icon { color: var(--text-dim); background: var(--surface2); }
+.cpub-picker-item[data-block="heading"] .cpub-picker-icon { color: var(--deveco-dark-green); background: rgba(0, 78, 83, 0.06); border-color: rgba(0, 78, 83, 0.15); }
+.cpub-picker-item[data-block="image"] .cpub-picker-icon,
+.cpub-picker-item[data-block="gallery"] .cpub-picker-icon { color: var(--deveco-blue); background: rgba(91, 197, 232, 0.06); border-color: rgba(91, 197, 232, 0.2); }
+.cpub-picker-item[data-block="code"] .cpub-picker-icon { color: var(--purple); background: var(--purple-bg); border-color: var(--purple-border); }
+.cpub-picker-item[data-block="quote"] .cpub-picker-icon { color: var(--teal); background: var(--teal-bg); border-color: var(--teal-border); }
+.cpub-picker-item[data-block="callout"] .cpub-picker-icon { color: var(--yellow); background: var(--yellow-bg); border-color: var(--yellow-border); }
+.cpub-picker-item[data-block="divider"] .cpub-picker-icon { color: var(--text-faint); background: var(--surface2); }
+.cpub-picker-item[data-block="embed"] .cpub-picker-icon,
+.cpub-picker-item[data-block="video"] .cpub-picker-icon { color: var(--pink); background: var(--pink-bg); border-color: var(--pink-border); }
+.cpub-picker-item[data-block="quiz"] .cpub-picker-icon,
+.cpub-picker-item[data-block="checkpoint"] .cpub-picker-icon { color: var(--accent); background: var(--accent-bg); border-color: var(--accent-border); }
+.cpub-picker-item[data-block="parts-list"] .cpub-picker-icon,
+.cpub-picker-item[data-block="tool-list"] .cpub-picker-icon,
+.cpub-picker-item[data-block="build-step"] .cpub-picker-icon { color: var(--deveco-dark-green); background: rgba(0, 78, 83, 0.06); border-color: rgba(0, 78, 83, 0.15); }
+
+/* Editor shell: softer borders, better spacing */
+.cpub-editor-shell-inner {
+  border-radius: 0;
+}
+
+.cpub-editor-left,
+.cpub-editor-right {
+  border-color: var(--border);
+}
+
+/* Editor sidebar section headers */
+.cpub-editor-section-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Properties panel: better readability */
+.cpub-props-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.cpub-props-field-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.cpub-props-field-input,
+.cpub-props-field-select,
+.cpub-props-field-textarea {
+  font-size: 0.8125rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+}
+
+.cpub-props-field-input:focus,
+.cpub-props-field-select:focus,
+.cpub-props-field-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 231, 173, 0.15);
+}
+
+/* Editor topbar polish */
+.cpub-editor-topbar {
+  border-bottom: 1px solid var(--border);
+  height: 52px;
+}
+
+.cpub-editor-logo {
+  font-size: 0.875rem;
+}
+
+/* Block wrapper in canvas: softer borders */
+.cpub-block-wrapper {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.cpub-block-wrapper:hover {
+  border-color: var(--border);
+}
+
+.cpub-block-wrapper--selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 231, 173, 0.1);
+}
+
+/* Block handles */
+.cpub-block-handle {
+  border-radius: 4px;
+}
+
+/* Insert zone */
+.cpub-insert-zone-btn {
+  border-radius: 20px;
+  font-size: 0.75rem;
+  padding: 4px 14px;
+}

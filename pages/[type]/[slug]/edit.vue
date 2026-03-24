@@ -71,6 +71,25 @@ if (!isNew.value) {
   }
 }
 
+// Auto-generate slug from title (only when slug hasn't been manually edited)
+const slugManuallyEdited = ref(false);
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 128);
+}
+
+watch(title, (newTitle) => {
+  if (!slugManuallyEdited.value && isNew.value) {
+    metadata.value = { ...metadata.value, slug: slugify(newTitle) };
+  }
+});
+
 // Track dirty state from block changes
 watch(() => blockEditor.blocks.value, () => {
   isDirty.value = true;
@@ -146,8 +165,8 @@ function buildSaveBody(): Record<string, unknown> {
     ...metadata.value,
   };
 
-  // Remove client-only keys that don't belong in the API payload
-  delete body.slug;
+  // Send slug only if user explicitly set one (otherwise server auto-generates from title)
+  if (!body.slug) delete body.slug;
 
   // Strip empty strings — Zod URL validators reject ''
   for (const key of Object.keys(body)) {
@@ -176,13 +195,24 @@ async function silentSave(): Promise<void> {
     const body = buildSaveBody();
 
     if (isNew.value) {
-      const result = await $fetch<{ id: string; slug: string }>('/api/content', { method: 'POST', body });
+      let result: { id: string; slug: string };
+      try {
+        result = await $fetch<{ id: string; slug: string }>('/api/content', { method: 'POST', body });
+      } catch (err: unknown) {
+        // Slug conflict: retry with a numeric suffix
+        const msg = (err as { data?: { message?: string } })?.data?.message ?? '';
+        if (msg.toLowerCase().includes('slug') || msg.toLowerCase().includes('duplicate') || msg.toLowerCase().includes('unique')) {
+          body.slug = `${body.slug || slugify(title.value)}-${Date.now().toString(36).slice(-4)}`;
+          result = await $fetch<{ id: string; slug: string }>('/api/content', { method: 'POST', body });
+        } else {
+          throw err;
+        }
+      }
       contentId.value = result.id;
-      isNew.value = false; // Now subsequent saves will PUT instead of POST
+      isNew.value = false;
       isDirty.value = false;
       autoSaveStatus.value = 'saved';
       await syncBOM(result.id);
-      // Update the URL without full navigation so we can keep editing
       history.replaceState({}, '', `/${contentType.value}/${result.slug}/edit`);
     } else {
       const updated = await $fetch<{ slug: string }>(`/api/content/${contentId.value}`, { method: 'PUT', body });
@@ -325,7 +355,7 @@ async function handlePublish(): Promise<void> {
     <!-- Top bar -->
     <header class="cpub-editor-topbar">
       <NuxtLink to="/" class="cpub-editor-logo" aria-label="Home">
-        <span class="cpub-logo-accent">[</span>cpub<span class="cpub-logo-accent">]</span>
+        <DevEcoLogo variant="light-bg" size="sm" :show-text="false" />
       </NuxtLink>
       <button class="cpub-editor-back" aria-label="Go back" @click="$router.back()">
         <i class="fa-solid fa-arrow-left"></i>

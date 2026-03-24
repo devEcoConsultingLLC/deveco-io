@@ -54,6 +54,11 @@ const userUsername = computed(() => user.value?.username ?? '');
 
 <template>
   <div class="de-layout">
+    <!-- Top Banner -->
+    <div class="de-top-banner">
+      Backed by <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a> &middot; Part of the <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>
+    </div>
+
     <!-- Top Nav -->
     <header class="de-topbar">
       <div class="de-topbar-inner">
@@ -142,7 +147,8 @@ const userUsername = computed(() => user.value?.username ?? '');
       <div class="de-footer-inner">
         <div class="de-footer-brand">
           <DevEcoLogo variant="dark-bg" size="sm" :show-text="true" />
-          <p class="de-footer-tagline">Edge AI project sharing and community platform.</p>
+          <p class="de-footer-tagline">The open platform for Edge AI projects, hardware, and communities. Built by developers, for developers.</p>
+          <div class="de-footer-backer">Backed by <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a></div>
           <div class="de-footer-social">
             <a href="https://github.com/edge-ai-foundation" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="https://discord.gg/deveco" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -167,8 +173,12 @@ const userUsername = computed(() => user.value?.username ?? '');
         </nav>
       </div>
       <div class="de-footer-bottom">
-        <span>&copy; {{ new Date().getFullYear() }} devEco.io &middot; Edge AI Foundation. AGPL-3.0</span>
-        <span class="de-powered">Powered by <a href="https://commonpub.dev" target="_blank" rel="noopener">CommonPub</a></span>
+        <span>&copy; {{ new Date().getFullYear() }} devEco.io &middot; Part of <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener">EDGE AI FOUNDATION</a></span>
+        <span class="de-footer-ioc">
+          <i class="fa-solid fa-globe"></i>
+          <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>
+        </span>
+        <span class="de-powered">Powered by <a href="https://github.com/commonpub/commonpub" target="_blank" rel="noopener">CommonPub</a></span>
       </div>
     </footer>
   </div>
@@ -177,10 +187,22 @@ const userUsername = computed(() => user.value?.username ?? '');
 <style scoped>
 .de-layout { min-height: 100vh; display: flex; flex-direction: column; }
 
+/* ---- TOP BANNER ---- */
+.de-top-banner {
+  background: var(--deveco-dark-green); color: rgba(255, 255, 255, 0.6);
+  text-align: center; padding: 10px 24px;
+  font-size: 0.8125rem; font-weight: 500;
+}
+.de-top-banner strong { color: var(--accent); }
+.de-top-banner a { color: var(--accent); text-decoration: underline; }
+.de-top-banner a:hover { color: #fff; }
+
 /* ---- TOPBAR ---- */
 .de-topbar {
-  position: fixed; top: 0; left: 0; right: 0; height: 64px;
-  background: var(--surface); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; left: 0; right: 0; height: 60px;
+  background: var(--surface);
+  border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 100; backdrop-filter: blur(8px);
 }
 
@@ -275,7 +297,7 @@ const userUsername = computed(() => user.value?.username ?? '');
   align-items: center; justify-content: center;
 }
 .de-mobile-menu {
-  display: none; position: fixed; inset: 0; top: 64px;
+  display: none; position: fixed; inset: 0; top: 60px;
   z-index: 99; background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(4px);
 }
 .de-mobile-nav {
@@ -292,7 +314,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-mobile-link i { width: 18px; text-align: center; font-size: 14px; }
 .de-mobile-divider { height: 1px; background: var(--border); margin: 6px 16px; }
 
-#main-content { margin-top: 64px; flex: 1; }
+#main-content { flex: 1; }
 
 /* ---- FOOTER ---- */
 .de-footer {
@@ -330,6 +352,26 @@ const userUsername = computed(() => user.value?.username ?? '');
   font-size: 0.75rem; color: rgba(255, 255, 255, 0.4);
   display: flex; justify-content: space-between; align-items: center;
 }
+.de-footer-bottom a { color: rgba(255, 255, 255, 0.5); text-decoration: none; }
+.de-footer-bottom a:hover { color: var(--accent); }
+.de-footer-backer {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.6875rem; color: rgba(255, 255, 255, 0.4);
+  padding: 6px 10px; background: rgba(0, 231, 173, 0.08);
+  border-radius: 4px; width: fit-content;
+}
+.de-footer-backer a { color: inherit; text-decoration: none; }
+.de-footer-backer a:hover { text-decoration: underline; }
+.de-footer-backer strong { color: var(--accent); }
+
+.de-footer-ioc {
+  display: flex; align-items: center; gap: 6px;
+  color: #5865F2;
+}
+.de-footer-ioc a { color: #5865F2; text-decoration: none; }
+.de-footer-ioc a:hover { text-decoration: underline; }
+.de-footer-ioc i { font-size: 14px; }
+
 .de-powered a { color: var(--accent); text-decoration: none; }
 .de-powered a:hover { text-decoration: underline; }
 

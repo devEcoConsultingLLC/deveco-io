@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         {
           rel: 'stylesheet',
           href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
@@ -50,8 +51,8 @@ export default defineNuxtConfig({
     s3PublicUrl: '',
     uploadDir: './uploads',
     public: {
-      siteUrl: 'http://deveco.io',
-      domain: 'deveco.io',
+      siteUrl: 'http://localhost:3000',
+      domain: 'localhost:3000',
       siteName: 'devEco.io',
       siteDescription: 'Edge AI project sharing and community platform',
       // Feature flags — override with NUXT_PUBLIC_FEATURES_HUBS=false etc.
@@ -64,7 +65,7 @@ export default defineNuxtConfig({
         contests: true,
         learning: false,
         explainers: false,
-        federation: false,
+        federation: true,
         admin: true,
       },
       // Enabled content types (comma-separated) — override with NUXT_PUBLIC_CONTENT_TYPES=project,blog

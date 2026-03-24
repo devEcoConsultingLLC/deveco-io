@@ -17,7 +17,7 @@ export default defineCommonPubConfig({
     contests: true,
     learning: false,
     explainers: false,
-    federation: false,
+    federation: true,
     admin: true,
   },
   auth: {

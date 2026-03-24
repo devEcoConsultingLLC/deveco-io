@@ -60,7 +60,7 @@ function insertBlock(block: BlockDef): void {
             v-for="block in group.blocks"
             :key="block.type + (block.attrs?.variant ?? '')"
             class="cpub-bl-block"
-            :class="group.variant"
+            :class="[group.variant, `cpub-bl-type-${block.type}`]"
             :title="block.label"
             @click="insertBlock(block)"
           >
@@ -87,15 +87,16 @@ function insertBlock(block: BlockDef): void {
 .cpub-bl-search {
   display: flex;
   align-items: center;
-  gap: 7px;
-  background: var(--surface2);
-  border: 2px solid var(--border);
-  padding: 5px 9px;
-  margin: 10px 8px 4px;
+  gap: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 12px 12px 6px;
 }
 
 .cpub-bl-search-icon {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--text-faint);
   flex-shrink: 0;
 }
@@ -104,9 +105,10 @@ function insertBlock(block: BlockDef): void {
   background: transparent;
   border: none;
   outline: none;
-  font-size: 12px;
+  font-size: 0.8125rem;
   color: var(--text);
   width: 100%;
+  font-family: var(--font-sans);
 }
 
 .cpub-bl-search-input::placeholder {
@@ -116,7 +118,7 @@ function insertBlock(block: BlockDef): void {
 .cpub-bl-groups {
   flex: 1;
   overflow-y: auto;
-  padding: 4px 0;
+  padding: 6px 0;
 }
 
 .cpub-bl-group {
@@ -124,71 +126,90 @@ function insertBlock(block: BlockDef): void {
 }
 
 .cpub-bl-group-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-faint);
-  padding: 6px 12px 4px;
+  padding: 8px 16px 6px;
 }
 
 .cpub-bl-blocks {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
+  padding: 0 6px;
 }
 
 .cpub-bl-block {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 10px 10px;
+  gap: 10px;
+  padding: 5px 10px;
   cursor: pointer;
-  border: 2px solid transparent;
+  border: none;
+  border-radius: 8px;
   background: transparent;
   color: var(--text-dim);
-  font-size: 12px;
+  font-size: 0.8125rem;
   user-select: none;
   transition: background 0.1s;
   text-align: left;
   width: 100%;
-  margin: 0 4px;
 }
 
 .cpub-bl-block:hover {
   background: var(--surface2);
-  border-color: var(--border2);
   color: var(--text);
 }
 
 .cpub-bl-block-icon {
-  width: 22px;
-  height: 22px;
-  background: var(--surface3);
-  border: 2px solid var(--border2);
+  width: 28px;
+  height: 28px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 13px;
   color: var(--text-faint);
   flex-shrink: 0;
   transition: background 0.1s, color 0.1s;
 }
 
-.cpub-bl-block:hover .cpub-bl-block-icon {
-  background: var(--accent-bg);
-  border-color: var(--accent-border);
-  color: var(--accent);
-}
+/* Color-coded block icons */
+.cpub-bl-type-text .cpub-bl-block-icon,
+.cpub-bl-type-paragraph .cpub-bl-block-icon { color: var(--text-dim); }
+.cpub-bl-type-heading .cpub-bl-block-icon { color: #004e53; background: rgba(0, 78, 83, 0.06); border-color: rgba(0, 78, 83, 0.15); }
+.cpub-bl-type-image .cpub-bl-block-icon,
+.cpub-bl-type-gallery .cpub-bl-block-icon { color: #5bc5e8; background: rgba(91, 197, 232, 0.06); border-color: rgba(91, 197, 232, 0.2); }
+.cpub-bl-type-code .cpub-bl-block-icon,
+.cpub-bl-type-code_block .cpub-bl-block-icon { color: #5f2bef; background: rgba(95, 43, 239, 0.06); border-color: rgba(95, 43, 239, 0.15); }
+.cpub-bl-type-quote .cpub-bl-block-icon,
+.cpub-bl-type-blockquote .cpub-bl-block-icon { color: #4db3a8; background: rgba(77, 179, 168, 0.06); border-color: rgba(77, 179, 168, 0.2); }
+.cpub-bl-type-callout .cpub-bl-block-icon { color: #f4c84b; background: rgba(244, 200, 75, 0.06); border-color: rgba(244, 200, 75, 0.2); }
+.cpub-bl-type-divider .cpub-bl-block-icon { color: var(--text-faint); }
+.cpub-bl-type-embed .cpub-bl-block-icon,
+.cpub-bl-type-video .cpub-bl-block-icon { color: #e85a85; background: rgba(232, 90, 133, 0.06); border-color: rgba(232, 90, 133, 0.15); }
+.cpub-bl-type-quiz .cpub-bl-block-icon,
+.cpub-bl-type-checkpoint .cpub-bl-block-icon { color: #00e7ad; background: rgba(0, 231, 173, 0.06); border-color: rgba(0, 231, 173, 0.2); }
+.cpub-bl-type-parts-list .cpub-bl-block-icon,
+.cpub-bl-type-tool-list .cpub-bl-block-icon,
+.cpub-bl-type-build-step .cpub-bl-block-icon { color: #004e53; background: rgba(0, 78, 83, 0.06); border-color: rgba(0, 78, 83, 0.15); }
+.cpub-bl-type-downloads .cpub-bl-block-icon { color: #5f2bef; background: rgba(95, 43, 239, 0.06); border-color: rgba(95, 43, 239, 0.15); }
+.cpub-bl-type-math .cpub-bl-block-icon { color: #1b357d; background: rgba(27, 53, 125, 0.06); border-color: rgba(27, 53, 125, 0.15); }
+.cpub-bl-type-slider .cpub-bl-block-icon { color: #f4c84b; background: rgba(244, 200, 75, 0.06); border-color: rgba(244, 200, 75, 0.2); }
+.cpub-bl-type-section-header .cpub-bl-block-icon { color: #004e53; background: rgba(0, 78, 83, 0.06); border-color: rgba(0, 78, 83, 0.15); }
 
 .cpub-bl-block-label {
-  font-size: 11px;
+  font-size: 0.75rem;
+  font-weight: 500;
   flex: 1;
 }
 
 .cpub-bl-block-drag {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--text-faint);
   opacity: 0;
   transition: opacity 0.1s;
@@ -199,13 +220,12 @@ function insertBlock(block: BlockDef): void {
 }
 
 .cpub-bl-empty {
-  font-size: 11px;
+  font-size: 0.8125rem;
   color: var(--text-faint);
-  padding: 12px;
+  padding: 20px 12px;
   text-align: center;
 }
 
-/* Touch devices: always show drag grip since there's no hover */
 @media (hover: none) {
   .cpub-bl-block-drag { opacity: 1; }
 }

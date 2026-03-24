@@ -80,7 +80,14 @@ async function deleteNotification(id: string): Promise<void> {
 }
 
 .cpub-notif-list {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   background: var(--surface);
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .cpub-notifications-page { padding: 16px 12px; }
+  .cpub-notif-header { flex-wrap: wrap; gap: 8px; }
 }
 </style>

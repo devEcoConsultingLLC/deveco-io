@@ -100,7 +100,7 @@ async function kickMember(userId: string, username: string): Promise<void> {
 .members-title { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
 .members-count { font-size: 12px; font-family: var(--font-mono); color: var(--text-faint); }
 
-.members-list { border: 2px solid var(--border); background: var(--surface); }
+.members-list { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; }
 .member-card { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border2); }
 .member-card:last-child { border-bottom: none; }
 
@@ -122,4 +122,11 @@ async function kickMember(userId: string, username: string): Promise<void> {
 .member-kick-btn:hover { color: var(--red); border-color: var(--red); }
 
 .members-empty { text-align: center; padding: 48px 0; color: var(--text-faint); }
+
+@media (max-width: 768px) {
+  .members-page { padding: 16px; }
+  .member-card { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+  .member-joined { display: none; }
+  .member-actions { width: 100%; justify-content: flex-end; }
+}
 </style>

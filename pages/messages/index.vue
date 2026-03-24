@@ -265,7 +265,8 @@ async function startConversation(): Promise<void> {
   font-family: var(--font-sans);
   font-size: 13px;
   padding: 8px 10px;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   background: var(--surface);
   color: var(--text);
   outline: none;
@@ -281,7 +282,11 @@ async function startConversation(): Promise<void> {
   justify-content: flex-end;
   gap: 8px;
   padding: 12px 16px;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 
+@media (max-width: 768px) {
+  .cpub-messages-page { padding: 16px; }
+  .cpub-conversation-item { padding: 10px 12px; }
+}
 </style>

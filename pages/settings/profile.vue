@@ -822,6 +822,16 @@ async function handleSave(): Promise<void> {
   box-shadow: var(--shadow-md);
 }
 
+@media (max-width: 768px) {
+  .cpub-settings-form { padding: 0 4px; }
+  .cpub-skill-slider { width: 120px; }
+  .cpub-experience-dates { grid-template-columns: 1fr; }
+  .cpub-banner-upload { height: 100px; }
+}
+@media (max-width: 480px) {
+  .cpub-skill-slider { width: 80px; }
+}
+
 .cpub-save-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;

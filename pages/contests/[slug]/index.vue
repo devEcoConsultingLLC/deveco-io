@@ -544,4 +544,15 @@ async function submitEntry(): Promise<void> {
   font-size: 11px; color: var(--text-dim); margin-left: auto; font-family: var(--font-mono);
 }
 .cpub-admin-status strong { color: var(--accent); text-transform: capitalize; }
+
+@media (max-width: 768px) {
+  .cpub-hero-inner { padding: 20px 16px; }
+  .cpub-hero-title { font-size: 1.5rem; }
+  .cpub-hero-desc { font-size: 0.8125rem; }
+  .cpub-hero-cta { flex-wrap: wrap; gap: 8px; }
+  .cpub-countdown-row { flex-wrap: wrap; gap: 8px; }
+  .cpub-entries-grid { grid-template-columns: 1fr; }
+  .cpub-prizes-grid { grid-template-columns: 1fr; }
+  .cpub-admin-controls { flex-wrap: wrap; }
+}
 </style>

@@ -73,4 +73,8 @@ const themes = [
   font-size: 11px;
   color: var(--text-dim);
 }
+
+@media (max-width: 480px) {
+  .cpub-theme-grid { grid-template-columns: 1fr; }
+}
 </style>

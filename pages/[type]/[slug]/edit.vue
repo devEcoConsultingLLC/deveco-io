@@ -409,6 +409,31 @@ if (import.meta.client) {
 .cpub-code-view { color: #a0a0b0; font-family: var(--font-mono); font-size: 12px; white-space: pre-wrap; margin: 0; }
 
 .cpub-hidden { display: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .cpub-editor-topbar { padding: 0 10px; gap: 0; }
+  .cpub-editor-logo { display: none; }
+  .cpub-topbar-divider { display: none; }
+  .cpub-editor-back { margin-left: 0; }
+  .cpub-topbar-title-input { max-width: none; font-size: 12px; padding: 3px 6px; }
+  .cpub-autosave-status { display: none; }
+  .cpub-mode-tabs { margin: 0 6px; padding: 1px; }
+  .cpub-mode-tab { padding: 4px 10px; font-size: 10px; }
+  .cpub-topbar-spacer { display: none; }
+  .cpub-topbar-actions { gap: 4px; }
+  .cpub-topbar-btn { font-size: 11px; padding: 5px 10px; }
+  .cpub-editor-canvas { padding: 12px; }
+  .cpub-preview-canvas { padding: 16px; }
+  .cpub-preview-title { font-size: 22px; }
+  .cpub-code-canvas { padding: 10px; }
+  .cpub-code-view { font-size: 11px; }
+}
+
+@media (max-width: 480px) {
+  .cpub-mode-tabs { display: none; }
+  .cpub-topbar-btn { padding: 5px 8px; font-size: 10px; }
+}
 </style>
 
 <style>

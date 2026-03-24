@@ -7,6 +7,9 @@ const contentType = computed(() => route.params.type as string);
 const slug = computed(() => route.params.slug as string);
 /** Track whether this is a new content creation (starts true for /new, becomes false after first save) */
 const isNew = ref(slug.value === 'new');
+/** Show starter form for new content — collects title, description, cover before entering editor */
+const showStarterForm = ref(isNew.value);
+const starterSaving = ref(false);
 
 useSeoMeta({
   title: () => isNew.value ? `New ${contentType.value} -- devEco.io` : `Edit -- devEco.io`,
@@ -26,6 +29,55 @@ const isDirty = ref(false);
 const { extract: extractError } = useApiError();
 const mode = ref<'write' | 'preview' | 'code'>('write');
 const contentId = ref<string | null>(null);
+
+// --- Publish validation ---
+const publishErrors = ref<string[]>([]);
+const showPublishErrors = ref(false);
+
+function validateForPublish(): string[] {
+  const errs: string[] = [];
+  if (!title.value.trim()) errs.push('Title is required');
+  if (!(metadata.value.description as string)?.trim()) errs.push('Description is required');
+  if (!(metadata.value.coverImageUrl as string)?.trim()) errs.push('Cover image is required');
+  const tags = metadata.value.tags as string[];
+  if (!tags || tags.length === 0) errs.push('At least one tag is required');
+  if (blockEditor.blocks.value.length === 0) errs.push('Content is empty — add at least one block');
+  return errs;
+}
+
+// --- Starter form submit ---
+async function handleStarterSubmit(): Promise<void> {
+  if (!title.value.trim()) {
+    error.value = 'Title is required';
+    return;
+  }
+  starterSaving.value = true;
+  error.value = '';
+  try {
+    const body = buildSaveBody();
+    let result: { id: string; slug: string };
+    try {
+      result = await $fetch<{ id: string; slug: string }>('/api/content', { method: 'POST', body });
+    } catch (err: unknown) {
+      const msg = (err as { data?: { message?: string } })?.data?.message ?? '';
+      if (msg.toLowerCase().includes('slug') || msg.toLowerCase().includes('duplicate') || msg.toLowerCase().includes('unique')) {
+        body.slug = `${body.slug || slugify(title.value)}-${Date.now().toString(36).slice(-4)}`;
+        result = await $fetch<{ id: string; slug: string }>('/api/content', { method: 'POST', body });
+      } else {
+        throw err;
+      }
+    }
+    contentId.value = result.id;
+    isNew.value = false;
+    isDirty.value = false;
+    showStarterForm.value = false;
+    history.replaceState({}, '', `/${contentType.value}/${result.slug}/edit`);
+  } catch (err: unknown) {
+    error.value = extractError(err);
+  } finally {
+    starterSaving.value = false;
+  }
+}
 
 // --- Block editor composable ---
 const blockEditor = useBlockEditor();
@@ -315,6 +367,14 @@ if (import.meta.client) {
 
 async function handlePublish(): Promise<void> {
   if (saving.value || !title.value) return;
+  // Validate required fields
+  const errs = validateForPublish();
+  if (errs.length > 0) {
+    publishErrors.value = errs;
+    showPublishErrors.value = true;
+    return;
+  }
+  showPublishErrors.value = false;
   // Cancel any pending auto-save to prevent overlap
   if (autoSaveTimer) { clearTimeout(autoSaveTimer); autoSaveTimer = null; }
   saving.value = true;
@@ -351,7 +411,81 @@ async function handlePublish(): Promise<void> {
 </script>
 
 <template>
-  <div class="cpub-editor-layout">
+  <!-- Starter form for new content -->
+  <div v-if="showStarterForm" class="de-starter-overlay">
+    <div class="de-starter-card">
+      <div class="de-starter-header">
+        <NuxtLink to="/create" class="de-starter-back">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </NuxtLink>
+        <h1 class="de-starter-title">New {{ contentType }}</h1>
+        <p class="de-starter-subtitle">Fill in the basics to get started. You can change these later.</p>
+      </div>
+
+      <div v-if="error" class="de-starter-error">{{ error }}</div>
+
+      <form class="de-starter-form" @submit.prevent="handleStarterSubmit">
+        <div class="de-field">
+          <label for="starter-title" class="de-field-label">Title <span class="de-required">*</span></label>
+          <input
+            id="starter-title"
+            v-model="title"
+            type="text"
+            class="de-field-input"
+            :placeholder="`My awesome ${contentType}...`"
+            required
+            autofocus
+          />
+        </div>
+
+        <div class="de-field">
+          <label for="starter-desc" class="de-field-label">Description</label>
+          <textarea
+            id="starter-desc"
+            :value="metadata.description as string"
+            @input="metadata = { ...metadata, description: ($event.target as HTMLTextAreaElement).value }"
+            class="de-field-input de-field-textarea"
+            rows="3"
+            placeholder="A brief summary of what this is about..."
+          />
+        </div>
+
+        <div class="de-field">
+          <label class="de-field-label">Cover Image</label>
+          <ImageUpload
+            :model-value="(metadata.coverImageUrl as string) || ''"
+            @update:model-value="metadata = { ...metadata, coverImageUrl: $event }"
+            purpose="cover"
+            hint="Recommended: 1200×630px or wider"
+          />
+        </div>
+
+        <div class="de-starter-actions">
+          <button type="submit" class="de-btn-submit" :disabled="starterSaving || !title.trim()">
+            {{ starterSaving ? 'Creating...' : 'Start Writing' }}
+          </button>
+          <NuxtLink to="/create" class="de-btn-cancel">Cancel</NuxtLink>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main editor -->
+  <div v-else class="cpub-editor-layout">
+    <!-- Publish validation errors -->
+    <Teleport to="body">
+      <div v-if="showPublishErrors" class="de-publish-errors-overlay" @click.self="showPublishErrors = false">
+        <div class="de-publish-errors-card">
+          <h3 class="de-publish-errors-title"><i class="fa-solid fa-circle-exclamation"></i> Not ready to publish</h3>
+          <p class="de-publish-errors-subtitle">Please fix the following before publishing:</p>
+          <ul class="de-publish-errors-list">
+            <li v-for="(err, i) in publishErrors" :key="i">{{ err }}</li>
+          </ul>
+          <button class="de-btn-submit" @click="showPublishErrors = false">Got it</button>
+        </div>
+      </div>
+    </Teleport>
+
     <!-- Top bar -->
     <header class="cpub-editor-topbar">
       <NuxtLink to="/" class="cpub-editor-logo" aria-label="Home">
@@ -481,6 +615,185 @@ async function handlePublish(): Promise<void> {
 </template>
 
 <style scoped>
+/* --- Starter form --- */
+.de-starter-overlay {
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px 64px;
+}
+
+.de-starter-card {
+  width: 100%;
+  max-width: 560px;
+}
+
+.de-starter-header { margin-bottom: 28px; }
+
+.de-starter-back {
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.de-starter-back:hover { color: var(--text); }
+
+.de-starter-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+  text-transform: capitalize;
+}
+
+.de-starter-subtitle {
+  font-size: 0.9375rem;
+  color: var(--text-dim);
+}
+
+.de-starter-error {
+  padding: 10px 14px;
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid var(--red-border);
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  margin-bottom: 16px;
+}
+
+.de-starter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.de-field { display: flex; flex-direction: column; gap: 6px; }
+.de-field-label { font-size: 0.75rem; font-weight: 600; color: var(--text-dim); }
+.de-required { color: var(--red); }
+.de-field-input {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.de-field-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 231, 173, 0.12);
+}
+.de-field-input::placeholder { color: var(--text-faint); }
+.de-field-textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+
+.de-starter-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.de-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.de-btn-submit:hover { background: var(--color-primary-hover); }
+.de-btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.de-btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.de-btn-cancel:hover { background: var(--surface2); }
+
+/* --- Publish validation errors --- */
+.de-publish-errors-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.de-publish-errors-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+
+.de-publish-errors-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.de-publish-errors-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.de-publish-errors-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.de-publish-errors-list li {
+  font-size: 0.8125rem;
+  color: var(--text);
+  padding: 8px 12px;
+  background: var(--red-bg);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.de-publish-errors-list li::before {
+  content: '•';
+  color: var(--red);
+  font-weight: 700;
+}
+
 .cpub-editor-layout {
   display: flex;
   flex-direction: column;

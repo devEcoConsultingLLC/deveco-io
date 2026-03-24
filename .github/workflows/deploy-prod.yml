@@ -13,33 +13,36 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Deploy to droplet
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t deveco-app:latest .
+
+      - name: Save image tarball
+        run: docker save deveco-app:latest | gzip > /tmp/deveco-app.tar.gz
+
+      - name: Copy image to droplet
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: root
+          key: ${{ secrets.PROD_SSH_KEY }}
+          source: /tmp/deveco-app.tar.gz
+          target: /opt/deveco/
+          strip_components: 2
+
+      - name: Load image and restart
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.PROD_HOST }}
           username: root
           key: ${{ secrets.PROD_SSH_KEY }}
-          command_timeout: 10m
+          command_timeout: 5m
           script: |
             set -e
             cd /opt/deveco
-
-            # Pull latest code
-            if [ ! -d repo ]; then
-              git clone https://github.com/devEcoConsultingLLC/deveco-io.git repo
-            fi
-            cd repo
-            git fetch origin main
-            git reset --hard origin/main
-
-            # Build Docker image locally on droplet
-            docker build -t deveco-app:latest .
-
-            # Copy updated compose + Caddyfile to deploy dir
-            cp deploy/docker-compose.prod.yml /opt/deveco/docker-compose.yml
-
-            # Restart services
-            cd /opt/deveco
+            docker load < deveco-app.tar.gz
+            rm -f deveco-app.tar.gz
             docker compose up -d --remove-orphans
             docker image prune -f
-            echo "Deployed $(cd /opt/deveco/repo && git rev-parse --short HEAD)"
+            echo "Deployed ${{ github.sha }}"

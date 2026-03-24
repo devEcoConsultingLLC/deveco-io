@@ -19,7 +19,7 @@ function triggerPicker(): void {
   fileInput.value?.click();
 }
 
-async function handleFileChange(event: Event): void {
+async function handleFileChange(event: Event): Promise<void> {
   const target = event.target as HTMLInputElement;
   const file = target.files?.[0];
   if (!file) return;

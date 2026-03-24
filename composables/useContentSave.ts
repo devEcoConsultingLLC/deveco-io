@@ -3,6 +3,7 @@
  * Extracted from edit.vue to keep the page component thin.
  */
 import type { BlockTuple } from '@commonpub/editor';
+import type { WatchSource } from 'vue';
 
 export interface ContentSaveOptions {
   contentType: Ref<string>;

@@ -1,5 +1,6 @@
 // HTML sanitization for v-html bindings — defense-in-depth against stored XSS.
 // Uses DOMPurify (via isomorphic-dompurify for SSR compatibility).
+// @ts-expect-error -- isomorphic-dompurify types don't resolve under package.json "exports"
 import DOMPurify from 'isomorphic-dompurify';
 
 // Allow the subset of HTML that TipTap produces for block content

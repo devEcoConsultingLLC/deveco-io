@@ -19,7 +19,7 @@ jobs:
         run: docker build -t deveco-app:latest .
 
       - name: Save image tarball
-        run: docker save deveco-app:latest | gzip > /tmp/deveco-app.tar.gz
+        run: docker save deveco-app:latest | gzip > deveco-app.tar.gz
 
       - name: Copy image to droplet
         uses: appleboy/scp-action@v0.1.7
@@ -27,9 +27,8 @@ jobs:
           host: ${{ secrets.PROD_HOST }}
           username: root
           key: ${{ secrets.PROD_SSH_KEY }}
-          source: /tmp/deveco-app.tar.gz
+          source: deveco-app.tar.gz
           target: /opt/deveco/
-          strip_components: 2
 
       - name: Load image and restart
         uses: appleboy/ssh-action@v1

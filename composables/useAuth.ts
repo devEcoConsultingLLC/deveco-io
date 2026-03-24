@@ -48,7 +48,7 @@ export function useAuth() {
   }
 
   async function signOut(): Promise<void> {
-    await $fetch('/api/auth/sign-out', { method: 'POST', credentials: 'include' });
+    await $fetch('/api/auth/sign-out', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: {} });
     user.value = null;
     session.value = null;
     await navigateTo('/');

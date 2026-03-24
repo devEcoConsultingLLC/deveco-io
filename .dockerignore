@@ -1,0 +1,11 @@
+node_modules
+.output
+.nuxt
+.git
+.github
+docs
+mockups
+uploads
+*.md
+!package.json
+!pnpm-lock.yaml

@@ -2,26 +2,47 @@ name: Deploy Production
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
 
 jobs:
-  deploy:
-    name: Deploy to Production
+  build-and-deploy:
+    name: Build & Deploy
     runs-on: ubuntu-latest
     environment: production
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Deploy to production server
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Log in to Container Registry
+        run: doctl registry login --expiry-seconds 600
+
+      - name: Build Docker image
+        run: |
+          docker build \
+            -t registry.digitalocean.com/deveco/deveco-app:${{ github.sha }} \
+            -t registry.digitalocean.com/deveco/deveco-app:latest \
+            .
+
+      - name: Push to Container Registry
+        run: |
+          docker push registry.digitalocean.com/deveco/deveco-app:${{ github.sha }}
+          docker push registry.digitalocean.com/deveco/deveco-app:latest
+
+      - name: Deploy to droplet
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.PROD_HOST }}
-          username: ${{ secrets.PROD_USER }}
+          username: root
           key: ${{ secrets.PROD_SSH_KEY }}
           script: |
             cd /opt/deveco
-            git fetch --tags
-            git checkout ${{ github.ref_name }}
-            docker compose -f docker/docker-compose.prod.yml build
-            docker compose -f docker/docker-compose.prod.yml up -d
+            docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            docker compose pull app
+            docker compose up -d --remove-orphans
+            docker image prune -f
+            echo "Deployed ${{ github.sha }}"

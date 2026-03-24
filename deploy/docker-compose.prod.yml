@@ -28,6 +28,7 @@ services:
       - NODE_EXTRA_CA_CERTS=/etc/ssl/certs/do-ca.crt
     volumes:
       - ./ca-certificate.crt:/etc/ssl/certs/do-ca.crt:ro
+      - uploads_data:/app/uploads
     depends_on:
       redis:
         condition: service_healthy
@@ -70,3 +71,4 @@ volumes:
   caddy_config:
   redis_data:
   meili_data:
+  uploads_data:

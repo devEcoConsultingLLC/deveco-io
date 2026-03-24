@@ -62,7 +62,7 @@ export function useAuth() {
     if (import.meta.server) return;
     try {
       const data = await $fetch<{ user: ClientAuthUser | null; session: ClientAuthSession | null }>(
-        '/api/auth/get-session',
+        '/api/me',
         { credentials: 'include' },
       );
       user.value = data?.user ?? null;

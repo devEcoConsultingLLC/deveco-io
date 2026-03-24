@@ -519,7 +519,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 
 /* ---- CONTENT GRID ---- */
 .de-content-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 20px; margin-bottom: 24px;
 }
 

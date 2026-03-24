@@ -16,9 +16,10 @@ export default defineNuxtPlugin(async () => {
     return;
   }
 
-  // On client, fetch session from the auth API
+  // On client, fetch session from /api/me which includes enriched fields (role, username)
+  // Note: /api/auth/get-session returns raw Better Auth data WITHOUT custom columns.
   try {
-    const data = await $fetch<{ user: ClientAuthUser | null; session: ClientAuthSession | null }>('/api/auth/get-session', {
+    const data = await $fetch<{ user: ClientAuthUser | null; session: ClientAuthSession | null }>('/api/me', {
       credentials: 'include',
     });
     user.value = data?.user ?? null;

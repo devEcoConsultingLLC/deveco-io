@@ -120,7 +120,7 @@ function formatCount(n: number | undefined): string {
 /* Thumbnail */
 .cpub-cc-thumb {
   position: relative;
-  height: 180px;
+  aspect-ratio: 4 / 3;
   background: var(--surface2);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -209,11 +209,15 @@ function formatCount(n: number | undefined): string {
 }
 
 .cpub-cc-title {
-  font-size: 13px;
+  font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.35;
   margin-bottom: 4px;
   color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cpub-cc:hover .cpub-cc-title {

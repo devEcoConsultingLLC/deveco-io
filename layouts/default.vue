@@ -102,6 +102,9 @@ const userUsername = computed(() => user.value?.username ?? '');
             />
             <kbd class="de-kbd">&#8984;K</kbd>
           </form>
+          <NuxtLink to="/search" class="de-search-icon-btn" title="Search" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </NuxtLink>
 
           <template v-if="isAuthenticated">
             <NuxtLink to="/notifications" class="de-icon-btn" title="Notifications" aria-label="Notifications">
@@ -145,6 +148,7 @@ const userUsername = computed(() => user.value?.username ?? '');
         <NuxtLink v-if="hubs" to="/hubs" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-users"></i> Communities</NuxtLink>
         <NuxtLink v-if="contests" to="/contests" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-trophy"></i> Contests</NuxtLink>
         <NuxtLink to="/search" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-magnifying-glass"></i> Search</NuxtLink>
+        <NuxtLink v-if="isAdmin && admin" to="/admin" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-shield-halved"></i> Admin</NuxtLink>
         <template v-if="isAuthenticated">
           <div class="de-mobile-divider" />
           <NuxtLink to="/create" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-plus"></i> Create</NuxtLink>
@@ -314,6 +318,15 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-dropdown-item i { width: 16px; text-align: center; font-size: 12px; }
 .de-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
 
+.de-search-icon-btn {
+  display: none; width: 36px; height: 36px;
+  align-items: center; justify-content: center;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text-dim); font-size: 14px; text-decoration: none;
+  transition: all 0.15s;
+}
+.de-search-icon-btn:hover { background: var(--surface3); color: var(--text); }
+
 .de-mobile-toggle {
   display: none; width: 36px; height: 36px;
   background: none; border: 1px solid transparent; border-radius: 8px;
@@ -326,17 +339,17 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 .de-mobile-nav {
   background: var(--surface); border-bottom: 1px solid var(--border);
-  padding: 12px 8px; display: flex; flex-direction: column;
+  padding: 8px 6px; display: flex; flex-direction: column;
   box-shadow: var(--shadow-lg);
 }
 .de-mobile-link {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px; font-size: 0.875rem; color: var(--text-dim);
-  text-decoration: none; border-radius: 8px; transition: background 0.1s;
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; font-size: 0.8125rem; color: var(--text-dim);
+  text-decoration: none; border-radius: 6px; transition: background 0.1s;
 }
 .de-mobile-link:hover { background: var(--surface2); color: var(--text); }
-.de-mobile-link i { width: 18px; text-align: center; font-size: 14px; }
-.de-mobile-divider { height: 1px; background: var(--border); margin: 6px 16px; }
+.de-mobile-link i { width: 16px; text-align: center; font-size: 13px; }
+.de-mobile-divider { height: 1px; background: var(--border); margin: 4px 14px; }
 
 #main-content { flex: 1; }
 
@@ -417,8 +430,8 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 @media (max-width: 480px) {
   .de-search-form { display: none; }
+  .de-search-icon-btn { display: flex; }
   .de-topbar-inner { padding: 0 12px; }
   .de-footer-inner { grid-template-columns: 1fr; }
 }
-@media (max-width: 480px) { .de-footer-inner { grid-template-columns: 1fr; } }
 </style>

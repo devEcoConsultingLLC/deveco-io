@@ -52,19 +52,27 @@ function updateField(field: string, value: unknown): void {
 </template>
 
 <style scoped>
-.cpub-step-block { border: 2px solid var(--border2); background: var(--surface); }
+.cpub-step-block {
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  background: var(--surface);
+  border-left: 4px solid var(--deveco-dark-green, var(--accent));
+}
 
 .cpub-step-header {
   display: flex; align-items: center; gap: 12px;
   padding: 12px 16px;
-  border-bottom: 2px solid var(--border2);
-  background: var(--surface2);
+  border-bottom: 1px solid var(--border2);
+  background: rgba(0, 78, 83, 0.03);
+  border-radius: 10px 10px 0 0;
 }
 
 .cpub-step-num {
   width: 32px; height: 32px;
-  background: var(--accent); color: var(--color-text-inverse);
-  font-family: var(--font-mono); font-size: 14px; font-weight: 700;
+  background: var(--deveco-dark-green, var(--accent));
+  color: #fff;
+  font-size: 14px; font-weight: 700;
+  border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
@@ -77,9 +85,10 @@ function updateField(field: string, value: unknown): void {
 .cpub-step-title::placeholder { color: var(--text-faint); }
 
 .cpub-step-time {
-  width: 80px; font-family: var(--font-mono); font-size: 10px;
-  background: transparent; border: 2px solid var(--border2);
-  padding: 3px 6px; color: var(--text-dim); outline: none;
+  width: 80px; font-size: 0.6875rem;
+  background: transparent; border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 4px 8px; color: var(--text-dim); outline: none;
   text-align: center;
 }
 .cpub-step-time:focus { border-color: var(--accent); }

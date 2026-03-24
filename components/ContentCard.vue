@@ -100,14 +100,15 @@ function formatCount(n: number | undefined): string {
 <style scoped>
 .cpub-cc {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   overflow: hidden;
   transition: transform 0.15s, box-shadow 0.15s;
 }
 
 .cpub-cc:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--border);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .cpub-cc-link {
@@ -119,9 +120,9 @@ function formatCount(n: number | undefined): string {
 /* Thumbnail */
 .cpub-cc-thumb {
   position: relative;
-  height: 150px;
+  aspect-ratio: 4 / 3;
   background: var(--surface2);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -162,12 +163,12 @@ function formatCount(n: number | undefined): string {
 }
 
 .cpub-cc-badge {
-  font-family: var(--font-mono);
   font-size: 9px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 2px 7px;
+  padding: 3px 8px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -175,7 +176,7 @@ function formatCount(n: number | undefined): string {
 
 .cpub-cc-badge--featured {
   background: var(--yellow-bg);
-  border: 2px solid var(--yellow);
+  border: 1px solid var(--yellow-border);
   color: var(--yellow);
 }
 
@@ -192,7 +193,8 @@ function formatCount(n: number | undefined): string {
 .cpub-cc-dot {
   width: 8px;
   height: 8px;
-  border: 2px solid var(--surface);
+  border-radius: 50%;
+  border: 1.5px solid var(--surface);
   background: transparent;
 }
 
@@ -236,7 +238,7 @@ function formatCount(n: number | undefined): string {
   justify-content: space-between;
   gap: 8px;
   padding-top: 8px;
-  border-top: 2px solid var(--border2);
+  border-top: 1px solid var(--border2);
 }
 
 .cpub-cc-author {

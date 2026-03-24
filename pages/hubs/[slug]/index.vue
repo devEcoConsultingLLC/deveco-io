@@ -468,35 +468,33 @@ function handleLinkInsert(): void {
 .cpub-hub-hero { position: relative; overflow: hidden; }
 
 .cpub-hub-banner {
-  height: 160px;
-  background: var(--accent-bg);
+  height: 180px;
+  background: linear-gradient(135deg, var(--deveco-dark-green) 0%, #006b6b 50%, var(--deveco-light-green) 100%);
   position: relative;
   overflow: hidden;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-hub-banner-pattern {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(var(--border2) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border2) 1px, transparent 1px);
-  background-size: 32px 32px;
-  opacity: 0.5;
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 .cpub-hub-banner-dots {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(var(--accent) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
   background-size: 24px 24px;
-  opacity: 0.08;
 }
 
 .cpub-hub-meta-bar {
   background: var(--surface);
-  border-bottom: 2px solid var(--border);
-  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  padding: 20px 0;
 }
 
 .cpub-hub-meta-inner {
@@ -509,21 +507,24 @@ function handleLinkInsert(): void {
 }
 
 .cpub-hub-icon {
-  width: 64px;
-  height: 64px;
-  background: var(--accent-bg);
-  border: 2px solid var(--border);
+  width: 72px;
+  height: 72px;
+  background: var(--surface);
+  border: 3px solid var(--surface);
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 28px;
   flex-shrink: 0;
-  margin-top: -32px;
+  margin-top: -36px;
   position: relative;
   z-index: 1;
-  box-shadow: 4px 4px 0 var(--border);
-  color: var(--accent);
+  box-shadow: var(--shadow-md);
+  color: var(--deveco-dark-green);
+  overflow: hidden;
 }
+.cpub-hub-icon img { width: 100%; height: 100%; object-fit: cover; }
 
 .cpub-hub-info { flex: 1; min-width: 0; }
 
@@ -535,8 +536,9 @@ function handleLinkInsert(): void {
 }
 
 .cpub-hub-name {
-  font-size: 18px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 4px;
 }
@@ -553,9 +555,8 @@ function handleLinkInsert(): void {
   display: flex;
   align-items: center;
   gap: 20px;
-  font-size: 11px;
+  font-size: 0.8125rem;
   color: var(--text-dim);
-  font-family: var(--font-mono);
   margin-bottom: 12px;
 }
 
@@ -590,20 +591,19 @@ function handleLinkInsert(): void {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 0.6875rem;
+  font-weight: 600;
   color: var(--green);
   background: var(--green-bg);
   padding: 4px 12px;
   border: 1px solid var(--green-border);
+  border-radius: 20px;
 }
 
 /* ─── TABS ─── */
 .cpub-hub-tabs {
   background: var(--surface);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 48px;
   z-index: 90;
@@ -614,27 +614,27 @@ function handleLinkInsert(): void {
   margin: 0 auto;
   padding: 0 32px;
   display: flex;
-  gap: 2px;
+  gap: 4px;
 }
 
 .cpub-tab-btn {
-  font-size: 12px;
+  font-size: 0.8125rem;
   color: var(--text-dim);
-  padding: 10px 14px;
+  padding: 12px 16px;
   border: none;
   background: none;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
-  font-family: var(--font-mono);
+  border-bottom: 2px solid transparent;
   display: flex;
   align-items: center;
   gap: 6px;
   position: relative;
-  top: 2px;
+  top: 1px;
+  transition: color 0.15s;
 }
 
 .cpub-tab-btn:hover { color: var(--text); }
-.cpub-tab-btn.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+.cpub-tab-btn.active { color: var(--deveco-dark-green); border-bottom-color: var(--deveco-light-green); font-weight: 600; }
 
 /* ─── LAYOUT ─── */
 .cpub-hub-main {
@@ -653,7 +653,8 @@ function handleLinkInsert(): void {
 /* ─── COMPOSE BAR ─── */
 .cpub-compose-bar {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 12px 14px;
   margin-bottom: 16px;
   display: flex;
@@ -664,9 +665,10 @@ function handleLinkInsert(): void {
 .cpub-compose-input {
   flex: 1;
   background: var(--surface2);
-  border: 2px solid var(--border);
-  padding: 8px 12px;
-  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.8125rem;
   color: var(--text-faint);
   cursor: pointer;
 }
@@ -676,12 +678,13 @@ function handleLinkInsert(): void {
 
 .cpub-feed-card {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   overflow: hidden;
   transition: box-shadow 0.15s;
 }
 
-.cpub-feed-card:hover { box-shadow: 4px 4px 0 var(--border); }
+.cpub-feed-card:hover { box-shadow: var(--shadow-sm); }
 
 .cpub-announce-band {
   background: var(--yellow-bg);
@@ -696,18 +699,17 @@ function handleLinkInsert(): void {
 }
 
 .cpub-feed-avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--surface3);
-  border: 2px solid var(--border);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  font-family: var(--font-mono);
-  color: var(--text-dim);
+  color: var(--deveco-dark-green);
   flex-shrink: 0;
 }
 
@@ -720,17 +722,17 @@ function handleLinkInsert(): void {
   margin-bottom: 4px;
 }
 
-.cpub-feed-author { font-size: 12px; font-weight: 600; }
-.cpub-feed-time { font-size: 10px; color: var(--text-faint); font-family: var(--font-mono); }
+.cpub-feed-author { font-size: 0.8125rem; font-weight: 600; }
+.cpub-feed-time { font-size: 0.6875rem; color: var(--text-faint); }
 .cpub-feed-dot { width: 2px; height: 2px; border-radius: 50%; background: var(--text-faint); }
 
 .cpub-feed-type-badge {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  padding: 1px 6px;
+  font-size: 0.625rem;
+  padding: 2px 8px;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   font-weight: 600;
+  border-radius: 4px;
 }
 
 .cpub-badge-question { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-border); }
@@ -743,27 +745,27 @@ function handleLinkInsert(): void {
 
 .cpub-feed-footer {
   padding: 8px 16px;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
   gap: 12px;
-  background: var(--surface2);
 }
 
 .cpub-feed-action {
-  font-size: 11px;
+  font-size: 0.75rem;
   color: var(--text-dim);
   display: flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  padding: 3px 6px;
+  padding: 4px 8px;
   border: none;
+  border-radius: 6px;
   background: none;
-  font-family: var(--font-mono);
+  transition: background 0.15s;
 }
 
-.cpub-feed-action:hover { color: var(--text); background: var(--surface3); }
+.cpub-feed-action:hover { color: var(--text); background: var(--surface2); }
 .cpub-feed-action i { font-size: 10px; }
 
 .cpub-feed-actions-right {
@@ -778,8 +780,9 @@ function handleLinkInsert(): void {
 
 .cpub-disc-item {
   background: var(--surface);
-  border: 2px solid var(--border);
-  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
   cursor: pointer;
   display: flex;
   gap: 12px;
@@ -787,7 +790,7 @@ function handleLinkInsert(): void {
   transition: box-shadow 0.15s;
 }
 
-.cpub-disc-item:hover { box-shadow: 4px 4px 0 var(--border); }
+.cpub-disc-item:hover { box-shadow: var(--shadow-sm); }
 
 .cpub-disc-votes {
   display: flex;
@@ -798,12 +801,12 @@ function handleLinkInsert(): void {
   min-width: 28px;
 }
 
-.cpub-disc-vote-count { font-size: 13px; font-weight: 700; font-family: var(--font-mono); color: var(--text); }
-.cpub-disc-vote-label { font-size: 8px; color: var(--text-faint); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; }
+.cpub-disc-vote-count { font-size: 14px; font-weight: 700; color: var(--text); }
+.cpub-disc-vote-label { font-size: 9px; color: var(--text-faint); text-transform: uppercase; }
 
 .cpub-disc-info { flex: 1; min-width: 0; }
 .cpub-disc-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; line-height: 1.35; }
-.cpub-disc-meta { font-size: 10px; color: var(--text-faint); font-family: var(--font-mono); display: flex; align-items: center; gap: 8px; }
+.cpub-disc-meta { font-size: 0.6875rem; color: var(--text-faint); display: flex; align-items: center; gap: 8px; }
 
 .cpub-disc-replies { display: flex; flex-direction: column; align-items: center; gap: 2px; flex-shrink: 0; min-width: 28px; }
 .cpub-disc-reply-count { font-size: 12px; font-weight: 600; font-family: var(--font-mono); color: var(--text-dim); }
@@ -818,30 +821,30 @@ function handleLinkInsert(): void {
 
 .cpub-member-card {
   background: var(--surface);
-  border: 2px solid var(--border);
-  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
   text-align: center;
 }
 
 .cpub-member-avatar {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--surface3);
-  border: 2px solid var(--border);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  font-family: var(--font-mono);
-  color: var(--text-dim);
-  margin: 0 auto 8px;
+  color: var(--deveco-dark-green);
+  margin: 0 auto 10px;
 }
 
-.cpub-member-name { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
-.cpub-member-handle { font-size: 10px; color: var(--text-faint); font-family: var(--font-mono); }
-.cpub-member-role { font-size: 9px; color: var(--accent); font-family: var(--font-mono); text-transform: uppercase; margin-top: 4px; }
+.cpub-member-name { font-size: 0.8125rem; font-weight: 600; margin-bottom: 2px; }
+.cpub-member-handle { font-size: 0.6875rem; color: var(--text-faint); }
+.cpub-member-role { font-size: 0.625rem; color: var(--deveco-dark-green); font-weight: 600; text-transform: uppercase; margin-top: 6px; }
 
 /* ─── SIDEBAR ─── */
 .cpub-hub-sidebar { min-width: 0; }
@@ -853,21 +856,20 @@ function handleLinkInsert(): void {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--surface3);
-  border: 2px solid var(--border);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
   font-weight: 600;
-  font-family: var(--font-mono);
-  color: var(--text-dim);
+  color: var(--deveco-dark-green);
   flex-shrink: 0;
 }
 
 .cpub-mod-info { flex: 1; }
 .cpub-mod-name { font-size: 11px; font-weight: 500; }
-.cpub-mod-role { font-size: 10px; color: var(--text-faint); font-family: var(--font-mono); }
+.cpub-mod-role { font-size: 0.6875rem; color: var(--text-faint); }
 
 .cpub-rule-item {
   display: flex;
@@ -894,7 +896,8 @@ function handleLinkInsert(): void {
   width: 28px;
   height: 28px;
   background: var(--surface2);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -921,7 +924,7 @@ function handleLinkInsert(): void {
 .cpub-resource-item a:hover { text-decoration: underline; }
 
 /* ─── POST ERROR ─── */
-.cpub-post-error { font-size: 11px; color: var(--red); background: var(--red-bg); border: 1px solid var(--red-border); padding: 8px 12px; margin-bottom: 12px; font-family: var(--font-mono); }
+.cpub-post-error { font-size: 0.75rem; color: var(--red); background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
@@ -946,26 +949,27 @@ function handleLinkInsert(): void {
 
 .cpub-product-card {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 16px;
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  box-shadow: 4px 4px 0 var(--border);
   cursor: pointer;
-  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+  transition: box-shadow 0.15s, transform 0.15s;
 }
 
 .cpub-product-card:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 5px 5px 0 var(--border);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .cpub-product-card-icon {
   width: 48px;
   height: 48px;
   background: var(--surface2);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1035,11 +1039,8 @@ function handleLinkInsert(): void {
 .cpub-meta-link a:hover { text-decoration: underline; }
 
 .cpub-section-title {
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 700;
-  font-family: var(--font-mono);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
   color: var(--text-dim);
 }
 

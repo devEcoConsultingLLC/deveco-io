@@ -401,13 +401,24 @@ const userUsername = computed(() => user.value?.username ?? '');
 
 @media (max-width: 768px) {
   .de-topbar-nav { display: none; }
-  .de-search-form { min-width: auto; }
-  .de-search-input { width: 60px; }
-  .de-kbd, .de-new-text { display: none; }
+  .de-topbar-spacer { display: none; }
+  .de-topbar-actions { gap: 6px; }
+  .de-search-form { min-width: 0; flex: 1; max-width: 180px; }
+  .de-search-input { width: 100%; min-width: 0; }
+  .de-kbd { display: none; }
+  .de-new-text { display: none; }
+  .de-btn-ghost { font-size: 0.75rem; padding: 6px 10px; white-space: nowrap; }
+  .de-btn-primary { font-size: 0.75rem; padding: 6px 10px; white-space: nowrap; }
+  .de-icon-btn { display: none; }
   .de-mobile-toggle { display: flex; }
   .de-mobile-menu { display: block; }
   .de-footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
   .de-footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
+}
+@media (max-width: 480px) {
+  .de-search-form { display: none; }
+  .de-topbar-inner { padding: 0 12px; }
+  .de-footer-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) { .de-footer-inner { grid-template-columns: 1fr; } }
 </style>

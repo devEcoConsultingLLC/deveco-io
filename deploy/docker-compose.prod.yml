@@ -25,6 +25,9 @@ services:
       - NODE_ENV=production
       - NUXT_HOST=0.0.0.0
       - NUXT_PORT=3000
+      - NODE_EXTRA_CA_CERTS=/etc/ssl/certs/do-ca.crt
+    volumes:
+      - ./ca-certificate.crt:/etc/ssl/certs/do-ca.crt:ro
     depends_on:
       redis:
         condition: service_healthy

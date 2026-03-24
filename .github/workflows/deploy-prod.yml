@@ -42,6 +42,8 @@ jobs:
             cd /opt/deveco
             docker load < deveco-app.tar.gz
             rm -f deveco-app.tar.gz
-            docker compose up -d --remove-orphans
+            # Tag with both names so compose finds it regardless of which image name it references
+            docker tag deveco-app:latest registry.digitalocean.com/deveco/deveco-app:latest 2>/dev/null || true
+            docker compose up -d --force-recreate --remove-orphans
             docker image prune -f
             echo "Deployed ${{ github.sha }}"

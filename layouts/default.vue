@@ -102,9 +102,6 @@ const userUsername = computed(() => user.value?.username ?? '');
             />
             <kbd class="de-kbd">&#8984;K</kbd>
           </form>
-          <NuxtLink to="/search" class="de-search-icon-btn" title="Search" aria-label="Search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </NuxtLink>
 
           <template v-if="isAuthenticated">
             <NuxtLink to="/notifications" class="de-icon-btn" title="Notifications" aria-label="Notifications">
@@ -415,13 +412,15 @@ const userUsername = computed(() => user.value?.username ?? '');
 @media (max-width: 768px) {
   .de-topbar-nav { display: none; }
   .de-topbar-spacer { display: none; }
-  .de-topbar-actions { gap: 6px; }
-  .de-search-form { min-width: 0; flex: 1; max-width: 180px; }
-  .de-search-input { width: 100%; min-width: 0; }
+  .de-topbar-actions { gap: 4px; }
+  .de-search-form { min-width: 0; flex: 1; max-width: 180px; padding: 0 8px; }
+  .de-search-input { width: 100%; min-width: 0; padding: 6px 0; font-size: 0.75rem; }
+  .de-search-icon { font-size: 11px; }
   .de-kbd { display: none; }
   .de-new-text { display: none; }
-  .de-btn-ghost { font-size: 0.75rem; padding: 6px 10px; white-space: nowrap; }
-  .de-btn-primary { font-size: 0.75rem; padding: 6px 10px; white-space: nowrap; }
+  .de-btn-ghost { font-size: 0.75rem; padding: 6px 8px; white-space: nowrap; }
+  .de-btn-primary { font-size: 0.75rem; padding: 6px 8px; white-space: nowrap; }
+  .de-btn-primary i { font-size: 11px; }
   .de-icon-btn { display: none; }
   .de-mobile-toggle { display: flex; }
   .de-mobile-menu { display: block; }
@@ -429,9 +428,8 @@ const userUsername = computed(() => user.value?.username ?? '');
   .de-footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
 }
 @media (max-width: 480px) {
-  .de-search-form { display: none; }
-  .de-search-icon-btn { display: flex; }
-  .de-topbar-inner { padding: 0 12px; }
+  .de-topbar-inner { padding: 0 8px; }
+  .de-search-form { max-width: 140px; }
   .de-footer-inner { grid-template-columns: 1fr; }
 }
 </style>

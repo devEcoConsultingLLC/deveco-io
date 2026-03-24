@@ -290,7 +290,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 
         <!-- Powered badge -->
         <div class="de-powered-badge">
-          <DevEcoLogo variant="light-bg" size="sm" :show-text="false" />
+          <span class="de-cpub-mark"><span class="de-cpub-bracket">[</span>C<span class="de-cpub-bracket">]</span></span>
           <span class="de-powered-text">Powered by <a href="https://github.com/commonpub/commonpub" target="_blank" rel="noopener">CommonPub</a></span>
         </div>
       </aside>
@@ -613,6 +613,11 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   padding: 14px; background: var(--surface); border: 1px solid var(--border);
   border-radius: 12px;
 }
+.de-cpub-mark {
+  font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700;
+  color: var(--text-dim);
+}
+.de-cpub-bracket { color: var(--accent); }
 .de-powered-text { font-size: 0.75rem; color: var(--text-faint); }
 .de-powered-text a { color: var(--deveco-dark-green); text-decoration: none; }
 .de-powered-text a:hover { text-decoration: underline; }

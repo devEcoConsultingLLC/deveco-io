@@ -1,46 +1,26 @@
 # Dependencies
 node_modules/
-.pnpm-store/
 
-# Build outputs
-dist/
-.output/
+# Build
 .nuxt/
-.nitro/
-.cache/
+.output/
+dist/
+.turbo/
 
 # Environment
 .env
 .env.local
-.env.*.local
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Turbo
-.turbo/
-
-# Logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-
-# Testing
-coverage/
-
-# Docker volumes (local dev)
-docker/data/
-
-# Drizzle
-packages/db/drizzle/meta/
-
-# MinIO data
-docker/minio-data/
+# Uploads (dev)
+uploads/*
+!uploads/.gitkeep

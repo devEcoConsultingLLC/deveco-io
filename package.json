@@ -1,34 +1,54 @@
 {
   "name": "deveco-io",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "private": true,
-  "description": "devEco.io — Edge AI project sharing and community platform",
-  "license": "AGPL-3.0-only",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/edge-ai-foundation/deveco-io"
-  },
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
-  },
-  "packageManager": "pnpm@9.15.4",
+  "type": "module",
   "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "lint": "turbo lint",
-    "typecheck": "turbo typecheck",
-    "db:generate": "pnpm --filter @deveco/db generate",
-    "db:migrate": "pnpm --filter @deveco/db migrate",
-    "db:seed": "pnpm --filter @deveco/db seed",
-    "db:studio": "pnpm --filter @deveco/db studio",
-    "clean": "turbo clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,vue,md,json,css}\""
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@commonpub/auth": "^0.4.0",
+    "@commonpub/config": "^0.4.0",
+    "@commonpub/docs": "^0.4.0",
+    "@commonpub/editor": "^0.4.0",
+    "@commonpub/learning": "^0.4.0",
+    "@commonpub/protocol": "^0.4.0",
+    "@commonpub/schema": "^0.4.0",
+    "@commonpub/server": "^0.4.0",
+    "@commonpub/ui": "^0.4.0",
+    "@tiptap/core": "^2.11.0",
+    "@tiptap/extension-bold": "^2.11.0",
+    "@tiptap/extension-bullet-list": "^2.11.0",
+    "@tiptap/extension-code": "^2.11.0",
+    "@tiptap/extension-document": "^2.11.0",
+    "@tiptap/extension-history": "^2.11.0",
+    "@tiptap/extension-italic": "^2.11.0",
+    "@tiptap/extension-link": "^2.11.0",
+    "@tiptap/extension-list-item": "^2.11.0",
+    "@tiptap/extension-ordered-list": "^2.11.0",
+    "@tiptap/extension-paragraph": "^2.11.0",
+    "@tiptap/extension-placeholder": "^2.11.0",
+    "@tiptap/extension-strike": "^2.11.0",
+    "@tiptap/extension-text": "^2.11.0",
+    "drizzle-orm": "^0.45.1",
+    "isomorphic-dompurify": "^3.3.0",
+    "nuxt": "^3.16.0",
+    "pg": "^8.13.0",
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0",
+    "sharp": "^0.34.5",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@deveco/config": "workspace:*",
-    "prettier": "^3.4.2",
-    "turbo": "^2.3.3",
-    "typescript": "^5.7.3"
+    "@types/node": "^22.0.0",
+    "drizzle-kit": "^0.31.0",
+    "@nuxt/test-utils": "^3.17.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0",
+    "vue-tsc": "^2.2.0"
   }
 }

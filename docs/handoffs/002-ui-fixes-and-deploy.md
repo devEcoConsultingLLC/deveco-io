@@ -80,26 +80,73 @@ Federation is **enabled** (`FEATURE_FEDERATION=true`) and the backend is **proto
 3. **No user-facing federation UI** — no fediverse address display (`@user@deveco.io`), no remote follow button, no federated timeline
 4. **No outbound federation** — creating/publishing content doesn't send AP activities to followers on other instances
 
+## Additional work done (second pass)
+
+### Hub assignment
+- New `GET /api/user/hubs` endpoint lists user's hub memberships
+- Hub selector dropdown in EditorPropertiesPanel
+- Auto-shares content to selected hub on publish via `/api/hubs/[slug]/share`
+
+### Dark mode
+- Toggle in user dropdown menu (sun/moon icon)
+- Uses existing `useTheme()` composable + localStorage persistence
+
+### Avatar images site-wide
+- ContentCard renders author avatar image when available
+- Header user menu shows profile picture instead of initial
+
+### Contest admin controls
+- Status transition buttons (Activate / Start Judging / Complete) on contest detail page
+- Submit Entry only shows when contest is active
+- Auto-slug generation from title (was crashing without slug)
+
+### Profile fixes
+- `updateProfileSchema` extended with `avatarUrl`/`bannerUrl` (upstream schema omits them, Zod was stripping)
+- Empty string URLs converted to `undefined` (avoids `<img src="">` bug)
+- Profile settings page restyled to deveco design (rounded, soft shadows)
+
+### Federation (full implementation)
+- `@commonpub/server` v0.4.3 → 0.4.4 published:
+  - `createInboxHandlers()` — real DB operations for Follow/Accept/Reject/Undo/Like/Announce
+  - `deliverPendingActivities()` — outbound delivery with HTTP Signatures, retry, status tracking
+  - **Critical bug fixed**: `onUndo` was deleting ALL follow relationships (used `and()` with single condition)
+  - **High bug fixed**: `onLike` crashed on non-URL objectUri
+- Both inbox routes (`/inbox`, `/users/[username]/inbox`) wired to real handlers
+- Delivery worker (Nitro plugin, 30s interval) processes pending outbound activities
+- Admin federation page (`/admin/federation`) with stats + activity log
+- Fediverse address shown on profile (`@user@deveco.io`)
+
+### Code audit + bug fixes
+- Inbox body double-read (readBody before toWebRequest)
+- Domain extraction trailing slash/port (checks hostname emptiness)
+- Federation activity endpoint validates direction/status/limit/offset
+- Profile PUT converts empty URLs to undefined
+
+### Testing (46 tests)
+- Vitest configured, CI runs tests before typecheck
+- contest-slug: 8 tests (special chars, truncation, unicode)
+- domain-extraction: 7 tests (scheme, port, path, bare domain)
+- profile-schema: 10 tests (URLs, empty strings, validation)
+- federation-activity-params: 10 tests (enum validation, clamping)
+- auth-plugin: 5 tests (role checks, null handling)
+- inbox-keyid: 6 tests (Signature header parsing)
+
 ## Known issues / remaining work
 
 ### High priority
-1. **Hub assignment UI** — Editor properties panel has "hub members only" toggle but no dropdown to select which hub. Need hub selector that lists user's hubs, with visibility modes (public in hub vs hub-only).
-2. **Dark mode toggle** — CSS tokens exist but toggle not wired
-3. **CSRF protection** — POST endpoints lack origin/referrer validation
-4. **View dedup** — in-memory Map should be Redis for production
-5. **`@commonpub/auth` upstream** — should add `additionalFields` for role/username to eliminate `enrichUser()` workaround
+1. **CSRF protection** — POST endpoints lack origin/referrer validation
+2. **View dedup** — in-memory Map should be Redis for production
+3. **`@commonpub/auth` upstream** — should add `additionalFields` for role/username to eliminate `enrichUser()` workaround
+4. **Editor responsive** — editor page needs mobile pass
+5. **All pages mobile responsive** — hub detail, contests, messages, settings pages need mobile pass
 
 ### Medium priority
-6. **Federation inbox implementation** — wire inbox callbacks to DB operations
-7. **Federation UI** — fediverse address display, remote follow, admin federation panel
-8. **Content starter form styling** — cover upload zone needs polish
-9. **Editor responsive** — editor page needs mobile pass
-10. **Hub detail responsive** — deeper pages need mobile pass
-11. **Profile settings page** — still has CommonPub brutalist styling, needs deveco restyle
-12. **CSS `!important` cleanup** — ~29 instances in deveco-theme.css
+6. **Content starter form styling** — cover upload zone needs polish
+7. **CSS `!important` cleanup** — ~29 instances in deveco-theme.css
+8. **Federated timeline** — show content from followed remote users
+9. **Remote follow button** — UI for following users from other instances
+10. **Contest entry submission flow** — needs testing with active contest
 
 ### Low priority / nice-to-have
-13. **Outbound federation** — send AP activities when content is published
-14. **Federated timeline** — show content from followed remote users
-15. **CONTRIBUTING.md** — doesn't exist yet (planned as open source project)
-16. **GH Actions Node.js 24** — deprecation warning for Node.js 20 actions, needs update before June 2026
+11. **CONTRIBUTING.md** — doesn't exist yet (planned as open source project)
+12. **GH Actions Node.js 24** — deprecation warning for Node.js 20 actions, needs update before June 2026

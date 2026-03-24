@@ -187,14 +187,17 @@ function handleLinkInsert(): void {
   <div v-else-if="c" class="cpub-hub-page">
     <!-- ═══ HUB HERO ═══ -->
     <div class="cpub-hub-hero">
-      <div class="cpub-hub-banner">
-        <div class="cpub-hub-banner-pattern"></div>
-        <div class="cpub-hub-banner-dots"></div>
+      <div class="cpub-hub-banner" :style="(c as Record<string, unknown>)?.bannerUrl ? { backgroundImage: `url(${(c as Record<string, unknown>).bannerUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+        <template v-if="!(c as Record<string, unknown>)?.bannerUrl">
+          <div class="cpub-hub-banner-pattern"></div>
+          <div class="cpub-hub-banner-dots"></div>
+        </template>
       </div>
       <div class="cpub-hub-meta-bar">
         <div class="cpub-hub-meta-inner">
           <div class="cpub-hub-icon">
-            <i class="fa-solid fa-wrench"></i>
+            <img v-if="(c as Record<string, unknown>)?.iconUrl" :src="(c as Record<string, unknown>).iconUrl as string" :alt="c?.name ?? ''" />
+            <i v-else :class="isCompanyHub ? 'fa-solid fa-building' : isProductHub ? 'fa-solid fa-microchip' : 'fa-solid fa-users'" />
           </div>
           <div class="cpub-hub-info">
             <div class="cpub-hub-top-row">

@@ -413,8 +413,8 @@ async function handleReport(): Promise<void> {
 
 /* Profile Hero */
 .cpub-profile-hero {
-  background: var(--surface2);
-  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   padding: 0;
 }
 
@@ -446,14 +446,14 @@ async function handleReport(): Promise<void> {
   border-radius: 50%;
   background: var(--surface);
   border: 4px solid var(--surface);
-  box-shadow: 0 0 0 2px var(--border);
+  box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 40px;
   font-weight: 700;
-  color: var(--accent);
-  font-family: var(--font-mono);
+  color: var(--deveco-dark-green);
+  overflow: hidden;
 }
 
 
@@ -463,16 +463,16 @@ async function handleReport(): Promise<void> {
 }
 
 .cpub-profile-name {
-  font-size: 22px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
   letter-spacing: -0.02em;
   margin-bottom: 2px;
 }
 
 .cpub-profile-handle {
-  font-size: 13px;
+  font-size: 0.875rem;
   color: var(--text-dim);
-  font-family: var(--font-mono);
   margin-bottom: 6px;
 }
 
@@ -534,7 +534,8 @@ async function handleReport(): Promise<void> {
   width: 28px;
   height: 28px;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   color: var(--text-dim);
   display: flex;
   align-items: center;
@@ -552,15 +553,16 @@ async function handleReport(): Promise<void> {
 .cpub-profile-stats {
   display: flex;
   gap: 0;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
   margin-top: 16px;
 }
 
 .cpub-profile-stat {
   flex: 1;
   padding: 14px 20px;
-  border-right: 2px solid var(--border);
+  border-right: 1px solid var(--border);
   cursor: pointer;
+  transition: background 0.15s;
 }
 
 .cpub-profile-stat:last-child {
@@ -572,26 +574,24 @@ async function handleReport(): Promise<void> {
 }
 
 .cpub-profile-stat-val {
-  font-size: 18px;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text);
-  font-family: var(--font-mono);
   margin-bottom: 2px;
   display: block;
 }
 
 .cpub-profile-stat-label {
-  font-size: 10px;
+  font-size: 0.6875rem;
   color: var(--text-faint);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
 
 /* Profile Tabs */
 .cpub-profile-tabs {
   background: var(--surface);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 48px;
   z-index: 90;
@@ -602,21 +602,21 @@ async function handleReport(): Promise<void> {
   margin: 0 auto;
   padding: 0 32px;
   display: flex;
-  gap: 2px;
+  gap: 4px;
 }
 
 .cpub-tab-btn {
-  font-size: 12px;
+  font-size: 0.8125rem;
   color: var(--text-dim);
-  padding: 10px 14px;
+  padding: 12px 16px;
   border: none;
   background: none;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
-  font-family: system-ui, -apple-system, sans-serif;
+  border-bottom: 2px solid transparent;
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: color 0.15s;
   position: relative;
   top: 2px;
 }
@@ -624,8 +624,9 @@ async function handleReport(): Promise<void> {
 .cpub-tab-btn:hover { color: var(--text); }
 
 .cpub-tab-btn.active {
-  color: var(--text);
-  border-bottom-color: var(--accent);
+  color: var(--deveco-dark-green);
+  border-bottom-color: var(--deveco-light-green);
+  font-weight: 600;
 }
 
 /* Main Content */

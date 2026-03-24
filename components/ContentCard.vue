@@ -120,7 +120,7 @@ function formatCount(n: number | undefined): string {
 /* Thumbnail */
 .cpub-cc-thumb {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   background: var(--surface2);
   border-bottom: 1px solid var(--border);
   display: flex;

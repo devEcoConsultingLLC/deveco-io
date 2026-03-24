@@ -115,9 +115,9 @@ async function handleSubmit(): Promise<void> {
   padding: var(--space-3);
   background: var(--red-bg);
   color: var(--red);
-  border: 2px solid var(--red);
-  border-radius: var(--radius);
-  font-size: 12px;
+  border: 1px solid var(--red-border, var(--red));
+  border-radius: 8px;
+  font-size: 0.8125rem;
 }
 
 .field {
@@ -127,21 +127,18 @@ async function handleSubmit(): Promise<void> {
 }
 
 .field-label {
-  font-size: 12px;
-  font-weight: 500;
-  font-family: var(--font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: var(--text-dim);
 }
 
 .field-input {
-  padding: 8px 12px;
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
   background: var(--surface);
   color: var(--text);
-  font-size: 13px;
+  font-size: 0.875rem;
   font-family: var(--font-sans);
   outline: none;
   width: 100%;
@@ -158,27 +155,24 @@ async function handleSubmit(): Promise<void> {
 }
 
 .submit-btn {
-  padding: 7px 14px;
-  background: var(--accent);
-  color: var(--color-text-inverse);
-  border: 2px solid var(--accent);
-  border-radius: var(--radius);
-  font-size: 13px;
-  font-weight: 500;
+  padding: 10px 14px;
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
   font-family: var(--font-sans);
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.15s;
+  transition: background 0.15s;
 }
 
 .submit-btn:hover:not(:disabled) {
-  box-shadow: var(--shadow-md);
-  transform: translate(-1px, -1px);
+  background: var(--color-primary-hover);
 }
 
 .submit-btn:active:not(:disabled) {
-  transform: translate(1px, 1px);
-  box-shadow: none;
+  opacity: 0.9;
 }
 
 .submit-btn:disabled {

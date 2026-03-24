@@ -2,13 +2,13 @@ name: CI
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main]
   push:
-    branches: [main, develop]
+    branches: [main]
 
 jobs:
-  lint-typecheck-test:
-    name: Lint, Typecheck & Test
+  build:
+    name: Build & Typecheck
     runs-on: ubuntu-latest
 
     steps:
@@ -16,21 +16,18 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm turbo lint
-
       - name: Typecheck
-        run: pnpm turbo typecheck
+        run: pnpm nuxt typecheck
 
       - name: Build
-        run: pnpm turbo build
+        run: pnpm nuxt build

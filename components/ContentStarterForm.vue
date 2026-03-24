@@ -98,7 +98,15 @@ function updateField(key: string, value: unknown): void {
   padding: 48px 24px 64px;
 }
 
-.cpub-starter-card { width: 100%; max-width: 560px; }
+.cpub-starter-card {
+  width: 100%;
+  max-width: 600px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+}
 .cpub-starter-header { margin-bottom: 28px; }
 
 .cpub-starter-back {
@@ -113,11 +121,12 @@ function updateField(key: string, value: unknown): void {
 .cpub-starter-back:hover { color: var(--text); }
 
 .cpub-starter-title {
-  font-family: var(--font-display, var(--font-sans));
-  font-size: 1.75rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 6px;
   text-transform: capitalize;
+  color: var(--deveco-dark-green);
 }
 
 .cpub-starter-subtitle { font-size: 0.9375rem; color: var(--text-dim); }

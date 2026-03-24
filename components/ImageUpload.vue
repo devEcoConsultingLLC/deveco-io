@@ -68,7 +68,7 @@ function clearImage(): void {
     <!-- Preview / upload area -->
     <div
       class="de-img-upload-zone"
-      :class="[aspectClass || (purpose === 'banner' ? 'de-img-banner' : 'de-img-square'), { 'de-img-has-preview': modelValue }]"
+      :class="[aspectClass || (purpose === 'banner' ? 'de-img-banner' : purpose === 'cover' ? 'de-img-cover' : 'de-img-square'), { 'de-img-has-preview': modelValue }]"
       @click="triggerPicker"
     >
       <img v-if="modelValue" :src="modelValue" alt="Preview" class="de-img-preview" />
@@ -136,6 +136,12 @@ function clearImage(): void {
 .de-img-square {
   width: 120px;
   height: 120px;
+}
+
+.de-img-cover {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 120px;
 }
 
 .de-img-banner {

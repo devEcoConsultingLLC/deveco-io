@@ -13,10 +13,22 @@ useHead({
 const userMenuOpen = ref(false);
 const mobileMenuOpen = ref(false);
 
+const searchQuery = ref('');
+const searchInputRef = ref<HTMLInputElement | null>(null);
+
 function handleGlobalKeydown(e: KeyboardEvent): void {
   if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
     e.preventDefault();
-    navigateTo('/search');
+    searchInputRef.value?.focus();
+  }
+}
+
+function handleSearchSubmit(): void {
+  const q = searchQuery.value.trim();
+  if (q) {
+    navigateTo(`/search?q=${encodeURIComponent(q)}`);
+    searchQuery.value = '';
+    searchInputRef.value?.blur();
   }
 }
 
@@ -78,11 +90,18 @@ const userUsername = computed(() => user.value?.username ?? '');
         <div class="de-topbar-spacer" />
 
         <div class="de-topbar-actions">
-          <NuxtLink to="/search" class="de-search-btn" aria-label="Search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span class="de-search-text">Search...</span>
+          <form class="de-search-form" @submit.prevent="handleSearchSubmit">
+            <i class="fa-solid fa-magnifying-glass de-search-icon"></i>
+            <input
+              ref="searchInputRef"
+              v-model="searchQuery"
+              type="text"
+              class="de-search-input"
+              placeholder="Search..."
+              aria-label="Search"
+            />
             <kbd class="de-kbd">&#8984;K</kbd>
-          </NuxtLink>
+          </form>
 
           <template v-if="isAuthenticated">
             <NuxtLink to="/notifications" class="de-icon-btn" title="Notifications" aria-label="Notifications">
@@ -225,14 +244,19 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-topbar-spacer { flex: 1; }
 .de-topbar-actions { display: flex; align-items: center; gap: 8px; }
 
-.de-search-btn {
+.de-search-form {
   display: flex; align-items: center; gap: 8px;
-  padding: 8px 14px; background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 8px; color: var(--text-dim); font-size: 0.8125rem;
-  min-width: 200px; text-decoration: none; transition: border-color 0.15s, box-shadow 0.15s;
+  padding: 0 14px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; min-width: 220px; transition: border-color 0.15s, box-shadow 0.15s;
 }
-.de-search-btn:hover { border-color: var(--accent); box-shadow: var(--shadow-accent); }
-.de-search-btn i { font-size: 12px; }
+.de-search-form:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 231, 173, 0.12); }
+.de-search-icon { font-size: 12px; color: var(--text-faint); flex-shrink: 0; }
+.de-search-input {
+  flex: 1; border: none; background: none; outline: none;
+  padding: 8px 0; font-size: 0.8125rem; color: var(--text);
+  font-family: var(--font-sans);
+}
+.de-search-input::placeholder { color: var(--text-faint); }
 .de-kbd {
   margin-left: auto; font-size: 0.6875rem; font-family: var(--font-mono);
   padding: 2px 6px; background: var(--surface3); border: 1px solid var(--border);
@@ -377,8 +401,9 @@ const userUsername = computed(() => user.value?.username ?? '');
 
 @media (max-width: 768px) {
   .de-topbar-nav { display: none; }
-  .de-search-btn { min-width: auto; padding: 8px 10px; }
-  .de-search-text, .de-kbd, .de-new-text { display: none; }
+  .de-search-form { min-width: auto; }
+  .de-search-input { width: 60px; }
+  .de-kbd, .de-new-text { display: none; }
   .de-mobile-toggle { display: flex; }
   .de-mobile-menu { display: block; }
   .de-footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }

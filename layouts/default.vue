@@ -210,8 +210,8 @@ const userUsername = computed(() => user.value?.username ?? '');
 /* ---- TOP BANNER ---- */
 .de-top-banner {
   background: var(--deveco-dark-green); color: rgba(255, 255, 255, 0.6);
-  text-align: center; padding: 10px 24px;
-  font-size: 0.8125rem; font-weight: 500;
+  text-align: center; padding: 8px 12px;
+  font-size: 0.75rem; font-weight: 500; line-height: 1.4;
 }
 .de-top-banner strong { color: var(--accent); }
 .de-top-banner a { color: var(--accent); text-decoration: underline; }

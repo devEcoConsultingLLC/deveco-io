@@ -112,11 +112,12 @@ function removeTag(tag: string): void {
 <style scoped>
 .cpub-adv-panel {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-top: none;
+  border-radius: 0 0 12px 12px;
   padding: 24px 32px 28px;
   margin-bottom: 24px;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-adv-grid {

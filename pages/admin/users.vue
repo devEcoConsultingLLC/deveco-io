@@ -123,7 +123,7 @@ async function deleteUser(userId: string, username: string): Promise<void> {
 
 <style scoped>
 .admin-page-title { font-size: var(--text-xl); font-weight: var(--font-weight-bold); margin-bottom: 16px; }
-.admin-search { width: 100%; max-width: 400px; padding: 6px 10px; border: 2px solid var(--border); background: var(--surface); color: var(--text); font-size: 13px; margin-bottom: 16px; }
+.admin-search { width: 100%; max-width: 400px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 13px; margin-bottom: 16px; }
 .admin-search:focus { outline: none; border-color: var(--accent); }
 .admin-table-wrap { overflow-x: auto; }
 .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }

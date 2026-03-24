@@ -70,7 +70,7 @@ async function resolveReport(id: string, resolution: 'resolved' | 'dismissed'): 
 
 <style scoped>
 .admin-page-title { font-size: var(--text-xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-6); }
-.report-card { padding: 16px; border: 2px solid var(--border); background: var(--surface); margin-bottom: 12px; box-shadow: 4px 4px 0 var(--border); }
+.report-card { padding: 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); margin-bottom: 12px; box-shadow: var(--shadow-sm); }
 .report-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .report-status { font-size: 10px; font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; padding: 2px 8px; }
 .status-pending { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }

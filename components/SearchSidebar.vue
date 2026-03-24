@@ -89,14 +89,14 @@ const { hubs: hubsEnabled } = useFeatures();
 
 <style scoped>
 .cpub-sb-block {
-  background: var(--surface); border: 2px solid var(--border); padding: 20px;
-  margin-bottom: 18px; box-shadow: 4px 4px 0 var(--border);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+  margin-bottom: 18px; box-shadow: var(--shadow-sm);
 }
 
 .cpub-sb-heading {
   font-size: 10px; font-family: var(--font-mono); font-weight: 700;
   color: var(--text-faint); letter-spacing: 0.12em; text-transform: uppercase;
-  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--border);
+  margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
 }
 
 .cpub-pop-search-list { list-style: none; }

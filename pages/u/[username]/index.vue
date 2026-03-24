@@ -794,30 +794,44 @@ async function handleReport(): Promise<void> {
 }
 
 @media (max-width: 768px) {
+  .cpub-profile-banner { height: 120px; }
+  .cpub-profile-hero-inner { padding: 0 16px; margin-top: -36px; }
   .cpub-profile-hero-top {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 12px;
   }
+  .cpub-profile-avatar { width: 80px; height: 80px; font-size: 28px; border-width: 3px; }
+  .cpub-profile-name { font-size: 1.25rem; }
+  .cpub-profile-bio { max-width: 100%; }
   .cpub-profile-meta {
     justify-content: center;
     flex-wrap: wrap;
+    gap: 8px;
   }
   .cpub-profile-actions {
     justify-content: center;
+    flex-wrap: wrap;
   }
+  .cpub-profile-social { margin-left: 0; }
   .cpub-profile-stats {
     flex-wrap: wrap;
   }
   .cpub-profile-stat {
-    min-width: 50%;
-    border-bottom: 2px solid var(--border);
+    min-width: 33%;
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
   }
+  .cpub-profile-stat-val { font-size: 1rem; }
+  .cpub-profile-tabs-inner { padding: 0 12px; }
+  .cpub-profile-main { padding: 16px; }
   .cpub-about-grid {
     grid-template-columns: 1fr;
   }
   .cpub-grid-3 {
     grid-template-columns: 1fr;
   }
+  .cpub-tag-row { justify-content: center; }
 }
 </style>

@@ -47,16 +47,25 @@ const { data: stats } = await useFetch('/api/admin/stats');
 </template>
 
 <style scoped>
-.cpub-admin-title { font-size: var(--text-xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-6); }
-.cpub-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); margin-bottom: var(--space-8); }
-.cpub-stat-card { padding: var(--space-5); background: var(--surface); border: 2px solid var(--border); box-shadow: 4px 4px 0 var(--border); display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
-.cpub-stat-icon { font-size: var(--text-xl); color: var(--text-dim); margin-bottom: var(--space-1); }
-.cpub-stat-value { font-size: var(--text-3xl); font-weight: var(--font-weight-bold); font-family: var(--font-mono); }
-.cpub-stat-label { font-family: var(--font-mono); font-size: 10px; font-weight: var(--font-weight-semibold); text-transform: uppercase; letter-spacing: var(--tracking-widest); color: var(--text-dim); }
-.cpub-admin-section-title { font-size: var(--text-lg); font-weight: var(--font-weight-bold); margin-bottom: var(--space-4); }
-.cpub-admin-actions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
-.cpub-admin-action { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); padding: var(--space-5); background: var(--surface); border: 2px solid var(--border); text-decoration: none; color: var(--text); transition: all 0.15s; }
-.cpub-admin-action:hover { background: var(--surface2); box-shadow: 4px 4px 0 var(--border); transform: translate(-1px, -1px); }
-.cpub-admin-action-icon { font-size: var(--text-xl); color: var(--text-dim); }
-.cpub-admin-action-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: var(--tracking-wide); color: var(--text-dim); }
+.cpub-admin-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 24px; }
+.cpub-stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.cpub-stat-card {
+  padding: 20px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.cpub-stat-icon { font-size: 1.25rem; color: var(--accent); margin-bottom: 4px; }
+.cpub-stat-value { font-size: 1.75rem; font-weight: 700; font-family: var(--font-mono); }
+.cpub-stat-label { font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); }
+.cpub-admin-section-title { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+.cpub-admin-actions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+.cpub-admin-action {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 20px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; text-decoration: none; color: var(--text);
+  transition: all 0.15s;
+}
+.cpub-admin-action:hover { background: var(--surface2); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.cpub-admin-action-icon { font-size: 1.25rem; color: var(--text-dim); }
+.cpub-admin-action-label { font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); }
 </style>

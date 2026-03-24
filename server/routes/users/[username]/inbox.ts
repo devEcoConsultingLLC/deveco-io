@@ -6,14 +6,21 @@ function extractKeyId(signatureHeader: string): string | null {
   return match ? match[1] : null;
 }
 
+function extractDomain(url: string): string {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname) return parsed.hostname;
+  } catch { /* fall through */ }
+  return url.replace(/^https?:\/\//, '').replace(/[:/].*$/, '');
+}
+
 export default defineEventHandler(async (event) => {
   const config = useConfig();
   if (!config.features.federation) {
     throw createError({ statusCode: 404, statusMessage: 'Not Found' });
   }
 
-  const method = getMethod(event);
-  if (method !== 'POST') {
+  if (getMethod(event) !== 'POST') {
     throw createError({ statusCode: 405, statusMessage: 'Method Not Allowed' });
   }
 
@@ -33,17 +40,17 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: 'Could not resolve actor public key' });
   }
 
+  const body = await readBody(event);
+
   const request = toWebRequest(event);
   const signatureValid = await verifyHttpSignature(request, actor.publicKey.publicKeyPem);
   if (!signatureValid) {
     throw createError({ statusCode: 401, statusMessage: 'Invalid HTTP Signature' });
   }
 
-  const body = await readBody(event);
-
   const db = useDB();
   const runtimeConfig = useRuntimeConfig();
-  const domain = (runtimeConfig.public?.siteUrl as string)?.replace(/^https?:\/\//, '') || config.instance.domain;
+  const domain = extractDomain((runtimeConfig.public?.siteUrl as string) || `https://${config.instance.domain}`);
   const callbacks = createInboxHandlers({ db, domain });
 
   try {

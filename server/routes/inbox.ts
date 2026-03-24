@@ -1,25 +1,30 @@
 import { processInboxActivity, verifyHttpSignature, resolveActor } from '@commonpub/protocol';
 import { createInboxHandlers } from '@commonpub/server';
 
-/** Extract keyId from the Signature header to resolve the sender's public key */
 function extractKeyId(signatureHeader: string): string | null {
   const match = signatureHeader.match(/keyId="([^"]+)"/);
   return match ? match[1] : null;
 }
 
+/** Extract clean domain from a URL string (strips scheme, port, trailing slash) */
+function extractDomain(url: string): string {
+  try {
+    const parsed = new URL(url);
+    if (parsed.hostname) return parsed.hostname;
+  } catch { /* fall through */ }
+  return url.replace(/^https?:\/\//, '').replace(/[:/].*$/, '');
+}
+
 export default defineEventHandler(async (event) => {
-  // Gate on federation feature flag
   const config = useConfig();
   if (!config.features.federation) {
     throw createError({ statusCode: 404, statusMessage: 'Not Found' });
   }
 
-  const method = getMethod(event);
-  if (method !== 'POST') {
+  if (getMethod(event) !== 'POST') {
     throw createError({ statusCode: 405, statusMessage: 'Method Not Allowed' });
   }
 
-  // Verify HTTP Signature
   const signatureHeader = getHeader(event, 'signature');
   if (!signatureHeader) {
     throw createError({ statusCode: 401, statusMessage: 'Missing HTTP Signature' });
@@ -36,18 +41,18 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: 'Could not resolve actor public key' });
   }
 
+  // Read body BEFORE converting to web request (avoids stream double-read)
+  const body = await readBody(event);
+
   const request = toWebRequest(event);
   const signatureValid = await verifyHttpSignature(request, actor.publicKey.publicKeyPem);
   if (!signatureValid) {
     throw createError({ statusCode: 401, statusMessage: 'Invalid HTTP Signature' });
   }
 
-  const body = await readBody(event);
-
-  // Create handlers wired to DB operations
   const db = useDB();
   const runtimeConfig = useRuntimeConfig();
-  const domain = (runtimeConfig.public?.siteUrl as string)?.replace(/^https?:\/\//, '') || config.instance.domain;
+  const domain = extractDomain((runtimeConfig.public?.siteUrl as string) || `https://${config.instance.domain}`);
   const callbacks = createInboxHandlers({ db, domain });
 
   try {

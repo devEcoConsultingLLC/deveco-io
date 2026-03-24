@@ -12,7 +12,14 @@ const extendedProfileSchema = updateProfileSchema.extend({
 export default defineEventHandler(async (event): Promise<UserProfile> => {
   const db = useDB();
   const user = requireAuth(event);
-  const input = await parseBody(event, extendedProfileSchema);
+  const raw = await parseBody(event, extendedProfileSchema);
+  // Convert empty strings to null for URL fields (avoids <img src="">)
+  const input = {
+    ...raw,
+    avatarUrl: raw.avatarUrl || undefined,
+    bannerUrl: raw.bannerUrl || undefined,
+    website: raw.website || undefined,
+  };
 
   const profile = await updateUserProfile(db, user.id, input);
 

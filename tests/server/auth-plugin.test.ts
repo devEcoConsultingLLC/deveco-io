@@ -20,8 +20,9 @@ describe('auth state management', () => {
   });
 
   it('isAdmin is false when user is null', () => {
-    const user = null;
-    expect(user?.role === 'admin').toBeFalsy();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const user: any = null;
+    expect(user?.role === 'admin').toBe(false);
   });
 
   it('/api/me returns null for unauthenticated requests', () => {

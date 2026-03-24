@@ -9,6 +9,7 @@ export default defineNitroPlugin((nitro) => {
 
   let interval: ReturnType<typeof setInterval> | null = null;
 
+  // @ts-expect-error -- 'ready' hook exists at runtime but Nitro types don't expose it
   nitro.hooks.hook('ready', () => {
     const config = useConfig();
     if (!config.features.federation) return;

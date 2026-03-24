@@ -195,7 +195,7 @@ async function submitEntry(): Promise<void> {
         <!-- Admin controls -->
         <div v-if="isAdmin && c" class="cpub-admin-controls">
           <span class="cpub-admin-controls-label"><i class="fa-solid fa-shield-halved"></i> Admin</span>
-          <button v-if="c.status === 'draft' || c.status === 'upcoming'" class="cpub-btn cpub-btn-sm" :disabled="transitioning" @click="transitionStatus('active')"><i class="fa fa-play"></i> Activate</button>
+          <button v-if="c.status === 'upcoming'" class="cpub-btn cpub-btn-sm" :disabled="transitioning" @click="transitionStatus('active')"><i class="fa fa-play"></i> Activate</button>
           <button v-if="c.status === 'active'" class="cpub-btn cpub-btn-sm" :disabled="transitioning" @click="transitionStatus('judging')"><i class="fa fa-gavel"></i> Start Judging</button>
           <button v-if="c.status === 'judging'" class="cpub-btn cpub-btn-sm" :disabled="transitioning" @click="transitionStatus('completed')"><i class="fa fa-check"></i> Complete</button>
           <span class="cpub-admin-status">Status: <strong>{{ c.status }}</strong></span>

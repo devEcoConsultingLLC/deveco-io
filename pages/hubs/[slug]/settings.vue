@@ -47,13 +47,13 @@ async function handleSave(): Promise<void> {
       method: 'PUT',
       body: {
         name: form.name,
-        description: form.description || null,
-        rules: form.rules.split('\n').map((r: string) => r.trim()).filter(Boolean),
+        description: form.description || undefined,
+        rules: form.rules || undefined,
         joinPolicy: form.joinPolicy,
         privacy: form.privacy,
-        website: form.website || null,
-        iconUrl: form.iconUrl || null,
-        bannerUrl: form.bannerUrl || null,
+        website: form.website || undefined,
+        iconUrl: form.iconUrl || undefined,
+        bannerUrl: form.bannerUrl || undefined,
       },
     });
     toast.success('Settings saved');

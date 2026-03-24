@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const { user, isAuthenticated, isAdmin, signOut, refreshSession } = useAuth();
+const { themeId, setTheme } = useTheme();
+const isDark = computed(() => themeId.value === 'dark');
+function toggleDarkMode(): void { setTheme(isDark.value ? 'base' : 'dark'); }
 const { count: unreadCount, connect: connectNotifications, disconnect: disconnectNotifications } = useNotifications();
 const { hubs, learning, video, docs, contests, admin } = useFeatures();
 const { enabledTypeMeta } = useContentTypes();
@@ -113,12 +116,14 @@ const userUsername = computed(() => user.value?.username ?? '');
             </NuxtLink>
             <div class="de-user-menu-wrapper">
               <button class="de-avatar-btn" aria-label="User menu" :aria-expanded="userMenuOpen" @click.stop="userMenuOpen = !userMenuOpen">
-                <span class="de-user-avatar">{{ userInitial }}</span>
+                <img v-if="user?.image" :src="user.image" alt="" class="de-user-avatar-img" />
+                <span v-else class="de-user-avatar">{{ userInitial }}</span>
               </button>
               <div v-if="userMenuOpen" class="de-user-dropdown" role="menu">
                 <NuxtLink :to="`/u/${userUsername}`" class="de-dropdown-item" role="menuitem" @click="userMenuOpen = false"><i class="fa-solid fa-user"></i> Profile</NuxtLink>
                 <NuxtLink to="/dashboard" class="de-dropdown-item" role="menuitem" @click="userMenuOpen = false"><i class="fa-solid fa-gauge"></i> Dashboard</NuxtLink>
                 <NuxtLink to="/settings" class="de-dropdown-item" role="menuitem" @click="userMenuOpen = false"><i class="fa-solid fa-gear"></i> Settings</NuxtLink>
+                <button class="de-dropdown-item" role="menuitem" @click="toggleDarkMode"><i :class="isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"></i> {{ isDark ? 'Light Mode' : 'Dark Mode' }}</button>
                 <div class="de-dropdown-divider" />
                 <button class="de-dropdown-item" role="menuitem" @click="handleSignOut"><i class="fa-solid fa-right-from-bracket"></i> Sign out</button>
               </div>
@@ -290,6 +295,10 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-btn-ghost:hover { color: var(--text); }
 
 .de-avatar-btn { background: none; border: none; padding: 0; cursor: pointer; }
+.de-user-avatar-img {
+  width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--accent);
+}
 .de-user-avatar {
   width: 32px; height: 32px; border-radius: 50%;
   background: var(--accent-bg); border: 2px solid var(--accent);

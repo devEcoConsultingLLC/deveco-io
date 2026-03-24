@@ -520,7 +520,7 @@ async function handleSave(): Promise<void> {
 
 .cpub-form-section {
   padding-bottom: var(--space-6);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-form-section-label {
@@ -539,7 +539,8 @@ async function handleSave(): Promise<void> {
   display: block;
   width: 100%;
   height: 140px;
-  border: 2px dashed var(--border2);
+  border: 1px dashed var(--border2);
+  border-radius: 12px;
   background: var(--surface);
   cursor: pointer;
   overflow: hidden;
@@ -582,7 +583,7 @@ async function handleSave(): Promise<void> {
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  border: 2px solid var(--border2);
+  border: 1px solid var(--border2);
   background: var(--surface);
   cursor: pointer;
   overflow: hidden;
@@ -711,7 +712,8 @@ async function handleSave(): Promise<void> {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--border2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
   background: var(--surface);
   color: var(--text-dim);
   cursor: pointer;
@@ -738,7 +740,8 @@ async function handleSave(): Promise<void> {
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-2) var(--space-4);
-  border: 2px dashed var(--border2);
+  border: 1px dashed var(--border2);
+  border-radius: 8px;
   background: none;
   color: var(--text-dim);
   font-size: var(--text-sm);
@@ -759,7 +762,8 @@ async function handleSave(): Promise<void> {
 
 /* ─── Experience ─── */
 .cpub-experience-card {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   background: var(--surface);
   padding: var(--space-4);
   margin-bottom: var(--space-4);
@@ -802,17 +806,20 @@ async function handleSave(): Promise<void> {
 
 .cpub-save-btn {
   padding: var(--space-2) var(--space-5);
-  background: var(--accent);
-  color: var(--color-text-inverse);
-  border: 2px solid var(--border);
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
   font-size: var(--text-sm);
+  font-weight: 600;
   cursor: pointer;
   font-family: var(--font-sans);
-  box-shadow: var(--shadow-sm);
+  transition: background 0.15s, box-shadow 0.15s;
 }
 
 .cpub-save-btn:hover {
   background: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .cpub-save-btn:disabled {

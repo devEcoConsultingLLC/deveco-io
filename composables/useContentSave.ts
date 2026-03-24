@@ -187,6 +187,21 @@ export function useContentSave(opts: ContentSaveOptions): ContentSaveReturn {
       }
 
       await $fetch(`/api/content/${opts.contentId.value}/publish`, { method: 'POST' });
+
+      // Share to hub if one is selected in metadata
+      const hubSlug = opts.metadata.value?.hubSlug as string | undefined;
+      if (hubSlug && opts.contentId.value) {
+        try {
+          await $fetch(`/api/hubs/${hubSlug}/share`, {
+            method: 'POST',
+            body: { contentId: opts.contentId.value },
+          });
+        } catch {
+          // Non-fatal: content is published even if hub share fails
+          console.warn(`[publish] Failed to share to hub ${hubSlug}`);
+        }
+      }
+
       opts.isDirty.value = false;
       await navigateTo(`/${opts.contentType.value}/${resultSlug}`);
       return [];

@@ -82,7 +82,8 @@ function formatCount(n: number | undefined): string {
         <!-- Footer: author + stats -->
         <div class="cpub-cc-footer">
           <div v-if="item.author" class="cpub-cc-author">
-            <span class="cpub-cc-av">{{ authorInitial }}</span>
+            <img v-if="item.author.avatarUrl" :src="item.author.avatarUrl" :alt="item.author.displayName || item.author.username" class="cpub-cc-av-img" />
+            <span v-else class="cpub-cc-av">{{ authorInitial }}</span>
             <span class="cpub-cc-aname">{{ item.author.displayName || item.author.username }}</span>
             <span class="cpub-cc-sep">&middot;</span>
             <time class="cpub-cc-date">{{ dateStr }}</time>
@@ -252,6 +253,14 @@ function formatCount(n: number | undefined): string {
   font-size: 11px;
   color: var(--text-faint);
   min-width: 0;
+}
+
+.cpub-cc-av-img {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .cpub-cc-av {

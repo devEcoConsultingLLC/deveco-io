@@ -11,6 +11,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1015.0",
     "@commonpub/auth": "^0.4.2",
     "@commonpub/config": "^0.4.2",
     "@commonpub/docs": "^0.4.2",
@@ -38,15 +39,15 @@
     "isomorphic-dompurify": "^3.3.0",
     "nuxt": "^3.16.0",
     "pg": "^8.13.0",
+    "sharp": "^0.34.5",
     "vue": "^3.4.0",
     "vue-router": "^4.3.0",
-    "sharp": "^0.34.5",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@nuxt/test-utils": "^3.17.0",
     "@types/node": "^22.0.0",
     "drizzle-kit": "^0.31.0",
-    "@nuxt/test-utils": "^3.17.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0",
     "vue-tsc": "^2.2.0"

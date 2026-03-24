@@ -163,14 +163,16 @@ async function handleReport(): Promise<void> {
     <section class="cpub-profile-hero">
       <!-- Banner -->
       <div class="cpub-profile-banner">
-        <div class="cpub-profile-banner-grid" />
+        <img v-if="p.bannerUrl" :src="p.bannerUrl" :alt="`${p.displayName || p.username} banner`" class="cpub-profile-banner-img" />
+        <div v-else class="cpub-profile-banner-grid" />
       </div>
 
       <div class="cpub-profile-hero-inner">
         <div class="cpub-profile-hero-top">
           <div class="cpub-profile-avatar-wrap">
             <div class="cpub-profile-avatar">
-              {{ (p.displayName || p.username || 'U').charAt(0).toUpperCase() }}
+              <img v-if="p.avatarUrl" :src="p.avatarUrl" :alt="p.displayName || p.username" class="cpub-profile-avatar-img" />
+              <span v-else>{{ (p.displayName || p.username || 'U').charAt(0).toUpperCase() }}</span>
             </div>
           </div>
           <div class="cpub-profile-hero-info">
@@ -401,6 +403,12 @@ async function handleReport(): Promise<void> {
   overflow: hidden;
 }
 
+.cpub-profile-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .cpub-profile-banner-grid {
   position: absolute;
   inset: 0;
@@ -456,6 +464,11 @@ async function handleReport(): Promise<void> {
   overflow: hidden;
 }
 
+.cpub-profile-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 .cpub-profile-hero-info {
   flex: 1;

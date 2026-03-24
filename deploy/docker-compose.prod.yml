@@ -15,7 +15,7 @@ services:
         condition: service_started
 
   app:
-    image: registry.digitalocean.com/deveco/deveco-app:latest
+    image: deveco-app:latest
     restart: unless-stopped
     expose:
       - "3000"

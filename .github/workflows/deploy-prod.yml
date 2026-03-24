@@ -13,39 +13,33 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
-        with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Log in to Container Registry
-        run: doctl registry login --expiry-seconds 600
-
-      - name: Build Docker image
-        run: |
-          docker build \
-            -t registry.digitalocean.com/deveco/deveco-app:${{ github.sha }} \
-            -t registry.digitalocean.com/deveco/deveco-app:latest \
-            .
-
-      - name: Push to Container Registry
-        run: |
-          docker push registry.digitalocean.com/deveco/deveco-app:${{ github.sha }}
-          docker push registry.digitalocean.com/deveco/deveco-app:latest
-
       - name: Deploy to droplet
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.PROD_HOST }}
           username: root
           key: ${{ secrets.PROD_SSH_KEY }}
-          command_timeout: 5m
+          command_timeout: 10m
           script: |
-            doctl registry login --expiry-seconds 300 2>/dev/null || docker login -u ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} -p ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }} registry.digitalocean.com
+            set -e
             cd /opt/deveco
-            docker compose pull app
+
+            # Pull latest code
+            if [ ! -d repo ]; then
+              git clone https://github.com/devEcoConsultingLLC/deveco-io.git repo
+            fi
+            cd repo
+            git fetch origin main
+            git reset --hard origin/main
+
+            # Build Docker image locally on droplet
+            docker build -t deveco-app:latest .
+
+            # Copy updated compose + Caddyfile to deploy dir
+            cp deploy/docker-compose.prod.yml /opt/deveco/docker-compose.yml
+
+            # Restart services
+            cd /opt/deveco
             docker compose up -d --remove-orphans
             docker image prune -f
-            echo "Deployed ${{ github.sha }}"
+            echo "Deployed $(cd /opt/deveco/repo && git rev-parse --short HEAD)"

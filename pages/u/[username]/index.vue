@@ -177,7 +177,7 @@ async function handleReport(): Promise<void> {
           </div>
           <div class="cpub-profile-hero-info">
             <h1 class="cpub-profile-name">{{ p.displayName || p.username }}</h1>
-            <div class="cpub-profile-handle">@{{ p.username }}</div>
+            <div class="cpub-profile-handle">@{{ p.username }}<span class="cpub-fedi-addr" title="Fediverse address">@deveco.io</span></div>
             <p v-if="p.headline" class="cpub-profile-headline">{{ p.headline }}</p>
             <p v-if="p.bio" class="cpub-profile-bio">{{ p.bio }}</p>
             <div class="cpub-profile-meta">
@@ -487,6 +487,11 @@ async function handleReport(): Promise<void> {
   font-size: 0.875rem;
   color: var(--text-dim);
   margin-bottom: 6px;
+}
+
+.cpub-fedi-addr {
+  color: var(--text-faint);
+  font-size: 0.75rem;
 }
 
 .cpub-profile-headline {

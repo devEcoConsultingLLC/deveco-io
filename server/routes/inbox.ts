@@ -1,37 +1,5 @@
-import { processInboxActivity, verifyHttpSignature, resolveActor, type InboxCallbacks } from '@commonpub/protocol';
-
-// Stub callbacks — federation inbound processing is not yet wired to DB operations.
-// Each callback logs the activity for debugging; real implementations will
-// resolve actors, persist follows, create local content mirrors, etc.
-const inboxCallbacks: InboxCallbacks = {
-  async onFollow(actorUri, targetActorUri, activityId) {
-    console.log('[inbox] Follow:', actorUri, '→', targetActorUri, activityId);
-  },
-  async onAccept(actorUri, objectId) {
-    console.log('[inbox] Accept:', actorUri, objectId);
-  },
-  async onReject(actorUri, objectId) {
-    console.log('[inbox] Reject:', actorUri, objectId);
-  },
-  async onUndo(actorUri, objectType, objectId) {
-    console.log('[inbox] Undo:', actorUri, objectType, objectId);
-  },
-  async onCreate(actorUri, object) {
-    console.log('[inbox] Create:', actorUri, (object as Record<string, unknown>).type);
-  },
-  async onUpdate(actorUri, object) {
-    console.log('[inbox] Update:', actorUri, (object as Record<string, unknown>).type);
-  },
-  async onDelete(actorUri, objectId) {
-    console.log('[inbox] Delete:', actorUri, objectId);
-  },
-  async onLike(actorUri, objectUri) {
-    console.log('[inbox] Like:', actorUri, objectUri);
-  },
-  async onAnnounce(actorUri, objectUri) {
-    console.log('[inbox] Announce:', actorUri, objectUri);
-  },
-};
+import { processInboxActivity, verifyHttpSignature, resolveActor } from '@commonpub/protocol';
+import { createInboxHandlers } from '@commonpub/server';
 
 /** Extract keyId from the Signature header to resolve the sender's public key */
 function extractKeyId(signatureHeader: string): string | null {
@@ -62,7 +30,6 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, statusMessage: 'Invalid Signature header: missing keyId' });
   }
 
-  // keyId is typically "https://remote.example/users/alice#main-key" — strip the fragment to get the actor URI
   const actorUri = keyId.replace(/#.*$/, '');
   const actor = await resolveActor(actorUri, fetch);
   if (!actor?.publicKey?.publicKeyPem) {
@@ -77,8 +44,14 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event);
 
+  // Create handlers wired to DB operations
+  const db = useDB();
+  const runtimeConfig = useRuntimeConfig();
+  const domain = (runtimeConfig.public?.siteUrl as string)?.replace(/^https?:\/\//, '') || config.instance.domain;
+  const callbacks = createInboxHandlers({ db, domain });
+
   try {
-    const result = await processInboxActivity(body, inboxCallbacks);
+    const result = await processInboxActivity(body, callbacks);
     if (!result.success) {
       throw createError({ statusCode: 400, statusMessage: result.error ?? 'Invalid activity' });
     }

@@ -172,9 +172,9 @@ const { hubs: hubsEnabled } = useFeatures();
 
 .cpub-btn-join-sm {
   font-size: 10px; font-family: var(--font-mono); padding: 3px 8px;
-  border: 2px solid var(--border); background: var(--green-bg); color: var(--green);
+  border: 1px solid var(--border); border-radius: 6px; background: var(--green-bg); color: var(--green);
   cursor: pointer; flex-shrink: 0; display: inline-flex; align-items: center; gap: 4px;
-  box-shadow: 1px 1px 0 var(--border); transition: all 0.15s;
+  box-shadow: var(--shadow-sm); transition: all 0.15s;
 }
 
 .cpub-btn-join-sm:hover { box-shadow: var(--shadow-sm); }

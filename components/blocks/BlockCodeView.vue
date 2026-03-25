@@ -18,10 +18,10 @@ const code = computed(() => (props.content.code as string) || '');
 
 <style scoped>
 .cpub-block-code {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   overflow: hidden;
   margin: 20px 0;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-code-header {
@@ -30,7 +30,7 @@ const code = computed(() => (props.content.code as string) || '');
   gap: 8px;
   padding: 8px 14px;
   background: var(--surface2);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-code-lang {

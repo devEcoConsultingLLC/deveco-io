@@ -423,7 +423,7 @@ const blockCount = computed(() => props.blockEditor.blocks.value.length);
 .cpub-ee-asset-item {
   display: flex; align-items: center; gap: 10px; padding: 8px 10px;
   background: var(--surface); border: 2px solid var(--border); cursor: pointer;
-  box-shadow: 2px 2px 0 var(--border); margin-bottom: 5px;
+  box-shadow: var(--shadow-sm); margin-bottom: 5px;
 }
 .cpub-ee-asset-icon { width: 34px; height: 34px; background: var(--surface2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--border2); }
 .cpub-ee-asset-icon i { font-size: 11px; color: var(--text-faint); }
@@ -492,7 +492,7 @@ const blockCount = computed(() => props.blockEditor.blocks.value.length);
     width: 44px; height: 44px; border: 2px solid var(--border); background: var(--surface);
     color: var(--text-dim); font-size: 16px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 4px 4px 0 var(--border);
+    box-shadow: var(--shadow-sm);
   }
   .cpub-ee-mobile-btn:hover { background: var(--surface2); color: var(--text); }
   .cpub-ee-mobile-overlay {

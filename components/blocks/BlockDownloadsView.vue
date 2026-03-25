@@ -39,10 +39,10 @@ const files = computed<FileItem[]>(() => {
 
 <style scoped>
 .cpub-block-downloads {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   margin: 20px 0;
   overflow: hidden;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-dl-header {
@@ -51,7 +51,7 @@ const files = computed<FileItem[]>(() => {
   gap: 8px;
   padding: 10px 14px;
   background: var(--surface2);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-dl-icon { font-size: 12px; color: var(--accent); }
@@ -74,7 +74,7 @@ const files = computed<FileItem[]>(() => {
   width: 32px;
   height: 32px;
   background: var(--surface2);
-  border: 2px solid var(--border2);
+  border: 1px solid var(--border2);
   display: flex;
   align-items: center;
   justify-content: center;

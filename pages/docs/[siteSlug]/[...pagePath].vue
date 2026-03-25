@@ -449,7 +449,7 @@ useSeoMeta({
   right: 16px;
   background: var(--surface);
   border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   z-index: 50;
   max-height: 200px;
   overflow-y: auto;
@@ -554,7 +554,7 @@ useSeoMeta({
 .docs-content :deep(a:hover) { text-decoration: underline; }
 .docs-content :deep(strong) { color: var(--text); font-weight: 600; }
 .docs-content :deep(code) { font-family: var(--font-mono); font-size: 12px; background: var(--surface2); padding: 2px 5px; border: 1px solid var(--border2); color: var(--accent); }
-.docs-content :deep(pre) { padding: 16px; background: var(--surface2); border: 2px solid var(--border); overflow-x: auto; margin: 16px 0; box-shadow: 4px 4px 0 var(--border); }
+.docs-content :deep(pre) { padding: 16px; background: var(--surface2); border: 2px solid var(--border); overflow-x: auto; margin: 16px 0; box-shadow: var(--shadow-sm); }
 .docs-content :deep(pre code) { background: none; border: none; padding: 0; font-size: 13px; color: var(--text); }
 .docs-content :deep(ul), .docs-content :deep(ol) { margin-bottom: 14px; padding-left: 24px; }
 .docs-content :deep(li) { margin-bottom: 4px; }
@@ -585,12 +585,12 @@ useSeoMeta({
   text-decoration: none;
   min-width: 0;
   max-width: 48%;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transition: box-shadow 0.15s, transform 0.15s;
 }
 
 .docs-pn-link:hover {
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transform: translate(1px, 1px);
 }
 
@@ -669,7 +669,7 @@ useSeoMeta({
   background: var(--accent);
   color: var(--color-text-inverse);
   border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   font-size: 16px;
   cursor: pointer;
   z-index: 100;

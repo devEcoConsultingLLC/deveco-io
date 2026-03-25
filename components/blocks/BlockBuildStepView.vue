@@ -27,10 +27,10 @@ const num = computed(() => props.stepNumber ?? (props.content.stepNumber as numb
 
 <style scoped>
 .cpub-block-step {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   overflow: hidden;
   margin: 20px 0;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-step-header {
@@ -86,7 +86,7 @@ const num = computed(() => props.stepNumber ?? (props.content.stepNumber as numb
   width: 100%;
   max-height: 400px;
   object-fit: cover;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   margin-top: 12px;
 }
 </style>

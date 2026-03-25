@@ -422,7 +422,7 @@ const sortedPages = computed(() => {
 .cpub-back-link { color: var(--accent); text-decoration: none; font-size: 12px; }
 .cpub-back-link:hover { text-decoration: underline; }
 
-.edit-section { border: 2px solid var(--border); background: var(--surface); padding: 20px; margin-bottom: 16px; box-shadow: 4px 4px 0 var(--border); }
+.edit-section { border: 2px solid var(--border); background: var(--surface); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
 .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .section-heading { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .section-heading i { font-size: 12px; color: var(--accent); }

@@ -38,10 +38,10 @@ const tools = computed<Tool[]>(() => {
 
 <style scoped>
 .cpub-block-tools {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   margin: 20px 0;
   overflow: hidden;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-tools-header {
@@ -50,7 +50,7 @@ const tools = computed<Tool[]>(() => {
   gap: 8px;
   padding: 10px 14px;
   background: var(--surface2);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-tools-icon { font-size: 12px; color: var(--accent); }

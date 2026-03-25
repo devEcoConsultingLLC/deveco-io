@@ -89,11 +89,11 @@ const stateIcons: Record<string, string> = {
 <style scoped>
 .cpub-block-slider {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   border-left: 4px solid var(--accent);
   padding: 22px 24px;
   margin: 28px 0;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-card-header {
@@ -160,7 +160,7 @@ const stateIcons: Record<string, string> = {
   width: 100%;
   height: 6px;
   background: var(--surface3);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   outline: none;
   cursor: pointer;
   position: relative;
@@ -173,18 +173,18 @@ const stateIcons: Record<string, string> = {
   width: 18px;
   height: 18px;
   background: var(--accent);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   cursor: pointer;
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-slider-input::-moz-range-thumb {
   width: 18px;
   height: 18px;
   background: var(--accent);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   cursor: pointer;
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-slider-range-labels {

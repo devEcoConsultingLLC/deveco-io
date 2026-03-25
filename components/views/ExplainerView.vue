@@ -315,7 +315,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   top: 3px; left: 0; right: 0;
   height: 48px;
   background: var(--surface);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -369,14 +369,14 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   align-items: center;
   justify-content: center;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   color: var(--text-dim);
   cursor: pointer;
   font-size: 12px;
   transition: background 0.1s, color 0.1s, box-shadow 0.1s;
   flex-shrink: 0;
 }
-.cpub-icon-btn:hover:not(:disabled) { background: var(--surface2); color: var(--text); box-shadow: 2px 2px 0 var(--border); }
+.cpub-icon-btn:hover:not(:disabled) { background: var(--surface2); color: var(--text); box-shadow: var(--shadow-sm); }
 .cpub-icon-btn:active:not(:disabled) { box-shadow: none; transform: translate(1px, 1px); }
 .cpub-icon-btn.active { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
 .cpub-icon-btn:disabled { opacity: 0.3; cursor: not-allowed; }
@@ -395,7 +395,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   width: 200px;
   flex-shrink: 0;
   background: var(--surface);
-  border-right: 2px solid var(--border);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -407,7 +407,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   letter-spacing: 0.12em;
   color: var(--text-faint);
   text-transform: uppercase;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 .cpub-toc-list { list-style: none; padding: 6px 0; }
 .cpub-toc-item a {
@@ -440,7 +440,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   align-items: center;
   gap: 8px;
   padding: 12px 14px;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
   margin-top: auto;
 }
 .cpub-sidebar-author-avatar {
@@ -448,7 +448,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   height: 24px;
   border-radius: var(--radius-full);
   background: var(--surface3);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -582,7 +582,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   font-family: var(--font-mono);
   font-size: 13px;
   background: var(--surface2);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   padding: 1px 6px;
   color: var(--accent);
 }
@@ -626,7 +626,7 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   justify-content: space-between;
   margin-top: 48px;
   padding-top: 24px;
-  border-top: 2px solid var(--border);
+  border-top: 1px solid var(--border);
 }
 
 .cpub-progress-dots { display: flex; align-items: center; gap: 5px; }
@@ -648,15 +648,15 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   gap: 8px;
   padding: 10px 18px;
   background: var(--accent);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   color: var(--color-text-inverse);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transition: box-shadow 0.1s, transform 0.1s;
 }
-.cpub-next-btn:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.cpub-next-btn:hover { box-shadow: var(--shadow-sm); transform: translate(1px, 1px); }
 .cpub-next-btn i { font-size: 12px; }
 
 .cpub-prev-btn {
@@ -665,14 +665,14 @@ onUnmounted(() => { document.removeEventListener('keydown', onKeydown); });
   gap: 8px;
   padding: 10px 18px;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   color: var(--text);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: box-shadow 0.1s;
 }
-.cpub-prev-btn:hover { box-shadow: 2px 2px 0 var(--border); }
+.cpub-prev-btn:hover { box-shadow: var(--shadow-sm); }
 .cpub-prev-btn i { font-size: 12px; }
 
 /* ── RESPONSIVE ── */

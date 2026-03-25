@@ -271,11 +271,11 @@ function getDifficultyClass(d: string | null): string {
 
 /* Actions */
 .cpub-path-actions { display: flex; gap: 10px; margin-top: 16px; align-items: center; flex-wrap: wrap; }
-.cpub-enroll-btn { padding: 10px 22px; background: var(--accent); color: var(--color-text-inverse); border: 2px solid var(--border); font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 4px 4px 0 var(--border); display: inline-flex; align-items: center; gap: 6px; }
-.cpub-enroll-btn:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.cpub-enroll-btn { padding: 10px 22px; background: var(--accent); color: var(--color-text-inverse); border: 2px solid var(--border); font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 6px; }
+.cpub-enroll-btn:hover { box-shadow: var(--shadow-sm); transform: translate(1px, 1px); }
 .cpub-enroll-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.cpub-continue-btn { padding: 10px 22px; background: var(--green); color: var(--color-text-inverse); border: 2px solid var(--border); font-size: 13px; font-weight: 600; text-decoration: none; box-shadow: 4px 4px 0 var(--border); display: inline-flex; align-items: center; gap: 6px; }
-.cpub-continue-btn:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.cpub-continue-btn { padding: 10px 22px; background: var(--green); color: var(--color-text-inverse); border: 2px solid var(--border); font-size: 13px; font-weight: 600; text-decoration: none; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 6px; }
+.cpub-continue-btn:hover { box-shadow: var(--shadow-sm); transform: translate(1px, 1px); }
 .cpub-unenroll-btn { padding: 6px 14px; background: var(--surface); border: 2px solid var(--border); color: var(--text-dim); font-size: 12px; cursor: pointer; }
 .cpub-unenroll-btn:hover { color: var(--red); border-color: var(--red); }
 .cpub-edit-link { padding: 6px 14px; border: 1px solid var(--border2); font-size: 12px; color: var(--text-dim); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
@@ -294,7 +294,7 @@ function getDifficultyClass(d: string | null): string {
 .cpub-curriculum-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .cpub-curriculum-title { font-size: 18px; font-weight: 700; }
 .cpub-curriculum-count { font-size: 11px; font-family: var(--font-mono); color: var(--text-faint); }
-.cpub-module { border: 2px solid var(--border); margin-bottom: 12px; background: var(--surface); box-shadow: 4px 4px 0 var(--border); }
+.cpub-module { border: 2px solid var(--border); margin-bottom: 12px; background: var(--surface); box-shadow: var(--shadow-sm); }
 .cpub-module-header { display: flex; align-items: flex-start; gap: 12px; width: 100%; padding: 14px 16px; border: none; background: none; cursor: pointer; text-align: left; font-family: inherit; }
 .cpub-module-header:hover { background: var(--surface2); }
 .cpub-module-number { font-family: var(--font-mono); font-size: 12px; color: var(--accent); font-weight: 700; min-width: 20px; padding-top: 2px; }
@@ -315,7 +315,7 @@ function getDifficultyClass(d: string | null): string {
 
 /* Sidebar */
 .cpub-path-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.cpub-sidebar-card { padding: 16px; border: 2px solid var(--border); background: var(--surface); box-shadow: 4px 4px 0 var(--border); }
+.cpub-sidebar-card { padding: 16px; border: 2px solid var(--border); background: var(--surface); box-shadow: var(--shadow-sm); }
 .cpub-sidebar-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-faint); margin-bottom: 12px; display: block; }
 .cpub-sidebar-stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border2); font-size: 13px; }
 .cpub-sidebar-stat:last-child { border-bottom: none; }

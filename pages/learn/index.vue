@@ -211,9 +211,9 @@ const activeDifficultyFilter = ref('');
 .cpub-hero-title { font-size: 28px; font-weight: 700; line-height: 1.15; margin-bottom: 10px; letter-spacing: -.03em; }
 .cpub-hero-sub { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 520px; margin-bottom: 24px; }
 .cpub-hero-cats { display: flex; gap: 8px; flex-wrap: wrap; }
-.cpub-hero-cat { font-size: 11px; font-family: var(--font-mono); padding: 6px 14px; border-radius: var(--radius); border: 2px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.cpub-hero-cat { font-size: 11px; font-family: var(--font-mono); padding: 6px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
 .cpub-hero-cat:hover { background: var(--surface2); color: var(--text); }
-.cpub-hero-cat.active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); box-shadow: 3px 3px 0 var(--border); }
+.cpub-hero-cat.active { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); box-shadow: var(--shadow-sm); }
 .cpub-hero-cat-icon { font-size: 12px; }
 .cpub-hero-stats { display: flex; gap: 24px; margin-top: 24px; padding-top: 20px; border-top: 2px solid var(--border); }
 .cpub-hero-stat { display: flex; flex-direction: column; gap: 2px; }
@@ -230,16 +230,16 @@ const activeDifficultyFilter = ref('');
 .cpub-btn-xs { padding: 3px 8px; font-size: 10px; font-family: var(--font-mono); }
 .cpub-btn-progress { background: var(--accent-bg); border-color: var(--accent-border); color: var(--accent); }
 
-.cpub-progress-track { height: 4px; background: var(--surface3); border-radius: 0; overflow: hidden; border: 1px solid var(--border2); }
-.cpub-progress-fill { height: 100%; border-radius: 0; background: var(--accent); }
+.cpub-progress-track { height: 4px; background: var(--surface3); border-radius: 6px; overflow: hidden; border: 1px solid var(--border2); }
+.cpub-progress-fill { height: 100%; border-radius: 6px; background: var(--accent); }
 
 /* cpub-sec-sub, cpub-sec-head-right → global components.css */
 
 /* MY LEARNING */
 .cpub-ip-row { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
 .cpub-ip-row::-webkit-scrollbar { display: none; }
-.cpub-ip-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden; min-width: 220px; max-width: 220px; flex-shrink: 0; box-shadow: 4px 4px 0 var(--border); }
-.cpub-ip-card:hover { box-shadow: 5px 5px 0 var(--border); }
+.cpub-ip-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; min-width: 220px; max-width: 220px; flex-shrink: 0; box-shadow: var(--shadow-sm); }
+.cpub-ip-card:hover { box-shadow: var(--shadow-md); }
 .cpub-ip-thumb { height: 100px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--surface3); }
 .cpub-ip-thumb-icon { font-size: 24px; position: relative; z-index: 1; color: var(--text-dim); }
 .cpub-ip-thumb-badge { position: absolute; top: 8px; right: 8px; z-index: 2; }
@@ -253,27 +253,27 @@ const activeDifficultyFilter = ref('');
 .cpub-ip-continue:hover { background: var(--accent-bg); }
 
 /* LEARNING PATHS */
-.cpub-path-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 20px; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 12px; box-shadow: 4px 4px 0 var(--border); }
-.cpub-path-card:hover { box-shadow: 5px 5px 0 var(--border); }
-.cpub-path-icon-wrap { width: 52px; height: 52px; border-radius: var(--radius); border: 2px solid var(--border); background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: var(--text-dim); }
+.cpub-path-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: flex; gap: 20px; align-items: flex-start; margin-bottom: 12px; box-shadow: var(--shadow-sm); }
+.cpub-path-card:hover { box-shadow: var(--shadow-md); }
+.cpub-path-icon-wrap { width: 52px; height: 52px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; color: var(--text-dim); }
 .cpub-path-body { flex: 1; }
 .cpub-path-title { font-size: 14px; font-weight: 600; }
 .cpub-path-desc { font-size: 12px; color: var(--text-dim); line-height: 1.55; margin-bottom: 12px; }
 .cpub-path-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .cpub-path-meta-item { font-size: 11px; font-family: var(--font-mono); color: var(--text-faint); display: flex; align-items: center; gap: 5px; }
-.cpub-path-courses-preview { display: flex; gap: 6px; margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--border2); overflow-x: auto; }
-.cpub-path-course-pill { font-size: 10px; font-family: var(--font-mono); padding: 3px 10px; border-radius: 0; border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim); white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
+.cpub-path-courses-preview { display: flex; gap: 6px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border2); overflow-x: auto; }
+.cpub-path-course-pill { font-size: 10px; font-family: var(--font-mono); padding: 3px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text-dim); white-space: nowrap; display: inline-flex; align-items: center; gap: 4px; }
 .cpub-pill-done { border-color: var(--green-border); color: var(--green); background: var(--green-bg); }
 .cpub-path-aside { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0; }
 .cpub-path-aside-meta { font-size: 11px; font-family: var(--font-mono); color: var(--text-faint); }
 
 /* COURSES */
 .cpub-course-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.cpub-course-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: 4px 4px 0 var(--border); }
-.cpub-course-card:hover { box-shadow: 5px 5px 0 var(--border); }
+.cpub-course-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); }
+.cpub-course-card:hover { box-shadow: var(--shadow-md); }
 .cpub-course-cover { height: 120px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--surface3); border-bottom: 2px solid var(--border); }
 .cpub-course-cover-icon { font-size: 28px; position: relative; z-index: 1; color: var(--text-dim); }
-.cpub-course-cover-price { position: absolute; top: 10px; right: 10px; z-index: 2; font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 0; background: var(--surface); border: 2px solid var(--border); }
+.cpub-course-cover-price { position: absolute; top: 10px; right: 10px; z-index: 2; font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); }
 .cpub-price-free { color: var(--green); border-color: var(--green); }
 .cpub-price-paid { color: var(--text); }
 .cpub-course-body { padding: 14px; flex: 1; display: flex; flex-direction: column; }
@@ -287,7 +287,7 @@ const activeDifficultyFilter = ref('');
 .cpub-star-count { font-size: 10px; color: var(--text-faint); font-family: var(--font-mono); margin-left: 2px; }
 .cpub-course-meta-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .cpub-course-meta-item { font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); display: flex; align-items: center; gap: 4px; }
-.cpub-course-footer { margin-top: auto; padding-top: 10px; border-top: 2px solid var(--border2); }
+.cpub-course-footer { margin-top: auto; padding-top: 10px; border-top: 1px solid var(--border2); }
 .cpub-course-enrolled-progress { margin-bottom: 8px; }
 .cpub-course-enrolled-label { font-size: 10px; font-family: var(--font-mono); color: var(--accent); margin-bottom: 5px; }
 .cpub-course-actions { display: flex; align-items: center; justify-content: space-between; }
@@ -295,9 +295,9 @@ const activeDifficultyFilter = ref('');
 
 /* EXPLAINERS */
 .cpub-explainer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.cpub-explainer-card { background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 18px; display: flex; gap: 16px; align-items: flex-start; box-shadow: 4px 4px 0 var(--border); }
-.cpub-explainer-card:hover { box-shadow: 5px 5px 0 var(--border); }
-.cpub-explainer-icon { width: 44px; height: 44px; border-radius: var(--radius); border: 2px solid var(--border); background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; color: var(--text-dim); }
+.cpub-explainer-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; display: flex; gap: 16px; align-items: flex-start; box-shadow: var(--shadow-sm); }
+.cpub-explainer-card:hover { box-shadow: var(--shadow-md); }
+.cpub-explainer-icon { width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; color: var(--text-dim); }
 .cpub-explainer-body { flex: 1; }
 .cpub-explainer-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
 .cpub-explainer-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; margin-bottom: 10px; }
@@ -307,10 +307,10 @@ const activeDifficultyFilter = ref('');
 
 /* TUTORIALS */
 .cpub-tutorial-list { display: flex; flex-direction: column; }
-.cpub-tutorial-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 2px solid var(--border2); cursor: pointer; }
+.cpub-tutorial-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border2); cursor: pointer; }
 .cpub-tutorial-row:last-child { border-bottom: none; }
 .cpub-tutorial-row:hover .cpub-tutorial-title { color: var(--accent); }
-.cpub-tutorial-icon { width: 36px; height: 36px; border-radius: var(--radius); background: var(--surface2); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; color: var(--text-dim); }
+.cpub-tutorial-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; color: var(--text-dim); }
 .cpub-tutorial-body { flex: 1; }
 .cpub-tutorial-title { font-size: 12px; font-weight: 600; margin-bottom: 3px; transition: color .1s; }
 .cpub-tutorial-meta { font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); display: flex; align-items: center; gap: 8px; }
@@ -324,20 +324,20 @@ const activeDifficultyFilter = ref('');
 .cpub-sb-cat-item { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-bottom: 1px solid var(--border2); cursor: pointer; }
 .cpub-sb-cat-item:last-child { border-bottom: none; }
 .cpub-sb-cat-item:hover .cpub-sb-cat-name { color: var(--text); }
-.cpub-sb-cat-icon { width: 24px; height: 24px; border-radius: var(--radius); background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; color: var(--text-dim); }
+.cpub-sb-cat-icon { width: 24px; height: 24px; border-radius: 10px; background: var(--surface2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; color: var(--text-dim); }
 .cpub-sb-cat-name { font-size: 12px; color: var(--text-dim); }
 .cpub-sb-cat-count { margin-left: auto; font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); }
 .cpub-sb-level-row { display: flex; flex-direction: column; gap: 6px; }
 .cpub-sb-level-item { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-.cpub-sb-level-check { width: 14px; height: 14px; border-radius: 0; border: 2px solid var(--border); background: var(--surface); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; }
+.cpub-sb-level-check { width: 14px; height: 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 8px; }
 .cpub-checked { background: var(--accent); border-color: var(--border); color: var(--color-text-inverse); }
 .cpub-sb-level-name { font-size: 12px; color: var(--text-dim); }
 .cpub-sb-level-n { margin-left: auto; font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); }
 .cpub-sb-tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
-.cpub-sb-tag { font-size: 10px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 0; border: 1px solid var(--border); background: var(--surface2); color: var(--text-faint); cursor: pointer; }
+.cpub-sb-tag { font-size: 10px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface2); color: var(--text-faint); cursor: pointer; }
 .cpub-sb-tag:hover { border-color: var(--border); color: var(--text-dim); background: var(--surface3); }
 .cpub-cert-grid { display: flex; flex-direction: column; gap: 8px; }
-.cpub-cert-item { background: var(--surface2); border: 2px solid var(--border); border-radius: var(--radius); padding: 10px 12px; display: flex; align-items: center; gap: 10px; box-shadow: 3px 3px 0 var(--border); }
+.cpub-cert-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow-sm); }
 .cpub-cert-badge { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--yellow); background: var(--yellow-bg); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; color: var(--yellow); }
 .cpub-cert-info { flex: 1; }
 .cpub-cert-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
@@ -345,7 +345,7 @@ const activeDifficultyFilter = ref('');
 
 /* MY PATHS */
 .cpub-my-paths { display: flex; flex-direction: column; gap: 2px; margin-bottom: 16px; }
-.cpub-my-path-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 2px solid var(--border); background: var(--surface); }
+.cpub-my-path-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border: 1px solid var(--border); background: var(--surface); }
 .cpub-my-path-info { display: flex; align-items: center; gap: 10px; }
 .cpub-my-path-title { font-size: 13px; font-weight: 600; color: var(--text); text-decoration: none; }
 .cpub-my-path-title:hover { color: var(--accent); }

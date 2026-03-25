@@ -138,7 +138,7 @@ async function transitionStatus(newStatus: string): Promise<void> {
 .status-completed { color: var(--text-faint); border-color: var(--border2); background: var(--surface2); }
 
 .edit-form { display: flex; flex-direction: column; gap: 16px; }
-.form-section { border: 2px solid var(--border); background: var(--surface); padding: 20px; box-shadow: 4px 4px 0 var(--border); }
+.form-section { border: 2px solid var(--border); background: var(--surface); padding: 20px; box-shadow: var(--shadow-sm); }
 .form-section-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; }
 .form-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
 .form-field:last-child { margin-bottom: 0; }

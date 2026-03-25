@@ -105,8 +105,8 @@ const categories = [
 
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
 
-.product-card { border: 2px solid var(--border); background: var(--surface); text-decoration: none; color: var(--text); box-shadow: 4px 4px 0 var(--border); transition: box-shadow 0.15s, transform 0.15s; display: flex; gap: 12px; padding: 16px; }
-.product-card:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.product-card { border: 2px solid var(--border); background: var(--surface); text-decoration: none; color: var(--text); box-shadow: var(--shadow-sm); transition: box-shadow 0.15s, transform 0.15s; display: flex; gap: 12px; padding: 16px; }
+.product-card:hover { box-shadow: var(--shadow-sm); transform: translate(1px, 1px); }
 .product-card-icon { width: 40px; height: 40px; border: 2px solid var(--border); background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--accent); flex-shrink: 0; }
 .product-card-body { flex: 1; min-width: 0; }
 .product-card-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }

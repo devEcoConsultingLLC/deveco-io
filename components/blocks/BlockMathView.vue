@@ -16,10 +16,10 @@ const label = computed(() => (props.content.label as string) || '');
 .cpub-block-math {
   font-family: var(--font-mono);
   background: var(--border);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   padding: 16px 18px;
   margin: 16px 0;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-math-label {

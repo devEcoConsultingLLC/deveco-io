@@ -88,9 +88,9 @@ function optionClass(idx: number): string {
 <style scoped>
 .cpub-block-quiz {
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   margin: 28px 0;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-quiz-header {
@@ -98,7 +98,7 @@ function optionClass(idx: number): string {
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-quiz-badge {
@@ -139,7 +139,7 @@ function optionClass(idx: number): string {
   gap: 10px;
   padding: 12px 14px;
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   cursor: pointer;
   transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
   user-select: none;
@@ -151,7 +151,7 @@ function optionClass(idx: number): string {
 
 .cpub-quiz-option:hover:not(.answered) {
   background: var(--surface2);
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-quiz-option.selected-correct {

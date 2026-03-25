@@ -79,8 +79,8 @@ async function handleShare(): Promise<void> {
   display: flex;
   gap: var(--space-1);
   padding: var(--space-3) 0;
-  border-top: 2px solid var(--border);
-  border-bottom: 2px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 .cpub-engage-btn {
@@ -89,7 +89,7 @@ async function handleShare(): Promise<void> {
   gap: var(--space-2);
   padding: var(--space-2) var(--space-3);
   background: none;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   font-family: var(--font-sans);
   font-size: var(--text-sm);
   color: var(--text-dim);

@@ -110,7 +110,7 @@ watch(() => props.open, (v) => {
 .cpub-picker-dialog {
   background: var(--surface);
   border: 2px solid var(--border);
-  box-shadow: 8px 8px 0 var(--border);
+  box-shadow: var(--shadow-lg);
   width: 520px;
   max-width: 90vw;
   max-height: 70vh;

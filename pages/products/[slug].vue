@@ -107,14 +107,14 @@ useSeoMeta({
 .spec-val { font-weight: 500; }
 
 .product-links { display: flex; gap: 8px; margin-bottom: 32px; }
-.product-link-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 2px solid var(--border); background: var(--surface); color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; box-shadow: 4px 4px 0 var(--border); }
-.product-link-btn:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.product-link-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border: 2px solid var(--border); background: var(--surface); color: var(--text); text-decoration: none; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-sm); }
+.product-link-btn:hover { box-shadow: var(--shadow-sm); transform: translate(1px, 1px); }
 
 .product-projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
 .product-projects-empty { color: var(--text-faint); font-size: 13px; padding: 24px 0; }
 
 .product-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.product-sb-card { padding: 16px; border: 2px solid var(--border); background: var(--surface); box-shadow: 4px 4px 0 var(--border); }
+.product-sb-card { padding: 16px; border: 2px solid var(--border); background: var(--surface); box-shadow: var(--shadow-sm); }
 .product-sb-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-faint); margin-bottom: 12px; }
 .product-sb-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border2); font-size: 13px; color: var(--text-dim); }
 .product-sb-row:last-child { border-bottom: none; }

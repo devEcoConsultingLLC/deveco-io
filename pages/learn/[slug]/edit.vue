@@ -362,7 +362,7 @@ async function handlePublish(): Promise<void> {
 .cpub-status-draft { background: var(--surface3); color: var(--text-faint); border: 1px solid var(--border2); }
 .cpub-status-published { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
 
-.cpub-meta-section { background: var(--surface); border: 2px solid var(--border); padding: 16px 20px; margin-bottom: 24px; box-shadow: 4px 4px 0 var(--border); }
+.cpub-meta-section { background: var(--surface); border: 2px solid var(--border); padding: 16px 20px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
 .cpub-meta-section-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
 .cpub-meta-form { display: flex; flex-direction: column; gap: 10px; }
 .cpub-meta-field { display: flex; flex-direction: column; gap: 3px; }
@@ -374,7 +374,7 @@ async function handlePublish(): Promise<void> {
 
 .cpub-modules-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
 
-.cpub-module-card { background: var(--surface); border: 2px solid var(--border); box-shadow: 4px 4px 0 var(--border); }
+.cpub-module-card { background: var(--surface); border: 2px solid var(--border); box-shadow: var(--shadow-sm); }
 
 .cpub-module-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid var(--border); background: var(--surface2); gap: 8px; }
 .cpub-module-title-input { font-size: 14px; font-weight: 600; background: none; border: 2px solid transparent; padding: 4px 8px; color: var(--text); outline: none; flex: 1; }

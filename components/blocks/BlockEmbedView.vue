@@ -23,9 +23,9 @@ const url = computed(() => {
 <style scoped>
 .cpub-block-embed {
   margin: 24px 0;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
   overflow: hidden;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .cpub-embed-label {
@@ -37,7 +37,7 @@ const url = computed(() => {
   letter-spacing: 0.06em;
   color: var(--text-faint);
   background: var(--surface2);
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   gap: 6px;

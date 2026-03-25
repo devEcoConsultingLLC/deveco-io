@@ -208,7 +208,7 @@ async function startConversation(): Promise<void> {
 .cpub-new-msg-dialog {
   background: var(--surface);
   border: 2px solid var(--border);
-  box-shadow: 8px 8px 0 var(--border);
+  box-shadow: var(--shadow-lg);
   width: 400px;
   max-width: 90vw;
 }

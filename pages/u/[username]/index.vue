@@ -738,8 +738,8 @@ async function handleReport(): Promise<void> {
 
 /* Certificates list */
 .cpub-cert-list { display: flex; flex-direction: column; gap: 8px; }
-.cpub-cert-card-profile { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 2px solid var(--border); background: var(--surface); text-decoration: none; color: var(--text); box-shadow: 4px 4px 0 var(--border); transition: box-shadow 0.15s, transform 0.15s; }
-.cpub-cert-card-profile:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.cpub-cert-card-profile { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); text-decoration: none; color: var(--text); box-shadow: var(--shadow-sm); transition: box-shadow 0.15s, transform 0.15s; }
+.cpub-cert-card-profile:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 .cpub-cert-card-badge { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--yellow); background: var(--yellow-bg); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--yellow); flex-shrink: 0; }
 .cpub-cert-card-info { flex: 1; }
 .cpub-cert-card-path { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
@@ -748,8 +748,8 @@ async function handleReport(): Promise<void> {
 
 /* Enrollment list */
 .cpub-enrollment-list { display: flex; flex-direction: column; gap: 8px; }
-.cpub-enrollment-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 2px solid var(--border); background: var(--surface); text-decoration: none; color: var(--text); box-shadow: 4px 4px 0 var(--border); transition: box-shadow 0.15s, transform 0.15s; }
-.cpub-enrollment-card:hover { box-shadow: 2px 2px 0 var(--border); transform: translate(1px, 1px); }
+.cpub-enrollment-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); text-decoration: none; color: var(--text); box-shadow: var(--shadow-sm); transition: box-shadow 0.15s, transform 0.15s; }
+.cpub-enrollment-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
 .cpub-enrollment-icon { width: 40px; height: 40px; border: 2px solid var(--border); background: var(--surface2); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--accent); flex-shrink: 0; }
 .cpub-enrollment-info { flex: 1; }
 .cpub-enrollment-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
@@ -773,8 +773,9 @@ async function handleReport(): Promise<void> {
   top: calc(100% + 4px);
   right: 0;
   background: var(--surface);
-  border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
   z-index: 100;
   min-width: 140px;
 }

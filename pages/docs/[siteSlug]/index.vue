@@ -254,7 +254,7 @@ useSeoMeta({
 .docs-search-input { width: 100%; padding: 6px 8px 6px 26px; font-size: 12px; border: 2px solid var(--border); background: var(--surface); color: var(--text); }
 .docs-search-input::placeholder { color: var(--text-faint); }
 .docs-search-input:focus { border-color: var(--accent); outline: none; }
-.docs-search-results { position: absolute; top: 100%; left: 16px; right: 16px; background: var(--surface); border: 2px solid var(--border); box-shadow: 4px 4px 0 var(--border); z-index: 50; max-height: 200px; overflow-y: auto; }
+.docs-search-results { position: absolute; top: 100%; left: 16px; right: 16px; background: var(--surface); border: 2px solid var(--border); box-shadow: var(--shadow-sm); z-index: 50; max-height: 200px; overflow-y: auto; }
 .docs-search-result { display: block; padding: 8px 12px; font-size: 12px; color: var(--text-dim); text-decoration: none; border-bottom: 1px solid var(--border2); }
 .docs-search-result:last-child { border-bottom: none; }
 .docs-search-result:hover { background: var(--surface2); color: var(--accent); }
@@ -305,12 +305,12 @@ useSeoMeta({
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transition: box-shadow 0.15s, transform 0.15s;
 }
 
 .docs-start-btn:hover {
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transform: translate(1px, 1px);
 }
 
@@ -326,12 +326,12 @@ useSeoMeta({
   background: var(--surface);
   text-decoration: none;
   color: var(--text);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transition: box-shadow 0.15s, transform 0.15s;
 }
 
 .docs-page-card:hover {
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   transform: translate(1px, 1px);
 }
 
@@ -354,7 +354,7 @@ useSeoMeta({
   background: var(--accent);
   color: var(--color-text-inverse);
   border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   font-size: 16px;
   cursor: pointer;
   z-index: 100;

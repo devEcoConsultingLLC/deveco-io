@@ -328,7 +328,7 @@ const videoEmbedUrl = computed(() => {
   border: 2px solid var(--border);
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .lesson-section-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
@@ -371,7 +371,7 @@ const videoEmbedUrl = computed(() => {
   margin-top: 12px;
   border: 2px solid var(--border);
   background: var(--surface2);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 .video-iframe { width: 100%; aspect-ratio: 16 / 9; display: block; }

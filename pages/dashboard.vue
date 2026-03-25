@@ -234,12 +234,12 @@ const totalLikes = computed(() =>
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
 }
 
 .cpub-dash-create-btn:hover {
-  box-shadow: 2px 2px 0 var(--border);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Stats */

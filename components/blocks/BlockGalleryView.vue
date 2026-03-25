@@ -45,7 +45,7 @@ const images = computed<GalleryImage[]>(() => {
   aspect-ratio: 4/3;
   object-fit: cover;
   display: block;
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 .cpub-gallery-caption {

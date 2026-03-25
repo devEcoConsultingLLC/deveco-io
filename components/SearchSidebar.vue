@@ -177,5 +177,5 @@ const { hubs: hubsEnabled } = useFeatures();
   box-shadow: 1px 1px 0 var(--border); transition: all 0.15s;
 }
 
-.cpub-btn-join-sm:hover { box-shadow: 2px 2px 0 var(--border); }
+.cpub-btn-join-sm:hover { box-shadow: var(--shadow-sm); }
 </style>

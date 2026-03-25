@@ -401,9 +401,9 @@ const canvasMaxWidth = computed(() => {
 .cpub-be-cover-btn {
   font-size: 11px; padding: 6px 12px; background: var(--surface); border: 2px solid var(--border);
   color: var(--text-dim); cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
-  font-family: var(--font-mono); box-shadow: 2px 2px 0 var(--border);
+  font-family: var(--font-mono); box-shadow: var(--shadow-sm);
 }
-.cpub-be-cover-btn.primary { background: var(--accent); color: var(--color-text-inverse); border-color: var(--accent); box-shadow: 2px 2px 0 var(--border); }
+.cpub-be-cover-btn.primary { background: var(--accent); color: var(--color-text-inverse); border-color: var(--accent); box-shadow: var(--shadow-sm); }
 .cpub-be-cover-btn:hover { background: var(--surface2); }
 .cpub-be-cover-btn.primary:hover { opacity: 0.9; background: var(--accent); }
 
@@ -457,7 +457,7 @@ const canvasMaxWidth = computed(() => {
 /* SEO card */
 .cpub-be-seo-card {
   background: var(--surface); border: 2px solid var(--border); padding: 14px;
-  font-family: Arial, sans-serif; box-shadow: 2px 2px 0 var(--border);
+  font-family: Arial, sans-serif; box-shadow: var(--shadow-sm);
 }
 .cpub-be-seo-url { font-size: 11px; color: var(--green); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
 .cpub-be-seo-favicon {
@@ -489,7 +489,7 @@ const canvasMaxWidth = computed(() => {
 /* Author row */
 .cpub-be-author-row {
   display: flex; align-items: center; gap: 10px; padding: 10px;
-  background: var(--surface); border: 2px solid var(--border); box-shadow: 2px 2px 0 var(--border);
+  background: var(--surface); border: 2px solid var(--border); box-shadow: var(--shadow-sm);
 }
 .cpub-be-author-av {
   width: 32px; height: 32px; border-radius: 50%; background: var(--accent);
@@ -549,7 +549,7 @@ const canvasMaxWidth = computed(() => {
     width: 44px; height: 44px; border: 2px solid var(--border); background: var(--surface);
     color: var(--text-dim); font-size: 16px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 4px 4px 0 var(--border);
+    box-shadow: var(--shadow-sm);
   }
   .cpub-be-mobile-btn:hover { background: var(--surface2); color: var(--text); }
   .cpub-be-mobile-overlay {

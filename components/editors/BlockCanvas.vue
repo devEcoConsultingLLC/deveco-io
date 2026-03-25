@@ -386,7 +386,7 @@ function isTextBlock(type: string): boolean {
   max-width: 680px;
   background: var(--surface);
   border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   padding: 44px 56px;
   position: relative;
 }
@@ -450,7 +450,7 @@ function isTextBlock(type: string): boolean {
   gap: 0;
   background: var(--text, #1a1a1a);
   border: 2px solid var(--border, #1a1a1a);
-  box-shadow: 4px 4px 0 var(--border, #1a1a1a);
+  box-shadow: var(--shadow-sm);
   padding: 3px;
   transform: translateX(-50%);
   pointer-events: auto;

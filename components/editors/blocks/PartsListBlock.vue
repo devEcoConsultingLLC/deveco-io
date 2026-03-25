@@ -288,7 +288,7 @@ function onNameBlur(): void {
   z-index: 50;
   background: var(--surface);
   border: 2px solid var(--border);
-  box-shadow: 4px 4px 0 var(--border);
+  box-shadow: var(--shadow-sm);
   max-height: 200px;
   overflow-y: auto;
 }

@@ -545,14 +545,28 @@ async function submitEntry(): Promise<void> {
 }
 .cpub-admin-status strong { color: var(--accent); text-transform: capitalize; }
 
+@media (max-width: 1024px) {
+  .cpub-contest-layout { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 768px) {
-  .cpub-hero-inner { padding: 20px 16px; }
-  .cpub-hero-title { font-size: 1.5rem; }
-  .cpub-hero-desc { font-size: 0.8125rem; }
+  .cpub-hero-inner { padding: 24px 16px; }
+  .cpub-hero-title { font-size: 1.375rem; }
+  .cpub-hero-tagline { font-size: 0.8125rem; }
   .cpub-hero-cta { flex-wrap: wrap; gap: 8px; }
-  .cpub-countdown-row { flex-wrap: wrap; gap: 8px; }
-  .cpub-entries-grid { grid-template-columns: 1fr; }
-  .cpub-prizes-grid { grid-template-columns: 1fr; }
+  .cpub-btn-lg { padding: 8px 16px; font-size: 12px; }
+  .cpub-countdown-row { flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .cpub-countdown-block { min-width: 48px; }
+  .cpub-hero-stats { flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .cpub-contest-main { padding: 16px; }
+  .cpub-prize-grid { grid-template-columns: 1fr; gap: 10px; }
+  .cpub-prize-additional { grid-template-columns: 1fr; }
+  .cpub-entry-grid { grid-template-columns: 1fr; }
+  .cpub-judges-grid { grid-template-columns: 1fr; gap: 8px; }
+  .cpub-sponsor-grid { grid-template-columns: 1fr; }
+  .cpub-about-card { padding: 14px; }
+  .cpub-rules-card { padding: 14px; }
   .cpub-admin-controls { flex-wrap: wrap; }
+  .cpub-submit-dialog { width: calc(100vw - 32px); }
 }
 </style>

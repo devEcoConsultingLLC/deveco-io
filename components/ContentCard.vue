@@ -96,7 +96,7 @@ function formatCount(n: number | undefined): string {
 
 .pcard:hover {
   border-color: var(--deveco-teal, var(--accent));
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 

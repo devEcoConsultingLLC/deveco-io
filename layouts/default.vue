@@ -431,7 +431,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 @media (max-width: 768px) {
   .de-topbar-nav { display: none; }
   .de-topbar-spacer { display: none; }
-  .de-topbar-actions { gap: 6px; }
+  .de-topbar-actions { gap: 6px; margin-left: auto; }
   .de-search-form { display: none; }
   .de-search-icon-mobile { display: flex; }
   .de-kbd { display: none; }

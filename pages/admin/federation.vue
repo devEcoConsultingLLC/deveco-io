@@ -112,4 +112,11 @@ const { data: statsData } = await useFetch('/api/admin/federation/stats', {
 .fed-status.pending { color: var(--yellow); background: var(--yellow-bg); }
 .fed-status.failed { color: var(--red); background: var(--red-bg); }
 .fed-time { font-family: var(--font-mono); font-size: 0.625rem; color: var(--text-faint); white-space: nowrap; }
+
+@media (max-width: 768px) {
+  .fed-activity-row { flex-wrap: wrap; font-size: 0.6875rem; }
+  .fed-actor { font-size: 0.6rem; }
+  .fed-info { font-size: 0.75rem; }
+  .fed-info code { font-size: 0.625rem; }
+}
 </style>

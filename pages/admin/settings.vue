@@ -159,4 +159,9 @@ async function addSetting(): Promise<void> {
   text-align: center;
   padding: var(--space-8) 0;
 }
+
+@media (max-width: 768px) {
+  .settings-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .settings-add { flex-direction: column; }
+}
 </style>

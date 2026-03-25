@@ -74,4 +74,9 @@ async function toggleFollow(targetUsername: string, isFollowing: boolean): Promi
 .follow-handle { font-size: 12px; color: var(--text-faint); font-family: var(--font-mono); }
 
 .follow-empty { text-align: center; padding: 48px 0; color: var(--text-faint); }
+
+@media (max-width: 768px) {
+  .follow-page { padding: 16px; }
+  .follow-title { font-size: 1.125rem; }
+}
 </style>

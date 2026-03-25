@@ -105,4 +105,14 @@ const { data } = await useFetch<PaginatedResponse<Serialized<ContentListItem>>>(
   padding: var(--space-10) 0;
   text-transform: capitalize;
 }
+
+@media (max-width: 768px) {
+  .cpub-listing { padding: 0 12px; }
+  .cpub-listing-header { flex-wrap: wrap; gap: 8px; }
+  .cpub-listing-title { font-size: 1.125rem; }
+  .cpub-listing-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+@media (max-width: 480px) {
+  .cpub-listing-grid { grid-template-columns: 1fr; }
+}
 </style>

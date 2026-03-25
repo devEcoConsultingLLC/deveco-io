@@ -99,6 +99,12 @@ async function handleSend(text: string): Promise<void> {
   align-items: center;
   gap: 12px;
   padding: 8px 12px;
-  border-bottom: 2px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .msg-page { padding: 12px; }
+  .msg-scroll { height: calc(100vh - 160px); }
+  .msg-compose { padding: 8px; }
 }
 </style>

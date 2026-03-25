@@ -54,3 +54,16 @@ const canCreateContest = computed(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.cpub-contests-page { max-width: 960px; margin: 0 auto; padding: 32px; }
+.cpub-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.cpub-card { border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; transition: box-shadow 0.15s, transform 0.15s; }
+.cpub-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.cpub-card-body { padding: 16px; }
+
+@media (max-width: 768px) {
+  .cpub-contests-page { padding: 16px; }
+  .cpub-grid-3 { grid-template-columns: 1fr; gap: 14px; }
+}
+</style>

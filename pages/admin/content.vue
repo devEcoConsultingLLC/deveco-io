@@ -65,7 +65,7 @@ async function removeContent(id: string, title: string): Promise<void> {
 .cpub-admin-title { font-size: var(--text-xl); font-weight: var(--font-weight-bold); margin-bottom: var(--space-6); }
 .cpub-admin-table-wrap { overflow-x: auto; }
 .cpub-admin-table { width: 100%; border-collapse: collapse; }
-.cpub-admin-table th { font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--border); }
+.cpub-admin-table th { font-family: var(--font-mono); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
 .cpub-admin-table td { padding: 8px 12px; border-bottom: 1px solid var(--border2); font-size: 13px; }
 .cpub-admin-link { color: var(--text); text-decoration: none; font-weight: 500; }
 .cpub-admin-link:hover { color: var(--accent); }
@@ -78,4 +78,10 @@ async function removeContent(id: string, title: string): Promise<void> {
 .cpub-admin-delete { background: none; border: none; color: var(--text-faint); cursor: pointer; font-size: 12px; padding: 4px 6px; }
 .cpub-admin-delete:hover { color: var(--red); }
 .cpub-empty { color: var(--text-faint); text-align: center; padding: var(--space-10) 0; }
+
+@media (max-width: 768px) {
+  .cpub-admin-title { font-size: 1.125rem; }
+  .cpub-admin-table { font-size: 11px; }
+  .cpub-admin-table th, .cpub-admin-table td { padding: 6px 8px; white-space: nowrap; }
+}
 </style>

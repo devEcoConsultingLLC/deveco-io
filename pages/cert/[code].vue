@@ -71,12 +71,13 @@ useSeoMeta({
 }
 
 .cert-card {
-  border: 2px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   background: var(--surface);
   padding: 40px;
   text-align: center;
   position: relative;
-  box-shadow: 8px 8px 0 var(--border);
+  box-shadow: var(--shadow-lg);
 }
 
 .cert-badge-wrap { margin-bottom: 20px; }
@@ -112,7 +113,7 @@ useSeoMeta({
   line-height: 1.2;
 }
 
-.cert-recipient { margin-bottom: 24px; padding: 16px 0; border-top: 2px solid var(--border); border-bottom: 2px solid var(--border); }
+.cert-recipient { margin-bottom: 24px; padding: 16px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .cert-recipient-label { font-size: 10px; font-family: var(--font-mono); color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
 .cert-recipient-name { font-size: 20px; font-weight: 700; color: var(--accent); text-decoration: none; }
 .cert-recipient-name:hover { text-decoration: underline; }
@@ -143,4 +144,12 @@ useSeoMeta({
 .cert-not-found-icon { font-size: 40px; color: var(--red); margin-bottom: 16px; }
 .cert-not-found h1 { font-size: 20px; margin-bottom: 8px; }
 .cert-not-found p { font-size: 13px; }
+
+@media (max-width: 768px) {
+  .cert-page { padding: 24px 16px; }
+  .cert-card { padding: 24px 16px; }
+  .cert-title { font-size: 1.125rem; }
+  .cert-recipient-name { font-size: 1rem; }
+  .cert-details { flex-direction: column; gap: 12px; }
+}
 </style>

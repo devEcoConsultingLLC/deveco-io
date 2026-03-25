@@ -93,6 +93,7 @@ const userUsername = computed(() => user.value?.username ?? '');
         <div class="de-topbar-spacer" />
 
         <div class="de-topbar-actions">
+          <NuxtLink to="/search" class="de-search-icon-mobile" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></NuxtLink>
           <form class="de-search-form" @submit.prevent="handleSearchSubmit">
             <i class="fa-solid fa-magnifying-glass de-search-icon"></i>
             <input
@@ -333,6 +334,15 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 .de-search-icon-btn:hover { background: var(--surface3); color: var(--text); }
 
+.de-search-icon-mobile {
+  display: none; width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text-dim); font-size: 14px; text-decoration: none;
+  transition: all 0.15s;
+}
+.de-search-icon-mobile:hover { background: var(--surface3); color: var(--text); }
+
 .de-mobile-toggle {
   display: none; width: 44px; height: 44px;
   background: none; border: 1px solid transparent; border-radius: 8px;
@@ -421,15 +431,13 @@ const userUsername = computed(() => user.value?.username ?? '');
 @media (max-width: 768px) {
   .de-topbar-nav { display: none; }
   .de-topbar-spacer { display: none; }
-  .de-topbar-actions { gap: 4px; }
-  .de-search-form { min-width: 0; flex: 1; max-width: 180px; padding: 0 8px; }
-  .de-search-input { width: 100%; min-width: 0; padding: 6px 0; font-size: 0.75rem; }
-  .de-search-icon { font-size: 11px; }
+  .de-topbar-actions { gap: 6px; }
+  .de-search-form { display: none; }
+  .de-search-icon-mobile { display: flex; }
   .de-kbd { display: none; }
   .de-new-text { display: none; }
-  .de-btn-ghost { font-size: 0.75rem; padding: 6px 8px; white-space: nowrap; }
-  .de-btn-primary { font-size: 0.75rem; padding: 6px 8px; white-space: nowrap; }
-  .de-btn-primary i { font-size: 11px; }
+  .de-btn-ghost { font-size: 0.8125rem; padding: 8px 12px; white-space: nowrap; }
+  .de-btn-primary { font-size: 0.8125rem; padding: 8px 12px; white-space: nowrap; min-height: 40px; }
   .de-icon-btn { display: none; }
   .de-mobile-toggle { display: flex; }
   .de-mobile-menu { display: block; }
@@ -438,7 +446,6 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 @media (max-width: 480px) {
   .de-topbar-inner { padding: 0 8px; }
-  .de-search-form { max-width: 140px; }
   .de-footer-inner { grid-template-columns: 1fr; }
 }
 </style>

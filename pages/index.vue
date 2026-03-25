@@ -174,39 +174,10 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
           <div class="de-contest-banner-info">
             <span class="de-contest-banner-label">{{ activeContest.title }}</span>
             <span class="de-contest-banner-desc">{{ activeContest.description || `${activeContest.entryCount ?? 0} entries` }}</span>
-            <span v-if="activeContest.endDate" class="de-contest-banner-meta">${{ activeContest.prizes?.[0]?.value || '' }} in prizes · Ends {{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
+            <span v-if="activeContest.endDate" class="de-contest-banner-meta">{{ activeContest.entryCount ?? 0 }} entries · Ends {{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
           </div>
           <span class="de-contest-banner-btn">Enter Challenge <i class="fa-solid fa-arrow-right"></i></span>
         </NuxtLink>
-
-        <article v-if="featured?.items?.length && activeTab === 'foryou'" class="de-featured-card">
-          <div class="de-featured-thumb">
-            <i class="de-thumb-icon fa-solid fa-microchip" />
-            <div class="de-thumb-overlay">
-              <div class="de-thumb-badges">
-                <span class="de-badge de-badge-featured">Featured</span>
-                <ContentTypeBadge :type="featured.items[0].type" />
-              </div>
-            </div>
-          </div>
-          <div class="de-featured-body">
-            <h2 class="de-featured-title">
-              <NuxtLink :to="`/${featured.items[0].type}/${featured.items[0].slug}`">
-                {{ featured.items[0].title }}
-              </NuxtLink>
-            </h2>
-            <p v-if="featured.items[0].description" class="de-featured-excerpt">
-              {{ featured.items[0].description }}
-            </p>
-            <div class="de-card-author-row">
-              <AuthorRow :author="featured.items[0].author" :date="featured.items[0].publishedAt || featured.items[0].createdAt" />
-              <div class="de-card-stats">
-                <span class="de-stat-item"><i class="fa-solid fa-heart"></i> {{ featured.items[0].likeCount ?? 0 }}</span>
-                <span class="de-stat-item"><i class="fa-solid fa-comment"></i> {{ featured.items[0].commentCount ?? 0 }}</span>
-              </div>
-            </div>
-          </div>
-        </article>
 
         <!-- Content grid -->
         <div v-if="feed?.items?.length" class="de-content-grid">

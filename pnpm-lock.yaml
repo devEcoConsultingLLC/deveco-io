@@ -12,32 +12,32 @@ importers:
         specifier: ^3.1015.0
         version: 3.1015.0
       '@commonpub/auth':
-        specifier: ^0.4.2
-        version: 0.4.2(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
+        specifier: ^0.5.0
+        version: 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config':
-        specifier: ^0.4.2
-        version: 0.4.2
+        specifier: ^0.5.0
+        version: 0.5.0
       '@commonpub/docs':
-        specifier: ^0.4.2
-        version: 0.4.2(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+        specifier: ^0.5.0
+        version: 0.5.0(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/editor':
-        specifier: ^0.4.3
-        version: 0.4.3(4e189207a96c8481dd7164361ee1dc15)
+        specifier: ^0.5.0
+        version: 0.5.0(4e189207a96c8481dd7164361ee1dc15)
       '@commonpub/learning':
-        specifier: ^0.4.2
-        version: 0.4.2(4e189207a96c8481dd7164361ee1dc15)
+        specifier: ^0.5.0
+        version: 0.5.0(4e189207a96c8481dd7164361ee1dc15)
       '@commonpub/protocol':
-        specifier: ^0.4.2
-        version: 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+        specifier: ^0.5.0
+        version: 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/schema':
-        specifier: ^0.4.2
-        version: 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+        specifier: ^0.5.0
+        version: 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^0.4.4
-        version: 0.4.4(466d0ff42d443689ffcbccf4b6792f0e)
+        specifier: ^0.5.0
+        version: 0.5.0(466d0ff42d443689ffcbccf4b6792f0e)
       '@commonpub/ui':
-        specifier: ^0.4.2
-        version: 0.4.2(vue@3.5.30(typescript@5.9.3))
+        specifier: ^0.5.0
+        version: 0.5.0(vue@3.5.30(typescript@5.9.3))
       '@tiptap/core':
         specifier: ^2.11.0
         version: 2.27.2(@tiptap/pm@2.27.2)
@@ -523,16 +523,16 @@ packages:
     resolution: {integrity: sha512-SIOD2DxrRRwQ+jgzlXCqoEFiKOFqaPjhnNTGKXSRLvp1HiOvapLaFG2kEr9dYQTYe8rKrd9uvDUzmAITeNyaHQ==}
     engines: {node: '>=18.0.0'}
 
-  '@commonpub/auth@0.4.2':
-    resolution: {integrity: sha512-DVpda1Y1aeqfhj82v3Il1ff3GUd9RVqIL+d70LRO9Y2zFxowjp1vuxgrh38t5XyWfKY/BBmWt+EQBUbGwaxjTw==}
+  '@commonpub/auth@0.5.0':
+    resolution: {integrity: sha512-KJFCKpyrTUh83YiMGqwKhnBcuN7AuHmt33L9XN2hKRwcaUpvQ9wXN7jnfBcmFK6SoHbudeDsgKJKevqzMQyWnw==}
     engines: {node: '>=22'}
 
-  '@commonpub/config@0.4.2':
-    resolution: {integrity: sha512-/cWzr7gL4QFjBfg13Xq5ykAgZ+nRYlgKYo+mIleu0kEXjYxyXMBynaVXAek63YgKf4GNwfC7BOLhD/Ta83uqIA==}
+  '@commonpub/config@0.5.0':
+    resolution: {integrity: sha512-Wyqd6L3HZs12A+NP0twJSn9AhKm1GioAyvhTf9e3SloaVDburgbPvRS0WM2hesUIYrtW0TpeZr2nFyRViiWLXA==}
     engines: {node: '>=22'}
 
-  '@commonpub/docs@0.4.2':
-    resolution: {integrity: sha512-3zWwYebRFNVdnzMM4cPF629JyKadrqQYDzLein4lHJuNKjuiveAuRCen7mt7FHEs8HstWrtGCKLGWVerGfVxqQ==}
+  '@commonpub/docs@0.5.0':
+    resolution: {integrity: sha512-wqSQt3EGYF606ucR7Eyu8LrdJUdio62t8jtPmQglM29AVmn2Gl3xJ1flzXRW7ssreMIuSij4T+Tb1kHe1L6E6A==}
     engines: {node: '>=22'}
     peerDependencies:
       meilisearch: ^0.48.0
@@ -540,8 +540,8 @@ packages:
       meilisearch:
         optional: true
 
-  '@commonpub/editor@0.4.2':
-    resolution: {integrity: sha512-jerasVTs18CpV/H/m1zMmTsLapf309olJMJ3eJ04R2di9ytY0NOGjzIxBoCNAHpSHxJyIOK2PE6S0TIwj9G89w==}
+  '@commonpub/editor@0.5.0':
+    resolution: {integrity: sha512-nOKiYV1fEm3m6bSOGbmM+fNN+E5QUEJ7jB23yA3eFOYeBbrRyFYsUt26qD+hr8CrMnxW0hebXHQcFohYfJXp7g==}
     engines: {node: '>=22'}
     peerDependencies:
       '@tiptap/core': ^2.11.0
@@ -560,32 +560,12 @@ packages:
       '@tiptap/extension-text': ^2.11.0
       '@tiptap/pm': ^2.11.0
 
-  '@commonpub/editor@0.4.3':
-    resolution: {integrity: sha512-mD48WUfHWlbLTlPqGeUrbR95rKWuY7lkfgz6aYyWo5D12yixM9yYbekNfKOJZX0qWg9sj7rM0va7uF/9Rh0bRw==}
-    engines: {node: '>=22'}
-    peerDependencies:
-      '@tiptap/core': ^2.11.0
-      '@tiptap/extension-bold': ^2.11.0
-      '@tiptap/extension-bullet-list': ^2.11.0
-      '@tiptap/extension-code': ^2.11.0
-      '@tiptap/extension-document': ^2.11.0
-      '@tiptap/extension-history': ^2.11.0
-      '@tiptap/extension-horizontal-rule': ^2.11.0
-      '@tiptap/extension-italic': ^2.11.0
-      '@tiptap/extension-link': ^2.11.0
-      '@tiptap/extension-list-item': ^2.11.0
-      '@tiptap/extension-ordered-list': ^2.11.0
-      '@tiptap/extension-placeholder': ^2.11.0
-      '@tiptap/extension-strike': ^2.11.0
-      '@tiptap/extension-text': ^2.11.0
-      '@tiptap/pm': ^2.11.0
-
-  '@commonpub/explainer@0.4.2':
-    resolution: {integrity: sha512-ivZe7dP8AQX5RD1Vm7qWaVsAqCiIosJwFEOFor3L8taIDbqyiGDHWPQGEBnxlFgM5q7GctV0ks/I/z1EwZ8Wjg==}
+  '@commonpub/explainer@0.5.0':
+    resolution: {integrity: sha512-bBnZ/NfbNiiN+8gesef2uqJ/Oj/rTBAI8sBadJW6WvnmSzrbD+BirHveoq2kgzGfAJV9fZ7INecGK5JLx5h/wQ==}
     engines: {node: '>=22'}
 
-  '@commonpub/infra@0.4.2':
-    resolution: {integrity: sha512-4TJO/96K8q7yCZaLzT6gjqUbz44CwlVYnm6rH1ypre4zPQq/MYoqsDF4DRNnFJqhO9lEY9ISRSiFDsy82x1nkw==}
+  '@commonpub/infra@0.5.0':
+    resolution: {integrity: sha512-CrtlygoCFTtZpbe/hCWNCAvhyffpqyz4MvYhXz1DlDPOF7U0d87jwdIBtFCCuXmJX5Wi6WcGKfq83CZONdryOA==}
     engines: {node: '>=22'}
     peerDependencies:
       '@aws-sdk/client-s3': ^3.1010.0
@@ -596,28 +576,28 @@ packages:
       sharp:
         optional: true
 
-  '@commonpub/learning@0.4.2':
-    resolution: {integrity: sha512-4UyulfYhBgNrKPb3USTCWo+XfeIlviqNXCZ1JLM6dveHTbzB3SafZ8pbe2hkmKqCDhuQsecSi1nxNd5VaCQaiA==}
+  '@commonpub/learning@0.5.0':
+    resolution: {integrity: sha512-eBWIVfBPUoRV2s+aqCAXLRMhAZtCoZVOV0KiDQAmBkHoRbC5BdaRwoMDo8M16FSj9O/S4iApoFf2BubdVlCsXA==}
     engines: {node: '>=22'}
 
-  '@commonpub/protocol@0.4.2':
-    resolution: {integrity: sha512-tL9wQaUvsf0Acuw9jXxfD9UfGD3cuCaYo13bCBq6jOArrA/yg53ZCtGoxoiYMmuQEYLzftOLqoU3v+aOiZqELg==}
+  '@commonpub/protocol@0.5.0':
+    resolution: {integrity: sha512-IJjMBlQBj94GngIoZ6TN1Vva124syEtOLtcjAe9oJ3I8pUwbmgM/L5qOuMQ5cRJIaiZ8g8qFCPV2ozmj+P6DIg==}
     engines: {node: '>=22'}
 
-  '@commonpub/schema@0.4.2':
-    resolution: {integrity: sha512-Fv6ba0RJUSjuYQIjTD0J7vRiLsNMQT7x3uuDYtD3W/vMLi5dxvD3oVvOkDbKBJgyH1rzB1ZIXhzbyqUHy96Zfw==}
-    engines: {node: '>=22'}
-    peerDependencies:
-      drizzle-orm: ^0.45.1
-
-  '@commonpub/server@0.4.4':
-    resolution: {integrity: sha512-y2IMITPivVRISWBexn6d+o0wVYee2JRCsL1Njll4Q07tgfXGVLO4xWjUW6ZFT32Xb6F36mJJuX+m5vcLamhcDw==}
+  '@commonpub/schema@0.5.0':
+    resolution: {integrity: sha512-HgYHX3gVm1z9eVNKst/QHtCSUVjcAlZeRMfFdV6wx/b1x9l526A6AedxIKZkL948dfqhRr2EpUY2U+cnld9oXA==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/ui@0.4.2':
-    resolution: {integrity: sha512-hNkl1s7g6EoDIsWyZ/okN0XmTKXRxg0opg1Vy1efWL9AADFo7sgxgZYbA6WOm7AJTvXCeHaxhd9p9mtzzQGHZQ==}
+  '@commonpub/server@0.5.0':
+    resolution: {integrity: sha512-yO/LpAlMya51hb+x8ar9PGctEDhjYEIJ/haPYjdn9vyWYmoP6wFTnw1MpMHF0m/RVtbvpKQg2A4NOL0fKrAuOw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      drizzle-orm: ^0.45.1
+
+  '@commonpub/ui@0.5.0':
+    resolution: {integrity: sha512-WBXvz2pCVkXqagp6WGQJdbR50QDMzFC1DX2C0K+Nb0XxNxqhuJ1a+0HDjWm6t1vaUhOhIKuxa2MuJP1J9sCrGg==}
     engines: {node: '>=22'}
     peerDependencies:
       vue: ^3.4.0
@@ -6276,11 +6256,11 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.4.2': {}
 
-  '@commonpub/auth@0.4.2(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))':
+  '@commonpub/auth@0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))':
     dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/protocol': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.5.0
+      '@commonpub/protocol': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       better-auth: 1.5.6(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
     transitivePeerDependencies:
@@ -6327,14 +6307,14 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/config@0.4.2':
+  '@commonpub/config@0.5.0':
     dependencies:
       zod: 4.3.6
 
-  '@commonpub/docs@0.4.2(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
+  '@commonpub/docs@0.5.0(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
     dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.5.0
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@shikijs/rehype': 4.0.2
       isomorphic-dompurify: 3.7.0(@noble/hashes@2.0.1)
       rehype-sanitize: 6.0.0
@@ -6354,33 +6334,10 @@ snapshots:
       - drizzle-orm
       - supports-color
 
-  '@commonpub/editor@0.4.2(4e189207a96c8481dd7164361ee1dc15)':
+  '@commonpub/editor@0.5.0(4e189207a96c8481dd7164361ee1dc15)':
     dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
-      '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-bullet-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-code': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-document': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-history': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
-      '@tiptap/extension-horizontal-rule': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
-      '@tiptap/extension-italic': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-link': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
-      '@tiptap/extension-list-item': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-ordered-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-placeholder': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
-      '@tiptap/extension-strike': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/extension-text': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
-      '@tiptap/pm': 2.27.2
-      zod: 4.3.6
-    transitivePeerDependencies:
-      - drizzle-orm
-
-  '@commonpub/editor@0.4.3(4e189207a96c8481dd7164361ee1dc15)':
-    dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.5.0
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
       '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
       '@tiptap/extension-bullet-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
@@ -6406,11 +6363,11 @@ snapshots:
       - drizzle-orm
       - supports-color
 
-  '@commonpub/explainer@0.4.2(4e189207a96c8481dd7164361ee1dc15)':
+  '@commonpub/explainer@0.5.0(4e189207a96c8481dd7164361ee1dc15)':
     dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/editor': 0.4.2(4e189207a96c8481dd7164361ee1dc15)
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.5.0
+      '@commonpub/editor': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       zod: 4.3.6
     transitivePeerDependencies:
       - '@tiptap/core'
@@ -6429,18 +6386,19 @@ snapshots:
       - '@tiptap/extension-text'
       - '@tiptap/pm'
       - drizzle-orm
+      - supports-color
 
-  '@commonpub/infra@0.4.2(@aws-sdk/client-s3@3.1015.0)(sharp@0.34.5)':
+  '@commonpub/infra@0.5.0(@aws-sdk/client-s3@3.1015.0)(sharp@0.34.5)':
     optionalDependencies:
       '@aws-sdk/client-s3': 3.1015.0
       sharp: 0.34.5
 
-  '@commonpub/learning@0.4.2(4e189207a96c8481dd7164361ee1dc15)':
+  '@commonpub/learning@0.5.0(4e189207a96c8481dd7164361ee1dc15)':
     dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/editor': 0.4.2(4e189207a96c8481dd7164361ee1dc15)
-      '@commonpub/explainer': 0.4.2(4e189207a96c8481dd7164361ee1dc15)
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.5.0
+      '@commonpub/editor': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
+      '@commonpub/explainer': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       zod: 4.3.6
     transitivePeerDependencies:
       - '@tiptap/core'
@@ -6459,30 +6417,31 @@ snapshots:
       - '@tiptap/extension-text'
       - '@tiptap/pm'
       - drizzle-orm
+      - supports-color
 
-  '@commonpub/protocol@0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
+  '@commonpub/protocol@0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
     dependencies:
-      '@commonpub/config': 0.4.2
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.5.0
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       jose: 6.2.2
       zod: 4.3.6
     transitivePeerDependencies:
       - drizzle-orm
 
-  '@commonpub/schema@0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
+  '@commonpub/schema@0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
     dependencies:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       zod: 4.3.6
 
-  '@commonpub/server@0.4.4(466d0ff42d443689ffcbccf4b6792f0e)':
+  '@commonpub/server@0.5.0(466d0ff42d443689ffcbccf4b6792f0e)':
     dependencies:
-      '@commonpub/auth': 0.4.2(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
-      '@commonpub/config': 0.4.2
-      '@commonpub/docs': 0.4.2(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@commonpub/infra': 0.4.2(@aws-sdk/client-s3@3.1015.0)(sharp@0.34.5)
-      '@commonpub/learning': 0.4.2(4e189207a96c8481dd7164361ee1dc15)
-      '@commonpub/protocol': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
+      '@commonpub/config': 0.5.0
+      '@commonpub/docs': 0.5.0(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/infra': 0.5.0(@aws-sdk/client-s3@3.1015.0)(sharp@0.34.5)
+      '@commonpub/learning': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
+      '@commonpub/protocol': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/schema': 0.5.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       isomorphic-dompurify: 3.7.0(@noble/hashes@2.0.1)
     transitivePeerDependencies:
@@ -6550,7 +6509,7 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/ui@0.4.2(vue@3.5.30(typescript@5.9.3))':
+  '@commonpub/ui@0.5.0(vue@3.5.30(typescript@5.9.3))':
     dependencies:
       vue: 3.5.30(typescript@5.9.3)
 

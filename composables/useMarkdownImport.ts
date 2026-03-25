@@ -38,8 +38,8 @@ export function useMarkdownImport(blockEditor: BlockEditor) {
       }
 
       // Find image blocks with remote URLs and upload them
-      const imageBlocks = editor.blocks.filter(
-        b => b.type === 'image' && b.content.src && isRemoteUrl(b.content.src as string),
+      const imageBlocks = (editor.blocks as Array<{ id: string; type: string; content: Record<string, unknown> }>).filter(
+        (b: { type: string; content: Record<string, unknown> }) => b.type === 'image' && b.content.src && isRemoteUrl(b.content.src as string),
       );
 
       if (imageBlocks.length > 0) {

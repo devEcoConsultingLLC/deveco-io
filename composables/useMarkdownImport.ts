@@ -4,14 +4,10 @@
 import { markdownToBlockTuples } from '@commonpub/editor';
 import type { BlockTuple } from '@commonpub/editor';
 
-interface BlockEditor {
-  blocks: { id: string; type: string; content: Record<string, unknown> }[];
-  addBlock: (type: string, content: Record<string, unknown>, afterId?: string) => void;
-  updateBlock: (id: string, content: Record<string, unknown>) => void;
-  clearBlocks: () => void;
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type BlockEditor = any;
 
-export function useMarkdownImport(blockEditor: Ref<BlockEditor> | BlockEditor) {
+export function useMarkdownImport(blockEditor: BlockEditor) {
   const importing = ref(false);
   const progress = ref({ total: 0, uploaded: 0 });
 
@@ -23,7 +19,7 @@ export function useMarkdownImport(blockEditor: Ref<BlockEditor> | BlockEditor) {
       const blocks = markdownToBlockTuples(md);
       if (!blocks.length) return;
 
-      const editor = unref(blockEditor);
+      const editor = blockEditor;
 
       if (mode === 'replace') {
         editor.clearBlocks();

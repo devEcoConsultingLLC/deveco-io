@@ -1,10 +1,18 @@
 import { z } from 'zod';
-import { createStorageFromEnv, generateStorageKey, validateUpload, ALLOWED_IMAGE_TYPES } from '@commonpub/server';
+import { createStorageFromEnv, generateStorageKey, isProcessableImage, processImage } from '@commonpub/server';
 
 const schema = z.object({
   url: z.string().url(),
   purpose: z.enum(['content', 'cover', 'avatar', 'banner']).default('content'),
 });
+
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
+
+let storage: ReturnType<typeof createStorageFromEnv> | null = null;
+function getStorage(): ReturnType<typeof createStorageFromEnv> {
+  if (!storage) storage = createStorageFromEnv();
+  return storage;
+}
 
 export default defineEventHandler(async (event) => {
   const user = requireAuth(event);
@@ -20,14 +28,14 @@ export default defineEventHandler(async (event) => {
     hostname.startsWith('10.') ||
     hostname.startsWith('192.168.') ||
     hostname.match(/^172\.(1[6-9]|2\d|3[01])\./) ||
-    hostname === '169.254.169.254' // AWS metadata
+    hostname === '169.254.169.254'
   ) {
     throw createError({ statusCode: 400, statusMessage: 'Cannot fetch from private/local addresses' });
   }
 
   // Download the remote image
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 10_000); // 10s timeout
+  const timeout = setTimeout(() => controller.abort(), 10_000);
 
   let response: Response;
   try {
@@ -35,7 +43,7 @@ export default defineEventHandler(async (event) => {
       signal: controller.signal,
       headers: { 'User-Agent': 'devEco.io Image Fetcher' },
     });
-  } catch (err) {
+  } catch {
     throw createError({ statusCode: 400, statusMessage: 'Failed to fetch remote image' });
   } finally {
     clearTimeout(timeout);
@@ -46,23 +54,25 @@ export default defineEventHandler(async (event) => {
   }
 
   const contentType = response.headers.get('content-type') || '';
-  if (!ALLOWED_IMAGE_TYPES.some(t => contentType.startsWith(t))) {
-    throw createError({ statusCode: 400, statusMessage: `Unsupported image type: ${contentType}` });
+  const mimeType = contentType.split(';')[0]!.trim();
+  if (!ALLOWED_IMAGE_TYPES.includes(mimeType)) {
+    throw createError({ statusCode: 400, statusMessage: `Unsupported image type: ${mimeType}` });
   }
 
   const buffer = Buffer.from(await response.arrayBuffer());
-  const maxSize = 10 * 1024 * 1024; // 10MB
-  if (buffer.length > maxSize) {
+  if (buffer.length > 10 * 1024 * 1024) {
     throw createError({ statusCode: 400, statusMessage: 'Image too large (max 10MB)' });
   }
 
-  // Upload to storage
-  const storage = createStorageFromEnv();
-  const ext = contentType.split('/')[1] || 'jpg';
-  const key = generateStorageKey(purpose, ext);
+  const adapter = getStorage();
+  const filename = parsed.pathname.split('/').pop() || `import-${Date.now()}`;
 
-  await storage.put(key, buffer, contentType);
-  const resultUrl = storage.getPublicUrl(key);
+  if (isProcessableImage(mimeType)) {
+    const processed = await processImage(buffer, filename, purpose, adapter, mimeType);
+    return { url: processed.originalUrl };
+  }
 
-  return { url: resultUrl };
+  const key = generateStorageKey(filename, purpose);
+  const publicUrl = await adapter.upload(key, buffer, mimeType);
+  return { url: publicUrl };
 });

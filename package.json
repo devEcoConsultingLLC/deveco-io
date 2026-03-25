@@ -17,7 +17,7 @@
     "@commonpub/auth": "^0.4.2",
     "@commonpub/config": "^0.4.2",
     "@commonpub/docs": "^0.4.2",
-    "@commonpub/editor": "^0.4.2",
+    "@commonpub/editor": "^0.4.3",
     "@commonpub/learning": "^0.4.2",
     "@commonpub/protocol": "^0.4.2",
     "@commonpub/schema": "^0.4.2",

@@ -21,8 +21,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/editor':
-        specifier: ^0.4.2
-        version: 0.4.2(4e189207a96c8481dd7164361ee1dc15)
+        specifier: ^0.4.3
+        version: 0.4.3(4e189207a96c8481dd7164361ee1dc15)
       '@commonpub/learning':
         specifier: ^0.4.2
         version: 0.4.2(4e189207a96c8481dd7164361ee1dc15)
@@ -542,6 +542,26 @@ packages:
 
   '@commonpub/editor@0.4.2':
     resolution: {integrity: sha512-jerasVTs18CpV/H/m1zMmTsLapf309olJMJ3eJ04R2di9ytY0NOGjzIxBoCNAHpSHxJyIOK2PE6S0TIwj9G89w==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@tiptap/core': ^2.11.0
+      '@tiptap/extension-bold': ^2.11.0
+      '@tiptap/extension-bullet-list': ^2.11.0
+      '@tiptap/extension-code': ^2.11.0
+      '@tiptap/extension-document': ^2.11.0
+      '@tiptap/extension-history': ^2.11.0
+      '@tiptap/extension-horizontal-rule': ^2.11.0
+      '@tiptap/extension-italic': ^2.11.0
+      '@tiptap/extension-link': ^2.11.0
+      '@tiptap/extension-list-item': ^2.11.0
+      '@tiptap/extension-ordered-list': ^2.11.0
+      '@tiptap/extension-placeholder': ^2.11.0
+      '@tiptap/extension-strike': ^2.11.0
+      '@tiptap/extension-text': ^2.11.0
+      '@tiptap/pm': ^2.11.0
+
+  '@commonpub/editor@0.4.3':
+    resolution: {integrity: sha512-mD48WUfHWlbLTlPqGeUrbR95rKWuY7lkfgz6aYyWo5D12yixM9yYbekNfKOJZX0qWg9sj7rM0va7uF/9Rh0bRw==}
     engines: {node: '>=22'}
     peerDependencies:
       '@tiptap/core': ^2.11.0
@@ -6356,6 +6376,35 @@ snapshots:
       zod: 4.3.6
     transitivePeerDependencies:
       - drizzle-orm
+
+  '@commonpub/editor@0.4.3(4e189207a96c8481dd7164361ee1dc15)':
+    dependencies:
+      '@commonpub/config': 0.4.2
+      '@commonpub/schema': 0.4.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
+      '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-bullet-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-code': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-document': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-history': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-horizontal-rule': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-italic': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-link': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-list-item': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-ordered-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-placeholder': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-strike': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-text': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/pm': 2.27.2
+      rehype-stringify: 10.0.1
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.2
+      unified: 11.0.5
+      zod: 4.3.6
+    transitivePeerDependencies:
+      - drizzle-orm
+      - supports-color
 
   '@commonpub/explainer@0.4.2(4e189207a96c8481dd7164361ee1dc15)':
     dependencies:

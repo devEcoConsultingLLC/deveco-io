@@ -198,6 +198,15 @@ if (import.meta.client) {
   onMounted(() => { window.addEventListener('beforeunload', onBeforeUnload); });
   onUnmounted(() => { window.removeEventListener('beforeunload', onBeforeUnload); });
 }
+
+// --- Markdown import ---
+const showImportDialog = ref(false);
+const { importing, importMarkdown } = useMarkdownImport(blockEditor);
+
+async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'): Promise<void> {
+  await importMarkdown(md, importMode);
+  isDirty.value = true;
+}
 </script>
 
 <template>
@@ -217,6 +226,7 @@ if (import.meta.client) {
   <!-- Main editor -->
   <div v-else class="cpub-editor-layout">
     <PublishErrorsModal :errors="publishErrors" :show="showPublishErrors" @dismiss="dismissPublishErrors" />
+    <MarkdownImportDialog :show="showImportDialog" @close="showImportDialog = false" @import="handleMarkdownImport" />
 
     <!-- Top bar -->
     <header class="cpub-editor-topbar">
@@ -253,6 +263,9 @@ if (import.meta.client) {
       </div>
       <div class="cpub-topbar-spacer" />
       <div class="cpub-topbar-actions">
+        <button class="cpub-topbar-btn" :disabled="importing" @click="showImportDialog = true" title="Import Markdown">
+          <i class="fa-brands fa-markdown"></i>
+        </button>
         <button class="cpub-topbar-btn" :disabled="saving || !title" @click="silentSave">
           {{ saving ? 'Saving...' : 'Save Draft' }}
         </button>

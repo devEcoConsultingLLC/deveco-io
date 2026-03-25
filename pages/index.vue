@@ -114,23 +114,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
       </button>
       <div class="de-hero-inner">
         <div class="de-hero-content">
-          <template v-if="contestsEnabled && activeContest">
-            <div class="de-hero-eyebrow">
-              <span class="de-badge de-badge-live"><span class="de-live-dot" /> Live Contest</span>
-              <span class="de-badge">{{ activeContest.entryCount ?? 0 }} entries</span>
-            </div>
-            <h1 class="de-hero-title">{{ activeContest.title }}</h1>
-            <p v-if="activeContest.description" class="de-hero-excerpt">{{ activeContest.description }}</p>
-            <div class="de-hero-actions">
-              <NuxtLink :to="`/contests/${activeContest.slug}`" class="de-btn de-btn-accent"><i class="fa-solid fa-trophy"></i> Enter Contest</NuxtLink>
-              <NuxtLink :to="`/contests/${activeContest.slug}`" class="de-btn de-btn-outline"><i class="fa-solid fa-circle-info"></i> View Details</NuxtLink>
-            </div>
-            <div class="de-hero-meta">
-              <span class="de-hero-stat"><i class="fa-solid fa-users"></i> <strong>{{ activeContest.entryCount ?? 0 }}</strong> entries</span>
-              <span v-if="activeContest.endDate" class="de-hero-stat"><i class="fa-solid fa-calendar"></i> Ends <strong>{{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) }}</strong></span>
-            </div>
-          </template>
-          <template v-else>
             <div class="de-hero-eyebrow"><span class="de-eyebrow-line" /> Open Platform for Edge AI</div>
             <h1 class="de-hero-title">
               Build <span>Edge AI</span> Projects That Matter
@@ -160,7 +143,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
                 <span class="de-hero-stat-label">Communities</span>
               </div>
             </div>
-          </template>
         </div>
         <div class="de-hero-visual">
           <DevEcoLogo variant="dark-bg" size="lg" :show-text="false" />
@@ -187,6 +169,16 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
     <div class="de-main-layout">
       <main class="de-feed-col">
         <!-- Featured card -->
+        <!-- Active Contest Banner -->
+        <NuxtLink v-if="contestsEnabled && activeContest" :to="`/contests/${activeContest.slug}`" class="de-contest-banner">
+          <div class="de-contest-banner-info">
+            <span class="de-contest-banner-label">{{ activeContest.title }}</span>
+            <span class="de-contest-banner-desc">{{ activeContest.description || `${activeContest.entryCount ?? 0} entries` }}</span>
+            <span v-if="activeContest.endDate" class="de-contest-banner-meta">${{ activeContest.prizes?.[0]?.value || '' }} in prizes · Ends {{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
+          </div>
+          <span class="de-contest-banner-btn">Enter Challenge <i class="fa-solid fa-arrow-right"></i></span>
+        </NuxtLink>
+
         <article v-if="featured?.items?.length && activeTab === 'foryou'" class="de-featured-card">
           <div class="de-featured-thumb">
             <i class="de-thumb-icon fa-solid fa-microchip" />
@@ -519,6 +511,38 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   font-size: 0.75rem; color: var(--text-faint);
 }
 .de-stat-item i { font-size: 11px; }
+
+/* ---- CONTEST BANNER ---- */
+.de-contest-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  background: linear-gradient(135deg, #1b357d, #5f2bef); border-radius: 10px;
+  padding: 18px 22px; margin-bottom: 20px; text-decoration: none; color: #fff;
+  position: relative; overflow: hidden; transition: box-shadow 0.2s;
+}
+.de-contest-banner::before {
+  content: ''; position: absolute; top: -40%; right: -5%;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(66, 255, 254, 0.15), transparent 70%);
+}
+.de-contest-banner:hover { box-shadow: var(--shadow-lg); }
+.de-contest-banner-info { position: relative; flex: 1; min-width: 0; }
+.de-contest-banner-label {
+  display: block; font-size: 0.9375rem; font-weight: 700; margin-bottom: 2px;
+}
+.de-contest-banner-desc {
+  font-size: 0.8125rem; color: rgba(255, 255, 255, 0.7); display: block;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.de-contest-banner-meta {
+  font-size: 0.6875rem; color: rgba(255, 255, 255, 0.5); display: block; margin-top: 2px;
+}
+.de-contest-banner-btn {
+  position: relative; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.8125rem; font-weight: 700; padding: 10px 16px;
+  background: var(--deveco-yellow, #f4c84b); color: var(--gray-900, #111827);
+  border-radius: 6px; white-space: nowrap; flex-shrink: 0;
+}
+.de-contest-banner-btn:hover { background: #e5b93f; }
 
 /* ---- CONTENT GRID ---- */
 .de-content-grid {

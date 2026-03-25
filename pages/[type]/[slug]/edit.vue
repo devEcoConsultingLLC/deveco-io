@@ -226,7 +226,7 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
   <!-- Main editor -->
   <div v-else class="cpub-editor-layout">
     <PublishErrorsModal :errors="publishErrors" :show="showPublishErrors" @dismiss="dismissPublishErrors" />
-    <MarkdownImportDialog :show="showImportDialog" @close="showImportDialog = false" @import="handleMarkdownImport" />
+    <EditorsMarkdownImportDialog :show="showImportDialog" @close="showImportDialog = false" @import="handleMarkdownImport" />
 
     <!-- Top bar -->
     <header class="cpub-editor-topbar">
@@ -263,8 +263,8 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
       </div>
       <div class="cpub-topbar-spacer" />
       <div class="cpub-topbar-actions">
-        <button class="cpub-topbar-btn" :disabled="importing" @click="showImportDialog = true" title="Import Markdown">
-          <i class="fa-brands fa-markdown"></i>
+        <button class="cpub-topbar-btn cpub-topbar-btn-import" :disabled="importing" @click="showImportDialog = true" title="Import Markdown">
+          <i class="fa-brands fa-markdown"></i> <span class="cpub-import-label">Import</span>
         </button>
         <button class="cpub-topbar-btn" :disabled="saving || !title" @click="silentSave">
           {{ saving ? 'Saving...' : 'Save Draft' }}
@@ -405,6 +405,8 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
 .cpub-topbar-btn { font-size: 12px; padding: 6px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); cursor: pointer; transition: background 0.15s; }
 .cpub-topbar-btn:hover { background: var(--surface2); }
 .cpub-topbar-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.cpub-topbar-btn-import { border-color: var(--teal, #14b8a6); color: var(--teal, #14b8a6); }
+.cpub-topbar-btn-import:hover { background: rgba(20, 184, 166, 0.1); }
 .cpub-topbar-btn-primary { background: var(--accent); color: var(--color-accent-text); font-weight: 600; border-color: var(--accent); }
 .cpub-topbar-btn-primary:hover { background: var(--color-accent-hover); }
 
@@ -436,6 +438,7 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
   .cpub-topbar-spacer { display: none; }
   .cpub-topbar-actions { gap: 4px; }
   .cpub-topbar-btn { font-size: 11px; padding: 5px 10px; }
+  .cpub-import-label { display: none; }
   .cpub-editor-canvas { padding: 12px; }
   .cpub-preview-canvas { padding: 16px; }
   .cpub-preview-title { font-size: 22px; }

@@ -319,7 +319,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 .de-hero-dismiss {
   position: absolute; top: 16px; right: 20px;
   background: rgba(255, 255, 255, 0.1); border: none; border-radius: 8px;
-  color: rgba(255, 255, 255, 0.5); font-size: 14px; width: 32px; height: 32px;
+  color: rgba(255, 255, 255, 0.5); font-size: 14px; width: 44px; height: 44px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2; transition: background 0.15s;
 }
@@ -452,13 +452,16 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   max-width: 1280px; margin: 0 auto;
   display: flex; align-items: flex-end; gap: 0;
   overflow-x: auto; scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 .de-tabs-inner::-webkit-scrollbar { display: none; }
 
 .de-tab {
   font-size: 0.8125rem; font-weight: 500;
-  color: var(--text-faint); padding: 12px 18px;
+  color: var(--text-faint); padding: 14px 18px; min-height: 44px;
   border-bottom: 2px solid transparent; white-space: nowrap;
+  scroll-snap-align: start;
   background: none; border-top: none; border-left: none; border-right: none;
   cursor: pointer; transition: color 0.15s, border-color 0.15s;
 }

@@ -270,7 +270,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 
 .de-icon-btn {
-  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
   background: transparent; border: 1px solid transparent; border-radius: 8px;
   color: var(--text-dim); font-size: 14px; position: relative;
   transition: all 0.15s; text-decoration: none;
@@ -280,7 +280,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 
 .de-btn-primary {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 16px; background: var(--deveco-dark-green); border: none;
+  padding: 10px 16px; min-height: 44px; background: var(--deveco-dark-green); border: none;
   border-radius: 8px; color: #fff; font-size: 0.8125rem; font-weight: 600;
   text-decoration: none; cursor: pointer; transition: all 0.15s;
 }
@@ -288,7 +288,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 
 .de-btn-ghost {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 16px; background: transparent; border: none;
+  padding: 10px 16px; min-height: 44px; background: transparent; border: none;
   border-radius: 8px; color: var(--text-dim); font-size: 0.8125rem; font-weight: 500;
   text-decoration: none; cursor: pointer; transition: color 0.15s;
 }
@@ -315,7 +315,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 .de-dropdown-item {
   display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; font-size: 0.8125rem; color: var(--text-dim);
+  padding: 10px 14px; min-height: 44px; font-size: 0.8125rem; color: var(--text-dim);
   text-decoration: none; background: none; border: none; border-radius: 8px;
   cursor: pointer; font-family: inherit; width: 100%; text-align: left;
   transition: all 0.12s;
@@ -334,7 +334,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-search-icon-btn:hover { background: var(--surface3); color: var(--text); }
 
 .de-mobile-toggle {
-  display: none; width: 36px; height: 36px;
+  display: none; width: 44px; height: 44px;
   background: none; border: 1px solid transparent; border-radius: 8px;
   color: var(--text-dim); font-size: 18px; cursor: pointer;
   align-items: center; justify-content: center;
@@ -350,7 +350,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 .de-mobile-link {
   display: flex; align-items: center; gap: 10px;
-  padding: 9px 14px; font-size: 0.8125rem; color: var(--text-dim);
+  padding: 12px 14px; min-height: 44px; font-size: 0.8125rem; color: var(--text-dim);
   text-decoration: none; border-radius: 6px; transition: background 0.1s;
 }
 .de-mobile-link:hover { background: var(--surface2); color: var(--text); }

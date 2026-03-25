@@ -437,7 +437,7 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
   .cpub-mode-tab { padding: 4px 10px; font-size: 10px; }
   .cpub-topbar-spacer { display: none; }
   .cpub-topbar-actions { gap: 4px; }
-  .cpub-topbar-btn { font-size: 11px; padding: 5px 10px; }
+  .cpub-topbar-btn { font-size: 11px; padding: 8px 10px; min-height: 36px; }
   .cpub-import-label { display: none; }
   .cpub-editor-canvas { padding: 12px; }
   .cpub-preview-canvas { padding: 16px; }
@@ -447,8 +447,11 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
 }
 
 @media (max-width: 480px) {
-  .cpub-mode-tabs { display: none; }
-  .cpub-topbar-btn { padding: 5px 8px; font-size: 10px; }
+  .cpub-mode-tabs { margin: 0 4px; }
+  .cpub-mode-tab { padding: 4px 8px; font-size: 9px; }
+  .cpub-topbar-btn { padding: 6px 8px; font-size: 10px; min-height: 34px; }
+  .cpub-editor-back { width: 34px; height: 34px; }
+  .cpub-preview-title { font-size: 18px; }
 }
 </style>
 

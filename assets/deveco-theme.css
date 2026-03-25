@@ -542,3 +542,18 @@ header {
   font-size: 0.75rem;
   padding: 4px 14px;
 }
+
+/* ── TOUCH TARGETS (WCAG 2.1 AA minimum 44px) ── */
+@media (pointer: coarse) {
+  .cpub-btn,
+  .cpub-btn-sm,
+  .cpub-btn-xs,
+  button:not([class*="cpub-mode"]):not([class*="cpub-tab"]) {
+    min-height: 44px;
+  }
+  .cpub-tab-btn {
+    min-height: 44px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}

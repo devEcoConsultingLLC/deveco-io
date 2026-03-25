@@ -50,6 +50,7 @@ const blockTypes: BlockTypeGroup[] = [
     blocks: [
       { type: 'sectionHeader', label: 'Section Header', icon: 'fa-heading', description: 'Tag + title + intro — starts a section' },
       { type: 'horizontal_rule', label: 'Section Divider', icon: 'fa-minus', description: 'Visual break' },
+      { type: 'markdown', label: 'Markdown', icon: 'fa-brands fa-markdown', description: 'Raw markdown block' },
     ],
   },
 ];

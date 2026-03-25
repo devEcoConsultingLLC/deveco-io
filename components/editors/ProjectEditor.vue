@@ -41,6 +41,7 @@ const blockTypes: BlockTypeGroup[] = [
       { type: 'callout', label: 'Warning', icon: 'fa-triangle-exclamation', description: 'Warning callout', attrs: { variant: 'warning' } },
       { type: 'blockquote', label: 'Quote', icon: 'fa-quote-left', description: 'Blockquote' },
       { type: 'horizontal_rule', label: 'Divider', icon: 'fa-minus', description: 'Visual separator' },
+      { type: 'markdown', label: 'Markdown', icon: 'fa-brands fa-markdown', description: 'Raw markdown block' },
     ],
   },
 ];

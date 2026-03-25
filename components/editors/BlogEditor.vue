@@ -40,6 +40,7 @@ const blockTypes: BlockTypeGroup[] = [
     blocks: [
       { type: 'callout', label: 'Callout', icon: 'fa-circle-info', description: 'Tip, warning, or note', attrs: { variant: 'info' } },
       { type: 'embed', label: 'Embed', icon: 'fa-globe', description: 'External embed' },
+      { type: 'markdown', label: 'Markdown', icon: 'fa-brands fa-markdown', description: 'Raw markdown block' },
     ],
   },
 ];

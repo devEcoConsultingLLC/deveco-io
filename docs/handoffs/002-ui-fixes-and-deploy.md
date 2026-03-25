@@ -131,22 +131,61 @@ Federation is **enabled** (`FEATURE_FEDERATION=true`) and the backend is **proto
 - auth-plugin: 5 tests (role checks, null handling)
 - inbox-keyid: 6 tests (Signature header parsing)
 
+### Mobile responsive sweep (19 pages total)
+
+**Batch 1** (9 pages):
+- Editor: hide logo/divider on mobile, compact topbar, hide mode tabs at 480px, 12px canvas padding
+- Contest create: deveco restyle + single-column form
+- Contest detail: hero/countdown/grid wrap, admin controls wrap
+- Messages index: rounded inputs, reduced padding
+- Settings appearance: single-column theme grid at 480px
+- Settings profile: responsive skill slider, single-col dates
+- Hub members: rounded list, wrapping cards, hide join date
+- Notifications: rounded list, responsive header
+- Feed: rounded filter chips, responsive grid (240px→1col)
+
+**Batch 2** (10 pages):
+- Content type listing: responsive grid (240px→1col), header wrap
+- Contests index: scoped styles added (was all inline), deveco cards, single-column mobile
+- Certificate: deveco restyle (rounded, soft shadow), stack details on mobile
+- Profile followers/following: reduce padding
+- Admin audit/content: table responsive (nowrap, smaller padding, horizontal scroll)
+- Admin settings: stack rows vertically on mobile
+- Admin federation: activity log wraps on mobile
+- Message conversation: reduced padding, adjusted scroll height
+
+### CI pipeline fixed
+- Added `nuxt prepare` before test step (tsconfig dependency)
+- Fixed 3 typecheck errors: contest status enum, Nitro hook type, test type narrowing
+- **CI fully green**: Tests (46) + Typecheck (0 errors) + Build — all passing
+
+## Production verification (2026-03-25)
+
+| Endpoint | Status | Result |
+|----------|--------|--------|
+| `GET /api/me` | OK | `{user: null, session: null}` (unauthenticated) |
+| `GET /api/users/moheeb_deveco` | OK | Avatar URL populated |
+| `GET /api/search?q=test` | OK | 1 result returned |
+| `GET /api/contests` | OK | 1 contest exists |
+| `GET /.well-known/webfinger` | OK | `acct:moheeb_deveco@deveco.io`, 2 links |
+| `GET /nodeinfo/2.1` | OK | software=commonpub, 2 users |
+| `GET /users/moheeb_deveco` (AP) | OK | type=Person, inbox, publicKey present |
+
 ## Known issues / remaining work
 
 ### High priority
 1. **CSRF protection** — POST endpoints lack origin/referrer validation
 2. **View dedup** — in-memory Map should be Redis for production
 3. **`@commonpub/auth` upstream** — should add `additionalFields` for role/username to eliminate `enrichUser()` workaround
-4. **Editor responsive** — editor page needs mobile pass
-5. **All pages mobile responsive** — hub detail, contests, messages, settings pages need mobile pass
 
 ### Medium priority
-6. **Content starter form styling** — cover upload zone needs polish
-7. **CSS `!important` cleanup** — ~29 instances in deveco-theme.css
-8. **Federated timeline** — show content from followed remote users
-9. **Remote follow button** — UI for following users from other instances
-10. **Contest entry submission flow** — needs testing with active contest
+4. **Brutalist CSS cleanup** — ~80 files still have CommonPub 2px borders / offset shadows (block views, editor components, content views). Major pass needed.
+5. **Content starter form styling** — cover upload zone needs polish
+6. **CSS `!important` cleanup** — ~29 instances in deveco-theme.css
+7. **Federated timeline** — show content from followed remote users
+8. **Remote follow button** — UI for following users from other instances
+9. **Contest entry submission flow** — needs testing with active contest
 
 ### Low priority / nice-to-have
-11. **CONTRIBUTING.md** — doesn't exist yet (planned as open source project)
-12. **GH Actions Node.js 24** — deprecation warning for Node.js 20 actions, needs update before June 2026
+10. **CONTRIBUTING.md** — doesn't exist yet (planned as open source project)
+11. **GH Actions Node.js 24** — deprecation warning for Node.js 20 actions, needs update before June 2026

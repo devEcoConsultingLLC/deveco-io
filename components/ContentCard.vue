@@ -109,7 +109,7 @@ function formatCount(n: number | undefined): string {
 /* Image */
 .pcard__img {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 3;
   background: var(--deveco-dark-green);
   overflow: hidden;
 }

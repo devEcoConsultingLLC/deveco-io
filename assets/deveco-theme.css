@@ -166,10 +166,10 @@
   --color-border: var(--border2);
   --color-border-strong: var(--border);
 
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.2);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.2);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.15), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --shadow-accent: 0 4px 14px -3px rgba(0, 231, 173, 0.25);
 
   --accent: #00e7ad;
@@ -245,17 +245,17 @@ header {
 .cpub-card,
 .cpub-hub-card,
 [class*="cpub-"][class*="-card"] {
-  border: 1px solid var(--border) !important;
-  border-radius: 12px !important;
-  box-shadow: var(--shadow-sm) !important;
-  transition: box-shadow 0.2s, transform 0.2s !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: none;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .cpub-card:hover,
 .cpub-hub-card:hover,
 [class*="cpub-"][class*="-card"]:hover {
-  box-shadow: var(--shadow-md) !important;
-  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 /* Hub card icon: rounded */

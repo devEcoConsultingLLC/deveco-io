@@ -88,6 +88,30 @@ All endpoints verified working: `/api/me`, profile API, search, contests, WebFin
 - `@commonpub/server` 0.4.3 → 0.4.4
 - `@commonpub/editor` 0.4.3
 
+### CSS cascade layers — proper theming architecture
+- **`@commonpub/ui` v0.6.0**: All base theme CSS wrapped in `@layer commonpub { ... }`
+- Consuming apps write plain unlayered CSS → automatically wins over the base theme
+- Zero `!important` needed — cascade layers handle priority natively
+- CommonPub brutalist design preserved in the library for reference app
+- deveco-io's soft design overrides it cleanly via `deveco-theme.css`
+- This is the industry best practice (CSS Cascade Layers, supported in all modern browsers)
+
+### Design token fixes
+- **Dark mode border tokens**: `--border` changed from `#2a4e50` to `#183436` (barely visible against `--surface: #0f2628`, matching mockup's ~10% contrast approach)
+- **Light mode border tokens**: `--border` changed from `#d1d5db` (gray-300) to `#e5e7eb` (gray-200, matching mockup exactly)
+- **Dark mode shadow tokens**: Opacity reduced from 0.2-0.3 to 0.1-0.15 (was 3x too heavy)
+- **Card hover**: Subtle teal border at 40% opacity instead of full `var(--deveco-teal)`
+
+### Mobile topbar
+- Search bar → search icon link on mobile (<768px)
+- Create button properly sized
+- Actions pushed to right with `margin-left: auto`
+
+### Additional fixes
+- ContentTypeBadge: removed border, solid background pills with 3px radius
+- SearchSidebar: last offset shadow removed
+- ContentCard: hover shadow toned to `--shadow-md`
+
 ## Known issues / remaining work
 
 ### High priority

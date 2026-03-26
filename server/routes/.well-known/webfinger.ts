@@ -31,6 +31,19 @@ export default defineEventHandler(async (event) => {
     });
   }
 
+  const config = useConfig();
+
+  // Instance actor lookup: acct:domain@domain → /actor Service
+  if (parsed.username === instanceDomain || parsed.username === config.instance.domain) {
+    const actorUri = `https://${instanceDomain}/actor`;
+    setResponseHeader(event, 'content-type', 'application/jrd+json');
+    return buildWebFingerResponse({
+      username: instanceDomain,
+      domain: instanceDomain,
+      actorUri,
+    });
+  }
+
   // Look up user in database
   const db = useDB();
   const profile = await getUserByUsername(db, parsed.username);

@@ -251,9 +251,19 @@ async function handleBuild(): Promise<void> {
 
         <!-- Author Row -->
         <div class="cpub-author-row">
-          <div class="cpub-av cpub-av-lg">{{ content.author?.displayName?.slice(0, 2).toUpperCase() || 'CP' }}</div>
+          <NuxtLink :to="`/u/${content.author?.username}`" class="cpub-av-link">
+            <img
+              v-if="content.author?.avatarUrl"
+              :src="content.author.avatarUrl"
+              :alt="content.author?.displayName || content.author?.username"
+              class="cpub-av cpub-av-lg cpub-av-img"
+            />
+            <div v-else class="cpub-av cpub-av-lg">{{ content.author?.displayName?.slice(0, 2).toUpperCase() || 'CP' }}</div>
+          </NuxtLink>
           <div>
-            <div class="cpub-author-name">{{ content.author?.displayName || content.author?.username || 'Author' }}</div>
+            <NuxtLink :to="`/u/${content.author?.username}`" class="cpub-author-name cpub-author-link">
+              {{ content.author?.displayName || content.author?.username || 'Author' }}
+            </NuxtLink>
             <div class="cpub-author-meta-row">
               <span v-if="content.author?.org" class="cpub-author-org">{{ content.author.org }}</span>
               <span class="cpub-meta-date">Published {{ formattedDate }}</span>
@@ -684,6 +694,22 @@ async function handleBuild(): Promise<void> {
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
+}
+.cpub-author-link {
+  text-decoration: none;
+  color: var(--text);
+}
+.cpub-author-link:hover {
+  color: var(--accent);
+}
+.cpub-av-link {
+  text-decoration: none;
+}
+.cpub-av-img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border: 2px solid var(--border);
 }
 
 .cpub-author-meta-row {

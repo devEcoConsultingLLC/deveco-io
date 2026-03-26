@@ -31,8 +31,8 @@
   --color-text-inverse: #ffffff;
 
   /* === BORDERS === */
-  --border: #d1d5db;
-  --border2: #e5e7eb;
+  --border: #e5e7eb;
+  --border2: #f3f4f6;
 
   --color-border: var(--border2);
   --color-border-strong: var(--border);
@@ -160,8 +160,8 @@
   --color-on-primary: #ffffff;
   --color-primary-hover: #006b72;
 
-  --border: #2a4e50;
-  --border2: #1e3c3e;
+  --border: #183436;
+  --border2: #142d2f;
 
   --color-border: var(--border2);
   --color-border-strong: var(--border);

@@ -37,8 +37,6 @@ const { data: featured } = await useFetch<PaginatedResponse<Serialized<ContentLi
   query: { status: 'published', sort: 'popular', limit: 1 },
 });
 
-const { data: stats } = await useFetch('/api/stats');
-
 const { data: communities } = await useFetch('/api/hubs', {
   query: { limit: 4 },
 });
@@ -128,20 +126,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
               <NuxtLink to="/create" class="de-btn de-btn-outline">
                 <i class="fa-solid fa-plus"></i> Start Building
               </NuxtLink>
-            </div>
-            <div class="de-hero-stats">
-              <div class="de-hero-stat-block">
-                <span class="de-hero-stat-value">{{ stats?.content?.byType?.project ?? 0 }}</span>
-                <span class="de-hero-stat-label">Projects</span>
-              </div>
-              <div class="de-hero-stat-block">
-                <span class="de-hero-stat-value">{{ stats?.users?.total ?? 0 }}</span>
-                <span class="de-hero-stat-label">Members</span>
-              </div>
-              <div class="de-hero-stat-block">
-                <span class="de-hero-stat-value">{{ stats?.hubs?.total ?? 0 }}</span>
-                <span class="de-hero-stat-label">Communities</span>
-              </div>
             </div>
         </div>
         <div class="de-hero-visual">
@@ -345,20 +329,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 
 .de-hero-actions { display: flex; gap: 12px; margin-bottom: 32px; }
 
-.de-hero-stats {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 24px; padding-top: 24px;
-  border-top: 1px solid rgba(0, 231, 173, 0.1);
-}
-.de-hero-stat-value {
-  font-family: var(--font-display); font-size: 1.5rem;
-  font-weight: 800; color: #fff; display: block;
-}
-.de-hero-stat-label {
-  font-size: 0.6875rem; font-weight: 600;
-  color: rgba(255, 255, 255, 0.4); text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
 
 .de-hero-visual {
   flex-shrink: 0; display: flex; align-items: center; justify-content: center;
@@ -392,17 +362,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 }
 .de-btn-outline:hover { background: rgba(255, 255, 255, 0.2); }
 
-.de-hero-meta {
-  display: flex; align-items: center; gap: 24px; margin-top: 20px;
-}
-
-.de-hero-stat {
-  font-size: 0.8125rem; color: rgba(255, 255, 255, 0.5);
-  display: flex; align-items: center; gap: 6px;
-}
-.de-hero-stat strong { color: rgba(255, 255, 255, 0.8); }
-
-.de-hero-aside { flex-shrink: 0; }
 
 /* ---- TABS ---- */
 .de-tabs-bar {

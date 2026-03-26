@@ -281,7 +281,7 @@ async function handleMarkdownImport(md: string, importMode: 'append' | 'replace'
       <component
         :is="editorComponent"
         :block-editor="blockEditor"
-        :metadata="contentType === 'blog' ? { ...metadata, title: title } : metadata"
+        :metadata="{ ...metadata, title: title }"
         @update:metadata="handleMetadataUpdate"
       />
     </template>

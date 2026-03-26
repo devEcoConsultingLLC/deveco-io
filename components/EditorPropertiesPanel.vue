@@ -100,7 +100,7 @@ const difficultyOptions = [
             <option value="">None</option>
             <option v-for="hub in userHubs.items" :key="hub.id" :value="hub.slug">{{ hub.name }}</option>
           </select>
-          <span class="de-prop-hint">Share this content to a community you belong to</span>
+          <span class="de-prop-hint">Link to a community's project gallery. Content visibility is controlled separately above.</span>
         </div>
 
         <div class="de-prop-field">
@@ -398,5 +398,13 @@ const difficultyOptions = [
   font-size: 0.8125rem;
   color: var(--text);
   text-transform: capitalize;
+}
+
+.de-prop-hint {
+  display: block;
+  font-size: 0.6875rem;
+  color: var(--text-faint);
+  margin-top: 4px;
+  line-height: 1.4;
 }
 </style>

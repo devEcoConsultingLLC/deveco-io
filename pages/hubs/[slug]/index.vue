@@ -187,8 +187,8 @@ function handleLinkInsert(): void {
   <div v-else-if="c" class="cpub-hub-page">
     <!-- ═══ HUB HERO ═══ -->
     <div class="cpub-hub-hero">
-      <div class="cpub-hub-banner" :style="(c as Record<string, unknown>)?.bannerUrl ? { backgroundImage: `url(${(c as Record<string, unknown>).bannerUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
-        <template v-if="!(c as Record<string, unknown>)?.bannerUrl">
+      <div class="cpub-hub-banner" :style="c?.bannerUrl ? { backgroundImage: `url(${c.bannerUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}">
+        <template v-if="!c?.bannerUrl">
           <div class="cpub-hub-banner-pattern"></div>
           <div class="cpub-hub-banner-dots"></div>
         </template>
@@ -196,7 +196,7 @@ function handleLinkInsert(): void {
       <div class="cpub-hub-meta-bar">
         <div class="cpub-hub-meta-inner">
           <div class="cpub-hub-icon">
-            <img v-if="(c as Record<string, unknown>)?.iconUrl" :src="(c as Record<string, unknown>).iconUrl as string" :alt="c?.name ?? ''" />
+            <img v-if="c?.iconUrl" :src="c.iconUrl" :alt="c?.name ?? ''" />
             <i v-else :class="isCompanyHub ? 'fa-solid fa-building' : isProductHub ? 'fa-solid fa-microchip' : 'fa-solid fa-users'" />
           </div>
           <div class="cpub-hub-info">
@@ -215,9 +215,8 @@ function handleLinkInsert(): void {
                     <i class="fa-solid fa-plus"></i> Join Hub
                   </button>
                   <span v-else-if="c.currentUserRole" class="cpub-member-badge">
-                    <i class="fa-solid fa-check"></i> Member
+                    <i class="fa-solid fa-check"></i> Joined
                   </span>
-                  <button class="cpub-btn" @click="handleJoin"><i class="fa-solid fa-bell"></i> Subscribe</button>
                   <button class="cpub-btn cpub-btn-sm" aria-label="Share hub" @click="handleShare"><i class="fa-solid fa-share-nodes"></i></button>
                   <NuxtLink v-if="c.currentUserRole === 'owner'" :to="`/hubs/${slug}/settings`" class="cpub-btn cpub-btn-sm" aria-label="Hub settings"><i class="fa-solid fa-gear"></i> Settings</NuxtLink>
                 </div>
@@ -1053,10 +1052,24 @@ function handleLinkInsert(): void {
 }
 
 @media (max-width: 640px) {
-  .cpub-hub-meta-inner { flex-direction: column; }
-  .cpub-hub-icon { margin-top: 0; }
+  .cpub-hub-banner { height: 120px; }
+  .cpub-hub-meta-inner { flex-direction: column; padding: 0 16px; }
+  .cpub-hub-icon { margin-top: -24px; width: 56px; height: 56px; font-size: 22px; }
+  .cpub-hub-name { font-size: 1.25rem; }
+  .cpub-hub-stats { flex-wrap: wrap; gap: 10px 16px; font-size: 0.75rem; }
+  .cpub-hub-actions { flex-wrap: wrap; }
+  .cpub-hub-badges { flex-wrap: wrap; }
   .cpub-hub-main { padding: 16px; }
-  .cpub-members-grid { grid-template-columns: 1fr; }
+  .cpub-tabs-inner { padding: 0 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .cpub-tab-btn { white-space: nowrap; flex-shrink: 0; }
+  .cpub-compose-bar { flex-wrap: wrap; }
+  .cpub-compose-input { min-width: 0; }
+  .cpub-members-grid { grid-template-columns: repeat(2, 1fr); }
   .cpub-gallery-grid { grid-template-columns: 1fr; }
+  .cpub-products-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 400px) {
+  .cpub-members-grid { grid-template-columns: 1fr; }
 }
 </style>

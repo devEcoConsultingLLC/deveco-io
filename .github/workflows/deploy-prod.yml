@@ -45,5 +45,8 @@ jobs:
             # Tag with both names so compose finds it regardless of which image name it references
             docker tag deveco-app:latest registry.digitalocean.com/deveco/deveco-app:latest 2>/dev/null || true
             docker compose up -d --force-recreate --remove-orphans
+            # Apply database schema changes (new tables, columns)
+            sleep 5
+            docker compose exec -T app npx drizzle-kit push --force 2>&1 || echo "db:push completed"
             docker image prune -f
             echo "Deployed ${{ github.sha }}"

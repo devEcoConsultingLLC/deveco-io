@@ -108,6 +108,9 @@ const userUsername = computed(() => user.value?.username ?? '');
           </form>
 
           <template v-if="isAuthenticated">
+            <NuxtLink to="/messages" class="de-icon-btn" title="Messages" aria-label="Messages">
+              <i class="fa-solid fa-envelope"></i>
+            </NuxtLink>
             <NuxtLink to="/notifications" class="de-icon-btn" title="Notifications" aria-label="Notifications">
               <i class="fa-solid fa-bell"></i>
               <span v-if="unreadCount > 0" class="de-notif-dot" />
@@ -156,6 +159,7 @@ const userUsername = computed(() => user.value?.username ?? '');
           <div class="de-mobile-divider" />
           <NuxtLink to="/create" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-plus"></i> Create</NuxtLink>
           <NuxtLink to="/dashboard" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-gauge"></i> Dashboard</NuxtLink>
+          <NuxtLink to="/messages" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-envelope"></i> Messages</NuxtLink>
           <NuxtLink to="/notifications" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-bell"></i> Notifications</NuxtLink>
         </template>
       </nav>

@@ -36,8 +36,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(466d0ff42d443689ffcbccf4b6792f0e)
       '@commonpub/ui':
-        specifier: ^0.5.0
-        version: 0.5.0(vue@3.5.30(typescript@5.9.3))
+        specifier: ^0.5.1
+        version: 0.5.1(vue@3.5.30(typescript@5.9.3))
       '@tiptap/core':
         specifier: ^2.11.0
         version: 2.27.2(@tiptap/pm@2.27.2)
@@ -596,8 +596,8 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/ui@0.5.0':
-    resolution: {integrity: sha512-WBXvz2pCVkXqagp6WGQJdbR50QDMzFC1DX2C0K+Nb0XxNxqhuJ1a+0HDjWm6t1vaUhOhIKuxa2MuJP1J9sCrGg==}
+  '@commonpub/ui@0.5.1':
+    resolution: {integrity: sha512-6NU1JPCg7L1nR/Mfr0AvHfLWOb+ccGQolMUzmrDExfmJr9xMlNUG8fmFt6lgB7TZV2spqVfaQhye8QfTs6i6gg==}
     engines: {node: '>=22'}
     peerDependencies:
       vue: ^3.4.0
@@ -6509,7 +6509,7 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/ui@0.5.0(vue@3.5.30(typescript@5.9.3))':
+  '@commonpub/ui@0.5.1(vue@3.5.30(typescript@5.9.3))':
     dependencies:
       vue: 3.5.30(typescript@5.9.3)
 

@@ -245,17 +245,17 @@ header {
 .cpub-card,
 .cpub-hub-card,
 [class*="cpub-"][class*="-card"] {
-  border: 1px solid var(--border) !important;
-  border-radius: 8px !important;
-  box-shadow: none !important;
-  transition: box-shadow 0.2s, transform 0.2s !important;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: none;
+  transition: box-shadow 0.2s, transform 0.2s;
 }
 
 .cpub-card:hover,
 .cpub-hub-card:hover,
 [class*="cpub-"][class*="-card"]:hover {
-  box-shadow: var(--shadow-md) !important;
-  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 /* Hub card icon: rounded */
@@ -343,15 +343,12 @@ header {
 }
 
 .cpub-btn-primary {
-  background: var(--deveco-dark-green) !important;
-  color: #fff !important;
-  box-shadow: none !important;
+  background: var(--deveco-dark-green);
+  color: #fff;
 }
 
 .cpub-btn-primary:hover {
-  background: var(--color-primary-hover) !important;
-  box-shadow: none !important;
-  transform: none !important;
+  background: var(--color-primary-hover);
 }
 
 /* Badges */
@@ -544,30 +541,8 @@ header {
   padding: 4px 14px;
 }
 
-/* ── OVERRIDE ALL COMMONPUB BASE BRUTALIST STYLES ── */
-/* The base @commonpub/ui/theme CSS uses 2px borders and offset shadows.
-   This nuclear override forces the deveco soft design on everything. */
-
-/* Force 1px borders on ALL cpub elements */
-.cpub-btn,
-.cpub-card,
-.cpub-sb-card,
-.cpub-input,
-.cpub-textarea,
-.cpub-page-btn,
-.cpub-badge,
-[class*="cpub-"][class*="-card"],
-[class*="cpub-"][class*="-btn"] {
-  border-width: 1px !important;
-}
-
-/* Kill ALL offset shadows from base theme */
-.cpub-btn-primary,
-.cpub-btn-primary:hover,
-.cpub-sb-card,
-.cpub-page-btn.active {
-  box-shadow: none !important;
-}
+/* Base @commonpub/ui v0.5.1+ uses 1px borders and no offset shadows.
+   The overrides below are for deveco-specific refinements only. */
 
 /* ── TOUCH TARGETS (WCAG 2.1 AA minimum 44px) ── */
 @media (pointer: coarse) {

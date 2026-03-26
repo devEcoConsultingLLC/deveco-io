@@ -215,7 +215,7 @@ footer {
 
 /* Topbar: always has rounded bottom corners */
 header {
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg) !important;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 :focus-visible {
@@ -260,8 +260,8 @@ header {
 
 /* Hub card icon: rounded */
 .cpub-hub-card-icon {
-  border-radius: 10px !important;
-  border: 1px solid var(--accent-border) !important;
+  border-radius: 10px;
+  border: 1px solid var(--accent-border);
 }
 
 /* Hub card type badge */
@@ -287,17 +287,17 @@ header {
 
 /* Listing create button */
 .cpub-listing-create {
-  background: var(--deveco-dark-green) !important;
-  color: #fff !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 8px 16px !important;
-  font-size: 0.8125rem !important;
-  font-weight: 600 !important;
+  background: var(--deveco-dark-green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.8125rem;
+  font-weight: 600;
 }
 
 .cpub-listing-create:hover {
-  background: var(--color-primary-hover) !important;
+  background: var(--color-primary-hover);
 }
 
 /* Section headers */
@@ -333,13 +333,13 @@ header {
 
 /* Buttons: deveco style */
 .cpub-btn {
-  border-radius: 8px !important;
-  font-size: 0.8125rem !important;
-  font-weight: 600 !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 8px 16px !important;
-  transition: all 0.15s !important;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: none;
+  box-shadow: none;
+  padding: 8px 16px;
+  transition: all 0.15s;
 }
 
 .cpub-btn-primary {
@@ -385,9 +385,9 @@ header {
 
 .cpub-filter-pill,
 .cpub-type-pill {
-  border-radius: 20px !important;
-  font-size: 0.8125rem !important;
-  padding: 6px 16px !important;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  padding: 6px 16px;
 }
 
 /* === EDITOR OVERRIDES === */

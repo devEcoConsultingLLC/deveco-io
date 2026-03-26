@@ -1,4 +1,5 @@
-import { processInboxActivity, verifyHttpSignature, resolveActor, createInboxHandlers } from '@commonpub/server';
+import { processInboxActivity, verifyHttpSignature, resolveActor } from '@commonpub/protocol';
+import { createInboxHandlers } from '@commonpub/server';
 
 /**
  * Hub-specific inbox endpoint (FEP-1b12).

@@ -15,7 +15,8 @@ export default defineNitroPlugin((nitro) => {
     if (!config.features.federation) return;
 
     const runtimeConfig = useRuntimeConfig();
-    const domain = (runtimeConfig.public?.siteUrl as string)?.replace(/^https?:\/\//, '') || config.instance.domain;
+    const siteUrl = (runtimeConfig.public?.siteUrl as string) || `https://${config.instance.domain}`;
+    const domain = siteUrl.replace(/^https?:\/\//, '').replace(/[:/].*$/, '');
 
     console.log('[federation] Activity delivery worker started');
 

@@ -4,7 +4,7 @@ const { themeId, setTheme } = useTheme();
 const isDark = computed(() => themeId.value === 'dark');
 function toggleDarkMode(): void { setTheme(isDark.value ? 'base' : 'dark'); }
 const { count: unreadCount, connect: connectNotifications, disconnect: disconnectNotifications } = useNotifications();
-const { hubs, learning, video, docs, contests, admin } = useFeatures();
+const { hubs, learning, video, docs, contests, admin, federation } = useFeatures();
 const { enabledTypeMeta } = useContentTypes();
 
 useHead({
@@ -87,6 +87,7 @@ const userUsername = computed(() => user.value?.username ?? '');
           <NuxtLink to="/blog" class="de-nav-link">Blog</NuxtLink>
           <NuxtLink v-if="hubs" to="/hubs" class="de-nav-link">Communities</NuxtLink>
           <NuxtLink v-if="contests" to="/contests" class="de-nav-link">Contests</NuxtLink>
+          <NuxtLink v-if="federation" to="/federation" class="de-nav-link">Fediverse</NuxtLink>
           <NuxtLink v-if="isAdmin && admin" to="/admin" class="de-nav-link">Admin</NuxtLink>
         </nav>
 
@@ -153,6 +154,7 @@ const userUsername = computed(() => user.value?.username ?? '');
         <NuxtLink to="/blog" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-pen-nib"></i> Blog</NuxtLink>
         <NuxtLink v-if="hubs" to="/hubs" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-users"></i> Communities</NuxtLink>
         <NuxtLink v-if="contests" to="/contests" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-trophy"></i> Contests</NuxtLink>
+        <NuxtLink v-if="federation" to="/federation" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-globe"></i> Fediverse</NuxtLink>
         <NuxtLink to="/search" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-magnifying-glass"></i> Search</NuxtLink>
         <NuxtLink v-if="isAdmin && admin" to="/admin" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-shield-halved"></i> Admin</NuxtLink>
         <template v-if="isAuthenticated">

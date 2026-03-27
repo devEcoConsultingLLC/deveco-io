@@ -1,9 +1,9 @@
-import { findOrCreateConversation } from '@commonpub/server';
+import { findOrCreateConversation, resolveRemoteHandle, isFederatedHandle } from '@commonpub/server';
 import { users } from '@commonpub/schema';
 import { and, inArray, isNull } from 'drizzle-orm';
 import { z } from 'zod';
 
-// Accept either UUIDs or usernames — resolve usernames to IDs server-side
+// Accept UUIDs, usernames, or federated handles (@user@domain)
 const createConversationBodySchema = z.object({
   participants: z.array(z.string().min(1)).min(1).max(50),
 });

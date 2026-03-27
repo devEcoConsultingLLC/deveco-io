@@ -66,8 +66,8 @@ async function startConversation(): Promise<void> {
         </div>
         <div class="cpub-new-msg-body">
           <div class="cpub-new-msg-field">
-            <label class="cpub-new-msg-label">Recipient username</label>
-            <input v-model="newRecipient" type="text" class="cpub-new-msg-input" placeholder="username" />
+            <label class="cpub-new-msg-label">Recipient</label>
+            <input v-model="newRecipient" type="text" class="cpub-new-msg-input" placeholder="username or @user@remote-instance.com" />
           </div>
           <div class="cpub-new-msg-field">
             <label class="cpub-new-msg-label">Message (optional)</label>

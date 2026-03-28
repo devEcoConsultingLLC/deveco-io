@@ -38,25 +38,36 @@ const renderedContent = computed(() => {
     try {
       const blocks = JSON.parse(trimmed) as [string, Record<string, unknown>][];
       if (!Array.isArray(blocks)) return raw;
+      // Sanitize HTML: strip scripts, event handlers, dangerous URIs
+      const san = (h: unknown): string => {
+        if (typeof h !== 'string') return '';
+        return h
+          .replace(/<script[\s\S]*?<\/script>/gi, '')
+          .replace(/<style[\s\S]*?<\/style>/gi, '')
+          .replace(/\s+on\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]*)/gi, '')
+          .replace(/href\s*=\s*["']javascript:[^"']*["']/gi, 'href="#"');
+      };
+      const esc = (s: unknown): string => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
       return blocks.map(([type, data]) => {
         switch (type) {
           case 'paragraph': case 'text':
-            return data.html ? `<p>${data.html}</p>` : data.text ? `<p>${data.text}</p>` : '';
+            return data.html ? `<p>${san(data.html)}</p>` : data.text ? `<p>${esc(data.text)}</p>` : '';
           case 'heading': {
             const lvl = Math.min(Math.max(Number(data.level) || 2, 1), 6);
-            return `<h${lvl}>${data.html || data.text || ''}</h${lvl}>`;
+            return `<h${lvl}>${san(data.html) || esc(data.text)}</h${lvl}>`;
           }
           case 'image':
-            return data.url ? `<figure><img src="${data.url}" alt="${data.alt || ''}" />${data.caption ? `<figcaption>${data.caption}</figcaption>` : ''}</figure>` : '';
+            return data.url ? `<figure><img src="${esc(data.url)}" alt="${esc(data.alt)}" />${data.caption ? `<figcaption>${esc(data.caption)}</figcaption>` : ''}</figure>` : '';
           case 'code_block': case 'code':
-            return data.code ? `<pre><code>${String(data.code).replace(/</g, '&lt;')}</code></pre>` : '';
+            return data.code ? `<pre><code>${esc(data.code)}</code></pre>` : '';
           case 'quote': case 'blockquote':
-            return `<blockquote>${data.html || `<p>${data.text || ''}</p>`}</blockquote>`;
+            return `<blockquote>${san(data.html) || `<p>${esc(data.text)}</p>`}</blockquote>`;
           case 'divider': return '<hr />';
           case 'build_step':
-            return `<div><strong>${data.title || ''}</strong>${data.html || (data.text ? `<p>${data.text}</p>` : '')}</div>`;
+            return `<div><strong>${esc(data.title)}</strong>${san(data.html) || (data.text ? `<p>${esc(data.text)}</p>` : '')}</div>`;
           default:
-            return data.html ? `<div>${data.html}</div>` : data.text ? `<p>${data.text}</p>` : '';
+            return data.html ? `<div>${san(data.html)}</div>` : data.text ? `<p>${esc(data.text)}</p>` : '';
         }
       }).join('\n');
     } catch { return raw; }

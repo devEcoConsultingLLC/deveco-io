@@ -7,10 +7,10 @@ const props = defineProps<{
 
 const contentId = computed(() => props.content?.id);
 const contentType = computed(() => props.content?.type ?? 'blog');
-const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, setInitialState } = useEngagement(contentId, contentType);
+const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, fetchInitialState } = useEngagement(contentId, contentType);
 
 onMounted(() => {
-  setInitialState(false, false, props.content?.likeCount ?? 0);
+  fetchInitialState(props.content?.likeCount ?? 0);
 });
 
 const config = useRuntimeConfig();

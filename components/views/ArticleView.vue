@@ -7,10 +7,10 @@ const props = defineProps<{
 
 const contentId = computed(() => props.content?.id);
 const contentType = computed(() => props.content?.type ?? 'article');
-const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, setInitialState } = useEngagement(contentId, contentType);
+const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, fetchInitialState } = useEngagement(contentId, contentType);
 
 onMounted(() => {
-  setInitialState(false, false, props.content?.likeCount ?? 0);
+  fetchInitialState(props.content?.likeCount ?? 0);
 });
 
 // Extract headings from block content for TOC

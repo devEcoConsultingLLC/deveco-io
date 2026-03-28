@@ -16,9 +16,13 @@ export default defineEventHandler(async (event): Promise<PaginatedResponse<Conte
     return { items: [], total: 0 };
   }
 
+  const config = useConfig();
+
   return listContent(db, {
     ...filters,
     status: 'published',
     search: q,
+  }, {
+    includeFederated: config.features.seamlessFederation,
   });
 });

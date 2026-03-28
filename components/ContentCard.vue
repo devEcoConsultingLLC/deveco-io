@@ -22,6 +22,15 @@ const diffLabel = computed(() => {
   return 'Advanced';
 });
 
+const isFederated = computed(() => props.item.source === 'federated');
+
+const cardLink = computed(() => {
+  if (isFederated.value && props.item.federatedContentId) {
+    return `/mirror/${props.item.federatedContentId}`;
+  }
+  return `/${props.item.type}/${props.item.slug}`;
+});
+
 const authorInitial = computed(() => {
   const name = props.item.author?.displayName || props.item.author?.username || '?';
   return name.charAt(0).toUpperCase();
@@ -41,7 +50,7 @@ function formatCount(n: number | undefined): string {
 
 <template>
   <article class="pcard">
-    <NuxtLink :to="`/${item.type}/${item.slug}`" class="pcard__link">
+    <NuxtLink :to="cardLink" class="pcard__link">
       <!-- Image -->
       <div class="pcard__img" :style="cover ? {} : { background: 'var(--deveco-dark-green)' }">
         <img v-if="cover" :src="cover" :alt="item.title" class="pcard__cover" loading="lazy" />
@@ -54,6 +63,9 @@ function formatCount(n: number | undefined): string {
         <!-- Badges (top-left) -->
         <div class="pcard__badges">
           <span v-if="item.isFeatured" class="pcard__badge pcard__badge--featured">Featured</span>
+          <span v-if="isFederated && item.sourceDomain" class="pcard__badge pcard__badge--federated">
+            <i class="fa-solid fa-globe" /> {{ item.sourceDomain }}
+          </span>
           <ContentTypeBadge :type="item.type" />
         </div>
 
@@ -155,6 +167,18 @@ function formatCount(n: number | undefined): string {
 .pcard__badge--featured {
   background: var(--deveco-yellow, #f4c84b);
   color: var(--gray-900, #111827);
+}
+
+.pcard__badge--federated {
+  background: rgba(91, 197, 232, 0.85);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.pcard__badge--federated i {
+  font-size: 8px;
 }
 
 /* Level (difficulty) */

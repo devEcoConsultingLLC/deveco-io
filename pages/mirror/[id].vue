@@ -24,6 +24,46 @@ const dateStr = computed(() => {
   return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 });
 
+/**
+ * Render content body — handles both proper HTML and legacy raw JSON block tuples.
+ * Older federated content may have been stored as JSON.stringify'd BlockTuples
+ * before the contentToArticle HTML renderer was added.
+ */
+const renderedContent = computed(() => {
+  const raw = content.value?.content;
+  if (!raw) return '';
+  // If it starts with [[ it's likely raw BlockTuple JSON
+  const trimmed = raw.trim();
+  if (trimmed.startsWith('[[') || trimmed.startsWith('[["')) {
+    try {
+      const blocks = JSON.parse(trimmed) as [string, Record<string, unknown>][];
+      if (!Array.isArray(blocks)) return raw;
+      return blocks.map(([type, data]) => {
+        switch (type) {
+          case 'paragraph': case 'text':
+            return data.html ? `<p>${data.html}</p>` : data.text ? `<p>${data.text}</p>` : '';
+          case 'heading': {
+            const lvl = Math.min(Math.max(Number(data.level) || 2, 1), 6);
+            return `<h${lvl}>${data.html || data.text || ''}</h${lvl}>`;
+          }
+          case 'image':
+            return data.url ? `<figure><img src="${data.url}" alt="${data.alt || ''}" />${data.caption ? `<figcaption>${data.caption}</figcaption>` : ''}</figure>` : '';
+          case 'code_block': case 'code':
+            return data.code ? `<pre><code>${String(data.code).replace(/</g, '&lt;')}</code></pre>` : '';
+          case 'quote': case 'blockquote':
+            return `<blockquote>${data.html || `<p>${data.text || ''}</p>`}</blockquote>`;
+          case 'divider': return '<hr />';
+          case 'build_step':
+            return `<div><strong>${data.title || ''}</strong>${data.html || (data.text ? `<p>${data.text}</p>` : '')}</div>`;
+          default:
+            return data.html ? `<div>${data.html}</div>` : data.text ? `<p>${data.text}</p>` : '';
+        }
+      }).join('\n');
+    } catch { return raw; }
+  }
+  return raw;
+});
+
 const typeLabel = computed(() => {
   const t = content.value?.cpubType || content.value?.apType?.toLowerCase() || 'article';
   return t.charAt(0).toUpperCase() + t.slice(1);
@@ -125,11 +165,11 @@ useSeoMeta({
       <!-- Summary -->
       <p v-if="content.summary" class="mirror-summary">{{ content.summary }}</p>
 
-      <!-- Content body (sanitized HTML from remote instance) -->
+      <!-- Content body (rendered HTML from remote instance) -->
       <div
-        v-if="content.content"
+        v-if="renderedContent"
         class="mirror-body prose"
-        v-html="content.content"
+        v-html="renderedContent"
       />
 
       <!-- Tags -->

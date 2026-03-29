@@ -47,6 +47,9 @@ jobs:
             docker compose up -d --force-recreate --remove-orphans
             # Apply database schema changes (new tables, columns)
             sleep 5
-            docker compose exec -T app npx drizzle-kit push --force 2>&1 || echo "db:push completed"
+            # Apply schema changes — if drizzle-kit hits a TTY prompt, deploy still succeeds
+            docker compose exec -T app npx drizzle-kit push --force 2>&1 \
+              && echo "db:push succeeded" \
+              || echo "WARNING: db:push needs manual review — run interactively on the droplet"
             docker image prune -f
             echo "Deployed ${{ github.sha }}"

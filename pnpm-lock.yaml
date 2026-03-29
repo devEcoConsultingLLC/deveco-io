@@ -15,8 +15,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.7.0
+        version: 0.7.0
       '@commonpub/docs':
         specifier: ^0.5.0
         version: 0.5.0(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
@@ -27,14 +27,14 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(4e189207a96c8481dd7164361ee1dc15)
       '@commonpub/protocol':
-        specifier: ^0.8.1
-        version: 0.8.1(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+        specifier: ^0.9.0
+        version: 0.9.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/schema':
-        specifier: ^0.7.0
-        version: 0.7.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+        specifier: ^0.8.0
+        version: 0.8.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^1.1.0
-        version: 1.1.0(466d0ff42d443689ffcbccf4b6792f0e)
+        specifier: ^2.0.0
+        version: 2.0.0(466d0ff42d443689ffcbccf4b6792f0e)
       '@commonpub/ui':
         specifier: ^0.6.0
         version: 0.6.0(vue@3.5.30(typescript@5.9.3))
@@ -537,8 +537,8 @@ packages:
     resolution: {integrity: sha512-Wyqd6L3HZs12A+NP0twJSn9AhKm1GioAyvhTf9e3SloaVDburgbPvRS0WM2hesUIYrtW0TpeZr2nFyRViiWLXA==}
     engines: {node: '>=22'}
 
-  '@commonpub/config@0.6.0':
-    resolution: {integrity: sha512-E4XtBoc8sF7UgJ6Blhn2DeVMybcU9eO95sPrRCuw2Os0eEz9PMZgceOAhk9HsP21tZ7mGZ0z0M69K8sBbapkkw==}
+  '@commonpub/config@0.7.0':
+    resolution: {integrity: sha512-dvWLyPnKqNJ9bk2lzZAiRuQMuDntNe8oKd7cGry1sJhRVPI07AW6AEpWeY8xafDRf3ltsZhLNdBbtUIPrXXs3g==}
     engines: {node: '>=22'}
 
   '@commonpub/docs@0.5.0':
@@ -594,8 +594,8 @@ packages:
     resolution: {integrity: sha512-IJjMBlQBj94GngIoZ6TN1Vva124syEtOLtcjAe9oJ3I8pUwbmgM/L5qOuMQ5cRJIaiZ8g8qFCPV2ozmj+P6DIg==}
     engines: {node: '>=22'}
 
-  '@commonpub/protocol@0.8.1':
-    resolution: {integrity: sha512-NX+bIxRcpFYj87YcB0eZY4tqDTAYyLN0d0NbepzzzwiYNV20XeseV3wQB46y8TltnkNhew+qVWHb+boT3sbB1w==}
+  '@commonpub/protocol@0.9.0':
+    resolution: {integrity: sha512-0sDNyD1MQZpLQw69u/UhFTUyxq0N4ozYh0wH+Rfx/8xHsrr8IpSXvgWM6NuAGgVmQQMkKX4c/Q7Q5ZegtFQhFg==}
     engines: {node: '>=22'}
 
   '@commonpub/schema@0.5.0':
@@ -604,14 +604,14 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/schema@0.7.0':
-    resolution: {integrity: sha512-9hk8afRTL4erZ4DT7RxYM5FWWPXHjrIWOug6SZR5lXr5aB/I2QbhP67hyM8woufdZaJ1Gu5PYY6I0XcqQjBbdA==}
+  '@commonpub/schema@0.8.0':
+    resolution: {integrity: sha512-r17yrTanj2de4hfFkxQ2fAd+Nb4M4j2fRfu/AdzekULxklJ3Sc/j0ly6VmcLfVP9/l5/DtpR9n3uiZBkOaF3kg==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/server@1.1.0':
-    resolution: {integrity: sha512-8Hwa1uMusm4EgyEgJL3ctvv1Wpajv/ZzhLA6/DZbiGC6D8h6XOTDVJ5zrYipnMtYe8izkJWFrGasdQOUUdYrWw==}
+  '@commonpub/server@2.0.0':
+    resolution: {integrity: sha512-exLl/7GdAQOfGp8M0SkfMS9+/t4eoK9ISCbOpdVDnmiNiNO1fNkm/OP1XPifyvLzgJRJtSLeYEVznnm0l8sPLw==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -6335,7 +6335,7 @@ snapshots:
     dependencies:
       zod: 4.3.6
 
-  '@commonpub/config@0.6.0':
+  '@commonpub/config@0.7.0':
     dependencies:
       zod: 4.3.6
 
@@ -6456,10 +6456,10 @@ snapshots:
     transitivePeerDependencies:
       - drizzle-orm
 
-  '@commonpub/protocol@0.8.1(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
+  '@commonpub/protocol@0.9.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
     dependencies:
-      '@commonpub/config': 0.6.0
-      '@commonpub/schema': 0.7.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/config': 0.7.0
+      '@commonpub/schema': 0.8.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       jose: 6.2.2
       zod: 4.3.6
     transitivePeerDependencies:
@@ -6470,20 +6470,20 @@ snapshots:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       zod: 4.3.6
 
-  '@commonpub/schema@0.7.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
+  '@commonpub/schema@0.8.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
     dependencies:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       zod: 4.3.6
 
-  '@commonpub/server@1.1.0(466d0ff42d443689ffcbccf4b6792f0e)':
+  '@commonpub/server@2.0.0(466d0ff42d443689ffcbccf4b6792f0e)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
-      '@commonpub/config': 0.6.0
+      '@commonpub/config': 0.7.0
       '@commonpub/docs': 0.5.0(@noble/hashes@2.0.1)(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/infra': 0.5.0(@aws-sdk/client-s3@3.1015.0)(sharp@0.34.5)
       '@commonpub/learning': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
-      '@commonpub/protocol': 0.8.1(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@commonpub/schema': 0.7.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/protocol': 0.9.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/schema': 0.8.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       isomorphic-dompurify: 3.7.0(@noble/hashes@2.0.1)
     transitivePeerDependencies:

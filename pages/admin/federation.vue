@@ -58,6 +58,47 @@ async function deleteMirror(id: string) {
   await $fetch(`/api/admin/federation/mirrors/${id}`, { method: 'DELETE' });
   await refreshMirrors();
 }
+
+// Backfill
+const backfilling = ref<string | null>(null);
+const backfillResult = ref<{ processed: number; errors: number; pages: number } | null>(null);
+
+async function backfillMirror(id: string) {
+  backfilling.value = id;
+  backfillResult.value = null;
+  try {
+    const result = await $fetch<any>(`/api/admin/federation/mirrors/${id}/backfill`, { method: 'POST' });
+    backfillResult.value = result;
+    await refreshMirrors();
+  } finally {
+    backfilling.value = null;
+  }
+}
+
+// Retry failed activities
+const retrying = ref(false);
+
+async function retryFailed() {
+  retrying.value = true;
+  try {
+    await $fetch('/api/admin/federation/retry', { method: 'POST' });
+    window.location.reload();
+  } finally {
+    retrying.value = false;
+  }
+}
+
+// Activity filters
+const activityFilter = ref<{ direction?: string; status?: string; type?: string }>({});
+const filteredActivities = computed(() => {
+  const items = activityData.value?.items ?? [];
+  return items.filter((act: any) => {
+    if (activityFilter.value.direction && act.direction !== activityFilter.value.direction) return false;
+    if (activityFilter.value.status && act.status !== activityFilter.value.status) return false;
+    if (activityFilter.value.type && act.type !== activityFilter.value.type) return false;
+    return true;
+  });
+});
 </script>
 
 <template>
@@ -101,9 +142,44 @@ async function deleteMirror(id: string) {
 
     <!-- Activity Tab -->
     <div v-if="activeTab === 'activity'">
+      <!-- Filters + Retry -->
+      <div class="cpub-fed-form">
+        <select v-model="activityFilter.direction" class="cpub-fed-input" style="flex:0 0 auto;width:auto;">
+          <option value="">All directions</option>
+          <option value="inbound">Inbound</option>
+          <option value="outbound">Outbound</option>
+        </select>
+        <select v-model="activityFilter.status" class="cpub-fed-input" style="flex:0 0 auto;width:auto;">
+          <option value="">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="delivered">Delivered</option>
+          <option value="processed">Processed</option>
+          <option value="failed">Failed</option>
+        </select>
+        <select v-model="activityFilter.type" class="cpub-fed-input" style="flex:0 0 auto;width:auto;">
+          <option value="">All types</option>
+          <option value="Create">Create</option>
+          <option value="Update">Update</option>
+          <option value="Delete">Delete</option>
+          <option value="Follow">Follow</option>
+          <option value="Accept">Accept</option>
+          <option value="Like">Like</option>
+          <option value="Announce">Announce</option>
+          <option value="Undo">Undo</option>
+        </select>
+        <button
+          v-if="(statsData?.failed ?? 0) > 0"
+          class="cpub-fed-btn"
+          :disabled="retrying"
+          @click="retryFailed"
+        >
+          {{ retrying ? 'Retrying...' : `Retry ${statsData?.failed ?? 0} Failed` }}
+        </button>
+      </div>
+
       <div class="cpub-fed-activity-list">
-        <div v-if="!activityData?.items?.length" class="cpub-fed-empty">No federation activity yet.</div>
-        <div v-for="act in activityData?.items" :key="act.id" class="cpub-fed-activity-row">
+        <div v-if="!filteredActivities.length" class="cpub-fed-empty">No matching activity.</div>
+        <div v-for="act in filteredActivities" :key="act.id" class="cpub-fed-activity-row">
           <span class="cpub-fed-dir" :class="act.direction">{{ act.direction === 'inbound' ? 'IN' : 'OUT' }}</span>
           <span class="cpub-fed-type">{{ act.type }}</span>
           <span class="cpub-fed-actor">{{ act.actorUri }}</span>
@@ -132,8 +208,20 @@ async function deleteMirror(id: string) {
           <button class="cpub-fed-btn-sm" @click="toggleMirror(m.id, m.status)">
             {{ m.status === 'active' ? 'Pause' : 'Resume' }}
           </button>
+          <button
+            class="cpub-fed-btn-sm"
+            :disabled="backfilling === m.id"
+            @click="backfillMirror(m.id)"
+          >
+            {{ backfilling === m.id ? 'Backfilling...' : 'Backfill' }}
+          </button>
           <button class="cpub-fed-btn-sm cpub-fed-btn-danger" @click="deleteMirror(m.id)">Delete</button>
         </div>
+      </div>
+
+      <!-- Backfill result -->
+      <div v-if="backfillResult" class="cpub-fed-info-text" style="margin-top: 8px; padding: 8px; background: var(--accent-bg); border: 1px solid var(--accent-border);">
+        Backfill complete: {{ backfillResult.processed }} items processed, {{ backfillResult.errors }} errors, {{ backfillResult.pages }} pages crawled.
       </div>
     </div>
 

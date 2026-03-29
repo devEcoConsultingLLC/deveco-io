@@ -33,11 +33,11 @@ importers:
         specifier: ^0.8.0
         version: 0.8.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^2.0.0
-        version: 2.0.0(466d0ff42d443689ffcbccf4b6792f0e)
+        specifier: ^2.1.1
+        version: 2.1.1(466d0ff42d443689ffcbccf4b6792f0e)
       '@commonpub/ui':
-        specifier: ^0.6.0
-        version: 0.6.0(vue@3.5.30(typescript@5.9.3))
+        specifier: ^0.7.0
+        version: 0.7.0(vue@3.5.30(typescript@5.9.3))
       '@tiptap/core':
         specifier: ^2.11.0
         version: 2.27.2(@tiptap/pm@2.27.2)
@@ -610,14 +610,14 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/server@2.0.0':
-    resolution: {integrity: sha512-exLl/7GdAQOfGp8M0SkfMS9+/t4eoK9ISCbOpdVDnmiNiNO1fNkm/OP1XPifyvLzgJRJtSLeYEVznnm0l8sPLw==}
+  '@commonpub/server@2.1.1':
+    resolution: {integrity: sha512-/arVi8IHtuoEmXipuvBxmiSqBigmd5zqoszGG6ikKUT+GOEVfH0cgtp+5hpisD09UOPUexgxSsHByQeLgKcq4g==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/ui@0.6.0':
-    resolution: {integrity: sha512-C576/Z2zadXUpxumye8UW+/9Amb7znVH3s5YIPr9Xx1WH+6BGYdlafWKuPoDObWSZERNPOOoKts4lozhnelT3g==}
+  '@commonpub/ui@0.7.0':
+    resolution: {integrity: sha512-qcynrrgAXBcZTKcMLyj+Rpfsb+J58ZBi8f+LVCs34mbZ1J80UhqpiNMWmTfvBeunVoHaTJ+Gb3L90SgwvIpjpw==}
     engines: {node: '>=22'}
     peerDependencies:
       vue: ^3.4.0
@@ -6475,7 +6475,7 @@ snapshots:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       zod: 4.3.6
 
-  '@commonpub/server@2.0.0(466d0ff42d443689ffcbccf4b6792f0e)':
+  '@commonpub/server@2.1.1(466d0ff42d443689ffcbccf4b6792f0e)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.7.0
@@ -6551,7 +6551,7 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/ui@0.6.0(vue@3.5.30(typescript@5.9.3))':
+  '@commonpub/ui@0.7.0(vue@3.5.30(typescript@5.9.3))':
     dependencies:
       vue: 3.5.30(typescript@5.9.3)
 

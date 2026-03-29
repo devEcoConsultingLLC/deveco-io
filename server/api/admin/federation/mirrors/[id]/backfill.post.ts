@@ -11,10 +11,7 @@ function extractDomain(url: string): string {
  * Admin only.
  */
 export default defineEventHandler(async (event) => {
-  const session = event.context.session;
-  if (!session?.user || session.user.role !== 'admin') {
-    throw createError({ statusCode: 403, statusMessage: 'Admin access required' });
-  }
+  requireAdmin(event);
 
   const config = useConfig();
   if (!config.features.federation) {

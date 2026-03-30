@@ -5,6 +5,8 @@ useSeoMeta({ title: 'Create -- devEco.io' });
 definePageMeta({ middleware: 'auth' });
 
 const { isTypeEnabled } = useContentTypes();
+const route = useRoute();
+const hubParam = computed(() => (route.query.hub as string) || '');
 
 const allTypes = [
   {
@@ -61,7 +63,7 @@ const types = computed(() => allTypes.filter(t => isTypeEnabled(t.type as Conten
       <NuxtLink
         v-for="t in types"
         :key="t.type"
-        :to="`/${t.type}/new/edit`"
+        :to="`/${t.type}/new/edit${hubParam ? `?hub=${hubParam}` : ''}`"
         class="de-create-card"
       >
         <div class="de-create-card-icon" :style="{ color: t.color, background: t.bg, borderColor: t.border }">

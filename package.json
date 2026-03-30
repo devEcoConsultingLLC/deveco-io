@@ -21,7 +21,7 @@
     "@commonpub/learning": "^0.5.0",
     "@commonpub/protocol": "^0.9.2",
     "@commonpub/schema": "^0.8.5",
-    "@commonpub/server": "^2.3.1",
+    "@commonpub/server": "^2.3.2",
     "@commonpub/ui": "^0.7.0",
     "@tiptap/core": "^2.11.0",
     "@tiptap/extension-bold": "^2.11.0",

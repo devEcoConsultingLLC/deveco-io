@@ -3,11 +3,13 @@ import type { ContentViewData } from '~/composables/useEngagement';
 
 const props = defineProps<{
   content: ContentViewData;
+  federatedId?: string;
 }>();
 
 const contentId = computed(() => props.content?.id);
 const contentType = computed(() => props.content?.type ?? 'blog');
-const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, fetchInitialState } = useEngagement(contentId, contentType);
+const fedId = computed(() => props.federatedId);
+const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, fetchInitialState } = useEngagement(contentId, contentType, fedId);
 
 onMounted(() => {
   fetchInitialState(props.content?.likeCount ?? 0);

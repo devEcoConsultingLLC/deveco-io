@@ -182,8 +182,9 @@ function formatCount(n: number | undefined): string {
 }
 
 .pcard__badge--federated {
-  background: rgba(91, 197, 232, 0.85);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.75);
+  color: #5eead4;
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   gap: 3px;

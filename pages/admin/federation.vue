@@ -2,7 +2,7 @@
 definePageMeta({ layout: 'admin', middleware: 'auth' });
 useSeoMeta({ title: 'Federation — Admin — CommonPub' });
 
-const activeTab = ref<'activity' | 'mirrors' | 'clients'>('activity');
+const activeTab = ref<'activity' | 'mirrors' | 'clients' | 'tools'>('activity');
 
 const { data: statsData } = await useFetch('/api/admin/federation/stats', {
   default: () => ({ inbound: 0, outbound: 0, pending: 0, failed: 0, followers: 0, following: 0 }),
@@ -99,6 +99,47 @@ const filteredActivities = computed(() => {
     return true;
   });
 });
+
+// Tools: pending activities
+const pendingData = ref<{ count: number; activities: Array<{ id: string; activityType: string; actorUri: string; objectUri: string; createdAt: string; status: string }> } | null>(null);
+const loadingPending = ref(false);
+
+async function loadPending(): Promise<void> {
+  loadingPending.value = true;
+  try {
+    pendingData.value = await ($fetch as Function)('/api/admin/federation/pending');
+  } finally {
+    loadingPending.value = false;
+  }
+}
+
+// Tools: repair content types
+const repairResult = ref<{ total: number; updated: number; errors: number } | null>(null);
+const repairing = ref(false);
+
+async function repairTypes(): Promise<void> {
+  repairing.value = true;
+  repairResult.value = null;
+  try {
+    repairResult.value = await ($fetch as Function)('/api/admin/federation/repair-types', { method: 'POST' });
+  } finally {
+    repairing.value = false;
+  }
+}
+
+// Tools: re-federate
+const refederating = ref(false);
+const refederateResult = ref<{ queued: number } | null>(null);
+
+async function refederate(): Promise<void> {
+  refederating.value = true;
+  refederateResult.value = null;
+  try {
+    refederateResult.value = await ($fetch as Function)('/api/admin/federation/refederate', { method: 'POST' });
+  } finally {
+    refederating.value = false;
+  }
+}
 </script>
 
 <template>
@@ -138,6 +179,7 @@ const filteredActivities = computed(() => {
       <button :class="{ active: activeTab === 'activity' }" @click="activeTab = 'activity'">Activity</button>
       <button :class="{ active: activeTab === 'mirrors' }" @click="activeTab = 'mirrors'">Mirrors</button>
       <button :class="{ active: activeTab === 'clients' }" @click="activeTab = 'clients'">OAuth Clients</button>
+      <button :class="{ active: activeTab === 'tools' }" @click="activeTab = 'tools'">Tools</button>
     </div>
 
     <!-- Activity Tab -->
@@ -239,6 +281,52 @@ const filteredActivities = computed(() => {
         Clients are auto-registered via the <code>/api/auth/oauth2/register</code> endpoint.
       </p>
     </div>
+
+    <!-- Tools Tab -->
+    <div v-if="activeTab === 'tools'">
+      <div class="cpub-fed-tools">
+        <!-- Pending Activities -->
+        <div class="cpub-fed-tool-card">
+          <h3 class="cpub-fed-tool-title">Pending Activities</h3>
+          <p class="cpub-fed-tool-desc">View activities waiting for delivery.</p>
+          <button class="cpub-btn cpub-btn-sm" :disabled="loadingPending" @click="loadPending">
+            {{ loadingPending ? 'Loading...' : 'Load Pending' }}
+          </button>
+          <div v-if="pendingData" class="cpub-fed-tool-result">
+            <p><strong>{{ pendingData.count }}</strong> pending activities</p>
+            <div v-for="act in pendingData.activities" :key="act.id" class="cpub-fed-activity-row" style="font-size: 11px">
+              <span class="cpub-fed-type">{{ act.activityType }}</span>
+              <span class="cpub-fed-actor" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis">{{ act.actorUri }}</span>
+              <time class="cpub-fed-time">{{ new Date(act.createdAt).toLocaleString() }}</time>
+            </div>
+          </div>
+        </div>
+
+        <!-- Repair Content Types -->
+        <div class="cpub-fed-tool-card">
+          <h3 class="cpub-fed-tool-title">Repair Content Types</h3>
+          <p class="cpub-fed-tool-desc">Scan federated content and fix missing cpub:type annotations.</p>
+          <button class="cpub-btn cpub-btn-sm" :disabled="repairing" @click="repairTypes">
+            {{ repairing ? 'Repairing...' : 'Run Repair' }}
+          </button>
+          <div v-if="repairResult" class="cpub-fed-tool-result">
+            <p>Scanned <strong>{{ repairResult.total }}</strong>, updated <strong>{{ repairResult.updated }}</strong>, errors: {{ repairResult.errors }}</p>
+          </div>
+        </div>
+
+        <!-- Re-federate All Content -->
+        <div class="cpub-fed-tool-card">
+          <h3 class="cpub-fed-tool-title">Re-federate Content</h3>
+          <p class="cpub-fed-tool-desc">Queue all published content for re-federation (Create activities).</p>
+          <button class="cpub-btn cpub-btn-sm" :disabled="refederating" @click="refederate">
+            {{ refederating ? 'Queuing...' : 'Re-federate All' }}
+          </button>
+          <div v-if="refederateResult" class="cpub-fed-tool-result">
+            <p>Queued <strong>{{ refederateResult.queued }}</strong> activities for delivery.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -320,4 +408,17 @@ const filteredActivities = computed(() => {
 .cpub-fed-error { font-size: 10px; color: var(--color-error); font-family: var(--font-mono); cursor: help; }
 .cpub-fed-info-text { font-size: 0.75rem; color: var(--text-dim); margin-top: 12px; }
 .cpub-fed-info-text code { font-family: var(--font-mono); background: var(--surface2); padding: 1px 4px; }
+
+/* Tools */
+.cpub-fed-tools { display: flex; flex-direction: column; gap: 16px; }
+.cpub-fed-tool-card {
+  padding: 16px; background: var(--surface); border: 2px solid var(--border);
+  box-shadow: 4px 4px 0 var(--border);
+}
+.cpub-fed-tool-title { font-size: 0.875rem; font-weight: 700; margin-bottom: 4px; font-family: var(--font-mono); }
+.cpub-fed-tool-desc { font-size: 0.75rem; color: var(--text-dim); margin-bottom: 12px; }
+.cpub-fed-tool-result {
+  margin-top: 12px; padding: 10px; background: var(--surface2); border: 1px solid var(--border);
+  font-size: 0.75rem; font-family: var(--font-mono);
+}
 </style>

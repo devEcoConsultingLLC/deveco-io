@@ -18,6 +18,7 @@ export default defineCommonPubConfig({
     learning: false,
     explainers: false,
     federation: true,
+    federateHubs: true,
     seamlessFederation: true,
     admin: true,
   },

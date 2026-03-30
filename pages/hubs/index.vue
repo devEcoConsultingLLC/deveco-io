@@ -8,6 +8,17 @@ const { data } = await useFetch('/api/hubs');
 const { isAuthenticated } = useAuth();
 
 const hubs = computed(() => data.value?.items ?? []);
+
+function isFederated(hub: Record<string, unknown>): boolean {
+  return (hub as { source?: string }).source === 'federated';
+}
+
+function hubLink(hub: Record<string, unknown>): string {
+  if (isFederated(hub)) {
+    return `/federated-hubs/${hub.id}`;
+  }
+  return `/hubs/${hub.slug}`;
+}
 </script>
 
 <template>
@@ -26,8 +37,9 @@ const hubs = computed(() => data.value?.items ?? []);
       <NuxtLink
         v-for="hub in hubs"
         :key="hub.id"
-        :to="`/hubs/${hub.slug}`"
+        :to="hubLink(hub as Record<string, unknown>)"
         class="de-hub-card"
+        :class="{ 'de-hub-card-federated': isFederated(hub as Record<string, unknown>) }"
       >
         <div class="de-hub-card-banner" :style="hub.bannerUrl ? { backgroundImage: `url(${hub.bannerUrl})` } : {}">
           <div class="de-hub-card-icon">
@@ -44,6 +56,9 @@ const hubs = computed(() => data.value?.items ?? []);
           <div class="de-hub-card-meta">
             <span class="de-hub-card-stat"><i class="fa-solid fa-users"></i> {{ hub.memberCount ?? 0 }} members</span>
             <span class="de-hub-card-stat"><i class="fa-solid fa-message"></i> {{ hub.postCount ?? 0 }} posts</span>
+            <span v-if="isFederated(hub as Record<string, unknown>)" class="de-hub-card-federated-badge">
+              <i class="fa-solid fa-globe"></i> {{ (hub as Record<string, unknown>).originDomain }}
+            </span>
           </div>
         </div>
       </NuxtLink>
@@ -210,6 +225,17 @@ const hubs = computed(() => data.value?.items ?? []);
   gap: 5px;
 }
 .de-hub-card-stat i { font-size: 11px; }
+
+/* Federated hub badge */
+.de-hub-card-federated { border-style: dashed; }
+.de-hub-card-federated-badge {
+  font-size: 0.625rem;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+}
 
 /* Empty state */
 .de-empty-state {

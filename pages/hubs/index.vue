@@ -39,7 +39,6 @@ function hubLink(hub: Record<string, unknown>): string {
         :key="hub.id"
         :to="hubLink(hub as Record<string, unknown>)"
         class="de-hub-card"
-        :class="{ 'de-hub-card-federated': isFederated(hub as Record<string, unknown>) }"
       >
         <div class="de-hub-card-banner" :style="hub.bannerUrl ? { backgroundImage: `url(${hub.bannerUrl})` } : {}">
           <div class="de-hub-card-icon">
@@ -226,16 +225,16 @@ function hubLink(hub: Record<string, unknown>): string {
 }
 .de-hub-card-stat i { font-size: 11px; }
 
-/* Federated hub badge */
-.de-hub-card-federated { border-style: dashed; }
+/* Federated hub origin label */
 .de-hub-card-federated-badge {
-  font-size: 0.625rem;
-  color: var(--accent);
+  font-size: 0.6875rem;
+  color: var(--text-faint);
   display: flex;
   align-items: center;
   gap: 3px;
   margin-left: auto;
 }
+.de-hub-card-federated-badge i { font-size: 9px; color: var(--accent); }
 
 /* Empty state */
 .de-empty-state {

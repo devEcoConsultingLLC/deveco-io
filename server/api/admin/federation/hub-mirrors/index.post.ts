@@ -20,23 +20,21 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: 'Could not resolve remote hub actor' });
   }
 
-  if (actor.actorType !== 'Group') {
+  // ResolvedActor uses AP field names: type (not actorType), name (not displayName)
+  if (actor.type !== 'Group') {
     throw createError({ statusCode: 400, statusMessage: 'Actor is not a Group (hub)' });
   }
 
   const domain = new URL(body.actorUri).hostname;
-  // Extract hub slug from actor URI: https://domain/hubs/slug -> slug
   const slugMatch = body.actorUri.match(/\/hubs\/([^/]+)$/);
   const remoteSlug = slugMatch?.[1] ?? actor.preferredUsername ?? 'unknown';
 
   const result = await followRemoteHub(db, body.actorUri, {
     originDomain: domain,
     remoteSlug,
-    name: actor.displayName ?? actor.preferredUsername ?? remoteSlug,
+    name: actor.name ?? actor.preferredUsername ?? remoteSlug,
     description: actor.summary ?? undefined,
-    iconUrl: actor.avatarUrl ?? undefined,
-    bannerUrl: actor.bannerUrl ?? undefined,
-    remoteMemberCount: actor.followerCount ?? 0,
+    iconUrl: actor.icon?.url ?? undefined,
     url: `https://${domain}/hubs/${remoteSlug}`,
   });
 

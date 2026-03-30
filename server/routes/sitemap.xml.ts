@@ -69,9 +69,11 @@ export default defineEventHandler(async (event) => {
 
   // Hub pages
   for (const hub of hubs) {
+    if ('source' in hub && hub.source === 'federated') continue;
+    const localHub = hub as { slug: string; createdAt: Date; updatedAt?: Date };
     urls.push({
-      loc: `${siteUrl}/hubs/${hub.slug}`,
-      lastmod: new Date((hub as unknown as Record<string, unknown>).updatedAt as string ?? hub.createdAt ?? new Date()).toISOString(),
+      loc: `${siteUrl}/hubs/${localHub.slug}`,
+      lastmod: new Date(localHub.updatedAt ?? localHub.createdAt ?? new Date()).toISOString(),
       priority: '0.7',
       changefreq: 'weekly',
     });

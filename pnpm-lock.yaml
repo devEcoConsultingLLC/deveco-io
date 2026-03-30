@@ -33,8 +33,8 @@ importers:
         specifier: ^0.8.6
         version: 0.8.6(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^2.4.0
-        version: 2.4.0(466d0ff42d443689ffcbccf4b6792f0e)
+        specifier: ^2.4.1
+        version: 2.4.1(466d0ff42d443689ffcbccf4b6792f0e)
       '@commonpub/ui':
         specifier: ^0.7.0
         version: 0.7.0(vue@3.5.30(typescript@5.9.3))
@@ -616,8 +616,8 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/server@2.4.0':
-    resolution: {integrity: sha512-f3j28+E71O5dM2xg2CVv+SbuKOXK04ErV6gok4Z3YcSUd3n8+mVjiQFaYLONY35m3WrOTn+DrU2P8eNsPmcKjg==}
+  '@commonpub/server@2.4.1':
+    resolution: {integrity: sha512-kXGA7FlV8epCkC128DPqVCDvcu5oDCPy+q3qgJKRncqg6pZ008QoHelcjp0MytbUhZD1+woKycuuN9c3Hdd4LQ==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -4628,8 +4628,8 @@ packages:
       prosemirror-state: ^1.4.2
       prosemirror-view: ^1.33.8
 
-  prosemirror-transform@1.11.0:
-    resolution: {integrity: sha512-4I7Ce4KpygXb9bkiPS3hTEk4dSHorfRw8uI0pE8IhxlK2GXsqv5tIA7JUSxtSu7u8APVOTtbUBxTmnHIxVkIJw==}
+  prosemirror-transform@1.12.0:
+    resolution: {integrity: sha512-GxboyN4AMIsoHNtz5uf2r2Ru551i5hWeCMD6E2Ib4Eogqoub0NflniaBPVQ4MrGE5yZ8JV9tUHg9qcZTTrcN4w==}
 
   prosemirror-view@1.41.7:
     resolution: {integrity: sha512-jUwKNCEIGiqdvhlS91/2QAg21e4dfU5bH2iwmSDQeosXJgKF7smG0YSplOWK0cjSNgIqXe7VXqo7EIfUFJdt3w==}
@@ -6486,7 +6486,7 @@ snapshots:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       zod: 4.3.6
 
-  '@commonpub/server@2.4.0(466d0ff42d443689ffcbccf4b6792f0e)':
+  '@commonpub/server@2.4.1(466d0ff42d443689ffcbccf4b6792f0e)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.7.0
@@ -8267,7 +8267,7 @@ snapshots:
       prosemirror-state: 1.4.4
       prosemirror-tables: 1.8.5
       prosemirror-trailing-node: 3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.7)
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.7
 
   '@tybys/wasm-util@0.10.1':
@@ -10780,7 +10780,7 @@ snapshots:
 
   prosemirror-changeset@2.4.0:
     dependencies:
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
 
   prosemirror-collab@1.3.1:
     dependencies:
@@ -10790,12 +10790,12 @@ snapshots:
     dependencies:
       prosemirror-model: 1.25.4
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
 
   prosemirror-dropcursor@1.8.2:
     dependencies:
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.7
 
   prosemirror-gapcursor@1.4.1:
@@ -10808,14 +10808,14 @@ snapshots:
   prosemirror-history@1.5.0:
     dependencies:
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.7
       rope-sequence: 1.3.4
 
   prosemirror-inputrules@1.5.1:
     dependencies:
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
 
   prosemirror-keymap@1.2.3:
     dependencies:
@@ -10847,12 +10847,12 @@ snapshots:
     dependencies:
       prosemirror-model: 1.25.4
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
 
   prosemirror-state@1.4.4:
     dependencies:
       prosemirror-model: 1.25.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.7
 
   prosemirror-tables@1.8.5:
@@ -10860,7 +10860,7 @@ snapshots:
       prosemirror-keymap: 1.2.3
       prosemirror-model: 1.25.4
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
       prosemirror-view: 1.41.7
 
   prosemirror-trailing-node@3.0.0(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.7):
@@ -10871,7 +10871,7 @@ snapshots:
       prosemirror-state: 1.4.4
       prosemirror-view: 1.41.7
 
-  prosemirror-transform@1.11.0:
+  prosemirror-transform@1.12.0:
     dependencies:
       prosemirror-model: 1.25.4
 
@@ -10879,7 +10879,7 @@ snapshots:
     dependencies:
       prosemirror-model: 1.25.4
       prosemirror-state: 1.4.4
-      prosemirror-transform: 1.11.0
+      prosemirror-transform: 1.12.0
 
   punycode.js@2.3.1: {}
 

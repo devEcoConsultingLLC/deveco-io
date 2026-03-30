@@ -4,6 +4,7 @@ import type { BlockTuple } from '@commonpub/editor';
 
 const props = defineProps<{
   content: ContentViewData;
+  federatedId?: string;
 }>();
 
 const blocks = computed<BlockTuple[]>(() => {
@@ -78,7 +79,8 @@ const activeSection = ref(0);
 const completedSections = ref<Set<number>>(new Set());
 const contentId = computed(() => props.content?.id);
 const contentType = computed(() => props.content?.type ?? 'explainer');
-const { bookmarked, toggleBookmark, share } = useEngagement(contentId, contentType);
+const fedId = computed(() => props.federatedId);
+const { bookmarked, toggleBookmark, share } = useEngagement(contentId, contentType, fedId);
 
 const { user } = useAuth();
 const isOwner = computed(() => user.value?.id === props.content?.author?.id);

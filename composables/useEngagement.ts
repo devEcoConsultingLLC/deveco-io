@@ -82,10 +82,20 @@ export interface ContentViewData {
   seriesNext?: { title: string; url: string };
 }
 
-export function useEngagement(contentId: Ref<string | undefined>, contentType: Ref<string>, federatedContentId?: Ref<string | undefined>) {
+export interface EngagementOptions {
+  contentId: Ref<string | undefined>;
+  contentType: Ref<string>;
+  /** When set, likes federate to the remote instance instead of acting locally */
+  federatedContentId?: Ref<string | undefined>;
+}
+
+export function useEngagement(opts: EngagementOptions) {
+  const { contentId, contentType, federatedContentId } = opts;
   const liked = ref(false);
   const bookmarked = ref(false);
   const likeCount = ref(0);
+
+  const isFederated = computed(() => !!federatedContentId?.value);
 
   function setInitialState(isLiked: boolean, isBookmarked: boolean, likes: number): void {
     liked.value = isLiked;
@@ -101,10 +111,10 @@ export function useEngagement(contentId: Ref<string | undefined>, contentType: R
     likeCount.value += liked.value ? 1 : -1;
 
     try {
-      if (federatedContentId?.value) {
+      if (isFederated.value) {
         await $fetch('/api/federation/like', {
           method: 'POST',
-          body: { federatedContentId: federatedContentId.value },
+          body: { federatedContentId: federatedContentId!.value },
         });
       } else {
         await $fetch('/api/social/like', {
@@ -120,6 +130,8 @@ export function useEngagement(contentId: Ref<string | undefined>, contentType: R
 
   async function toggleBookmark(): Promise<void> {
     if (!contentId.value) return;
+    // Bookmarks are local-only — skip for federated content (no local record to target)
+    if (isFederated.value) return;
     const prev = bookmarked.value;
     bookmarked.value = !bookmarked.value;
 
@@ -153,7 +165,7 @@ export function useEngagement(contentId: Ref<string | undefined>, contentType: R
     likeCount.value = likes;
     if (!contentId.value) return;
     // Skip state fetch for federated content — no local like/bookmark records
-    if (federatedContentId?.value) return;
+    if (isFederated.value) return;
     try {
       const [likeRes, bmRes] = await Promise.all([
         $fetch<{ liked: boolean }>('/api/social/like', {
@@ -174,6 +186,7 @@ export function useEngagement(contentId: Ref<string | undefined>, contentType: R
     liked,
     bookmarked,
     likeCount,
+    isFederated,
     setInitialState,
     fetchInitialState,
     toggleLike,

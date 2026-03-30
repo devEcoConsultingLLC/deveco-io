@@ -37,8 +37,8 @@ const tabs = computed(() => {
 
 const contentId = computed(() => props.content?.id);
 const contentType = computed(() => props.content?.type ?? 'project');
-const fedId = computed(() => props.federatedId);
-const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, fetchInitialState } = useEngagement(contentId, contentType, fedId);
+const federatedContentId = computed(() => props.federatedId);
+const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, fetchInitialState } = useEngagement({ contentId, contentType, federatedContentId });
 
 onMounted(() => {
   fetchInitialState(props.content?.likeCount ?? 0);
@@ -517,7 +517,7 @@ async function handleBuild(): Promise<void> {
 
           <!-- DISCUSSION TAB -->
           <template v-else-if="activeTab === 'comments'">
-            <CommentSection :target-type="content.type" :target-id="content.id" />
+            <CommentSection :target-type="content.type" :target-id="content.id" :federated-content-id="federatedId" />
           </template>
         </div>
 

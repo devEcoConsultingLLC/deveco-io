@@ -15,10 +15,13 @@ interface Comment {
 const props = defineProps<{
   targetType: string;
   targetId: string;
+  /** When set, comments federate as replies to the remote content */
+  federatedContentId?: string;
 }>();
 
 const { user } = useAuth();
 
+const isFederated = computed(() => !!props.federatedContentId);
 const commentLimit = 20;
 
 const queryParams = computed(() => ({
@@ -27,9 +30,11 @@ const queryParams = computed(() => ({
   limit: commentLimit,
 }));
 
+// Skip comment fetch for federated content — local comments table has no record for remote IDs
 const { data: comments, refresh } = await useFetch<Comment[]>('/api/social/comments', {
   query: queryParams,
   lazy: true,
+  immediate: !props.federatedContentId,
 });
 
 const allCommentsLoaded = ref(false);
@@ -65,16 +70,29 @@ async function submitComment(): Promise<void> {
   if (!newComment.value.trim()) return;
   submitting.value = true;
   try {
-    await $fetch('/api/social/comments', {
-      method: 'POST',
-      body: {
-        targetType: props.targetType,
-        targetId: props.targetId,
-        content: newComment.value,
-      },
-    });
+    if (props.federatedContentId) {
+      // Federate reply to remote content
+      await $fetch('/api/federation/reply', {
+        method: 'POST',
+        body: {
+          federatedContentId: props.federatedContentId,
+          content: newComment.value,
+        },
+      });
+    } else {
+      await $fetch('/api/social/comments', {
+        method: 'POST',
+        body: {
+          targetType: props.targetType,
+          targetId: props.targetId,
+          content: newComment.value,
+        },
+      });
+    }
     newComment.value = '';
-    await refresh();
+    if (!props.federatedContentId) {
+      await refresh();
+    }
   } finally {
     submitting.value = false;
   }
@@ -93,12 +111,17 @@ async function deleteComment(id: string): Promise<void> {
       <span v-if="comments?.length" class="cpub-comments-count">{{ comments.length }}</span>
     </h3>
 
+    <!-- Federation notice -->
+    <p v-if="isFederated" class="cpub-comment-fed-notice">
+      <i class="fa-solid fa-globe"></i> Replies to this content are sent to the original instance.
+    </p>
+
     <!-- New comment form -->
     <div v-if="user" class="cpub-comment-form">
       <textarea
         v-model="newComment"
         class="cpub-textarea"
-        placeholder="Write a comment..."
+        :placeholder="isFederated ? 'Write a reply (will be sent to the original instance)...' : 'Write a comment...'"
         rows="3"
         aria-label="Write a comment"
       ></textarea>
@@ -107,7 +130,7 @@ async function deleteComment(id: string): Promise<void> {
         :disabled="!newComment.trim() || submitting"
         @click="submitComment"
       >
-        {{ submitting ? 'Posting...' : 'Post Comment' }}
+        {{ submitting ? 'Posting...' : isFederated ? 'Send Reply' : 'Post Comment' }}
       </button>
     </div>
     <p v-else class="cpub-comment-login">
@@ -186,6 +209,20 @@ async function deleteComment(id: string): Promise<void> {
 .cpub-comment-form .cpub-textarea {
   width: 100%;
 }
+
+.cpub-comment-fed-notice {
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+}
+.cpub-comment-fed-notice i { color: var(--accent); font-size: 11px; }
 
 .cpub-comment-login {
   font-size: 13px;

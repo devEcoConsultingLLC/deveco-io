@@ -18,7 +18,7 @@ const emit = defineEmits<{
 
 const contentId = computed(() => props.targetId);
 const contentType = computed(() => props.targetType);
-const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, setInitialState } = useEngagement(contentId, contentType);
+const { liked, bookmarked, likeCount, toggleLike, toggleBookmark, share, setInitialState } = useEngagement({ contentId, contentType });
 const { isAuthenticated } = useAuth();
 const showHubModal = ref(false);
 

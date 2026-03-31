@@ -60,13 +60,15 @@ export default defineEventHandler(async (event) => {
       .from(hubs)
       .where(isNull(hubs.deletedAt));
 
+    console.log(`[refederate] Found ${allHubs.length} hubs to federate`);
+
     for (const hub of allHubs) {
       // Announce the hub's existence (triggers auto-discovery on receivers)
       try {
         await federateHubActor(db, hub.id, domain);
         hubsQueued++;
-      } catch {
-        // Skip hubs that fail
+      } catch (err) {
+        console.error(`[refederate] federateHubActor failed for hub ${hub.id}:`, err instanceof Error ? err.message : err);
       }
 
       // Announce each hub post
@@ -86,10 +88,15 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  const allHubCount = config.features.federateHubs
+    ? (await db.select({ id: hubs.id }).from(hubs).where(isNull(hubs.deletedAt))).length
+    : 0;
+
   return {
     queued: contentQueued + hubsQueued + hubPostsQueued,
     content: contentQueued,
     hubs: hubsQueued,
+    hubsFound: allHubCount,
     hubPosts: hubPostsQueued,
   };
 });

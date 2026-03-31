@@ -129,7 +129,7 @@ async function repairTypes(): Promise<void> {
 
 // Tools: re-federate
 const refederating = ref(false);
-const refederateResult = ref<{ queued: number; content?: number; hubs?: number; hubPosts?: number } | null>(null);
+const refederateResult = ref<{ queued: number; content?: number; hubs?: number; hubsFound?: number; hubPosts?: number } | null>(null);
 
 async function refederate(): Promise<void> {
   refederating.value = true;
@@ -324,7 +324,7 @@ async function refederate(): Promise<void> {
           <div v-if="refederateResult" class="cpub-fed-tool-result">
             <p>Queued <strong>{{ refederateResult.queued }}</strong> activities for delivery.</p>
             <p v-if="refederateResult.content !== undefined" style="font-size: 12px; color: var(--text-faint); margin-top: 4px">
-              {{ refederateResult.content }} content, {{ refederateResult.hubs ?? 0 }} hubs, {{ refederateResult.hubPosts ?? 0 }} hub posts
+              {{ refederateResult.content }} content, {{ refederateResult.hubs ?? 0 }}/{{ refederateResult.hubsFound ?? '?' }} hubs announced, {{ refederateResult.hubPosts ?? 0 }} hub posts
             </p>
           </div>
         </div>

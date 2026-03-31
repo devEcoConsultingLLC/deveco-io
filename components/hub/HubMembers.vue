@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Serialized, HubMemberItem } from '@commonpub/server';
+import type { HubMemberViewModel } from '~/types/hub';
 
 defineProps<{
-  members: Serialized<HubMemberItem>[];
+  members: HubMemberViewModel[]
 }>();
 </script>
 
@@ -10,9 +10,9 @@ defineProps<{
   <div v-if="members?.length" class="cpub-members-grid">
     <MemberCard
       v-for="member in members"
-      :key="member.userId"
-      :username="member.user.username"
-      :display-name="member.user.displayName || member.user.username"
+      :key="member.username"
+      :username="member.username"
+      :display-name="member.name"
       :role="(member.role as 'owner' | 'moderator' | 'member') || 'member'"
       :joined-at="new Date(member.joinedAt)"
     />
@@ -31,10 +31,6 @@ defineProps<{
 }
 
 @media (max-width: 1024px) {
-  .cpub-members-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 640px) {
   .cpub-members-grid { grid-template-columns: repeat(2, 1fr); }
 }
 

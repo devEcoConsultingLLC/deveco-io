@@ -21,6 +21,12 @@ dist/
 .DS_Store
 Thumbs.db
 
+# Vue Harvest analysis artifacts
+.vue-harvest/
+
+# Package lock (using pnpm)
+package-lock.json
+
 # Uploads (dev)
 uploads/*
 !uploads/.gitkeep

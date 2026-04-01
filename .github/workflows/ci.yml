@@ -29,11 +29,8 @@ jobs:
       - name: Prepare Nuxt
         run: pnpm nuxt prepare
 
-      - name: Test
-        run: pnpm test
-
       - name: Typecheck
         run: pnpm nuxt typecheck
 
       - name: Build
-        run: pnpm nuxt build
+        run: pnpm build

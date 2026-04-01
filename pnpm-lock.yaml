@@ -12,8 +12,8 @@ importers:
         specifier: ^0.7.0
         version: 0.7.0
       '@commonpub/layer':
-        specifier: ^0.3.7
-        version: 0.3.7(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.14)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+        specifier: ^0.3.8
+        version: 0.3.8(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.14)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@commonpub/schema':
         specifier: ^0.8.8
         version: 0.8.8(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
@@ -505,8 +505,8 @@ packages:
       sharp:
         optional: true
 
-  '@commonpub/layer@0.3.7':
-    resolution: {integrity: sha512-Ct7o8iIbzJfhAzpvVC663dLAlLeMp9oR8rY35jEQsdoJqddS5M1A29QsehnUzf19Gj29YqjkAF4zR/kDpG7hVg==}
+  '@commonpub/layer@0.3.8':
+    resolution: {integrity: sha512-59rktiTS5PLNa6qP2M7VRmqvsH45jRqqJ+7N/RrKSf3p9Wch7QyT4hRdczm5w/dzSnuWjNfQCHjYIhfTe1TuiA==}
 
   '@commonpub/learning@0.5.0':
     resolution: {integrity: sha512-eBWIVfBPUoRV2s+aqCAXLRMhAZtCoZVOV0KiDQAmBkHoRbC5BdaRwoMDo8M16FSj9O/S4iApoFf2BubdVlCsXA==}
@@ -532,8 +532,20 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
+  '@commonpub/schema@0.8.9':
+    resolution: {integrity: sha512-EHa30zMnTBQT9acNXoEHNeI9YD9PynbAo6W5X+82n6Z8s3VhNUkFmlI1t+IYGCFWBUrSoAjCynj5qX8uewLTHw==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      drizzle-orm: ^0.45.1
+
   '@commonpub/server@2.7.0':
     resolution: {integrity: sha512-xjhxzmuEM6BbCzXlu2sEhJyw07F+MqeWkFImpiszL38ohh+p/X+QqE+78qc9hJPoaAPvRJD8BPqQYlzLb4B2oQ==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      drizzle-orm: ^0.45.1
+
+  '@commonpub/server@2.8.0':
+    resolution: {integrity: sha512-a0Lh9zrDKo/19Apv1yTRALsKKydT66RnLxq7SKt/V+4vBD6hWpkb/ZG22JExbHQd4KiGqbmW7qtVpqVLThY4DA==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -3659,6 +3671,10 @@ packages:
     resolution: {integrity: sha512-HYd0J+d/r+LXx9M2mppwTkujCXKmK+GPi5UQRUXlhQrluZTojMSO9mtnLMill40Q5ES5N1H/7TtPqUaoOulxFQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
 
+  isomorphic-dompurify@3.7.1:
+    resolution: {integrity: sha512-ChhzwwCm7k8h8ANiq1Vc7geCWeHGaAPusgXU5N4mu7Y2wChgn2JHvbUe6aH/XQOUG3+KV+GmqSq95MntW/V1ng==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
+
   jackspeak@3.4.3:
     resolution: {integrity: sha512-OGlZQpz2yfahA/Rd1Y8Cd9SIEsqvXkLVoSw/cgwhnhFMDbsQFeZYoJJ7bIZBS9BcamUW96asq/npPWugM+RQBw==}
 
@@ -6295,7 +6311,7 @@ snapshots:
       '@aws-sdk/client-s3': 3.1021.0
       sharp: 0.34.5
 
-  '@commonpub/layer@0.3.7(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.14)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
+  '@commonpub/layer@0.3.8(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.14)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@aws-sdk/client-s3': 3.1021.0
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
@@ -6304,8 +6320,8 @@ snapshots:
       '@commonpub/editor': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
       '@commonpub/learning': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
       '@commonpub/protocol': 0.9.4(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@commonpub/schema': 0.8.8(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
-      '@commonpub/server': 2.7.0(eeae4806c51a6f45e385f70620ce912c)
+      '@commonpub/schema': 0.8.9(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/server': 2.8.0(eeae4806c51a6f45e385f70620ce912c)
       '@commonpub/ui': 0.7.1(vue@3.5.30(typescript@5.9.3))
       '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
       '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
@@ -6434,6 +6450,11 @@ snapshots:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       zod: 4.3.6
 
+  '@commonpub/schema@0.8.9(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))':
+    dependencies:
+      drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
+      zod: 4.3.6
+
   '@commonpub/server@2.7.0(eeae4806c51a6f45e385f70620ce912c)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
@@ -6445,6 +6466,82 @@ snapshots:
       '@commonpub/schema': 0.8.8(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
       isomorphic-dompurify: 3.7.0(@noble/hashes@2.0.1)
+    transitivePeerDependencies:
+      - '@aws-sdk/client-rds-data'
+      - '@aws-sdk/client-s3'
+      - '@cloudflare/workers-types'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@libsql/client-wasm'
+      - '@lynx-js/react'
+      - '@neondatabase/serverless'
+      - '@noble/hashes'
+      - '@op-engineering/op-sqlite'
+      - '@opentelemetry/api'
+      - '@planetscale/database'
+      - '@prisma/client'
+      - '@sveltejs/kit'
+      - '@tanstack/react-start'
+      - '@tanstack/solid-start'
+      - '@tidbcloud/serverless'
+      - '@tiptap/core'
+      - '@tiptap/extension-bold'
+      - '@tiptap/extension-bullet-list'
+      - '@tiptap/extension-code'
+      - '@tiptap/extension-document'
+      - '@tiptap/extension-history'
+      - '@tiptap/extension-horizontal-rule'
+      - '@tiptap/extension-italic'
+      - '@tiptap/extension-link'
+      - '@tiptap/extension-list-item'
+      - '@tiptap/extension-ordered-list'
+      - '@tiptap/extension-placeholder'
+      - '@tiptap/extension-strike'
+      - '@tiptap/extension-text'
+      - '@tiptap/pm'
+      - '@types/better-sqlite3'
+      - '@types/pg'
+      - '@types/sql.js'
+      - '@upstash/redis'
+      - '@vercel/postgres'
+      - '@xata.io/client'
+      - better-sqlite3
+      - bun-types
+      - canvas
+      - drizzle-kit
+      - expo-sqlite
+      - gel
+      - knex
+      - kysely
+      - meilisearch
+      - mongodb
+      - mysql2
+      - next
+      - pg
+      - postgres
+      - prisma
+      - react
+      - react-dom
+      - sharp
+      - solid-js
+      - sql.js
+      - sqlite3
+      - supports-color
+      - svelte
+      - vitest
+      - vue
+
+  '@commonpub/server@2.8.0(eeae4806c51a6f45e385f70620ce912c)':
+    dependencies:
+      '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
+      '@commonpub/config': 0.7.0
+      '@commonpub/docs': 0.5.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/infra': 0.5.0(@aws-sdk/client-s3@3.1021.0)(sharp@0.34.5)
+      '@commonpub/learning': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
+      '@commonpub/protocol': 0.9.4(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/schema': 0.8.9(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
+      isomorphic-dompurify: 3.7.1(@noble/hashes@2.0.1)
     transitivePeerDependencies:
       - '@aws-sdk/client-rds-data'
       - '@aws-sdk/client-s3'
@@ -9478,6 +9575,14 @@ snapshots:
   isexe@4.0.0: {}
 
   isomorphic-dompurify@3.7.0(@noble/hashes@2.0.1):
+    dependencies:
+      dompurify: 3.3.3
+      jsdom: 29.0.1(@noble/hashes@2.0.1)
+    transitivePeerDependencies:
+      - '@noble/hashes'
+      - canvas
+
+  isomorphic-dompurify@3.7.1(@noble/hashes@2.0.1):
     dependencies:
       dompurify: 3.3.3
       jsdom: 29.0.1(@noble/hashes@2.0.1)

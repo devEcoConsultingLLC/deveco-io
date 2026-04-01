@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  extends: ['../commonpub/layers/base'],
+  extends: ['@commonpub/layer'],
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   app: {

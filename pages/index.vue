@@ -2,8 +2,8 @@
 import type { Serialized, ContentListItem, PaginatedResponse } from '@commonpub/server';
 
 useSeoMeta({
-  title: 'devEco.io | Edge AI Projects & Hardware Community',
-  description: 'The open platform for Edge AI projects, hardware, and communities. Share your builds, discover optimized models, and connect with developers pushing intelligence to the edge.',
+  title: 'devEco.io | Open Platform for Makers & Hardware Projects',
+  description: 'Share your hardware builds, software projects, and technical content with a community of makers and developers. From embedded systems and edge AI to full-stack apps, explore what others are building.',
 });
 
 const { user: authUser } = useAuth();
@@ -113,12 +113,12 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
       </button>
       <div class="de-hero-inner">
         <div class="de-hero-content">
-            <div class="de-hero-eyebrow"><span class="de-eyebrow-line" /> Open Platform for Edge AI</div>
+            <div class="de-hero-eyebrow"><span class="de-eyebrow-line" /> Open Platform for Makers</div>
             <h1 class="de-hero-title">
-              Build <span>Edge AI</span> Projects That Matter
+              Build <span>Projects</span> That Matter
             </h1>
             <p class="de-hero-excerpt">
-              The open platform for Edge AI projects, hardware, and communities. Share your builds, discover optimized models, and connect with developers pushing intelligence to the edge.
+              Share your hardware builds, software projects, and technical content with a community of makers and developers. From embedded systems and edge AI to full-stack apps, explore what others are building and bring your own ideas to life.
             </p>
             <div class="de-hero-actions">
               <NuxtLink to="/explore" class="de-btn de-btn-accent">

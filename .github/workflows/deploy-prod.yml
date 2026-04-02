@@ -48,8 +48,8 @@ jobs:
             # Apply database schema changes (new tables, columns)
             sleep 5
             # Apply schema changes — if drizzle-kit hits a TTY prompt, deploy still succeeds
-            docker compose exec -T app npx drizzle-kit push --force 2>&1 \
-              && echo "db:push succeeded" \
-              || echo "WARNING: db:push needs manual review — run interactively on the droplet"
+            docker compose exec -T app npx drizzle-kit push --force 2>&1 | tee /tmp/dbpush.log \
+              && echo "✅ db:push succeeded" \
+              || { echo "::warning::db:push failed — schema changes may need manual SQL. Check output above."; cat /tmp/dbpush.log; }
             docker image prune -f
             echo "Deployed ${{ github.sha }}"

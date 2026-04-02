@@ -15,9 +15,10 @@ FROM node:22-alpine AS runtime
 WORKDIR /app
 COPY --from=build /app/.output ./.output
 COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/drizzle.config.ts ./drizzle.config.ts
+COPY --from=build /app/drizzle.config.js ./drizzle.config.js
+COPY --from=build /app/node_modules/@commonpub/schema/dist ./schema/dist
 COPY --from=build /app/package.json ./package.json
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN npm install --no-save drizzle-kit@0.31.10
 ENV NODE_ENV=production
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000

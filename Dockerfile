@@ -14,11 +14,6 @@ RUN pnpm build
 FROM node:22-alpine AS runtime
 WORKDIR /app
 COPY --from=build /app/.output ./.output
-COPY --from=build /app/node_modules ./node_modules
-COPY --from=build /app/drizzle.config.js ./drizzle.config.js
-COPY --from=build /app/node_modules/@commonpub/schema/dist ./schema/dist
-# Install drizzle-kit with a clean package.json (avoid npm resolution errors with @commonpub deps)
-RUN echo '{"private":true}' > package.json && npm install --no-save drizzle-kit@0.31.10
 ENV NODE_ENV=production
 ENV NUXT_HOST=0.0.0.0
 ENV NUXT_PORT=3000

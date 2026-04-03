@@ -18,8 +18,8 @@ importers:
         specifier: ^0.8.13
         version: 0.8.13(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^2.16.0
-        version: 2.16.0(f8361d63c0f832d7f188100c89d5ee83)
+        specifier: ^2.17.0
+        version: 2.17.0(f8361d63c0f832d7f188100c89d5ee83)
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
@@ -541,6 +541,12 @@ packages:
 
   '@commonpub/server@2.16.0':
     resolution: {integrity: sha512-a5ACXF0IdTMnOAu6OBLInE1WeAnz01RPz5SLHZ2q1Qprv0dhvcsIsoyAXg0m+iZ2W2J8PYFcdL2KT4tEwStjKg==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      drizzle-orm: ^0.45.1
+
+  '@commonpub/server@2.17.0':
+    resolution: {integrity: sha512-WlJQUUmAiKVPECSAXCHYGZ0kJ5Pg3HVy1JJOWQieoQBkxQ1Uc6wTpgq0XLqP36l/9iK9oXtdG96A0VkzBkNGVQ==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -6433,6 +6439,82 @@ snapshots:
       zod: 4.3.6
 
   '@commonpub/server@2.16.0(f8361d63c0f832d7f188100c89d5ee83)':
+    dependencies:
+      '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
+      '@commonpub/config': 0.7.1
+      '@commonpub/docs': 0.5.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/infra': 0.5.1(@aws-sdk/client-s3@3.1022.0)(sharp@0.34.5)
+      '@commonpub/learning': 0.5.0(4e189207a96c8481dd7164361ee1dc15)
+      '@commonpub/protocol': 0.9.5(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      '@commonpub/schema': 0.8.13(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
+      drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
+      isomorphic-dompurify: 3.7.0(@noble/hashes@2.0.1)
+    transitivePeerDependencies:
+      - '@aws-sdk/client-rds-data'
+      - '@aws-sdk/client-s3'
+      - '@cloudflare/workers-types'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@libsql/client-wasm'
+      - '@lynx-js/react'
+      - '@neondatabase/serverless'
+      - '@noble/hashes'
+      - '@op-engineering/op-sqlite'
+      - '@opentelemetry/api'
+      - '@planetscale/database'
+      - '@prisma/client'
+      - '@sveltejs/kit'
+      - '@tanstack/react-start'
+      - '@tanstack/solid-start'
+      - '@tidbcloud/serverless'
+      - '@tiptap/core'
+      - '@tiptap/extension-bold'
+      - '@tiptap/extension-bullet-list'
+      - '@tiptap/extension-code'
+      - '@tiptap/extension-document'
+      - '@tiptap/extension-history'
+      - '@tiptap/extension-horizontal-rule'
+      - '@tiptap/extension-italic'
+      - '@tiptap/extension-link'
+      - '@tiptap/extension-list-item'
+      - '@tiptap/extension-ordered-list'
+      - '@tiptap/extension-placeholder'
+      - '@tiptap/extension-strike'
+      - '@tiptap/extension-text'
+      - '@tiptap/pm'
+      - '@types/better-sqlite3'
+      - '@types/pg'
+      - '@types/sql.js'
+      - '@upstash/redis'
+      - '@vercel/postgres'
+      - '@xata.io/client'
+      - better-sqlite3
+      - bun-types
+      - canvas
+      - drizzle-kit
+      - expo-sqlite
+      - gel
+      - knex
+      - kysely
+      - meilisearch
+      - mongodb
+      - mysql2
+      - next
+      - pg
+      - postgres
+      - prisma
+      - react
+      - react-dom
+      - sharp
+      - solid-js
+      - sql.js
+      - sqlite3
+      - supports-color
+      - svelte
+      - vitest
+      - vue
+
+  '@commonpub/server@2.17.0(f8361d63c0f832d7f188100c89d5ee83)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.7.1

@@ -217,7 +217,8 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
           <div class="de-sb-head">Trending Communities <NuxtLink to="/hubs">Browse</NuxtLink></div>
           <div v-for="hub in communities.items" :key="hub.id" class="de-hub-item">
             <div class="de-hub-icon">
-              <i class="fa-solid fa-users"></i>
+              <img v-if="hub.iconUrl" :src="hub.iconUrl" :alt="hub.name" class="de-hub-icon-img" />
+              <i v-else class="fa-solid fa-users"></i>
             </div>
             <div class="de-hub-info">
               <NuxtLink :to="`/hubs/${hub.slug}`" class="de-hub-name">{{ hub.name }}</NuxtLink>
@@ -546,6 +547,10 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   font-size: 14px; flex-shrink: 0; border-radius: 10px;
   border: 1px solid var(--teal); background: var(--teal-bg); color: var(--teal);
+  overflow: hidden;
+}
+.de-hub-icon-img {
+  width: 100%; height: 100%; object-fit: cover;
 }
 .de-hub-info { flex: 1; min-width: 0; }
 .de-hub-name { font-size: 0.8125rem; font-weight: 600; color: var(--text); margin-bottom: 2px; display: block; text-decoration: none; }

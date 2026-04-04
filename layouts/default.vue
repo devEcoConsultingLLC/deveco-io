@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const { user, isAuthenticated, isAdmin, signOut, refreshSession } = useAuth();
-const { themeId, setTheme } = useTheme();
-const isDark = computed(() => themeId.value === 'dark');
-function toggleDarkMode(): void { setTheme(isDark.value ? 'base' : 'dark'); }
+const { themeId, isDark, setDarkMode } = useTheme();
+function toggleDarkMode(): void { setDarkMode(!isDark.value); }
 const { count: unreadCount, connect: connectNotifications, disconnect: disconnectNotifications } = useNotifications();
 const { hubs, learning, video, docs, contests, admin, federation } = useFeatures();
 const { enabledTypeMeta } = useContentTypes();

@@ -18,8 +18,8 @@ importers:
         specifier: ^0.8.13
         version: 0.8.13(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^2.20.0
-        version: 2.20.0(f8361d63c0f832d7f188100c89d5ee83)
+        specifier: ^2.20.1
+        version: 2.20.1(f8361d63c0f832d7f188100c89d5ee83)
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.14)(pg@8.20.0)
@@ -545,8 +545,8 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/server@2.20.0':
-    resolution: {integrity: sha512-lojvuZJ0HU6T2znW65ZpUQLYva1MrwKU/0s05BTPv8eLvRS1c2Ia2Wkk98YP+7OibR2RHPB6tAMSi/IyfrKP6Q==}
+  '@commonpub/server@2.20.1':
+    resolution: {integrity: sha512-YAc5ND2th68tt3hXHFBwmTbjxrR44dmmIC+3NwK13bCcFBMVDe18nssjQyg90bL9K3ZyM7qcCYYDmnJzFqaSzQ==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -6546,7 +6546,7 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/server@2.20.0(f8361d63c0f832d7f188100c89d5ee83)':
+  '@commonpub/server@2.20.1(f8361d63c0f832d7f188100c89d5ee83)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.14)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.1(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.7.1

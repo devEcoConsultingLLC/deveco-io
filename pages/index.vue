@@ -237,11 +237,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
           </div>
         </div>
 
-        <!-- Powered badge -->
-        <div class="de-powered-badge">
-          <span class="de-cpub-mark"><span class="de-cpub-bracket">[</span>C<span class="de-cpub-bracket">]</span></span>
-          <span class="de-powered-text">Powered by <a href="https://github.com/commonpub/commonpub" target="_blank" rel="noopener">CommonPub</a></span>
-        </div>
       </aside>
     </div>
   </div>
@@ -569,21 +564,6 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   border-radius: 6px; color: var(--green); font-size: 0.75rem; font-weight: 500;
   flex-shrink: 0; display: flex; align-items: center; gap: 4px; cursor: default;
 }
-
-/* Powered badge */
-.de-powered-badge {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 14px; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px;
-}
-.de-cpub-mark {
-  font-family: var(--font-mono); font-size: 0.875rem; font-weight: 700;
-  color: var(--text-dim);
-}
-.de-cpub-bracket { color: var(--accent); }
-.de-powered-text { font-size: 0.75rem; color: var(--text-faint); }
-.de-powered-text a { color: var(--deveco-dark-green); text-decoration: none; }
-.de-powered-text a:hover { text-decoration: underline; }
 
 /* ---- TRENDING TAGS ---- */
 .de-tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }

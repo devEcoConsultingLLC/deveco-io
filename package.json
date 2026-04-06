@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@commonpub/config": "^0.8.0",
-    "@commonpub/layer": "^0.5.7",
-    "@commonpub/schema": "^0.8.15",
-    "@commonpub/server": "^2.25.0",
+    "@commonpub/layer": "^0.6.0",
+    "@commonpub/schema": "^0.8.18",
+    "@commonpub/server": "^2.26.0",
     "drizzle-orm": "^0.45.1",
     "nuxt": "^3.16.0",
     "vue": "^3.4.0",

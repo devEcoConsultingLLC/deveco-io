@@ -12,14 +12,14 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@commonpub/layer':
-        specifier: ^0.7.6
-        version: 0.7.6(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.15)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+        specifier: ^0.7.7
+        version: 0.7.7(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.15)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@commonpub/schema':
         specifier: ^0.9.4
         version: 0.9.4(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
       '@commonpub/server':
-        specifier: ^2.27.5
-        version: 2.27.5(ae656fcd325d10fdddeda51eba3581ac)
+        specifier: ^2.27.6
+        version: 2.27.6(172f00ece08c5b4121f6e31d3549a209)
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0)
@@ -82,8 +82,8 @@ packages:
   '@aws-crypto/util@5.2.0':
     resolution: {integrity: sha512-4RkU9EsI6ZpBve5fseQlGNUWKMa1RLPQ1dnjnQoe07ldfIzcsGb5hC5W0Dm7u423KWzawlrpbjXBrXCEv9zazQ==}
 
-  '@aws-sdk/client-s3@3.1027.0':
-    resolution: {integrity: sha512-g6kaFE/pW0Tsoq/BYg8PfXa1hIZQBmyoKtmJTgcbdyzYWiOOu8vj4PZUE2kS8myita6avaY8Ama5IodHJ39lPA==}
+  '@aws-sdk/client-s3@3.1028.0':
+    resolution: {integrity: sha512-KL8PREFJxyWXUjMQR6Krq/OjZ5qbcV1QFjtA7Q7oMW5XaFO9YoSBtBxQeeXO4um6vYSmRVYVDTvEKZDcNbyeXw==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.973.27':
@@ -536,8 +536,8 @@ packages:
       sharp:
         optional: true
 
-  '@commonpub/layer@0.7.6':
-    resolution: {integrity: sha512-hB1iaRO8zAJxLzs/P3jr/o7qkA0gHasGQyLNa5O3ix2WCo4FNi27fvFs723fP8A/iLYmDogcHBelGUv+X9RpPg==}
+  '@commonpub/layer@0.7.7':
+    resolution: {integrity: sha512-UMFhzsaoT+t+3ThKiKvQGz0rJLAwDXSYG5wTJ4gbjT/6/MwoZNlBlpnHzsv1rCv9+w9fsVlFbBGJvr60rPWAHg==}
 
   '@commonpub/learning@0.5.0':
     resolution: {integrity: sha512-eBWIVfBPUoRV2s+aqCAXLRMhAZtCoZVOV0KiDQAmBkHoRbC5BdaRwoMDo8M16FSj9O/S4iApoFf2BubdVlCsXA==}
@@ -575,8 +575,8 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/server@2.27.5':
-    resolution: {integrity: sha512-s+fFxrnDaOhjap5buyUHk61EWAP9aSWffV36v6Gyv/cGyE2/OoUFhrkKWqgU6g0V2LectZDXs3MXGsYxe2pYcA==}
+  '@commonpub/server@2.27.6':
+    resolution: {integrity: sha512-JLIgrz+RmwMlkj7g79NEw6UpJC2Q1RUetkEbfa/Tdq2V/XuQ0nOjGwUL9O8RydjbkIexaGSTxSIhWNOLWmqH7w==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -2468,8 +2468,8 @@ packages:
     resolution: {integrity: sha512-R9Q/58U+qBiSARGWbAbFLczECg/RmysRksX6Q8BaQEpt75I7LI6WGDZnjuC9GXSGKljEbA7N118LhGaMbfrTXw==}
     engines: {node: '>=18.0.0'}
 
-  '@smithy/middleware-retry@4.5.0':
-    resolution: {integrity: sha512-/NzISn4grj/BRFVua/xnQwF+7fakYZgimpw2dfmlPgcqecBMKxpB9g5mLYRrmBD5OrPoODokw4Vi1hrSR4zRyw==}
+  '@smithy/middleware-retry@4.5.1':
+    resolution: {integrity: sha512-/zY+Gp7Qj2D2hVm3irkCyONER7E9MiX3cUUm/k2ZmhkzZkrPgwVS4aJ5NriZUEN/M0D1hhjrgjUmX04HhRwdWA==}
     engines: {node: '>=18.0.0'}
 
   '@smithy/middleware-serde@4.2.17':
@@ -2572,8 +2572,8 @@ packages:
     resolution: {integrity: sha512-GTooyrlmRTqvUen4eK7/K1p6kryF7bnDfq6XsAbIsf2mo51B/utaH+XThY6dKgNCWzMAaH/+OLmqaBuLhLWRow==}
     engines: {node: '>=18.0.0'}
 
-  '@smithy/util-retry@4.3.0':
-    resolution: {integrity: sha512-tSOPQNT/4KfbvqeMovWC3g23KSYy8czHd3tlN+tOYVNIDLSfxIsrPJihYi5TpNcoV789KWtgChUVedh2y6dDPg==}
+  '@smithy/util-retry@4.3.1':
+    resolution: {integrity: sha512-FwmicpgWOkP5kZUjN3y+3JIom8NLGqSAJBeoIgK0rIToI817TEBHCrd0A2qGeKQlgDeP+Jzn4i0H/NLAXGy9uQ==}
     engines: {node: '>=18.0.0'}
 
   '@smithy/util-stream@4.5.22':
@@ -5920,7 +5920,7 @@ snapshots:
       '@smithy/util-utf8': 2.3.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.1027.0':
+  '@aws-sdk/client-s3@3.1028.0':
     dependencies:
       '@aws-crypto/sha1-browser': 5.2.0
       '@aws-crypto/sha256-browser': 5.2.0
@@ -5956,7 +5956,7 @@ snapshots:
       '@smithy/md5-js': 4.2.13
       '@smithy/middleware-content-length': 4.2.13
       '@smithy/middleware-endpoint': 4.4.29
-      '@smithy/middleware-retry': 4.5.0
+      '@smithy/middleware-retry': 4.5.1
       '@smithy/middleware-serde': 4.2.17
       '@smithy/middleware-stack': 4.2.13
       '@smithy/node-config-provider': 4.3.13
@@ -5972,7 +5972,7 @@ snapshots:
       '@smithy/util-defaults-mode-node': 4.2.49
       '@smithy/util-endpoints': 3.3.4
       '@smithy/util-middleware': 4.2.13
-      '@smithy/util-retry': 4.3.0
+      '@smithy/util-retry': 4.3.1
       '@smithy/util-stream': 4.5.22
       '@smithy/util-utf8': 4.2.2
       '@smithy/util-waiter': 4.2.15
@@ -6197,7 +6197,7 @@ snapshots:
       '@smithy/core': 3.23.14
       '@smithy/protocol-http': 5.3.13
       '@smithy/types': 4.14.0
-      '@smithy/util-retry': 4.3.0
+      '@smithy/util-retry': 4.3.1
       tslib: 2.8.1
 
   '@aws-sdk/nested-clients@3.996.19':
@@ -6221,7 +6221,7 @@ snapshots:
       '@smithy/invalid-dependency': 4.2.13
       '@smithy/middleware-content-length': 4.2.13
       '@smithy/middleware-endpoint': 4.4.29
-      '@smithy/middleware-retry': 4.5.0
+      '@smithy/middleware-retry': 4.5.1
       '@smithy/middleware-serde': 4.2.17
       '@smithy/middleware-stack': 4.2.13
       '@smithy/node-config-provider': 4.3.13
@@ -6237,7 +6237,7 @@ snapshots:
       '@smithy/util-defaults-mode-node': 4.2.49
       '@smithy/util-endpoints': 3.3.4
       '@smithy/util-middleware': 4.2.13
-      '@smithy/util-retry': 4.3.0
+      '@smithy/util-retry': 4.3.1
       '@smithy/util-utf8': 4.2.2
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -6755,14 +6755,14 @@ snapshots:
       - drizzle-orm
       - supports-color
 
-  '@commonpub/infra@0.5.1(@aws-sdk/client-s3@3.1027.0)(sharp@0.34.5)':
+  '@commonpub/infra@0.5.1(@aws-sdk/client-s3@3.1028.0)(sharp@0.34.5)':
     optionalDependencies:
-      '@aws-sdk/client-s3': 3.1027.0
+      '@aws-sdk/client-s3': 3.1028.0
       sharp: 0.34.5
 
-  '@commonpub/layer@0.7.6(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.15)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
+  '@commonpub/layer@0.7.7(@noble/hashes@2.0.1)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(kysely@0.28.15)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
-      '@aws-sdk/client-s3': 3.1027.0
+      '@aws-sdk/client-s3': 3.1028.0
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.15)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.9.0
       '@commonpub/docs': 0.6.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
@@ -6771,7 +6771,7 @@ snapshots:
       '@commonpub/learning': 0.5.0(b5d83a2eda68e21b4df8ab3e91ff240c)
       '@commonpub/protocol': 0.9.7(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
       '@commonpub/schema': 0.9.4(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
-      '@commonpub/server': 2.27.5(ae656fcd325d10fdddeda51eba3581ac)
+      '@commonpub/server': 2.27.6(172f00ece08c5b4121f6e31d3549a209)
       '@commonpub/ui': 0.8.5(vue@3.5.30(typescript@5.9.3))
       '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
       '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
@@ -6910,13 +6910,13 @@ snapshots:
       drizzle-orm: 0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0)
       zod: 4.3.6
 
-  '@commonpub/server@2.27.5(ae656fcd325d10fdddeda51eba3581ac)':
+  '@commonpub/server@2.27.6(172f00ece08c5b4121f6e31d3549a209)':
     dependencies:
       '@commonpub/auth': 0.5.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.15)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.0.1))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.9.0
       '@commonpub/docs': 0.6.2(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
       '@commonpub/editor': 0.7.0(3a9a871e110cf22809cb7f11550f32b6)
-      '@commonpub/infra': 0.5.1(@aws-sdk/client-s3@3.1027.0)(sharp@0.34.5)
+      '@commonpub/infra': 0.5.1(@aws-sdk/client-s3@3.1028.0)(sharp@0.34.5)
       '@commonpub/learning': 0.5.0(b5d83a2eda68e21b4df8ab3e91ff240c)
       '@commonpub/protocol': 0.9.7(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
       '@commonpub/schema': 0.9.4(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.15)(pg@8.20.0))
@@ -8527,7 +8527,7 @@ snapshots:
       '@smithy/util-middleware': 4.2.13
       tslib: 2.8.1
 
-  '@smithy/middleware-retry@4.5.0':
+  '@smithy/middleware-retry@4.5.1':
     dependencies:
       '@smithy/core': 3.23.14
       '@smithy/node-config-provider': 4.3.13
@@ -8536,7 +8536,7 @@ snapshots:
       '@smithy/smithy-client': 4.12.9
       '@smithy/types': 4.14.0
       '@smithy/util-middleware': 4.2.13
-      '@smithy/util-retry': 4.3.0
+      '@smithy/util-retry': 4.3.1
       '@smithy/uuid': 1.1.2
       tslib: 2.8.1
 
@@ -8687,7 +8687,7 @@ snapshots:
       '@smithy/types': 4.14.0
       tslib: 2.8.1
 
-  '@smithy/util-retry@4.3.0':
+  '@smithy/util-retry@4.3.1':
     dependencies:
       '@smithy/service-error-classification': 4.2.13
       '@smithy/types': 4.14.0

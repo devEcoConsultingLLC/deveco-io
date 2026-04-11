@@ -12,6 +12,7 @@ COPY . .
 RUN pnpm build
 
 FROM node:22-alpine AS runtime
+RUN apk add --no-cache util-linux
 WORKDIR /app
 COPY --from=build /app/.output ./.output
 COPY --from=build /app/drizzle.config.ts ./drizzle.config.ts

@@ -47,9 +47,8 @@ jobs:
             docker compose up -d --force-recreate --remove-orphans
             # Apply database schema changes (new tables, columns)
             sleep 5
-            # Apply schema changes — write output to file to avoid tee masking exit code
-            docker compose exec -T app npx drizzle-kit push --force > /tmp/dbpush.log 2>&1 \
-              && echo "✅ db:push succeeded" \
-              || { echo "::warning::db:push failed — schema changes may need manual SQL"; cat /tmp/dbpush.log; }
+            # Use wrapper script that handles drizzle-kit's interactive TTY prompts in CI
+            docker compose exec -T app node scripts/db-push.mjs 2>&1 | tee /tmp/dbpush.log \
+              || { echo "::warning::db:push had issues"; cat /tmp/dbpush.log; }
             docker image prune -f
             echo "Deployed ${{ github.sha }}"

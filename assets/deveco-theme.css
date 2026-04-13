@@ -226,7 +226,6 @@ header {
 /* === CONTENT TYPE BADGE COLORS (devEco palette) === */
 [data-content-type="project"] { --badge-color: var(--deveco-dark-green); --badge-bg: rgba(0, 78, 83, 0.08); }
 [data-content-type="blog"] { --badge-color: var(--pink); --badge-bg: var(--pink-bg); }
-[data-content-type="article"] { --badge-color: var(--deveco-blue); --badge-bg: rgba(91, 197, 232, 0.08); }
 
 /* === PAGE WRAPPER — centers and pads all cpub page containers === */
 #main-content > div {

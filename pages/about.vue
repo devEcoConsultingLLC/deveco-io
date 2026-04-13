@@ -38,7 +38,7 @@ const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
         <div class="de-about-card">
           <div class="de-about-card-icon"><i class="fa-solid fa-pen-nib"></i></div>
           <h3>Blog</h3>
-          <p>Share your thoughts, tutorials, and findings with the community. Rich text editing with embedded media and code.</p>
+          <p>Write articles, tutorials, deep dives, and opinion pieces. Rich text editing with embedded media and code.</p>
         </div>
         <div class="de-about-card">
           <div class="de-about-card-icon"><i class="fa-solid fa-code"></i></div>

@@ -80,6 +80,17 @@
   --pink-bg: rgba(232, 90, 133, 0.08);
   --pink-border: rgba(232, 90, 133, 0.25);
 
+  /* === CONTENT TYPE PICKER COLORS === */
+  --deveco-project-color: #004e53;
+  --deveco-project-bg: rgba(0, 78, 83, 0.06);
+  --deveco-project-border: rgba(0, 78, 83, 0.15);
+  --deveco-blog-color: #e85a85;
+  --deveco-blog-bg: rgba(232, 90, 133, 0.06);
+  --deveco-blog-border: rgba(232, 90, 133, 0.15);
+  --deveco-explainer-color: #f4c84b;
+  --deveco-explainer-bg: rgba(244, 200, 75, 0.06);
+  --deveco-explainer-border: rgba(244, 200, 75, 0.2);
+
   /* devEco additional brand colors */
   --deveco-dark-green: #004e53;
   --deveco-light-green: #00e7ad;

@@ -51,4 +51,14 @@ jobs:
             docker compose exec -T app node scripts/db-push.mjs 2>&1 | tee /tmp/dbpush.log \
               || { echo "::warning::db:push had issues"; cat /tmp/dbpush.log; }
             docker image prune -f
+            # Post-deploy smoke test — verify app is responding
+            for i in 1 2 3 4 5; do
+              if curl -sf http://localhost:3000/ > /dev/null 2>&1; then
+                echo "✅ Health check passed"
+                break
+              fi
+              echo "⏳ Waiting for app to start... ($i/5)"
+              sleep 5
+            done
+            curl -sf http://localhost:3000/ || echo "::warning::Health check failed — app may not have started correctly"
             echo "Deployed ${{ github.sha }}"

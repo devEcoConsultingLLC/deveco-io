@@ -13,9 +13,9 @@ const allTypes = [
   {
     type: 'project',
     icon: 'fa-solid fa-microchip',
-    color: '#004e53',
-    bg: 'rgba(0, 78, 83, 0.06)',
-    border: 'rgba(0, 78, 83, 0.15)',
+    color: 'var(--deveco-project-color)',
+    bg: 'var(--deveco-project-bg)',
+    border: 'var(--deveco-project-border)',
     name: 'Project',
     desc: 'Document a hardware or software build with step-by-step instructions, parts list, and build photos.',
     badge: '',
@@ -23,18 +23,18 @@ const allTypes = [
   {
     type: 'blog',
     icon: 'fa-solid fa-pen-nib',
-    color: '#e85a85',
-    bg: 'rgba(232, 90, 133, 0.06)',
-    border: 'rgba(232, 90, 133, 0.15)',
+    color: 'var(--deveco-blog-color)',
+    bg: 'var(--deveco-blog-bg)',
+    border: 'var(--deveco-blog-border)',
     name: 'Blog',
     desc: 'Write long-form content — articles, tutorials, deep dives, opinion pieces, or personal updates with rich formatting.',
   },
   {
     type: 'explainer',
     icon: 'fa-solid fa-lightbulb',
-    color: '#f4c84b',
-    bg: 'rgba(244, 200, 75, 0.06)',
-    border: 'rgba(244, 200, 75, 0.2)',
+    color: 'var(--deveco-explainer-color)',
+    bg: 'var(--deveco-explainer-bg)',
+    border: 'var(--deveco-explainer-border)',
     name: 'Explainer',
     desc: 'Create an interactive explorable explanation with sliders, quizzes, and section-by-section progression.',
   },
@@ -158,7 +158,7 @@ const types = computed(() => allTypes.filter(t => isTypeEnabled(t.type as Conten
   text-transform: uppercase;
   padding: 2px 8px;
   background: var(--deveco-dark-green);
-  color: #fff;
+  color: var(--color-text-inverse);
   border-radius: 10px;
 }
 
@@ -197,7 +197,7 @@ const types = computed(() => allTypes.filter(t => isTypeEnabled(t.type as Conten
 
 .de-create-card:hover .de-create-card-arrow {
   background: var(--deveco-dark-green);
-  color: #fff;
+  color: var(--color-text-inverse);
   border-color: var(--deveco-dark-green);
 }
 

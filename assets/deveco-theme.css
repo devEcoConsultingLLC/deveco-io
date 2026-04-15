@@ -252,9 +252,13 @@ header {
 }
 
 /* === GLOBAL CARD OVERRIDES — softer than commonpub default === */
+/* Only target actual card containers, not their children */
 .cpub-card,
 .cpub-hub-card,
-[class*="cpub-"][class*="-card"] {
+.cpub-author-card,
+.cpub-related-card,
+.cpub-explore-hub-card,
+.cpub-contest-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   box-shadow: none;
@@ -263,7 +267,9 @@ header {
 
 .cpub-card:hover,
 .cpub-hub-card:hover,
-[class*="cpub-"][class*="-card"]:hover {
+.cpub-related-card:hover,
+.cpub-explore-hub-card:hover,
+.cpub-contest-card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }

@@ -28,12 +28,14 @@ const contentQuery = computed(() => ({
   limit: 12,
 }));
 
+// @ts-ignore TS2589: nested PaginatedResponse<Serialized<ContentListItem>>
+// generics hit deep type instantiation under Nuxt's useFetch wrapper.
 const { data: feed } = await useFetch<PaginatedResponse<Serialized<ContentListItem>>>('/api/content', {
   query: contentQuery,
   watch: [contentQuery],
 });
 
-// Only show featured card if an admin has explicitly featured something
+// @ts-ignore TS2589: same as above.
 const { data: featured } = await useFetch<PaginatedResponse<Serialized<ContentListItem>>>('/api/content', {
   query: { status: 'published', featured: true, limit: 1 },
 });
@@ -42,16 +44,28 @@ const { data: communities } = await useFetch('/api/hubs', {
   query: { limit: 4 },
 });
 
-const { data: contests } = await useFetch('/api/contests', {
+interface ContestListItem {
+  id: string;
+  slug: string;
+  title: string;
+  status: string;
+  description?: string | null;
+  bannerUrl?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  entryCount?: number;
+}
+
+const { data: contests } = await useFetch<{ items: ContestListItem[] }>('/api/contests', {
   query: { limit: 3 },
 });
 
 const heroDismissed = ref(false);
 const joinedHubs = ref(new Set<string>());
 
-const activeContest = computed(() => {
+const activeContest = computed<ContestListItem | null>(() => {
   const items = contests.value?.items;
-  return items?.find((c) => c.status === 'active') ?? null;
+  return items?.find((c: ContestListItem) => c.status === 'active') ?? null;
 });
 
 const isAuthenticated = computed(() => !!user.value);

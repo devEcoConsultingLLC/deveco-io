@@ -30,6 +30,7 @@ const ENV_FLAG_MAP: Record<string, string> = {
   federateHubs: 'FEATURE_FEDERATE_HUBS',
   seamlessFederation: 'FEATURE_SEAMLESS_FEDERATION',
   admin: 'FEATURE_ADMIN',
+  events: 'FEATURE_EVENTS',
   emailNotifications: 'FEATURE_EMAIL_NOTIFICATIONS',
 };
 

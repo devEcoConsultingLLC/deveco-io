@@ -20,6 +20,7 @@ COPY --from=build /app/scripts ./scripts
 RUN echo '{"private":true,"type":"module"}' > package.json && npm install --no-save drizzle-kit@0.31.10 drizzle-orm pg zod
 # Copy schema dist to root node_modules (for drizzle-kit push) and .output (for Nitro runtime)
 COPY --from=build /app/node_modules/@commonpub/schema/dist ./node_modules/@commonpub/schema/dist
+COPY --from=build /app/node_modules/@commonpub/schema/migrations ./node_modules/@commonpub/schema/migrations
 COPY --from=build /app/node_modules/@commonpub/schema/package.json ./node_modules/@commonpub/schema/package.json
 COPY --chown=deveco:deveco --from=build /app/.output ./.output
 COPY --from=build /app/node_modules/@commonpub/schema/dist ./.output/server/node_modules/@commonpub/schema/dist

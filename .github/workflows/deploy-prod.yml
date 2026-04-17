@@ -45,11 +45,13 @@ jobs:
             # Tag with both names so compose finds it regardless of which image name it references
             docker tag deveco-app:latest registry.digitalocean.com/deveco/deveco-app:latest 2>/dev/null || true
             docker compose up -d --force-recreate --remove-orphans
-            # Apply database schema changes (new tables, columns)
+            # Apply committed schema migrations via drizzle-kit migrate.
+            # (Replaced db-push.mjs in session 128 — push blocks in CI on TTY
+            # prompts for constraint changes on populated tables; migrate just
+            # runs committed .sql files and tracks state in drizzle.__drizzle_migrations.)
             sleep 5
-            # Use wrapper script that handles drizzle-kit's interactive TTY prompts in CI
-            docker compose exec -T app node scripts/db-push.mjs 2>&1 | tee /tmp/dbpush.log \
-              || { echo "::warning::db:push had issues"; cat /tmp/dbpush.log; }
+            docker compose exec -T app node scripts/db-migrate.mjs 2>&1 | tee /tmp/dbmigrate.log \
+              || { echo "::error::db:migrate failed — see log above"; cat /tmp/dbmigrate.log; exit 1; }
             docker image prune -f
             # Post-deploy smoke test — verify app is responding
             for i in 1 2 3 4 5; do

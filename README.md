@@ -53,8 +53,8 @@ docker compose up -d    # Postgres, Redis, Meilisearch
 # Install dependencies
 pnpm install
 
-# Push database schema
-pnpm db:push
+# Apply committed schema migrations (session 128+)
+pnpm drizzle-kit migrate --config=drizzle.config.ts
 
 # Start dev server
 pnpm dev                # http://localhost:3000

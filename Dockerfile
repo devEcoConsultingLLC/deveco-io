@@ -1,5 +1,11 @@
 FROM node:22-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Pin pnpm to match the commonpub repo's Dockerfile. pnpm@latest used
+# to work but newer pnpm versions (≥10.11 ish) enforce
+# `onlyBuiltDependencies` strictly and fail the install on packages
+# with build scripts (sharp, esbuild, @parcel/watcher) that haven't
+# been explicitly approved. Pinning gives us deterministic builds and
+# avoids surprise behaviour changes from upstream pnpm releases.
+RUN corepack enable && corepack prepare pnpm@10.10.0 --activate
 WORKDIR /app
 
 FROM base AS deps

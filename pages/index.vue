@@ -73,7 +73,7 @@ const activeContest = computed<ContestListItem | null>(() => {
 // the hero banner is already showing as a full callout (dedupe).
 const sidebarContests = computed<ContestListItem[]>(() =>
   (contests.value?.items ?? []).filter(
-    (c) => c.status === 'active' && c.id !== activeContest.value?.id,
+    (c: ContestListItem) => c.status === 'active' && c.id !== activeContest.value?.id,
   ),
 );
 

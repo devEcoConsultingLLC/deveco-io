@@ -57,7 +57,7 @@ interface ContestListItem {
 }
 
 const { data: contests } = await useFetch<{ items: ContestListItem[] }>('/api/contests', {
-  query: { limit: 3 },
+  query: { status: 'active', limit: 3 },
 });
 
 const heroDismissed = ref(false);
@@ -67,6 +67,15 @@ const activeContest = computed<ContestListItem | null>(() => {
   const items = contests.value?.items;
   return items?.find((c: ContestListItem) => c.status === 'active') ?? null;
 });
+
+// Sidebar "Active Contests": only genuinely-active contests (the `status` query
+// is defensive — a completed contest must never appear here), and never the one
+// the hero banner is already showing as a full callout (dedupe).
+const sidebarContests = computed<ContestListItem[]>(() =>
+  (contests.value?.items ?? []).filter(
+    (c) => c.status === 'active' && c.id !== activeContest.value?.id,
+  ),
+);
 
 const isAuthenticated = computed(() => !!user.value);
 const toast = useToast();
@@ -212,9 +221,9 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
       <aside class="de-sidebar">
         <!-- Platform Stats -->
         <!-- Active Contests -->
-        <div v-if="contestsEnabled && contests?.items?.length" class="de-sb-card">
+        <div v-if="contestsEnabled && sidebarContests.length" class="de-sb-card">
           <div class="de-sb-head">Active Contests <NuxtLink to="/contests">View all</NuxtLink></div>
-          <div v-for="c in contests.items" :key="c.id" class="de-contest-item">
+          <div v-for="c in sidebarContests" :key="c.id" class="de-contest-item">
             <NuxtLink :to="`/contests/${c.slug}`" class="de-contest-name">{{ c.title }}</NuxtLink>
             <div class="de-contest-row">
               <span class="de-contest-entries">{{ c.entryCount ?? 0 }} entries</span>

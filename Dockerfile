@@ -8,14 +8,21 @@ FROM node:22-alpine AS base
 RUN corepack enable && corepack prepare pnpm@10.10.0 --activate
 WORKDIR /app
 
+# Use npm install (not pnpm). pnpm 10.10.0 --frozen-lockfile silently DROPS
+# files from @commonpub/* dist dirs in this Alpine image, so the built .output
+# ships incomplete/stale package code (e.g. an old listContent without the
+# pagination tiebreaker) and the new container fails its health check while the
+# old one keeps serving. npm install pulls complete packages (matches the
+# working heatsynclabs.io Dockerfile). No package-lock needed — the ^ ranges in
+# package.json resolve the intended versions reproducibly enough here.
 FROM base AS deps
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY package.json ./
+RUN npm install --no-audit --no-fund
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm build
+RUN npm run build
 
 FROM node:22-alpine AS runtime
 RUN addgroup -S deveco && adduser -S deveco -G deveco

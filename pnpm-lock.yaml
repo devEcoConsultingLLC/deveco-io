@@ -12,8 +12,8 @@ importers:
         specifier: ^0.16.0
         version: 0.16.0
       '@commonpub/layer':
-        specifier: ^0.43.1
-        version: 0.43.1(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+        specifier: ^0.43.2
+        version: 0.43.2(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@commonpub/schema':
         specifier: ^0.25.0
         version: 0.25.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
@@ -577,8 +577,8 @@ packages:
       sharp:
         optional: true
 
-  '@commonpub/layer@0.43.1':
-    resolution: {integrity: sha512-fNhRIBGUuYkqNT0euYVV+vypj37cidI9QqoSLmm5xDE7QynF1ckn6VjB3rkAP9j3A9NtheEyXOc2eETK2BtTgQ==}
+  '@commonpub/layer@0.43.2':
+    resolution: {integrity: sha512-hYYXqW4IdwWdNnPiBmwBCoo1Lz8c1EwBGWxMtzbnIx/qyAEbYvKqXSwvbWZm7Hi3DVaCr00A+j5I98Dc9XTIsw==}
 
   '@commonpub/learning@0.5.2':
     resolution: {integrity: sha512-hcCfmN18/yBiEkbwtIBzszv2+Sjgvs9wAddarzp3R4HrRovMksVNV0skG+VsFd8mS8XOtwvB2wlFw6YagVOU/g==}
@@ -624,8 +624,8 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/ui@0.9.1':
-    resolution: {integrity: sha512-DOFwQE22EuNEb/X3nmq+xPVl6Bk1YcU78j2SQhD6bnS8xX5TvCH89RC1wOULPkQteRxAgWN8S/J/meY8BOlJLA==}
+  '@commonpub/ui@0.9.2':
+    resolution: {integrity: sha512-76uy1xK7FwnA5D2P8gaCW0ZXmm9/IZvRBBUoF5dPnAG8jI3qFnlYG6y1n7DCBINqIcVC/6MgV9HmFoveqCvALg==}
     engines: {node: '>=22'}
     peerDependencies:
       vue: ^3.4.0
@@ -6989,7 +6989,7 @@ snapshots:
       ioredis: 5.10.1
       sharp: 0.34.5
 
-  '@commonpub/layer@0.43.1(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
+  '@commonpub/layer@0.43.2(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@aws-sdk/client-s3': 3.1030.0
       '@commonpub/auth': 0.7.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.16)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.0.2(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
@@ -7001,7 +7001,7 @@ snapshots:
       '@commonpub/protocol': 0.12.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
       '@commonpub/schema': 0.25.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
       '@commonpub/server': 2.71.0(c4903a8ceb8e55434ba3bd12191c1175)
-      '@commonpub/ui': 0.9.1(vue@3.5.30(typescript@5.9.3))(zod@4.3.6)
+      '@commonpub/ui': 0.9.2(vue@3.5.30(typescript@5.9.3))(zod@4.3.6)
       '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
       '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
       '@tiptap/extension-bullet-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
@@ -7230,7 +7230,7 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/ui@0.9.1(vue@3.5.30(typescript@5.9.3))(zod@4.3.6)':
+  '@commonpub/ui@0.9.2(vue@3.5.30(typescript@5.9.3))(zod@4.3.6)':
     dependencies:
       vue: 3.5.30(typescript@5.9.3)
       zod: 4.3.6

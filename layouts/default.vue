@@ -262,15 +262,6 @@ const userUsername = computed(() => user.value?.username ?? '');
 
 .de-topbar-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
 
-.de-topbar-nav { display: flex; align-items: center; gap: 2px; margin-left: 32px; }
-.de-nav-link {
-  font-size: 0.875rem; font-weight: 500; color: var(--text-dim);
-  padding: 8px 14px; border-radius: 6px; text-decoration: none;
-  transition: color 0.15s, background 0.15s;
-}
-.de-nav-link:hover { color: var(--text); background: var(--surface2); }
-.de-nav-link.router-link-active { color: var(--deveco-dark-green); background: var(--accent-bg); font-weight: 600; }
-
 /* Config-driven nav now renders via <NavRenderer> (.cpub-topbar-nav / .cpub-nav-link).
    :deep() reaches those child-component classes and reproduces deveco's pill/green look
    so the admin-configurable nav looks identical to the old hardcoded one. */
@@ -377,15 +368,6 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-dropdown-item:hover { background: var(--surface2); color: var(--text); }
 .de-dropdown-item i { width: 16px; text-align: center; font-size: 12px; }
 .de-dropdown-divider { height: 1px; background: var(--border); margin: 4px 8px; }
-
-.de-search-icon-btn {
-  display: none; width: 36px; height: 36px;
-  align-items: center; justify-content: center;
-  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-  color: var(--text-dim); font-size: 14px; text-decoration: none;
-  transition: all 0.15s;
-}
-.de-search-icon-btn:hover { background: var(--surface3); color: var(--text); }
 
 .de-search-icon-mobile {
   display: none; width: 40px; height: 40px;
@@ -506,7 +488,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-powered a:hover { text-decoration: underline; }
 
 @media (max-width: 768px) {
-  .de-topbar-nav { display: none; }
+  :deep(.cpub-topbar-nav) { display: none; }
   .de-topbar-spacer { display: none; }
   .de-topbar-actions { gap: 6px; margin-left: auto; }
   .de-search-form { display: none; }

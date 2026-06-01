@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import type { NavItem } from '@commonpub/server';
+
 const { user, isAuthenticated, isAdmin, signOut, refreshSession } = useAuth();
 const { themeId, isDark, setDarkMode } = useTheme();
 function toggleDarkMode(): void { setDarkMode(!isDark.value); }
 const { count: unreadCount, connect: connectNotifications, disconnect: disconnectNotifications } = useNotifications();
-const { hubs, learning, video, docs, contests, admin, federation } = useFeatures();
+// hubs + contests gate the footer "Community" links; nav visibility is now handled
+// inside NavRenderer (it reads useFeatures itself), so the old nav feature vars are gone.
+const { hubs, contests } = useFeatures();
 const { enabledTypeMeta } = useContentTypes();
 
 useHead({
@@ -14,6 +18,23 @@ useHead({
 
 const userMenuOpen = ref(false);
 const mobileMenuOpen = ref(false);
+
+// Config-driven nav (same source as /admin/navigation). Replaces the hardcoded
+// nav links so the admin nav editor actually drives deveco's navbar. Styling below
+// (:deep on .cpub-nav-link / .cpub-mobile-link) keeps deveco's pill/green look.
+// useAsyncData + (Function) cast avoids Nuxt's typed-route inference (TS2589) — same
+// pattern as the base layer's layouts/default.vue.
+const { data: navItems } = await useAsyncData('nav-items', () =>
+  ($fetch as Function)('/api/navigation/items') as Promise<NavItem[]>,
+  { default: () => [] as NavItem[] },
+);
+const openDropdown = ref<string | null>(null);
+function toggleDropdown(name: string): void {
+  openDropdown.value = openDropdown.value === name ? null : name;
+}
+function closeDropdowns(): void {
+  openDropdown.value = null;
+}
 
 const searchQuery = ref('');
 const searchInputRef = ref<HTMLInputElement | null>(null);
@@ -80,15 +101,13 @@ const userUsername = computed(() => user.value?.username ?? '');
           <DevEcoLogo variant="light-bg" size="sm" :show-text="true" />
         </NuxtLink>
 
-        <nav class="de-topbar-nav" aria-label="Main navigation">
-          <NuxtLink to="/" class="de-nav-link">Home</NuxtLink>
-          <NuxtLink to="/project" class="de-nav-link">Projects</NuxtLink>
-          <NuxtLink to="/blog" class="de-nav-link">Blog</NuxtLink>
-          <NuxtLink v-if="hubs" to="/hubs" class="de-nav-link">Communities</NuxtLink>
-          <NuxtLink v-if="contests" to="/contests" class="de-nav-link">Contests</NuxtLink>
-          <NuxtLink v-if="federation" to="/federation" class="de-nav-link">Fediverse</NuxtLink>
-          <NuxtLink v-if="isAdmin && admin" to="/admin" class="de-nav-link">Admin</NuxtLink>
-        </nav>
+        <NavRenderer
+          v-if="navItems"
+          :items="navItems"
+          :open-dropdown="openDropdown"
+          @toggle-dropdown="toggleDropdown"
+          @close-dropdowns="closeDropdowns"
+        />
 
         <div class="de-topbar-spacer" />
 
@@ -147,15 +166,14 @@ const userUsername = computed(() => user.value?.username ?? '');
 
     <!-- Mobile menu -->
     <div v-if="mobileMenuOpen" class="de-mobile-menu" @click.self="mobileMenuOpen = false">
-      <nav class="de-mobile-nav" aria-label="Mobile navigation">
-        <NuxtLink to="/" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-house"></i> Home</NuxtLink>
-        <NuxtLink to="/project" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-microchip"></i> Projects</NuxtLink>
-        <NuxtLink to="/blog" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-pen-nib"></i> Blog</NuxtLink>
-        <NuxtLink v-if="hubs" to="/hubs" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-users"></i> Communities</NuxtLink>
-        <NuxtLink v-if="contests" to="/contests" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-trophy"></i> Contests</NuxtLink>
-        <NuxtLink v-if="federation" to="/federation" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-globe"></i> Fediverse</NuxtLink>
+      <!-- Config-driven nav items (from /admin/navigation), then deveco's action links. -->
+      <MobileNavRenderer
+        v-if="navItems"
+        :items="navItems"
+        @close="mobileMenuOpen = false"
+      />
+      <nav class="de-mobile-nav de-mobile-nav-extra" aria-label="Mobile actions">
         <NuxtLink to="/search" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-magnifying-glass"></i> Search</NuxtLink>
-        <NuxtLink v-if="isAdmin && admin" to="/admin" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-shield-halved"></i> Admin</NuxtLink>
         <template v-if="isAuthenticated">
           <div class="de-mobile-divider" />
           <NuxtLink to="/create" class="de-mobile-link" @click="mobileMenuOpen = false"><i class="fa-solid fa-plus"></i> Create</NuxtLink>
@@ -252,6 +270,36 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 .de-nav-link:hover { color: var(--text); background: var(--surface2); }
 .de-nav-link.router-link-active { color: var(--deveco-dark-green); background: var(--accent-bg); font-weight: 600; }
+
+/* Config-driven nav now renders via <NavRenderer> (.cpub-topbar-nav / .cpub-nav-link).
+   :deep() reaches those child-component classes and reproduces deveco's pill/green look
+   so the admin-configurable nav looks identical to the old hardcoded one. */
+:deep(.cpub-topbar-nav) { display: flex; align-items: center; gap: 2px; margin-left: 32px; }
+:deep(.cpub-nav-link) {
+  font-size: 0.875rem; font-weight: 500; color: var(--text-dim);
+  padding: 8px 14px; border-radius: 6px; text-decoration: none; border: none; background: none;
+  display: flex; align-items: center; gap: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+:deep(.cpub-nav-link i) { font-size: 0.75rem; }
+:deep(.cpub-nav-link:hover) { color: var(--text); background: var(--surface2); }
+:deep(.cpub-nav-link.router-link-active) { color: var(--deveco-dark-green); background: var(--accent-bg); font-weight: 600; }
+:deep(.cpub-nav-link--disabled) { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+/* Nav dropdown panels (Learn/Build/etc. if configured as dropdowns) */
+:deep(.cpub-nav-dropdown) { position: relative; }
+:deep(.cpub-nav-caret) { font-size: 0.5rem; margin-left: 2px; transition: transform 0.15s; }
+:deep(.cpub-nav-trigger--open .cpub-nav-caret) { transform: rotate(180deg); }
+:deep(.cpub-nav-panel) {
+  position: absolute; top: 100%; left: 0; min-width: 180px; margin-top: 6px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  box-shadow: var(--shadow-md); z-index: 200; display: flex; flex-direction: column; padding: 4px 0;
+}
+:deep(.cpub-nav-panel-item) {
+  display: flex; align-items: center; gap: 8px; padding: 8px 14px;
+  font-size: 0.8125rem; color: var(--text-dim); text-decoration: none; transition: background 0.1s, color 0.1s;
+}
+:deep(.cpub-nav-panel-item:hover) { background: var(--surface2); color: var(--text); }
+:deep(.cpub-nav-panel-item i) { width: 14px; text-align: center; font-size: 0.6875rem; }
 
 .de-topbar-spacer { flex: 1; }
 .de-topbar-actions { display: flex; align-items: center; gap: 8px; }
@@ -371,6 +419,30 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-mobile-link:hover { background: var(--surface2); color: var(--text); }
 .de-mobile-link i { width: 16px; text-align: center; font-size: 13px; }
 .de-mobile-divider { height: 1px; background: var(--border); margin: 4px 14px; }
+
+/* The config-driven <MobileNavRenderer> emits .cpub-mobile-nav / .cpub-mobile-link.
+   It now provides the panel chrome (bg/border/shadow); the deveco action nav below it
+   (.de-mobile-nav-extra) is transparent so the two read as one continuous panel. */
+:deep(.cpub-mobile-nav) {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 8px 6px 0; display: flex; flex-direction: column; box-shadow: var(--shadow-lg);
+}
+:deep(.cpub-mobile-link) {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; min-height: 44px; font-size: 0.8125rem; color: var(--text-dim);
+  text-decoration: none; border-radius: 6px; transition: background 0.1s;
+}
+:deep(.cpub-mobile-link:hover) { background: var(--surface2); color: var(--text); }
+:deep(.cpub-mobile-link i) { width: 16px; text-align: center; font-size: 0.8125rem; }
+:deep(.cpub-mobile-link--indent) { padding-left: 36px; }
+:deep(.cpub-mobile-link--disabled) { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+:deep(.cpub-mobile-section-label) {
+  font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--text-faint); padding: 10px 14px 2px; margin-top: 4px;
+}
+/* Action nav directly under the renderer: drop its own panel chrome (the renderer's
+   .cpub-mobile-nav already supplies bg/shadow) so they merge visually. */
+.de-mobile-nav-extra { background: none; border-bottom: none; box-shadow: none; padding: 0 6px 8px; }
 
 #main-content { flex: 1; }
 

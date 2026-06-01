@@ -28,14 +28,11 @@ const contentQuery = computed(() => ({
   limit: 12,
 }));
 
-// @ts-ignore TS2589: nested PaginatedResponse<Serialized<ContentListItem>>
-// generics hit deep type instantiation under Nuxt's useFetch wrapper.
-const { data: feed } = await useFetch<PaginatedResponse<Serialized<ContentListItem>>>('/api/content', {
-  query: contentQuery,
-  watch: [contentQuery],
-});
+// Keyset pagination for recency tabs (latest/following/per-type), offset for the
+// popular "For You" tab — chosen transparently by the layer's useContentFeed.
+const { items: feedItems, loadMore, canLoadMore, loadingMore } = useContentFeed(contentQuery);
 
-// @ts-ignore TS2589: same as above.
+// @ts-ignore TS2589: nested PaginatedResponse<Serialized<ContentListItem>> generics.
 const { data: featured } = await useFetch<PaginatedResponse<Serialized<ContentListItem>>>('/api/content', {
   query: { status: 'published', featured: true, limit: 1 },
 });
@@ -79,37 +76,6 @@ const sidebarContests = computed<ContestListItem[]>(() =>
 
 const isAuthenticated = computed(() => !!user.value);
 const toast = useToast();
-
-const feedOffset = ref(0);
-const loadingMore = ref(false);
-const allLoaded = ref(false);
-
-async function loadMore(): Promise<void> {
-  loadingMore.value = true;
-  try {
-    const nextOffset = (feed.value?.items?.length ?? 0);
-    const more = await $fetch<{ items: Array<Record<string, unknown>> }>('/api/content', {
-      query: {
-        ...contentQuery.value,
-        offset: nextOffset,
-      },
-    });
-    if (more.items?.length) {
-      if (feed.value?.items) {
-        feed.value.items.push(...(more.items as typeof feed.value.items));
-      }
-    }
-    if (!more.items?.length || more.items.length < 12) {
-      allLoaded.value = true;
-    }
-  } catch {
-    toast.error('Failed to load more');
-  } finally {
-    loadingMore.value = false;
-  }
-}
-
-watch(activeTab, () => { allLoaded.value = false; });
 
 async function handleHubJoin(hubSlug: string): Promise<void> {
   if (!isAuthenticated.value) {
@@ -188,8 +154,8 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
         </NuxtLink>
 
         <!-- Content grid -->
-        <div v-if="feed?.items?.length" class="de-content-grid">
-          <ContentCard v-for="item in feed.items" :key="item.id" :item="item" />
+        <div v-if="feedItems.length" class="de-content-grid">
+          <ContentCard v-for="item in feedItems" :key="item.id" :item="item" />
         </div>
         <div v-else class="de-empty-state">
           <div class="de-empty-state-icon"><i :class="activeTab === 'following' ? 'fa-solid fa-user-group' : 'fa-solid fa-inbox'"></i></div>
@@ -209,7 +175,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
           </template>
         </div>
 
-        <div v-if="!allLoaded && feed?.items?.length" class="de-load-more-row">
+        <div v-if="canLoadMore" class="de-load-more-row">
           <button class="de-btn-load-more" :disabled="loadingMore" @click="loadMore">
             <i :class="loadingMore ? 'fa-solid fa-circle-notch fa-spin' : 'fa-solid fa-rotate'"></i>
             {{ loadingMore ? 'Loading...' : 'Load more' }}

@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@commonpub/config": "^0.18.0",
-    "@commonpub/layer": "^0.45.0",
+    "@commonpub/layer": "^0.46.0",
     "@commonpub/schema": "^0.26.0",
     "@commonpub/server": "^2.73.0",
     "drizzle-orm": "^0.45.1",

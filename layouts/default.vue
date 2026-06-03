@@ -167,7 +167,12 @@ const userUsername = computed(() => user.value?.username ?? '');
     <!-- Mobile menu -->
     <div v-if="mobileMenuOpen" class="de-mobile-menu" @click.self="mobileMenuOpen = false">
       <!-- Config-driven nav items (from /admin/navigation), then deveco's action links. -->
-      <MobileNavRenderer
+      <!-- Use the pathPrefix auto-import name: the layer registers
+           components/nav/MobileNavRenderer.vue as <NavMobileNavRenderer>.
+           Referencing bare <MobileNavRenderer> leaves it unresolved (renders an
+           empty <mobilenavrenderer> element + breaks hydration → the mobile
+           menu appears not to open). -->
+      <NavMobileNavRenderer
         v-if="navItems"
         :items="navItems"
         @close="mobileMenuOpen = false"

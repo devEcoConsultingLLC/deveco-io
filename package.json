@@ -11,10 +11,10 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@commonpub/config": "^0.19.0",
-    "@commonpub/layer": "^0.62.0",
-    "@commonpub/schema": "^0.35.0",
-    "@commonpub/server": "^2.82.0",
+    "@commonpub/config": "^0.21.0",
+    "@commonpub/layer": "^0.71.2",
+    "@commonpub/schema": "^0.39.0",
+    "@commonpub/server": "^2.84.1",
     "drizzle-orm": "^0.45.1",
     "nuxt": "^3.16.0",
     "vue": "^3.4.0",

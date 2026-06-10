@@ -312,6 +312,11 @@ const userUsername = computed(() => user.value?.username ?? '');
   padding: 8px 0; font-size: 0.8125rem; color: var(--text);
   font-family: var(--font-sans);
 }
+/* The form's :focus-within ring is the ONE focus indicator. Without this,
+   stoa's `[data-theme="stoa"] :focus-visible { box-shadow: var(--focus-ring) }`
+   (we ride the stoa fallback) draws a second ring INSIDE the form's ring —
+   the "double tracing". outline:none above doesn't cover box-shadow. */
+.de-search-input:focus-visible { outline: none; box-shadow: none; }
 .de-search-input::placeholder { color: var(--text-faint); }
 .de-kbd {
   margin-left: auto; font-size: 0.6875rem; font-family: var(--font-mono);

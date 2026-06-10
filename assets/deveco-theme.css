@@ -145,8 +145,16 @@
   --focus-ring: 0 0 0 3px rgba(0, 231, 173, 0.4);
 }
 
-/* === DARK MODE === */
-[data-theme="dark"] {
+/* === DARK MODE ===
+   Matches BOTH dark ids: deveco has no explicit `theme.default` instance
+   setting, so it rides the layer's `stoa` fallback — the Light/Dark toggle
+   and the cpub-color-scheme cookie therefore resolve to `stoa-dark`, not
+   `dark`. Without the stoa-dark selector this block never matched and the
+   unscoped :root branding above kept the page light ("dark mode doesn't
+   enable"). The block must stay AFTER :root (equal specificity; source
+   order is what lets it win). */
+[data-theme="dark"],
+[data-theme="stoa-dark"] {
   --bg: #0a1a1c;
   --surface: #0f2628;
   --surface2: #143234;

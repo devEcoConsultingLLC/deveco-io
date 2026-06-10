@@ -11,9 +11,9 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@commonpub/config": "^0.21.0",
-    "@commonpub/layer": "^0.72.0",
-    "@commonpub/schema": "^0.40.0",
+    "@commonpub/config": "^0.22.1",
+    "@commonpub/layer": "^0.73.0",
+    "@commonpub/schema": "^0.40.1",
     "@commonpub/server": "^2.84.1",
     "drizzle-orm": "^0.45.1",
     "nuxt": "^3.16.0",

@@ -270,7 +270,12 @@ const userUsername = computed(() => user.value?.username ?? '');
 /* Config-driven nav now renders via <NavRenderer> (.cpub-topbar-nav / .cpub-nav-link).
    :deep() reaches those child-component classes and reproduces deveco's pill/green look
    so the admin-configurable nav looks identical to the old hardcoded one. */
-:deep(.cpub-topbar-nav) { display: flex; align-items: center; gap: 2px; margin-left: 32px; }
+/* flex:1 + min-width:0 gives NavRenderer's priority-nav its real allocated
+   width to measure, so excess links collapse into the "More" dropdown instead
+   of pushing the search/auth cluster off-screen (and dragging a horizontal
+   page scrollbar with it — the "thin right margin"). */
+:deep(.cpub-topbar-nav) { display: flex; align-items: center; gap: 2px; margin-left: 32px; flex: 1 1 auto; min-width: 0; }
+:deep(.cpub-topbar-nav .cpub-nav-link) { white-space: nowrap; flex-shrink: 0; }
 :deep(.cpub-nav-link) {
   font-size: 0.875rem; font-weight: 500; color: var(--text-dim);
   padding: 8px 14px; border-radius: 6px; text-decoration: none; border: none; background: none;

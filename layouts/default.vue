@@ -261,13 +261,14 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 
 .de-topbar-inner {
-  /* 1360, not 1280: at 1280 the bar's content (logo + 6 nav links + search +
-     auth buttons ≈ 1300px) over-subscribes the row, so the priority nav
-     collapsed links into "More" even on huge screens (the nav's allocation
-     was capped at ~520px at EVERY viewport). 1360 fits all six links with
-     slack; below ~1360 viewports the More menu engages progressively, which
-     is the intended behavior. */
-  max-width: 1360px; margin: 0 auto; height: 100%;
+  /* Sized from MEASURED content, not vibes: non-nav content (logo + margins +
+     search + auth cluster + gaps) = ~695px, nav at natural width incl. the
+     More-trigger reserve = ~745px, + 48px padding → 1488. The old 1280 cap
+     over-subscribed the row so the priority nav collapsed links into "More"
+     at EVERY viewport (its allocation was constant). Below ~1500 viewports
+     More engages progressively — intended. If links are added later, More
+     reappears at desktop until this cap is revisited (graceful, visible). */
+  max-width: 1500px; margin: 0 auto; height: 100%;
   display: flex; align-items: center; padding: 0 24px; gap: 0;
 }
 

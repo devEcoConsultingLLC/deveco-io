@@ -582,3 +582,16 @@ header {
     padding-bottom: 12px;
   }
 }
+
+/* Theme-matched scrollbar (Chromium 121+/Firefox standard property). On macOS
+   with "always show scrollbars" the vertical gutter renders as a white strip
+   against the full-bleed dark hero (the "thin right margin"); tinting the
+   track to the page background makes it read as part of the page. */
+:root {
+  scrollbar-color: var(--border) var(--bg);
+}
+[data-theme="dark"],
+[data-theme="stoa-dark"],
+[data-theme="deveco-dark"] {
+  scrollbar-color: var(--surface3) var(--bg);
+}

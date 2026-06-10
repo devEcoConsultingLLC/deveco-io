@@ -261,7 +261,13 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 
 .de-topbar-inner {
-  max-width: 1280px; margin: 0 auto; height: 100%;
+  /* 1360, not 1280: at 1280 the bar's content (logo + 6 nav links + search +
+     auth buttons ≈ 1300px) over-subscribes the row, so the priority nav
+     collapsed links into "More" even on huge screens (the nav's allocation
+     was capped at ~520px at EVERY viewport). 1360 fits all six links with
+     slack; below ~1360 viewports the More menu engages progressively, which
+     is the intended behavior. */
+  max-width: 1360px; margin: 0 auto; height: 100%;
   display: flex; align-items: center; padding: 0 24px; gap: 0;
 }
 
@@ -308,7 +314,7 @@ const userUsername = computed(() => user.value?.username ?? '');
 .de-search-form {
   display: flex; align-items: center; gap: 8px;
   padding: 0 14px; background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 8px; min-width: 220px; transition: border-color 0.15s, box-shadow 0.15s;
+  border-radius: 8px; min-width: 200px; transition: border-color 0.15s, box-shadow 0.15s;
 }
 .de-search-form:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 231, 173, 0.12); }
 .de-search-icon { font-size: 12px; color: var(--text-faint); flex-shrink: 0; }

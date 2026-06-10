@@ -261,15 +261,18 @@ const userUsername = computed(() => user.value?.username ?? '');
 }
 
 .de-topbar-inner {
-  /* Sized from MEASURED content, not vibes: non-nav content (logo + margins +
-     search + auth cluster + gaps) = ~695px, nav at natural width incl. the
-     More-trigger reserve = ~745px, + 48px padding → 1488. The old 1280 cap
-     over-subscribed the row so the priority nav collapsed links into "More"
-     at EVERY viewport (its allocation was constant). Below ~1500 viewports
-     More engages progressively — intended. If links are added later, More
-     reappears at desktop until this cap is revisited (graceful, visible). */
-  max-width: 1500px; margin: 0 auto; height: 100%;
-  display: flex; align-items: center; padding: 0 24px; gap: 0;
+  /* NO max-width — the bar content is full-bleed (like the base layer's
+     topbar), so nav links only collapse into "More" when the WINDOW is
+     genuinely too narrow, never because of an arbitrary cap. Every cap we
+     tried (1280 → 1360 → 1500) broke for some state: the bar's content
+     width changes with auth (logged-in adds messages/notifications/New/
+     avatar ≈ +230px) and role (admins get an extra nav link), so a fixed
+     budget over-subscribes eventually and the priority nav hides links
+     beside hundreds of px of unused margin. Page CONTENT below stays
+     centered/capped — a full-width bar over centered content is the
+     standard pattern. */
+  margin: 0 auto; height: 100%;
+  display: flex; align-items: center; padding: 0 32px; gap: 0;
 }
 
 .de-topbar-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }

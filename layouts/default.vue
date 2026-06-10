@@ -312,7 +312,10 @@ const userUsername = computed(() => user.value?.username ?? '');
 :deep(.cpub-nav-panel-item:hover) { background: var(--surface2); color: var(--text); }
 :deep(.cpub-nav-panel-item i) { width: 14px; text-align: center; font-size: 0.6875rem; }
 
-.de-topbar-spacer { flex: 1; }
+/* Inert: the nav (flex:1) takes all free space so the priority-nav
+   measurement is content-independent — a slack-sharing spacer creates a
+   collapse ratchet (see the base layer's .cpub-topbar-spacer note). */
+.de-topbar-spacer { flex: 0 0 0; }
 .de-topbar-actions { display: flex; align-items: center; gap: 8px; }
 
 .de-search-form {

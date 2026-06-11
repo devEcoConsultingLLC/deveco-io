@@ -204,7 +204,7 @@ const userUsername = computed(() => user.value?.username ?? '');
           <p class="de-footer-tagline">The open platform for Edge AI projects, hardware, and communities. Built by developers, for developers.</p>
           <div class="de-footer-backer">Backed by <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a></div>
           <div class="de-footer-social">
-            <a href="https://github.com/edge-ai-foundation" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://github.com/devEcoConsultingLLC/deveco-io" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="https://discord.gg/deveco" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
             <a href="/feed.xml" class="de-footer-social-link" aria-label="RSS"><i class="fa-solid fa-rss"></i></a>
           </div>

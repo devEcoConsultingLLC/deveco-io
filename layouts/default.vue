@@ -222,6 +222,7 @@ const userUsername = computed(() => user.value?.username ?? '');
         <nav class="de-footer-col" aria-label="Platform links">
           <h4 class="de-footer-col-title">Platform</h4>
           <NuxtLink to="/about" class="de-footer-link">About</NuxtLink>
+          <NuxtLink to="/terms" class="de-footer-link">Terms &amp; Code of Conduct</NuxtLink>
           <a href="/feed.xml" class="de-footer-link">RSS Feed</a>
           <a href="/sitemap.xml" class="de-footer-link">Sitemap</a>
         </nav>

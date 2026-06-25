@@ -282,7 +282,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 
 .de-badge-featured {
   background: rgba(244, 200, 75, 0.1); border: 1px solid rgba(244, 200, 75, 0.3);
-  color: var(--yellow); font-size: 0.6875rem; font-weight: 600;
+  color: var(--yellow-text); font-size: 0.6875rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.05em;
   padding: 4px 10px; border-radius: 6px;
 }
@@ -530,7 +530,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 .de-hub-icon {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   font-size: 14px; flex-shrink: 0; border-radius: 10px;
-  border: 1px solid var(--teal); background: var(--teal-bg); color: var(--teal);
+  border: 1px solid var(--teal); background: var(--teal-bg); color: var(--teal-text);
   overflow: hidden;
 }
 .de-hub-icon-img {
@@ -550,7 +550,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 
 .de-btn-joined {
   padding: 5px 14px; background: var(--green-bg); border: 1px solid var(--green-border);
-  border-radius: 6px; color: var(--green); font-size: 0.75rem; font-weight: 500;
+  border-radius: 6px; color: var(--green-text); font-size: 0.75rem; font-weight: 500;
   flex-shrink: 0; display: flex; align-items: center; gap: 4px; cursor: default;
 }
 

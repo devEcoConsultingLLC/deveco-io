@@ -236,6 +236,11 @@ const userUsername = computed(() => user.value?.username ?? '');
         <span class="de-powered">Powered by <a href="https://github.com/commonpub/commonpub" target="_blank" rel="noopener">CommonPub</a></span>
       </div>
     </footer>
+    <!-- GDPR Phase 2 re-accept interstitial. Mounted here because this layout
+         overrides the layer's default.vue (which is where the layer mounts it for
+         other instances). Without this, requireTermsAcceptance soft-blocks all
+         writes with no way to re-accept. -->
+    <TermsReacceptanceGate />
   </div>
 </template>
 

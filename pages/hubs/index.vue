@@ -5,9 +5,17 @@ useSeoMeta({
 });
 
 const { data } = await useFetch('/api/hubs');
+const { data: featuredData } = await useFetch('/api/hubs/featured');
 const { isAuthenticated } = useAuth();
+const { featuredHub: featuredEnabled } = useFeatures();
 
-const hubs = computed(() => data.value?.items ?? []);
+// Operator-chosen featured hub, rendered as a full-width hero above the grid and
+// excluded from the grid so it isn't shown twice. Endpoint returns null when the
+// featuredHub feature is off.
+const featured = computed(() => (featuredEnabled.value ? featuredData.value?.featured ?? null : null));
+const hubs = computed(() =>
+  (data.value?.items ?? []).filter((h: { id: string }) => h.id !== featured.value?.id),
+);
 
 function isFederated(hub: Record<string, unknown>): boolean {
   return (hub as { source?: string }).source === 'federated';
@@ -32,6 +40,34 @@ function hubLink(hub: Record<string, unknown>): string {
         <i class="fa-solid fa-plus"></i> Create Hub
       </NuxtLink>
     </div>
+
+    <NuxtLink
+      v-if="featured"
+      :to="`/hubs/${featured.slug}`"
+      class="de-hub-featured"
+      :aria-label="`Featured community: ${featured.name}`"
+    >
+      <div class="de-hub-featured-banner" :style="featured.bannerUrl ? { backgroundImage: `url(${featured.bannerUrl})` } : {}">
+        <span class="de-hub-featured-badge"><i class="fa-solid fa-star"></i> Featured</span>
+      </div>
+      <div class="de-hub-featured-body">
+        <div class="de-hub-featured-icon">
+          <img v-if="featured.iconUrl" :src="featured.iconUrl" :alt="featured.name" />
+          <i v-else class="fa-solid fa-users"></i>
+        </div>
+        <div class="de-hub-featured-info">
+          <div class="de-hub-featured-top">
+            <h2 class="de-hub-featured-name">{{ featured.name }}</h2>
+            <span class="de-hub-card-type">{{ featured.hubType ?? 'community' }}</span>
+          </div>
+          <p v-if="featured.description" class="de-hub-featured-desc">{{ featured.description }}</p>
+          <div class="de-hub-featured-meta">
+            <span class="de-hub-card-stat"><i class="fa-solid fa-users"></i> {{ featured.memberCount ?? 0 }} members</span>
+            <span class="de-hub-card-stat"><i class="fa-solid fa-message"></i> {{ featured.postCount ?? 0 }} posts</span>
+          </div>
+        </div>
+      </div>
+    </NuxtLink>
 
     <div v-if="hubs.length" class="de-hubs-grid">
       <NuxtLink
@@ -62,7 +98,7 @@ function hubLink(hub: Record<string, unknown>): string {
         </div>
       </NuxtLink>
     </div>
-    <div v-else class="de-empty-state">
+    <div v-else-if="!featured" class="de-empty-state">
       <div class="de-empty-icon"><i class="fa-solid fa-users"></i></div>
       <p class="de-empty-title">No communities yet</p>
       <p class="de-empty-desc">Be the first to create one.</p>
@@ -116,6 +152,91 @@ function hubLink(hub: Record<string, unknown>): string {
   flex-shrink: 0;
 }
 .de-btn-create:hover { background: var(--color-primary-hover); }
+
+/* Featured community hero — full-width, spans the row above the grid */
+.de-hub-featured {
+  display: block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  margin-bottom: 28px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.de-hub-featured:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--deveco-dark-green);
+}
+.de-hub-featured-banner {
+  height: 200px;
+  background: linear-gradient(135deg, var(--deveco-dark-green), #1b357d);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.de-hub-featured-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+.de-hub-featured-body {
+  display: flex;
+  gap: 20px;
+  padding: 0 28px 24px;
+}
+.de-hub-featured-icon {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  margin-top: -36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 3px solid var(--surface);
+  border-radius: 16px;
+  font-size: 28px;
+  color: var(--deveco-dark-green);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.de-hub-featured-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 13px; }
+.de-hub-featured-info { flex: 1; min-width: 0; padding-top: 16px; }
+.de-hub-featured-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.de-hub-featured-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.de-hub-featured-desc {
+  font-size: 0.9375rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin-bottom: 14px;
+  max-width: 640px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.de-hub-featured-meta { display: flex; align-items: center; gap: 20px; }
 
 .de-hubs-grid {
   display: grid;
@@ -252,5 +373,11 @@ function hubLink(hub: Record<string, unknown>): string {
   .de-hubs-page { padding: 24px 16px 48px; }
   .de-hubs-grid { grid-template-columns: 1fr; }
   .de-hubs-header { flex-direction: column; }
+  .de-hub-featured-banner { height: 140px; }
+  .de-hub-featured-body { flex-direction: column; gap: 8px; padding: 0 16px 20px; }
+  .de-hub-featured-icon { width: 56px; height: 56px; margin-top: -28px; font-size: 22px; }
+  .de-hub-featured-info { padding-top: 0; }
+  .de-hub-featured-name { font-size: 1.25rem; }
+  .de-hub-featured-meta { flex-wrap: wrap; gap: 10px 16px; }
 }
 </style>

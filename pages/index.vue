@@ -7,7 +7,7 @@ useSeoMeta({
 });
 
 const { user: authUser } = useAuth();
-const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
+const { hubs: hubsEnabled, contests: contestsEnabled, featuredHub: featuredEnabled } = useFeatures();
 const { enabledTypeMeta } = useContentTypes();
 
 const activeTab = ref(authUser.value ? 'foryou' : 'latest');
@@ -40,6 +40,13 @@ const { data: featured } = await useFetch<PaginatedResponse<Serialized<ContentLi
 const { data: communities } = await useFetch('/api/hubs', {
   query: { limit: 4 },
 });
+
+// Operator-chosen featured hub, pinned at the top of Trending Communities.
+const { data: featuredHubData } = await useFetch('/api/hubs/featured');
+const featuredHubItem = computed(() => (featuredEnabled.value ? featuredHubData.value?.featured ?? null : null));
+const trendingHubs = computed(() =>
+  (communities.value?.items ?? []).filter((h: { id: string }) => h.id !== featuredHubItem.value?.id),
+);
 
 interface ContestListItem {
   id: string;
@@ -202,9 +209,24 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
         </div>
 
         <!-- Trending Communities -->
-        <div v-if="hubsEnabled && communities?.items?.length" class="de-sb-card">
+        <div v-if="hubsEnabled && (featuredHubItem || communities?.items?.length)" class="de-sb-card">
           <div class="de-sb-head">Trending Communities <NuxtLink to="/hubs">Browse</NuxtLink></div>
-          <div v-for="hub in communities.items" :key="hub.id" class="de-hub-item">
+
+          <!-- Featured community, pinned at the top -->
+          <div v-if="featuredHubItem" class="de-hub-item de-hub-item-featured">
+            <div class="de-hub-icon">
+              <img v-if="featuredHubItem.iconUrl" :src="featuredHubItem.iconUrl" :alt="featuredHubItem.name" class="de-hub-icon-img" />
+              <i v-else class="fa-solid fa-users"></i>
+            </div>
+            <div class="de-hub-info">
+              <NuxtLink :to="`/hubs/${featuredHubItem.slug}`" class="de-hub-name">{{ featuredHubItem.name }}</NuxtLink>
+              <div class="de-hub-members"><span class="de-hub-featured-tag"><i class="fa-solid fa-star"></i> Featured</span>{{ featuredHubItem.memberCount ?? 0 }} members</div>
+            </div>
+            <button v-if="joinedHubs.has(featuredHubItem.slug)" class="de-btn-joined" disabled><i class="fa-solid fa-check"></i> Joined</button>
+            <button v-else class="de-btn-join" @click.prevent="handleHubJoin(featuredHubItem.slug)">Join</button>
+          </div>
+
+          <div v-for="hub in trendingHubs" :key="hub.id" class="de-hub-item">
             <div class="de-hub-icon">
               <img v-if="hub.iconUrl" :src="hub.iconUrl" :alt="hub.name" class="de-hub-icon-img" />
               <i v-else class="fa-solid fa-users"></i>
@@ -527,6 +549,24 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 .de-hub-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .de-hub-item:last-child { border-bottom: none; padding-bottom: 0; }
 .de-hub-item:first-child { padding-top: 0; }
+.de-hub-item-featured {
+  margin: 0 -12px 4px;
+  padding: 12px;
+  background: rgba(0, 78, 83, 0.05);
+  border: 1px solid rgba(0, 78, 83, 0.15);
+  border-radius: 8px;
+}
+.de-hub-featured-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--deveco-dark-green);
+  margin-right: 8px;
+}
+.de-hub-featured-tag i { font-size: 9px; }
 .de-hub-icon {
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   font-size: 14px; flex-shrink: 0; border-radius: 10px;

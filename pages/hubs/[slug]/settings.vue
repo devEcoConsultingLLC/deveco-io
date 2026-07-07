@@ -43,7 +43,11 @@ const { extract: extractError } = useApiError();
 async function handleSave(): Promise<void> {
   saving.value = true;
   try {
-    await $fetch(`/api/hubs/${slug.value}`, {
+    // Loose $fetch cast: the typed-route overload resolves the whole server route
+    // manifest here, and as the layer's route count grows it collapses the base
+    // hub route's method union to GET, rejecting PUT (TS2322). This opts out.
+    const putHub = $fetch as unknown as (url: string, opts: { method: string; body: unknown }) => Promise<unknown>;
+    await putHub(`/api/hubs/${slug.value}`, {
       method: 'PUT',
       body: {
         name: form.name,

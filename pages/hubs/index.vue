@@ -47,7 +47,7 @@ function hubLink(hub: Record<string, unknown>): string {
       class="de-hub-featured"
       :aria-label="`Featured community: ${featured.name}`"
     >
-      <div class="de-hub-featured-banner" :style="featured.bannerUrl ? { backgroundImage: `url(${featured.bannerUrl})` } : {}">
+      <div class="de-hub-featured-banner" :class="{ 'has-banner': featured.bannerUrl }" :style="featured.bannerUrl ? { '--banner-img': `url(${featured.bannerUrl})` } : {}">
         <span class="de-hub-featured-badge"><i class="fa-solid fa-star"></i> Featured</span>
       </div>
       <div class="de-hub-featured-body">
@@ -170,24 +170,42 @@ function hubLink(hub: Record<string, unknown>): string {
   border-color: var(--deveco-dark-green);
 }
 .de-hub-featured-banner {
-  height: 150px;
-  box-sizing: border-box;
-  padding: 18px 28px;
-  /* contain (not cover) so a logo/wide banner shows in full with breathing room
-     instead of being cropped; the surface fills the frame + a divider separates
-     it cleanly from the body below. */
+  height: 160px;
+  position: relative;
+  overflow: hidden;
   background-color: var(--color-surface-alt, var(--surface));
+  border-bottom: 1px solid var(--border);
+}
+/* Blurred, scaled cover copy fills the whole banner (no gaps, no visible box) —
+   works whether the banner is a logo or a photo. */
+.de-hub-featured-banner.has-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--banner-img);
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.15);
+  transform: scale(1.25);
+  opacity: 0.92;
+}
+/* The actual image, sharp and fully visible (contain, never cropped) on top. */
+.de-hub-featured-banner.has-banner::after {
+  content: '';
+  position: absolute;
+  inset: 14px 24px;
+  z-index: 1;
+  background-image: var(--banner-img);
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
-  background-origin: content-box;
-  border-bottom: 1px solid var(--border);
-  position: relative;
 }
 .de-hub-featured-badge {
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -383,7 +401,8 @@ function hubLink(hub: Record<string, unknown>): string {
   .de-hubs-page { padding: 24px 16px 48px; }
   .de-hubs-grid { grid-template-columns: 1fr; }
   .de-hubs-header { flex-direction: column; }
-  .de-hub-featured-banner { height: 120px; padding: 14px 18px; }
+  .de-hub-featured-banner { height: 120px; }
+  .de-hub-featured-banner.has-banner::after { inset: 12px 16px; }
   .de-hub-featured-body { flex-direction: column; gap: 8px; padding: 0 16px 18px; }
   .de-hub-featured-icon { width: 56px; height: 56px; margin-top: -30px; font-size: 20px; }
   .de-hub-featured-info { padding-top: 0; }

@@ -170,7 +170,7 @@ function hubLink(hub: Record<string, unknown>): string {
   border-color: var(--deveco-dark-green);
 }
 .de-hub-featured-banner {
-  height: 200px;
+  height: 132px;
   background: linear-gradient(135deg, var(--deveco-dark-green), #1b357d);
   background-size: cover;
   background-position: center;
@@ -196,31 +196,33 @@ function hubLink(hub: Record<string, unknown>): string {
 }
 .de-hub-featured-body {
   display: flex;
-  gap: 20px;
-  padding: 0 28px 24px;
+  gap: 16px;
+  padding: 0 24px 20px;
 }
 .de-hub-featured-icon {
-  width: 72px;
-  height: 72px;
+  width: 60px;
+  height: 60px;
   flex-shrink: 0;
-  margin-top: -36px;
+  margin-top: -28px;
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--surface);
   border: 3px solid var(--surface);
-  border-radius: 16px;
-  font-size: 28px;
+  border-radius: 14px;
+  font-size: 24px;
   color: var(--deveco-dark-green);
   box-shadow: var(--shadow-md);
   overflow: hidden;
 }
-.de-hub-featured-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 13px; }
-.de-hub-featured-info { flex: 1; min-width: 0; padding-top: 16px; }
-.de-hub-featured-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.de-hub-featured-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 11px; }
+.de-hub-featured-info { flex: 1; min-width: 0; padding-top: 12px; }
+.de-hub-featured-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .de-hub-featured-name {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--text);
 }
@@ -373,9 +375,9 @@ function hubLink(hub: Record<string, unknown>): string {
   .de-hubs-page { padding: 24px 16px 48px; }
   .de-hubs-grid { grid-template-columns: 1fr; }
   .de-hubs-header { flex-direction: column; }
-  .de-hub-featured-banner { height: 140px; }
-  .de-hub-featured-body { flex-direction: column; gap: 8px; padding: 0 16px 20px; }
-  .de-hub-featured-icon { width: 56px; height: 56px; margin-top: -28px; font-size: 22px; }
+  .de-hub-featured-banner { height: 104px; }
+  .de-hub-featured-body { flex-direction: column; gap: 8px; padding: 0 16px 18px; }
+  .de-hub-featured-icon { width: 52px; height: 52px; margin-top: -26px; font-size: 20px; }
   .de-hub-featured-info { padding-top: 0; }
   .de-hub-featured-name { font-size: 1.25rem; }
   .de-hub-featured-meta { flex-wrap: wrap; gap: 10px 16px; }

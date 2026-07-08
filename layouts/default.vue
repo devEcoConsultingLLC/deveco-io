@@ -91,7 +91,7 @@ const userUsername = computed(() => user.value?.username ?? '');
   <div class="de-layout">
     <!-- Top Banner -->
     <div class="de-top-banner">
-      Backed by <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a> &middot; Part of the <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>
+      Partnered with <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a> &middot; Part of the <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>
     </div>
 
     <!-- Top Nav -->

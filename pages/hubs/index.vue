@@ -47,24 +47,21 @@ function hubLink(hub: Record<string, unknown>): string {
       class="de-hub-featured"
       :aria-label="`Featured community: ${featured.name}`"
     >
-      <div class="de-hub-featured-banner" :class="{ 'has-banner': featured.bannerUrl }" :style="featured.bannerUrl ? { '--banner-img': `url(${featured.bannerUrl})` } : {}">
-        <span class="de-hub-featured-badge"><i class="fa-solid fa-star"></i> Featured</span>
+      <span class="de-hub-featured-badge"><i class="fa-solid fa-star"></i> Featured</span>
+      <div class="de-hub-featured-media">
+        <img v-if="featured.iconUrl" :src="featured.iconUrl" :alt="featured.name" />
+        <i v-else class="fa-solid fa-users"></i>
       </div>
-      <div class="de-hub-featured-body">
-        <div class="de-hub-featured-icon">
-          <img v-if="featured.iconUrl" :src="featured.iconUrl" :alt="featured.name" />
-          <i v-else class="fa-solid fa-users"></i>
+      <div class="de-hub-featured-info">
+        <div class="de-hub-featured-top">
+          <h2 class="de-hub-featured-name">{{ featured.name }}</h2>
+          <span class="de-hub-card-type">{{ featured.hubType ?? 'community' }}</span>
         </div>
-        <div class="de-hub-featured-info">
-          <div class="de-hub-featured-top">
-            <h2 class="de-hub-featured-name">{{ featured.name }}</h2>
-            <span class="de-hub-card-type">{{ featured.hubType ?? 'community' }}</span>
-          </div>
-          <p v-if="featured.description" class="de-hub-featured-desc">{{ featured.description }}</p>
-          <div class="de-hub-featured-meta">
-            <span class="de-hub-card-stat"><i class="fa-solid fa-users"></i> {{ featured.memberCount ?? 0 }} members</span>
-            <span class="de-hub-card-stat"><i class="fa-solid fa-message"></i> {{ featured.postCount ?? 0 }} posts</span>
-          </div>
+        <p v-if="featured.description" class="de-hub-featured-desc">{{ featured.description }}</p>
+        <div class="de-hub-featured-meta">
+          <span class="de-hub-card-stat"><i class="fa-solid fa-users"></i> {{ featured.memberCount ?? 0 }} members</span>
+          <span class="de-hub-card-stat"><i class="fa-solid fa-message"></i> {{ featured.postCount ?? 0 }} posts</span>
+          <span class="de-hub-featured-cta">Explore <i class="fa-solid fa-arrow-right"></i></span>
         </div>
       </div>
     </NuxtLink>
@@ -153,102 +150,69 @@ function hubLink(hub: Record<string, unknown>): string {
 }
 .de-btn-create:hover { background: var(--color-primary-hover); }
 
-/* Featured community hero — full-width, spans the row above the grid */
+/* Featured community spotlight — horizontal, avatar-forward, softly branded.
+   A logo/avatar reads cleanly at any size, so we lead with the community's mark
+   instead of forcing its logo into a full-bleed banner slot. */
 .de-hub-featured {
-  display: block;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 30px 34px;
+  margin-bottom: 28px;
   text-decoration: none;
   color: inherit;
-  margin-bottom: 28px;
-  transition: box-shadow 0.2s, border-color 0.2s;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background:
+    radial-gradient(130% 130% at 0% 0%, rgba(0, 231, 173, 0.12), transparent 55%),
+    linear-gradient(135deg, var(--surface) 40%, var(--color-surface-alt, var(--surface)));
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
 }
 .de-hub-featured:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   border-color: var(--deveco-dark-green);
+  transform: translateY(-2px);
 }
-.de-hub-featured-banner {
-  height: 160px;
-  position: relative;
-  overflow: hidden;
-  background-color: var(--color-surface-alt, var(--surface));
-  border-bottom: 1px solid var(--border);
-}
-/* Blurred, scaled cover copy fills the whole banner (no gaps, no visible box) —
-   works whether the banner is a logo or a photo. */
-.de-hub-featured-banner.has-banner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image: var(--banner-img);
-  background-size: cover;
-  background-position: center;
-  filter: blur(28px) saturate(1.15);
-  transform: scale(1.25);
-  opacity: 0.92;
-}
-/* The actual image, sharp and fully visible (contain, never cropped) on top. */
-.de-hub-featured-banner.has-banner::after {
-  content: '';
-  position: absolute;
-  inset: 14px 24px;
-  z-index: 1;
-  background-image: var(--banner-img);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+.de-hub-featured:hover .de-hub-featured-cta { gap: 10px; color: var(--deveco-dark-green); }
 .de-hub-featured-badge {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 2;
+  top: 20px;
+  right: 22px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: 0.6875rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: #fff;
   background: var(--deveco-dark-green);
-  border: none;
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
   box-shadow: var(--shadow-sm);
 }
-.de-hub-featured-body {
-  display: flex;
-  gap: 16px;
-  padding: 0 24px 20px;
-}
-.de-hub-featured-icon {
-  width: 64px;
-  height: 64px;
+.de-hub-featured-media {
+  width: 104px;
+  height: 104px;
   flex-shrink: 0;
-  margin-top: -32px;
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--surface);
-  border: 4px solid var(--surface);
-  border-radius: 16px;
-  font-size: 24px;
-  color: var(--deveco-dark-green);
-  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-md);
   overflow: hidden;
+  color: var(--deveco-dark-green);
+  font-size: 42px;
 }
-.de-hub-featured-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-.de-hub-featured-info { flex: 1; min-width: 0; padding-top: 12px; }
-.de-hub-featured-top { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.de-hub-featured-media img { width: 100%; height: 100%; object-fit: cover; }
+.de-hub-featured-info { flex: 1; min-width: 0; padding-right: 90px; }
+.de-hub-featured-top { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
 .de-hub-featured-name {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text);
 }
@@ -257,14 +221,27 @@ function hubLink(hub: Record<string, unknown>): string {
   color: var(--text-dim);
   line-height: 1.55;
   margin-bottom: 14px;
-  max-width: 640px;
+  max-width: 680px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.de-hub-featured-meta { display: flex; align-items: center; gap: 20px; }
+.de-hub-featured-meta { display: flex; align-items: center; gap: 22px; }
+.de-hub-featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  transition: gap 0.2s, color 0.2s;
+}
 
 .de-hubs-grid {
   display: grid;
@@ -401,10 +378,12 @@ function hubLink(hub: Record<string, unknown>): string {
   .de-hubs-page { padding: 24px 16px 48px; }
   .de-hubs-grid { grid-template-columns: 1fr; }
   .de-hubs-header { flex-direction: column; }
-  .de-hub-featured-banner { height: 120px; }
-  .de-hub-featured-banner.has-banner::after { inset: 12px 16px; }
-  .de-hub-featured-body { flex-direction: column; gap: 8px; padding: 0 16px 18px; }
-  .de-hub-featured-icon { width: 56px; height: 56px; margin-top: -30px; font-size: 20px; }
+  .de-hub-featured { flex-direction: column; align-items: flex-start; gap: 16px; padding: 22px 20px; }
+  .de-hub-featured-media { width: 76px; height: 76px; border-radius: 18px; font-size: 32px; }
+  .de-hub-featured-info { padding-right: 0; }
+  .de-hub-featured-meta { flex-wrap: wrap; gap: 14px; }
+  .de-hub-featured-cta { margin-left: 0; }
+  .de-hub-featured-badge { top: 16px; right: 16px; }
   .de-hub-featured-info { padding-top: 0; }
   .de-hub-featured-name { font-size: 1.25rem; }
   .de-hub-featured-meta { flex-wrap: wrap; gap: 10px 16px; }

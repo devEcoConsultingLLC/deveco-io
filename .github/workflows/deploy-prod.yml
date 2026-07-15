@@ -32,16 +32,34 @@ jobs:
 
       - name: Load image and restart
         uses: appleboy/ssh-action@v1
+        env:
+          # Email transport key, injected from the encrypted GitHub secret into the
+          # droplet env at deploy time — never stored in the repo or the image.
+          NUXT_RESEND_API_KEY: ${{ secrets.NUXT_RESEND_API_KEY }}
         with:
           host: ${{ secrets.PROD_HOST }}
           username: root
           key: ${{ secrets.PROD_SSH_KEY }}
           command_timeout: 5m
+          # Forward the runner env var into the remote SSH session.
+          envs: NUXT_RESEND_API_KEY
           script: |
             set -e
             cd /opt/deveco
             docker load < deveco-app.tar.gz
             rm -f deveco-app.tar.gz
+            # Inject the email transport into the compose env_file (app.env_file: .env)
+            # from the CI secret. Idempotent: strip any prior NUXT_RESEND_* lines, then
+            # re-add. Skipped when the secret is unset (transport stays console).
+            if [ -n "$NUXT_RESEND_API_KEY" ]; then
+              touch .env
+              grep -vE '^NUXT_(EMAIL_ADAPTER|RESEND_API_KEY|RESEND_FROM)=' .env > .env.next || true
+              printf 'NUXT_EMAIL_ADAPTER=resend\nNUXT_RESEND_API_KEY=%s\nNUXT_RESEND_FROM=noreply@deveco.io\n' "$NUXT_RESEND_API_KEY" >> .env.next
+              mv .env.next .env
+              echo "Configured Resend transport in /opt/deveco/.env"
+            else
+              echo "No NUXT_RESEND_API_KEY secret — leaving email transport as-is"
+            fi
             # Tag with both names so compose finds it regardless of which image name it references
             docker tag deveco-app:latest registry.digitalocean.com/deveco/deveco-app:latest 2>/dev/null || true
             docker compose up -d --force-recreate --remove-orphans

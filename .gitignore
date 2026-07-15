@@ -31,3 +31,4 @@ package-lock.json
 uploads/*
 !uploads/.gitkeep
 .secrets/
+envbackup

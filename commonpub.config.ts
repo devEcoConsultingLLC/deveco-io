@@ -22,11 +22,17 @@ export default defineCommonPubConfig({
     federateHubs: true,
     seamlessFederation: true,
     admin: true,
+    // Email opted-in users even if their address is unverified (verification,
+    // when enabled, then gates sign-in only). Requires a working transport.
+    emailUnverified: true,
   },
   auth: {
     emailPassword: true,
     magicLink: false,
     passkeys: false,
+    // NOTE: requireEmailVerification intentionally NOT enabled. Existing users are
+    // all unverified, so turning it on would gate sign-in and lock them out. Enable
+    // only after backfilling existing accounts to email_verified=true.
     trustedInstances: ['commonpub.io'],
   },
   // Brand theme as a registered light/dark pair. With defaultTheme pinned the

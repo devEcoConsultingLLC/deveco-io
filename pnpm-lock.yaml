@@ -12,8 +12,8 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0
       '@commonpub/layer':
-        specifier: ^0.106.3
-        version: 0.106.3(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+        specifier: ^0.106.4
+        version: 0.106.4(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@commonpub/schema':
         specifier: ^0.59.0
         version: 0.59.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
@@ -527,6 +527,31 @@ packages:
       vue:
         optional: true
 
+  '@commonpub/editor@0.12.0':
+    resolution: {integrity: sha512-Km/W4OIn1mO4BvFad0QszN4cmKSNCWC/rsdzKhuDb7hR6Md6H6Nrlg1y4vmbRfTdpI8bcITK9lVszZd1Fgxl6w==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@tiptap/core': ^2.11.0
+      '@tiptap/extension-bold': ^2.11.0
+      '@tiptap/extension-bullet-list': ^2.11.0
+      '@tiptap/extension-code': ^2.11.0
+      '@tiptap/extension-document': ^2.11.0
+      '@tiptap/extension-history': ^2.11.0
+      '@tiptap/extension-horizontal-rule': ^2.11.0
+      '@tiptap/extension-italic': ^2.11.0
+      '@tiptap/extension-link': ^2.11.0
+      '@tiptap/extension-list-item': ^2.11.0
+      '@tiptap/extension-ordered-list': ^2.11.0
+      '@tiptap/extension-paragraph': ^2.11.0
+      '@tiptap/extension-placeholder': ^2.11.0
+      '@tiptap/extension-strike': ^2.11.0
+      '@tiptap/extension-text': ^2.11.0
+      '@tiptap/pm': ^2.11.0
+      vue: ^3.4.0
+    peerDependenciesMeta:
+      vue:
+        optional: true
+
   '@commonpub/editor@0.7.10':
     resolution: {integrity: sha512-fH7MizSu9Ee41uWvzUYlOmTQ8p1INVm4EFOUtmhw2yLFo+NLugx3eoHmxRX9NvEJm7gFFPYOaTZbCexN+7ERyQ==}
     engines: {node: '>=22'}
@@ -635,8 +660,8 @@ packages:
       sharp:
         optional: true
 
-  '@commonpub/layer@0.106.3':
-    resolution: {integrity: sha512-tITyPQD9aCkHzkVwYeq1oxHvQr+Tv/ZqsGy+/s/dGYCVAKudjZ4qJnWF8jzg4bp9QbGn7qQbkszWZT3+ba8sJA==}
+  '@commonpub/layer@0.106.4':
+    resolution: {integrity: sha512-LBXlTJQEeqBrSDciatqC6MkjLW/al7kMEUAYYesWvpi8WOY+KEguhwoc0FbpFUAzutONNj7NDLyoD8dFNpbB+g==}
 
   '@commonpub/learning@0.5.2':
     resolution: {integrity: sha512-hcCfmN18/yBiEkbwtIBzszv2+Sjgvs9wAddarzp3R4HrRovMksVNV0skG+VsFd8mS8XOtwvB2wlFw6YagVOU/g==}
@@ -694,8 +719,8 @@ packages:
     peerDependencies:
       drizzle-orm: ^0.45.1
 
-  '@commonpub/server@2.114.1':
-    resolution: {integrity: sha512-gPnt7viOkmh9QkTstBDZIOHsyZgtT5jo1MmrpcspcC9CBLHMiN8Y7FW1a/kjw06SkUftJsXidsWUQIPRs51bmw==}
+  '@commonpub/server@2.115.0':
+    resolution: {integrity: sha512-X/RrVHDa/i6wO9nBrcGYTGXVgcRUIp8IQ4PCi22X7s9mCo8/TgHr/GAyuNQLgFULmmFriK9PGfIpT7mmmd7kqg==}
     engines: {node: '>=22'}
     peerDependencies:
       drizzle-orm: ^0.45.1
@@ -7144,6 +7169,38 @@ snapshots:
       - drizzle-orm
       - supports-color
 
+  '@commonpub/editor@0.12.0(35eb1b13b79dcc0db2a24bd2be11f0b4)':
+    dependencies:
+      '@commonpub/config': 0.33.0
+      '@commonpub/schema': 0.59.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
+      '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
+      '@tiptap/extension-bold': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-bullet-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-code': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-document': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-history': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-horizontal-rule': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-italic': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-link': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-list-item': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-ordered-list': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-paragraph': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-placeholder': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)
+      '@tiptap/extension-strike': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/extension-text': 2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))
+      '@tiptap/pm': 2.27.2
+      rehype-stringify: 10.0.1
+      remark-gfm: 4.0.1
+      remark-parse: 11.0.0
+      remark-rehype: 11.1.2
+      unified: 11.0.5
+      zod: 4.3.6
+    optionalDependencies:
+      vue: 3.5.30(typescript@5.9.3)
+    transitivePeerDependencies:
+      - drizzle-orm
+      - supports-color
+
   '@commonpub/editor@0.7.10(35eb1b13b79dcc0db2a24bd2be11f0b4)':
     dependencies:
       '@commonpub/config': 0.13.0
@@ -7302,18 +7359,18 @@ snapshots:
       ioredis: 5.10.1
       sharp: 0.34.5
 
-  '@commonpub/layer@0.106.3(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
+  '@commonpub/layer@0.106.4(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.28.16)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@aws-sdk/client-s3': 3.1030.0
       '@commonpub/auth': 0.10.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.16)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.33.0
       '@commonpub/docs': 0.6.3(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
-      '@commonpub/editor': 0.11.0(35eb1b13b79dcc0db2a24bd2be11f0b4)
+      '@commonpub/editor': 0.12.0(35eb1b13b79dcc0db2a24bd2be11f0b4)
       '@commonpub/explainer': 0.8.0(35eb1b13b79dcc0db2a24bd2be11f0b4)
       '@commonpub/learning': 0.5.2(35eb1b13b79dcc0db2a24bd2be11f0b4)
       '@commonpub/protocol': 0.14.0
       '@commonpub/schema': 0.59.0(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
-      '@commonpub/server': 2.114.1(1ed594e20578430d5417ff8cf16605f4)
+      '@commonpub/server': 2.115.0(1ed594e20578430d5417ff8cf16605f4)
       '@commonpub/theme-studio': 0.6.1
       '@commonpub/ui': 0.13.2(vue@3.5.30(typescript@5.9.3))(zod@4.3.6)
       '@tiptap/core': 2.27.2(@tiptap/pm@2.27.2)
@@ -7552,12 +7609,12 @@ snapshots:
       - vitest
       - vue
 
-  '@commonpub/server@2.114.1(1ed594e20578430d5417ff8cf16605f4)':
+  '@commonpub/server@2.115.0(1ed594e20578430d5417ff8cf16605f4)':
     dependencies:
       '@commonpub/auth': 0.10.0(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.28.16)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.19.15)(jiti@2.6.1)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.30(typescript@5.9.3))
       '@commonpub/config': 0.33.0
       '@commonpub/docs': 0.6.3(drizzle-orm@0.45.1(@opentelemetry/api@1.9.0)(kysely@0.28.16)(pg@8.20.0))
-      '@commonpub/editor': 0.11.0(35eb1b13b79dcc0db2a24bd2be11f0b4)
+      '@commonpub/editor': 0.12.0(35eb1b13b79dcc0db2a24bd2be11f0b4)
       '@commonpub/infra': 0.17.0(@aws-sdk/client-s3@3.1030.0)(ioredis@5.10.1)(sharp@0.34.5)
       '@commonpub/learning': 0.5.2(35eb1b13b79dcc0db2a24bd2be11f0b4)
       '@commonpub/protocol': 0.14.0

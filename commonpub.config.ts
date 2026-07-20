@@ -15,6 +15,13 @@ export default defineCommonPubConfig({
     docs: false,
     video: false,
     contests: true,
+    // Rich contest registration (P1-P6): operator-definable registration forms with
+    // PII + private file/signature field types. contestPrivateFiles is gated on
+    // contestPii (personal-data field types). Access to stored PII is always gated
+    // server-side by the `contest.pii` permission; private files serve only through
+    // the auth + per-contest-organizer-scoped /api/files/[id]/raw route.
+    contestPii: true,
+    contestPrivateFiles: true,
     learning: false,
     explainers: false,
     editorial: true,

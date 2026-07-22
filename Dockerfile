@@ -15,9 +15,17 @@ WORKDIR /app
 # old one keeps serving. npm install pulls complete packages (matches the
 # working heatsynclabs.io Dockerfile). No package-lock needed — the ^ ranges in
 # package.json resolve the intended versions reproducibly enough here.
+#
+# --legacy-peer-deps: the @commonpub/* tree carries deep multi-version
+# duplication (config/schema pinned at many versions across sub-packages) plus
+# loose peers (drizzle-orm 0.45.1 vs 0.45.2). npm 10's arborist crashes on that
+# graph during a lockless from-scratch resolve ("Cannot read properties of null
+# (reading 'edgesOut')"). Legacy peer resolution installs peers loosely (npm v6
+# behaviour) and sidesteps the crash; top-level @commonpub versions resolve
+# identically. heatsync avoids this by committing a package-lock seed.
 FROM base AS deps
 COPY package.json ./
-RUN npm install --no-audit --no-fund
+RUN npm install --no-audit --no-fund --legacy-peer-deps
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules

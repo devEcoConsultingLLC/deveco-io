@@ -24,8 +24,11 @@ Thumbs.db
 # Vue Harvest analysis artifacts
 .vue-harvest/
 
-# Package lock (using pnpm)
-package-lock.json
+# package-lock.json IS tracked: the Docker build's `npm install` needs it as a
+# resolution seed. A lockless from-scratch resolve of the deep multi-version
+# @commonpub tree crashes npm's arborist ("Cannot read properties of null
+# (reading 'edgesOut')"). Seeding from the committed lock avoids the crash AND
+# installs @commonpub/editor's @tiptap/* peers (which --legacy-peer-deps drops).
 
 # Uploads (dev)
 uploads/*

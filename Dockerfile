@@ -13,19 +13,18 @@ WORKDIR /app
 # ships incomplete/stale package code (e.g. an old listContent without the
 # pagination tiebreaker) and the new container fails its health check while the
 # old one keeps serving. npm install pulls complete packages (matches the
-# working heatsynclabs.io Dockerfile). No package-lock needed — the ^ ranges in
-# package.json resolve the intended versions reproducibly enough here.
+# working heatsynclabs.io Dockerfile).
 #
-# --legacy-peer-deps: the @commonpub/* tree carries deep multi-version
-# duplication (config/schema pinned at many versions across sub-packages) plus
-# loose peers (drizzle-orm 0.45.1 vs 0.45.2). npm 10's arborist crashes on that
-# graph during a lockless from-scratch resolve ("Cannot read properties of null
-# (reading 'edgesOut')"). Legacy peer resolution installs peers loosely (npm v6
-# behaviour) and sidesteps the crash; top-level @commonpub versions resolve
-# identically. heatsync avoids this by committing a package-lock seed.
+# The committed package-lock.json is REQUIRED as a resolution seed. A lockless
+# from-scratch resolve of the deep multi-version @commonpub tree crashes npm 10's
+# arborist ("Cannot read properties of null (reading 'edgesOut')"). Seeding from
+# the lock takes the reconcile path (no crash) AND installs @commonpub/editor's
+# @tiptap/* peers — which --legacy-peer-deps silently drops, breaking the Nuxt
+# build at `@tiptap/pm/model`. `npm install` (not `npm ci`): ci rejects this tree
+# on the two-commander-majors state; install reconciles it. Matches heatsync.
 FROM base AS deps
-COPY package.json ./
-RUN npm install --no-audit --no-fund --legacy-peer-deps
+COPY package.json package-lock.json ./
+RUN npm install --no-audit --no-fund
 
 FROM base AS build
 COPY --from=deps /app/node_modules ./node_modules

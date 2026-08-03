@@ -154,7 +154,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
         <NuxtLink v-if="contestsEnabled && activeContest" :to="`/contests/${activeContest.slug}`" class="de-contest-banner">
           <div class="de-contest-banner-info">
             <span class="de-contest-banner-label">{{ activeContest.title }}</span>
-            <span class="de-contest-banner-desc">{{ activeContest.description || `${activeContest.entryCount ?? 0} entries` }}</span>
+            <span class="de-contest-banner-desc">{{ markdownToExcerpt(activeContest.description) || `${activeContest.entryCount ?? 0} entries` }}</span>
             <span v-if="activeContest.endDate" class="de-contest-banner-meta">{{ activeContest.entryCount ?? 0 }} entries · Ends {{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
           </div>
           <span class="de-contest-banner-btn">Enter Challenge <i class="fa-solid fa-arrow-right"></i></span>

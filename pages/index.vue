@@ -57,6 +57,9 @@ interface ContestListItem {
   bannerUrl?: string | null;
   startDate?: string | null;
   endDate?: string | null;
+  /** The current stage's close (server-derived); the day-count targets this so a
+   *  multi-stage contest shows the open round, not the far-off final endDate. */
+  currentStageEndDate?: string | null;
   entryCount?: number;
 }
 
@@ -201,7 +204,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
             <div class="de-contest-row">
               <span class="de-contest-entries">{{ c.entryCount ?? 0 }} entries</span>
               <span v-if="c.endDate" class="de-contest-deadline">
-                <i class="fa-regular fa-clock"></i> {{ Math.max(0, Math.ceil((new Date(c.endDate).getTime() - Date.now()) / 86400000)) }}d left
+                <i class="fa-regular fa-clock"></i> {{ Math.max(0, Math.ceil((new Date(c.currentStageEndDate ?? c.endDate).getTime() - Date.now()) / 86400000)) }}d left
               </span>
             </div>
             <NuxtLink :to="`/contests/${c.slug}`" class="de-btn-enter">Enter Contest</NuxtLink>

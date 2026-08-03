@@ -51,6 +51,13 @@ deveco.io {
 	}
 
 	handle {
+		# Cap body size on the catch-all so an attacker can't OOM an upstream
+		# worker by streaming a multi-GB body to /api/files/upload (or any
+		# non-inbox route). 128MB matches the largest legitimate `attachment`/
+		# `contest` upload (100MB + 28MB headroom for multipart overhead).
+		request_body {
+			max_size 128MB
+		}
 		reverse_proxy app:3000 {
 			header_up X-Real-IP {remote_host}
 			header_up X-Forwarded-For {remote_host}

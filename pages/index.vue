@@ -61,6 +61,8 @@ interface ContestListItem {
    *  multi-stage contest shows the open round, not the far-off final endDate. */
   currentStageEndDate?: string | null;
   entryCount?: number;
+  /** Everyone following the contest (all registrations) — "N following". */
+  followerCount?: number;
 }
 
 const { data: contests } = await useFetch<{ items: ContestListItem[] }>('/api/contests', {
@@ -158,7 +160,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
           <div class="de-contest-banner-info">
             <span class="de-contest-banner-label">{{ activeContest.title }}</span>
             <span class="de-contest-banner-desc">{{ markdownToExcerpt(activeContest.description) || `${activeContest.entryCount ?? 0} entries` }}</span>
-            <span v-if="activeContest.endDate" class="de-contest-banner-meta">{{ activeContest.entryCount ?? 0 }} entries · Ends {{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
+            <span v-if="activeContest.endDate" class="de-contest-banner-meta">{{ activeContest.entryCount ?? 0 }} entries<template v-if="(activeContest.followerCount ?? 0) > 0"> · {{ activeContest.followerCount }} following</template> · Ends {{ new Date(activeContest.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) }}</span>
           </div>
           <span class="de-contest-banner-btn">Enter Challenge <i class="fa-solid fa-arrow-right"></i></span>
         </NuxtLink>
@@ -203,6 +205,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
             <NuxtLink :to="`/contests/${c.slug}`" class="de-contest-name">{{ c.title }}</NuxtLink>
             <div class="de-contest-row">
               <span class="de-contest-entries">{{ c.entryCount ?? 0 }} entries</span>
+              <span v-if="(c.followerCount ?? 0) > 0" class="de-contest-entries"><i class="fa-solid fa-bell"></i> {{ c.followerCount }} following</span>
               <span v-if="c.endDate" class="de-contest-deadline">
                 <i class="fa-regular fa-clock"></i> {{ Math.max(0, Math.ceil((new Date(c.currentStageEndDate ?? c.endDate).getTime() - Date.now()) / 86400000)) }}d left
               </span>

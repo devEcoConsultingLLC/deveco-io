@@ -7,6 +7,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Nunito:wght@700;800;900&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
+  /* deveco's topbar is 60px (layouts/default.vue .de-topbar), not the layer's
+     48px default. Without this every layer rule keyed on the token — sticky
+     offsets, the mobile-menu top — lands 12px off. */
+  --cpub-topbar-height: 60px;
   /* === SURFACES === */
   --bg: #f9fafb;
   --surface: #ffffff;

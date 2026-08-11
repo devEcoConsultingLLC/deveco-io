@@ -85,6 +85,23 @@ function contestEndsLabel(d: string | null | undefined): string | null {
   const dt = new Date(d);
   return Number.isNaN(dt.getTime()) ? null : dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
+/**
+ * Banner meta line. Joins only the parts that have something to say, so a fresh
+ * contest never reads "0 entries" and a suppressed part never leaves a dangling
+ * " · " separator. Count rules come from the layer's utils/contestCounts.ts
+ * (@commonpub/layer 0.129) so this fork agrees with /contests and the contest
+ * page: one public figure, "registered", from followerCount, with entries only
+ * once submissions close.
+ */
+function contestBannerMeta(c: ContestListItem): string {
+  const parts: string[] = [];
+  if (showsRegisteredCount(c)) parts.push(registeredCountLabel(c));
+  if (showsEntryCount(c)) parts.push(entryCountLabel(c));
+  const ends = contestEndsLabel(c.endDate);
+  if (ends) parts.push(`Ends ${ends}`);
+  return parts.join(' · ');
+}
+
 function contestDaysLeft(c: { currentStageEndDate?: string | null; endDate?: string | null }): string | null {
   if (!clockReady.value) return null;
   const target = c.currentStageEndDate ?? c.endDate;
@@ -181,8 +198,13 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
         <NuxtLink v-if="contestsEnabled && activeContest" :to="`/contests/${activeContest.slug}`" class="de-contest-banner">
           <div class="de-contest-banner-info">
             <span class="de-contest-banner-label">{{ activeContest.title }}</span>
-            <span class="de-contest-banner-desc">{{ markdownToExcerpt(activeContest.description) || `${activeContest.entryCount ?? 0} entries` }}</span>
-            <span v-if="activeContest.endDate" class="de-contest-banner-meta">{{ activeContest.entryCount ?? 0 }} entries<template v-if="(activeContest.followerCount ?? 0) > 0"> · {{ activeContest.followerCount }} following</template><template v-if="contestEndsLabel(activeContest.endDate)"> · Ends {{ contestEndsLabel(activeContest.endDate) }}</template></span>
+            <!-- Counts follow the layer's shared rules (utils/contestCounts.ts,
+                 @commonpub/layer 0.129): one public figure, "registered", from
+                 followerCount; entries only once submissions close, where the
+                 number is final. Both suppressed at zero, so a fresh contest no
+                 longer reads "0 entries". -->
+            <span class="de-contest-banner-desc">{{ markdownToExcerpt(activeContest.description) || (showsRegisteredCount(activeContest) ? registeredCountLabel(activeContest) : '') }}</span>
+            <span v-if="contestBannerMeta(activeContest)" class="de-contest-banner-meta">{{ contestBannerMeta(activeContest) }}</span>
           </div>
           <span class="de-contest-banner-btn">Enter Challenge <i class="fa-solid fa-arrow-right"></i></span>
         </NuxtLink>
@@ -226,8 +248,10 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
           <div v-for="c in sidebarContests" :key="c.id" class="de-contest-item">
             <NuxtLink :to="`/contests/${c.slug}`" class="de-contest-name">{{ c.title }}</NuxtLink>
             <div class="de-contest-row">
-              <span class="de-contest-entries">{{ c.entryCount ?? 0 }} entries</span>
-              <span v-if="(c.followerCount ?? 0) > 0" class="de-contest-entries"><i class="fa-solid fa-bell"></i> {{ c.followerCount }} following</span>
+              <!-- This widget lists ACTIVE contests only, so an entry count is
+                   always the open-contest case the layer's count rules suppress.
+                   Registered is the meaningful figure. -->
+              <span v-if="showsRegisteredCount(c)" class="de-contest-entries"><i class="fa-solid fa-users"></i> {{ registeredCountLabel(c) }}</span>
               <!-- Gate the whole span on the label: rendering the icon with an
                    empty text node on the server and filling it in on the client
                    is itself a children mismatch. -->

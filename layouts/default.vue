@@ -191,6 +191,11 @@ const userUsername = computed(() => user.value?.username ?? '');
 
     <!-- Main -->
     <main id="main-content">
+      <!-- Soft email verification nag. In flow at the top of the content, not a
+           fixed overlay: see the component docblock. Self-gating on the flag,
+           the session and the dismissal cookie, so this is safe to render
+           unconditionally here. -->
+      <EmailVerificationBanner />
       <slot />
     </main>
 

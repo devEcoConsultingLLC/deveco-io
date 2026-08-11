@@ -66,4 +66,14 @@ export default defineCommonPubConfig({
     },
   ],
   defaultTheme: 'deveco',
+  // Consent-gated Google Analytics. The provider registry in
+  // @commonpub/config derives the CSP allowlist, the cookie-policy rows and
+  // the privacy-page disclosure from this one entry, so there is nothing else
+  // to declare and the three cannot drift apart. Switched on by
+  // `features.analytics` in nuxt.config.ts; nothing loads before the visitor
+  // accepts cookies.
+  analytics: {
+    provider: 'ga4',
+    measurementId: 'G-1BEXT06G60',
+  },
 });

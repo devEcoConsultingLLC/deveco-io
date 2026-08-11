@@ -1,3 +1,4 @@
+import siteConfig from './commonpub.config';
 export default defineNuxtConfig({
   extends: ['@commonpub/layer'],
   compatibilityDate: '2024-11-01',
@@ -27,9 +28,20 @@ export default defineNuxtConfig({
         explainers: false,
         federation: true,
         admin: true,
+        // Consent-gated Google Analytics. The measurement id lives in
+        // commonpub.config.ts; this is the on-switch.
+        analytics: true,
       },
       contentTypes: 'project,blog',
       contestCreation: 'staff',
+      // Wired from commonpub.config.ts rather than hand-copied. Until this
+      // existed NOTHING from that file reached the client, which is why the
+      // cookie-consent banner could never render here: it only appears once the
+      // instance declares a non-essential cookie, and it had no way to learn of
+      // one. The analytics provider's cookies are derived from the registry, so
+      // declaring the provider is enough.
+      instanceCookies: siteConfig.config.cookies ?? [],
+      analytics: siteConfig.config.analytics ?? { provider: 'none' },
     },
   },
   nitro: {

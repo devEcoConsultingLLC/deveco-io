@@ -32,6 +32,11 @@ export default defineCommonPubConfig({
     // Email opted-in users even if their address is unverified (verification,
     // when enabled, then gates sign-in only). Requires a working transport.
     emailUnverified: true,
+    // Consent-gated Google Analytics. The property lives in `analytics` below.
+    // This is the switch the app actually reads: useFeatures() primes from THIS
+    // file merged with the DB overrides, not from nuxt.config's
+    // runtimeConfig.public.features, which only carries env overrides.
+    analytics: true,
   },
   auth: {
     emailPassword: true,
@@ -70,8 +75,7 @@ export default defineCommonPubConfig({
   // @commonpub/config derives the CSP allowlist, the cookie-policy rows and
   // the privacy-page disclosure from this one entry, so there is nothing else
   // to declare and the three cannot drift apart. Switched on by
-  // `features.analytics` in nuxt.config.ts; nothing loads before the visitor
-  // accepts cookies.
+  // `features.analytics` above; nothing loads before the visitor accepts.
   analytics: {
     provider: 'ga4',
     measurementId: 'G-1BEXT06G60',

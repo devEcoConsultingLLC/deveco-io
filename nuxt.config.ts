@@ -28,8 +28,10 @@ export default defineNuxtConfig({
         explainers: false,
         federation: true,
         admin: true,
-        // Consent-gated Google Analytics. The measurement id lives in
-        // commonpub.config.ts; this is the on-switch.
+        // Mirrors commonpub.config.ts's features.analytics. This block only
+        // carries NUXT_PUBLIC_FEATURES_* env overrides; the value the app reads
+        // comes from commonpub.config.ts merged with the DB overrides, so the
+        // real switch is there, not here.
         analytics: true,
       },
       contentTypes: 'project,blog',

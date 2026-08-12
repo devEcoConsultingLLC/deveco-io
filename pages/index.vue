@@ -203,7 +203,15 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
                  followerCount; entries only once submissions close, where the
                  number is final. Both suppressed at zero, so a fresh contest no
                  longer reads "0 entries". -->
-            <span class="de-contest-banner-desc">{{ markdownToExcerpt(activeContest.description) || (showsRegisteredCount(activeContest) ? registeredCountLabel(activeContest) : '') }}</span>
+            <!-- `subheading` FIRST. It is a purpose-written one-paragraph summary,
+                 and it is what the contest page itself shows as the intro. The
+                 `description` field is the full body: for the live contest that is
+                 27,871 characters of HTML including a <style> block, so excerpting
+                 it produced "Resilience Across Frontiers When disasters occur,
+                 responders need real-time..." — a section heading run into the
+                 paragraph after it. Excerpting the body is the fallback, for a
+                 contest with no subheading. -->
+            <span class="de-contest-banner-desc">{{ activeContest.subheading?.trim() || markdownToExcerpt(activeContest.description) || (showsRegisteredCount(activeContest) ? registeredCountLabel(activeContest) : '') }}</span>
             <span v-if="contestBannerMeta(activeContest)" class="de-contest-banner-meta">{{ contestBannerMeta(activeContest) }}</span>
           </div>
           <span class="de-contest-banner-btn">Enter Challenge <i class="fa-solid fa-arrow-right"></i></span>
@@ -524,7 +532,10 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
 }
 .de-contest-banner-desc {
   font-size: 0.8125rem; color: rgba(255, 255, 255, 0.7); display: block;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  /* Two lines, not one nowrap line: the summary is a sentence, and a single
+     line cut it after about eight words even on a wide screen. */
+  display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
 }
 .de-contest-banner-meta {
   font-size: 0.6875rem; color: rgba(255, 255, 255, 0.5); display: block; margin-top: 2px;
@@ -699,12 +710,14 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   .de-contest-banner-desc {
     font-size: 0.875rem;
     line-height: 1.45;
-    /* Two lines instead of a hard single-line ellipsis: at this width the
-       nowrap rule truncated after about four words. */
     white-space: normal;
+    /* The whole summary, not a teaser of a teaser. The stacked card has the
+       width for it, and `subheading` is already a single short paragraph
+       written to introduce the contest. The clamp is only a safety valve for
+       an operator who writes an essay in that field. */
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    -webkit-line-clamp: 8;
+    line-clamp: 8;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

@@ -671,5 +671,57 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
   .de-hero-inner { padding: 32px 16px; }
   .de-main-layout { padding: 16px; }
   .de-hero-title { font-size: 1.5rem; }
+
+  /* ---- CONTEST BANNER -> CARD ----
+     The desktop banner is a `space-between` row, and it had no mobile rules at
+     all, so at 390px the button kept its own column and squeezed the title into
+     four cramped lines beside it while the subheading was cut to
+     "Resilience Across Fro...". Stacked, the title gets the full width and the
+     description gets to be a description. */
+  .de-contest-banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 18px;
+  }
+  .de-contest-banner-label {
+    font-size: 1.125rem;
+    line-height: 1.25;
+    margin-bottom: 6px;
+    /* Room to breathe, with a ceiling so a long title cannot push the CTA off
+       the first screen. */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .de-contest-banner-desc {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    /* Two lines instead of a hard single-line ellipsis: at this width the
+       nowrap rule truncated after about four words. */
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .de-contest-banner-meta {
+    font-size: 0.75rem;
+    margin-top: 6px;
+  }
+  .de-contest-banner-btn {
+    /* Full width and a 44px floor, matching the tap-target rule the layer's
+       buttons follow and the full-width hero CTAs directly above it. */
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+    font-size: 0.9375rem;
+  }
+  /* The decorative glow is sized for the wide banner; on a narrow card it
+     washes out the top-right corner behind the title. */
+  .de-contest-banner::before { width: 120px; height: 120px; top: -30%; }
 }
 </style>

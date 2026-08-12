@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Serialized, ContentListItem, PaginatedResponse } from '@commonpub/server';
+import type { Serialized, ContentListItem, PaginatedResponse, ContestListItem as ServerContestListItem } from '@commonpub/server';
 
 useSeoMeta({
   title: 'devEco.io | Open Platform for Makers & Hardware Projects',
@@ -48,22 +48,16 @@ const trendingHubs = computed(() =>
   (communities.value?.items ?? []).filter((h: { id: string }) => h.id !== featuredHubItem.value?.id),
 );
 
-interface ContestListItem {
-  id: string;
-  slug: string;
-  title: string;
-  status: string;
-  description?: string | null;
-  bannerUrl?: string | null;
-  startDate?: string | null;
-  endDate?: string | null;
-  /** The current stage's close (server-derived); the day-count targets this so a
-   *  multi-stage contest shows the open round, not the far-off final endDate. */
-  currentStageEndDate?: string | null;
-  entryCount?: number;
-  /** Everyone following the contest (all registrations) — "N following". */
-  followerCount?: number;
-}
+/**
+ * The list DTO, taken FROM the server package rather than hand-copied.
+ *
+ * This was a local interface that had drifted: it omitted `subheading`, so
+ * reading the field the API has actually been returning all along was a
+ * typecheck error. `Serialized<>` is what turns the server's `Date` fields into
+ * the strings that arrive over the wire, and this file already imports it for
+ * content.
+ */
+type ContestListItem = Serialized<ServerContestListItem>;
 
 const { data: contests } = await useFetch<{ items: ContestListItem[] }>('/api/contests', {
   query: { status: 'active', limit: 3 },

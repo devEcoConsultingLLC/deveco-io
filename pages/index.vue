@@ -3,7 +3,7 @@ import type { Serialized, ContentListItem, PaginatedResponse, ContestListItem as
 
 useSeoMeta({
   title: 'devEco.io | Open Platform for Makers & Hardware Projects',
-  description: 'Share your hardware builds, software projects, and technical content with a community of makers and developers. From embedded systems and edge AI to full-stack apps, explore what others are building.',
+  description: 'Share your hardware builds, software projects, and technical content with a community of makers and developers. From embedded systems to full-stack apps, explore what others are building.',
 });
 
 const { user: authUser } = useAuth();
@@ -152,7 +152,7 @@ async function handleHubJoin(hubSlug: string): Promise<void> {
               Build <span>Projects</span> That Matter
             </h1>
             <p class="de-hero-excerpt">
-              Share your hardware builds, software projects, and technical content with a community of makers and developers. From embedded systems and edge AI to full-stack apps, explore what others are building and bring your own ideas to life.
+              Share your hardware builds, software projects, and technical content with a community of makers and developers. From embedded systems to full-stack apps, explore what others are building and bring your own ideas to life.
             </p>
             <div class="de-hero-actions">
               <NuxtLink to="/explore" class="de-btn de-btn-accent">

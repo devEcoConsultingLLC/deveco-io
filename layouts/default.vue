@@ -91,7 +91,7 @@ const userUsername = computed(() => user.value?.username ?? '');
   <div class="de-layout">
     <!-- Top Banner -->
     <div class="de-top-banner">
-      Partnered with <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a> &middot; Part of the <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>
+      Part of the <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>
     </div>
 
     <!-- Top Nav -->
@@ -206,8 +206,8 @@ const userUsername = computed(() => user.value?.username ?? '');
       <div class="de-footer-inner">
         <div class="de-footer-brand">
           <DevEcoLogo variant="dark-bg" size="sm" :show-text="true" />
-          <p class="de-footer-tagline">The open platform for Edge AI projects, hardware, and communities. Built by developers, for developers.</p>
-          <div class="de-footer-backer">Backed by <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a></div>
+          <p class="de-footer-tagline">The open platform for projects, hardware, and communities. Built by developers, for developers.</p>
+          <div class="de-footer-backer"><a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a> Scholarship Partner</div>
           <div class="de-footer-social">
             <a href="https://github.com/devEcoConsultingLLC/deveco-io" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="https://discord.gg/deveco" target="_blank" rel="noopener" class="de-footer-social-link" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
@@ -233,7 +233,7 @@ const userUsername = computed(() => user.value?.username ?? '');
         </nav>
       </div>
       <div class="de-footer-bottom">
-        <span>&copy; {{ new Date().getFullYear() }} devEco.io &middot; Part of <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener">EDGE AI FOUNDATION</a></span>
+        <span>&copy; {{ new Date().getFullYear() }} devEco.io</span>
         <span class="de-footer-ioc">
           <i class="fa-solid fa-globe"></i>
           <a href="https://thedeveco.com/community" target="_blank" rel="noopener">Internet of Communities&trade;</a>

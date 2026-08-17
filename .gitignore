@@ -35,3 +35,9 @@ uploads/*
 !uploads/.gitkeep
 .secrets/
 envbackup
+
+# Production env backups pulled off the droplet. Secrets: never commit these.
+# Anchored patterns, not a bare `env*`, so nothing else is swallowed by accident.
+/new_env_bak
+/new_env_bak.*
+/*.env.bak

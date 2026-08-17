@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'About -- devEco.io',
-  description: 'devEco.io is an open-source edge AI project sharing and community platform.',
+  description: 'devEco.io is an open-source platform for sharing hardware and software projects.',
 });
 
 const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
@@ -14,7 +14,7 @@ const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
       <div class="de-about-hero-inner">
         <span class="de-about-badge"><i class="fa-solid fa-code-branch"></i> Open Source</span>
         <h1 class="de-about-title">dev<span>Eco</span>.io</h1>
-        <p class="de-about-subtitle">An open platform for edge AI project sharing, community building, and collaborative learning. Backed by Edge AI Foundation.</p>
+        <p class="de-about-subtitle">An open platform for sharing hardware and software projects, building community, and learning together. <a href="https://www.edgeaifoundation.org/" target="_blank" rel="noopener"><strong>EDGE AI FOUNDATION</strong></a> Scholarship Partner.</p>
       </div>
     </div>
 
@@ -22,8 +22,8 @@ const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
       <div class="de-about-grid">
         <div class="de-about-card">
           <div class="de-about-card-icon"><i class="fa-solid fa-microchip"></i></div>
-          <h3>Edge AI Projects</h3>
-          <p>Document your edge AI builds with rich editors. Parts lists, wiring diagrams, build steps, code blocks, and deployment guides.</p>
+          <h3>Hardware Projects</h3>
+          <p>Document your builds with rich editors. Parts lists, wiring diagrams, build steps, code blocks, and deployment guides.</p>
         </div>
         <div v-if="hubsEnabled" class="de-about-card">
           <div class="de-about-card-icon"><i class="fa-solid fa-users"></i></div>
@@ -33,7 +33,7 @@ const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
         <div v-if="contestsEnabled" class="de-about-card">
           <div class="de-about-card-icon"><i class="fa-solid fa-trophy"></i></div>
           <h3>Contests</h3>
-          <p>Run build contests with prizes, judges, and community voting. Competitions that push the boundaries of what edge AI can do.</p>
+          <p>Run build contests with prizes, judges, and community voting. Competitions that push the boundaries of what makers can build.</p>
         </div>
         <div class="de-about-card">
           <div class="de-about-card-icon"><i class="fa-solid fa-pen-nib"></i></div>
@@ -54,7 +54,7 @@ const { hubs: hubsEnabled, contests: contestsEnabled } = useFeatures();
 
       <div class="de-about-cta">
         <h2>Join the community</h2>
-        <p>devEco.io is free and open source. Create an account and start sharing your edge AI projects.</p>
+        <p>devEco.io is free and open source. Create an account and start sharing your projects.</p>
         <div class="de-about-cta-actions">
           <NuxtLink to="/auth/register" class="de-btn de-btn-accent"><i class="fa-solid fa-user-plus"></i> Create Account</NuxtLink>
           <a href="https://github.com/edge-ai-foundation/deveco-io" target="_blank" rel="noopener" class="de-btn de-btn-outline"><i class="fa-brands fa-github"></i> GitHub</a>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'Communities -- devEco.io',
-  description: 'Browse and join edge AI communities.',
+  description: 'Browse and join maker communities.',
 });
 
 const { data } = await useFetch('/api/hubs');

@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteName: 'devEco.io',
-      siteDescription: 'Edge AI project sharing and community platform',
+      siteDescription: 'An open platform for sharing hardware and software projects',
       features: {
         content: true,
         social: true,

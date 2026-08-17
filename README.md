@@ -1,14 +1,14 @@
 # devEco.io
 
-The open platform for Edge AI projects, hardware, and communities. Built by developers, for developers.
+The open platform for projects, hardware, and communities. Built by developers, for developers.
 
-**Live at [deveco.io](https://deveco.io)** | Backed by [Edge AI Foundation](https://edgeaifoundation.org) | Part of the [Internet of Communities](https://thedeveco.com/community)
+**Live at [deveco.io](https://deveco.io)** | [EDGE AI FOUNDATION](https://edgeaifoundation.org) Scholarship Partner | Part of the [Internet of Communities](https://thedeveco.com/community)
 
 Built on [CommonPub](https://github.com/commonpub/commonpub) — an open ActivityPub federation protocol for self-hosted maker communities.
 
 ## Features
 
-- **Projects** — Document edge AI builds with a block editor: parts lists, build steps, code blocks, galleries, and more
+- **Projects** — Document your builds with a block editor: parts lists, build steps, code blocks, galleries, and more
 - **Blog** — Publish posts, tutorials, and findings with rich formatting
 - **Communities** — Create and join hubs for collaboration, discussions, and project sharing
 - **Contests** — Staff-managed build competitions with submissions and judging
@@ -201,4 +201,4 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ---
 
-**devEco.io** is a project of [devEco Consulting LLC](https://thedeveco.com), backed by [Edge AI Foundation](https://edgeaifoundation.org).
+**devEco.io** is a project of [devEco Consulting LLC](https://thedeveco.com), an [EDGE AI FOUNDATION](https://edgeaifoundation.org) Scholarship Partner.

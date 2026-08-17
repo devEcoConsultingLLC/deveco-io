@@ -4,7 +4,7 @@ export default defineCommonPubConfig({
   instance: {
     name: 'devEco.io',
     domain: 'deveco.io',
-    description: 'Edge AI project sharing and community platform',
+    description: 'An open platform for sharing hardware and software projects',
     contentTypes: ['project', 'blog'],
     contestCreation: 'staff',
   },

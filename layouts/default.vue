@@ -421,9 +421,17 @@ const userUsername = computed(() => user.value?.username ?? '');
   color: var(--text-dim); font-size: 18px; cursor: pointer;
   align-items: center; justify-content: center;
 }
+/* Scroll container, not just an overlay: `position: fixed; inset: 0` caps the
+   height at the viewport, so anything past the fold had nothing to scroll and
+   was unreachable rather than merely hidden. deveco's rows are 44px minimum and
+   the bar is 60px, so this bites sooner here than in the layer. */
 .de-mobile-menu {
   display: none; position: fixed; inset: 0; top: 60px;
   z-index: 99; background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(4px);
+  overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+@supports (height: 100dvh) {
+  .de-mobile-menu { height: calc(100dvh - 60px); }
 }
 .de-mobile-nav {
   background: var(--surface); border-bottom: 1px solid var(--border);

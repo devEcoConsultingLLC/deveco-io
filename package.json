@@ -25,5 +25,13 @@
     "drizzle-kit": "^0.31.0",
     "typescript": "^5.7.0",
     "vue-tsc": "^2.2.0"
+  },
+  "overrides": {
+    "better-auth": "1.6.29"
+  },
+  "pnpm": {
+    "overrides": {
+      "better-auth": "1.6.29"
+    }
   }
 }

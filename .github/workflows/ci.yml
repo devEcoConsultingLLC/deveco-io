@@ -23,6 +23,15 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      # Runs BEFORE the install, and reads package-lock.json rather than the
+      # pnpm tree this job installs. That is the point: the Dockerfile builds
+      # from package-lock.json with npm, so a duplicated dependency can ship
+      # while every step below stays green. On 2026-08-31 exactly that happened
+      # -- three Vue copies in the npm tree took every SSR page to 500 while
+      # this CI passed.
+      - name: Single-copy check (the tree the Dockerfile ships)
+        run: node scripts/check-single-vue.mjs
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 

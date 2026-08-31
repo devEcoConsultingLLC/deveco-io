@@ -16,8 +16,8 @@
     "@commonpub/schema": "^0.66.0",
     "@commonpub/server": "^2.134.0",
     "drizzle-orm": "^0.45.1",
-    "nuxt": "^3.16.0",
-    "vue": "^3.4.0",
+    "nuxt": "^3.21.11",
+    "vue": "^3.5.42",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

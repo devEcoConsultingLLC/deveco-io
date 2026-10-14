@@ -8,6 +8,9 @@ jobs:
   deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     concurrency:
       group: deploy-production
       cancel-in-progress: true
@@ -21,6 +24,28 @@ jobs:
       - name: Save image tarball
         run: docker save deveco-app:latest | gzip > deveco-app.tar.gz
 
+      # Deploy gate: nothing reaches the droplet until CI (Build & Typecheck) has
+      # passed on THIS commit. The image above builds in parallel, so a green
+      # commit deploys no later than before; a red one stops here untouched.
+      - name: Wait for CI on this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 60); do
+            run=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow CI --commit "$GITHUB_SHA" --event push --json status,conclusion --jq '.[0] // {}')
+            status=$(echo "$run" | jq -r '.status // "not started"')
+            conclusion=$(echo "$run" | jq -r '.conclusion // ""')
+            if [ "$status" = "completed" ]; then
+              if [ "$conclusion" = "success" ]; then echo "CI passed on $GITHUB_SHA"; exit 0; fi
+              echo "::error::CI on $GITHUB_SHA finished '$conclusion'. Not deploying; re-run CI, then re-run this workflow."
+              exit 1
+            fi
+            echo "CI is $status ($i/60)"
+            sleep 30
+          done
+          echo "::error::CI did not finish within 30 minutes. Not deploying."
+          exit 1
+
       - name: Copy image to droplet
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -29,6 +54,17 @@ jobs:
           key: ${{ secrets.PROD_SSH_KEY }}
           source: deveco-app.tar.gz
           target: /opt/deveco/
+
+      # The Caddyfile and the script that applies it safely (deploy/sync-caddyfile.sh).
+      - name: Copy Caddyfile sync files to droplet
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: root
+          key: ${{ secrets.PROD_SSH_KEY }}
+          source: deploy/Caddyfile,deploy/sync-caddyfile.sh,deploy/caddyfile-known.sha256
+          target: /opt/deveco/caddy-sync/
+          strip_components: 1
 
       - name: Load image and restart
         uses: appleboy/ssh-action@v1
@@ -45,7 +81,12 @@ jobs:
           envs: NUXT_RESEND_API_KEY
           script: |
             set -e
+            # pipefail: without it `db-migrate.mjs | tee` reports tee's exit 0 and a
+            # failed migration sails through as a successful deploy.
+            set -o pipefail
             cd /opt/deveco
+            # Keep the running image as :previous for a one-retag rollback.
+            docker tag deveco-app:latest deveco-app:previous 2>/dev/null || true
             docker load < deveco-app.tar.gz
             rm -f deveco-app.tar.gz
             # Inject the email transport into the compose env_file (app.env_file: .env)
@@ -71,14 +112,14 @@ jobs:
             docker compose exec -T app node scripts/db-migrate.mjs 2>&1 | tee /tmp/dbmigrate.log \
               || { echo "::error::db:migrate failed — see log above"; cat /tmp/dbmigrate.log; exit 1; }
             docker image prune -f
-            # Post-deploy smoke test — verify app is responding
-            for i in 1 2 3 4 5; do
-              if curl -sf http://localhost:3000/ > /dev/null 2>&1; then
-                echo "✅ Health check passed"
-                break
-              fi
-              echo "⏳ Waiting for app to start... ($i/5)"
-              sleep 5
-            done
-            curl -sf http://localhost:3000/ || echo "::warning::Health check failed — app may not have started correctly"
+            # Post-deploy smoke, run INSIDE the app container: port 3000 is not
+            # published on the droplet, so the old host-level curl never reached the
+            # app and its `|| echo ::warning` could never fail the deploy. This waits
+            # for /api/health, then requires /, /api/health and /contests to answer.
+            docker compose exec -T app node scripts/smoke.mjs \
+              || { echo "::error::Post-deploy smoke failed. Roll back: docker tag deveco-app:previous deveco-app:latest && docker tag deveco-app:previous registry.digitalocean.com/deveco/deveco-app:latest && docker compose up -d --force-recreate app"; exit 1; }
+            # Bring the live Caddyfile up to the repo's version when it is safe to
+            # (never fails the deploy; see the script's header).
+            sh caddy-sync/sync-caddyfile.sh caddy-sync/Caddyfile caddy-sync/caddyfile-known.sha256 \
+              || echo "::warning::Caddyfile sync errored; the app deploy itself succeeded."
             echo "Deployed ${{ github.sha }}"

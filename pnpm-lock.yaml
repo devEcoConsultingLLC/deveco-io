@@ -15,8 +15,8 @@ importers:
         specifier: ^0.41.0
         version: 0.41.0
       '@commonpub/layer':
-        specifier: 0.141.0-rc.1
-        version: 0.141.0-rc.1(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(@types/node@22.20.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.29.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.20.2)(jiti@2.7.0)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+        specifier: ^0.141.0
+        version: 0.141.0(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(@types/node@22.20.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.29.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.20.2)(jiti@2.7.0)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@commonpub/schema':
         specifier: ^0.68.0
         version: 0.68.0(drizzle-orm@0.45.2(@opentelemetry/api@1.9.0)(kysely@0.29.3)(pg@8.20.0))
@@ -569,8 +569,8 @@ packages:
       sharp:
         optional: true
 
-  '@commonpub/layer@0.141.0-rc.1':
-    resolution: {integrity: sha512-BUbWrHtjsRJxW7nnUglpvxO1PcRIKr+ISbeEnGBkFIxzgUrt0ZnahJfhQw8wTiPZqSNDPO3o9JGuVHlNVfdpEw==}
+  '@commonpub/layer@0.141.0':
+    resolution: {integrity: sha512-mIPML1NhYuYJTDtF+7jPPy3UvX2zvEPx3ANBMnGnQemW5c8srHTfjz1jatWWiU9eHHaN+onpD3FqYzFRoW4bFA==}
 
   '@commonpub/learning@0.5.7':
     resolution: {integrity: sha512-jSiDHExT3Y1MKPbfbFyN2R0llGAICxR0PX1v6hZY+96LruZtigoLQbnMVb4Pq9d8QH9uXTfNcE1Yec27yv5aQw==}
@@ -6910,7 +6910,7 @@ snapshots:
       ioredis: 5.10.1
       sharp: 0.35.5(@types/node@22.20.2)
 
-  '@commonpub/layer@0.141.0-rc.1(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(@types/node@22.20.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.29.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.20.2)(jiti@2.7.0)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
+  '@commonpub/layer@0.141.0(@noble/hashes@2.2.0)(@opentelemetry/api@1.9.0)(@tiptap/extension-horizontal-rule@2.27.2(@tiptap/core@2.27.2(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2))(@tiptap/pm@2.27.2)(@types/node@22.20.2)(drizzle-kit@0.31.10)(ioredis@5.10.1)(kysely@0.29.3)(typescript@5.9.3)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.20.2)(jiti@2.7.0)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
     dependencies:
       '@aws-sdk/client-s3': 3.1030.0
       '@commonpub/auth': 0.13.5(@opentelemetry/api@1.9.0)(drizzle-kit@0.31.10)(kysely@0.29.3)(pg@8.20.0)(vitest@3.2.4(@types/debug@4.1.13)(@types/node@22.20.2)(jiti@2.7.0)(jsdom@29.1.1(@noble/hashes@2.2.0))(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.42(typescript@5.9.3))

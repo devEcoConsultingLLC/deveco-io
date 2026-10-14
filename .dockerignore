@@ -9,3 +9,9 @@ uploads
 *.md
 !package.json
 !pnpm-lock.yaml
+# Never let local credentials into an image layer (a build from a workstation
+# would otherwise copy them; CI checkouts never have them).
+.env
+.env.*
+new_env_bak
+.secrets
